@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_thousand_song_parent"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/my_sdk_white"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:id="@+id/ll_radio_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/siv_radio_icon"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                app:srcCompat="@drawable/ic_rectangle_2401" />
+
+            <TextView
+                android:id="@+id/tv_radio_song_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Khub Borsai"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!--   <ImageView
+                   android:id="@+id/iv_radio_favorite"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:padding="10dp"
+                   android:src="@drawable/my_bl_sdk_ic_baseline_favorite_border_40" />-->
+
+            <ImageView
+                android:id="@+id/iv_radio_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/my_bl_sdk_ic_baseline_play_circle_filled_40" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

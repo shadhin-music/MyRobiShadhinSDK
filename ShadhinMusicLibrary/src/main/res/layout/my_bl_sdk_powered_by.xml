@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="2dp"
+    android:background="#EFEFEF"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textPoweredBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="Powered by"
+            android:textAlignment="gravity"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:src="@drawable/my_bl_sdk_shadhin_logo_with_text_for_light" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

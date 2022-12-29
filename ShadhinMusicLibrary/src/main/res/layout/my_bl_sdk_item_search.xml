@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/sv_search_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+            android:drawableStart="@drawable/my_bl_sdk_ic_search_download"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:hint="@string/search"
+            android:inputType="textPersonName"
+            android:lines="1"
+            android:padding="12dp"
+            android:textColorHint="#757575"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/sv_search_input"
+            app:layout_constraintEnd_toEndOf="@id/search_bar"
+            app:layout_constraintTop_toTopOf="@+id/sv_search_input"
+            app:srcCompat="@drawable/my_bl_sdk_ic_clear_field" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/discover_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+
+    <com.shadhinmusiclibrary.utils.FollowUseWrapHeightViewPager
+        android:id="@+id/discover_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        android:clickable="true"
+        android:focusable="true"
+        tools:background="@color/red"
+        tools:layout_height="match_parent" />
+
+    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+        android:id="@+id/topSliderIndicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="bottom"
+        android:padding="@dimen/_10sdp"
+        app:centered="true"
+        app:fillColor="#FFFFFF"
+        app:pageColor="#4DFFFFFF"
+        app:snap="true"
+        tools:background="@color/black"
+
+        />
+
+    <ImageButton
+        android:id="@+id/volume_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        android:padding="16dp"
+        tools:visibility="visible"
+        android:src="@drawable/ic_volume_mute" />
+
+</RelativeLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnLatestRelease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/my_sdk_color_primary"
+            android:padding="15dp"
+            android:text="LatestRelease"
+            android:textColor="#212121"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnFeaturedPodcast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/my_sdk_color_primary"
+            android:padding="15dp"
+            android:text="Featured Podcast"
+            android:textColor="@color/my_sdk_color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnLatestRelease"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnPopularArtists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/my_sdk_color_primary"
+            android:padding="15dp"
+            android:text="popular artists"
+            android:textColor="@color/my_sdk_color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnFeaturedPodcast"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnMusicVideos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/my_sdk_color_primary"
+            android:padding="15dp"
+            android:text="music videos"
+            android:textColor="@color/my_sdk_color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnPopularArtists"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnWebview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/my_sdk_color_primary"
+            android:padding="15dp"
+            android:text="amar tunes All"
+            android:textColor="@color/my_sdk_color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnMusicVideos"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnWebview2"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="15dp"
+            android:text="amar tunes All"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnWebview"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="15dp"
+            android:text="Open Music"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnWebview2"
+            tools:ignore="MissingConstraints,TextContrastCheck,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnshare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="15dp"
+            android:text="share"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homePatch"
+            tools:ignore="MissingConstraints,TextContrastCheck,TextContrastCheck" />
+
+        <include
+            android:id="@+id/include_radio_layout"
+            layout="@layout/my_bl_sdk_music_radio_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnMusic" />
+
+        <TextView
+            android:id="@+id/btn_radio_see_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="See All Radio"
+            android:textColor="@color/my_sdk_black1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/include_radio_layout"
+            app:layout_constraintEnd_toEndOf="@+id/include_radio_layout"
+            app:layout_constraintTop_toBottomOf="@+id/include_radio_layout"
+            app:layout_constraintTop_toTopOf="@+id/btnMusic" />
+
+        <Button
+            android:id="@+id/homePatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="HomePatch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/patch_code" />
+
+        <AutoCompleteTextView
+            android:id="@+id/patch_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+
+
+            android:text="P030"
+            android:inputType="textAutoComplete"
+            android:hint="Patch Code"
+            app:layout_constraintEnd_toStartOf="@+id/btnLatestRelease"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

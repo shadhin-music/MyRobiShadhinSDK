@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_music_parent_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="3dp">
+
+    <ImageView
+        android:id="@+id/iv_music_parent_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_bl_sdk_ic_baseline_music_note_24" />
+
+    <TextView
+        android:id="@+id/tv_music_parent_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Music"
+        android:textColor="@color/my_sdk_color_primary"
+        android:textStyle="bold" />
+</LinearLayout>

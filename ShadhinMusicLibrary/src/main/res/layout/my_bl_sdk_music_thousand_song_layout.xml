@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_thousand_song_parent"
+    android:layout_width="328dp"
+    android:layout_height="120dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_bl_sdk_thousand_song_background"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_thousand_song_message1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="List of"
+                android:textColor="@color/my_sdk_color_white" />
+
+            <TextView
+                android:id="@+id/tv_thousand_song_message2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000+ Songs"
+                android:textColor="@color/my_sdk_color_white"
+                android:textSize="26dp" />
+
+            <TextView
+                android:id="@+id/tv_thousand_song_message3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="to set as you Amar Tune"
+                android:textColor="@color/my_sdk_color_white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_explore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_bl_sdk_rounded_shape"
+                android:drawableEnd="@drawable/my_bl_sdk_ic_baseline_arrow_forward_24"
+                android:padding="10dp"
+                android:text="Explore"
+                android:textAllCaps="false"
+                android:textColor="@color/my_sdk_color_black"
+                app:backgroundTint="@color/my_sdk_color_white" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

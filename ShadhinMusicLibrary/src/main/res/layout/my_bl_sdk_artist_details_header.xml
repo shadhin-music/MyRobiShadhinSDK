@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="12dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/thumb_card"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="36dp">
+
+                <ImageView
+                    android:id="@+id/thumb"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/my_bl_sdk_ic_artist" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/thumb_card"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_sdk_color_black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text=""
+                android:textColor="@color/my_sdk_color_black"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/desc"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="#EEEEEE" />
+
+            <LinearLayout
+                android:id="@+id/actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view">
+
+                <ImageView
+                    android:id="@+id/favorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="24dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/my_bl_sdk_ic_favorite_border" />
+
+                <ImageView
+                    android:id="@+id/iv_play_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="12dp"
+                    app:srcCompat="@drawable/my_bl_sdk_ic_play_linear" />
+
+                <ImageView
+                    android:id="@+id/share_btn_fab"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/my_bl_sdk_share" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBiography"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="1dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/my_sdk_color_white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toBottomOf="@id/cardHeader">
+
+        <RelativeLayout
+            android:id="@+id/descriptionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/tvBiography"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="Biography"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.shadhinmusiclibrary.utils.ExpandableTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvBiography"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginTop="12dp"
+                android:justificationMode="inter_word"
+                android:maxLines="4"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien congue mattis sit volutpat posuere. Netus platea eget dignissim eget tellus. Id urna nunc diam."
+                app:animation_duration="750" />
+
+            <TextView
+                android:id="@+id/tvReadMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDescription"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="4dp"
+                android:text="Read More"
+                android:textColor="@color/my_sdk_color_primary" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardListen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp"
+        app:layout_constraintTop_toBottomOf="@id/cardBiography">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_bl_sdk_gradient_background">
+
+            <com.shadhinmusiclibrary.utils.CircleImageView
+                android:id="@+id/imageArtist"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/my_bl_sdk_ic_artist" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/imageArtist"
+                android:text="Listen to"
+                android:textColor="@color/my_sdk_color_white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_toRightOf="@id/imageArtist"
+                android:maxLines="1"
+                android:textColor="@color/my_sdk_color_white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvfav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_toRightOf="@id/imageArtist"
+                android:text="Favourite song"
+                android:textColor="@color/my_sdk_color_white"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/track_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardListen">
+
+        <TextView
+            android:id="@+id/download_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toStartOf="@+id/switch_layout"
+            android:text="Download all"
+            android:textColor="@color/my_sdk_color_black"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:id="@+id/switch_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp">
+
+
+            <Switch
+                android:id="@+id/download_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="false"
+                android:thumbTint="@drawable/my_bl_sdk_switch_thumb"
+                android:trackTint="@drawable/my_bl_sdk_switch_track"
+                android:visibility="visible"
+                tools:ignore="UnusedAttribute,UseSwitchCompatOrMaterialXml"
+                tools:visibility="visible" />
+        </FrameLayout>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,3 @@
+include ':app'
+include ':ShadhinMusicLibrary'
+rootProject.name = "ShadhinMusicSDK"

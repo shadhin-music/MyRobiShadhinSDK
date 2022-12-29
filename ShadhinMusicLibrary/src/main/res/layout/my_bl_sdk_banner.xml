@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_slider_mainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="12dp">
+
+        <com.shadhinmusiclibrary.autoimageslider.SliderView
+            android:id="@+id/imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:sliderIndicatorGravity="right|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="2dp"
+            app:sliderIndicatorRadius="1dp"
+            app:sliderIndicatorSelectedColor="@color/my_sdk_color_primary"
+            app:sliderIndicatorUnselectedColor="@color/my_sdk_color_white"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <!--    <androidx.viewpager.widget.ViewPager-->
+<!--        android:id="@+id/banner_viewpager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/pager_dots"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:orientation="horizontal">-->
+<!--    </LinearLayout>-->
+</RelativeLayout>

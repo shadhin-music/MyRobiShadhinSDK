@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1019006919306",
+    "project_id": "shadhinmusicsdk",
+    "storage_bucket": "shadhinmusicsdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019006919306:android:7ce1a24bf040e1077d8373",
+        "android_client_info": {
+          "package_name": "com.co.shadhinmusicsdk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019006919306-qg8j1ah3mnvt40uhfonnrme5g6int4b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALSTbcNoP27xgsIW1NJFOcLUhBjVCA2NY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019006919306-qg8j1ah3mnvt40uhfonnrme5g6int4b3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
