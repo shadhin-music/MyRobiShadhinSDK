@@ -35,11 +35,14 @@ var sliderList: MutableList<HomePatchDetailModel> = homePatchDetailModel
     override fun onBindViewHolder(viewHolder: SliderViewHolder?, position: Int) {
 
         if (viewHolder != null) {
-            val image = sliderList.get(position).bannerImage
-          //  Log.e("TAG","DATA: "+ sliderList.get(position).imageUrl)
-            viewHolder?.itemView?.let {
-                viewHolder?.imageView?.let { it1 ->
-                    Glide.with(it).load(image?.replace("<\$size\$>", "984")).fitCenter()
+            val image = sliderList.get(position).imageUrl
+            viewHolder.imageView?.alpha = 1f
+            viewHolder.imageView?.scaleX = 1f
+            viewHolder.imageView?.scaleY = 1f
+            Log.e("TAG","DATA: "+ sliderList.get(position).imageUrl)
+            viewHolder.itemView?.let {
+                viewHolder.imageView?.let { it1 ->
+                    Glide.with(it).load(image)
                         .into(it1)
                 }
             }

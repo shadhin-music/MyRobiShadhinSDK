@@ -14,7 +14,8 @@ import retrofit2.http.*
 
 internal interface ApiService {
     // @GET("ClientHomeContent/GetHomeContent")
-    @GET("ClientHomeContent/GetHomeContentV2")
+   // @GET("ClientHomeContent/GetHomeContentV2")
+    @GET("HomeContent/GetHomeContent")
     suspend fun fetchHomeData(
         @Query("pageNumber") pageNumber: Int?,
         @Query("isPaid") isPaid: Boolean?,

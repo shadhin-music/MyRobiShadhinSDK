@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -49,9 +50,10 @@ internal class ParentAdapter(
             VIEW_POPULAR_AMAR_TUNES -> R.layout.my_bl_sdk_item_popular_amar_tunes
             VIEW_SHOW ->R.layout.my_bl_sdk_item_release_patch
             VIEW_BANNER ->R.layout.my_bl_sdk_banner
-//            VIEW_POPULAR_BANDS -> R.layout.item_top_trending
-//            VIEW_MADE_FOR_YOU -> R.layout.item_top_trending
-//            VIEW_LATEST_RELEASE -> R.layout.item_top_trending
+            VIEW_DISCOVER -> R.layout.billboard_layout
+            VIEW_PDPS -> R.layout.my_bl_sdk_item_release_patch
+            VIEW_LARGE_VIDEO -> R.layout.my_bl_sdk_item_release_patch
+            VIEW_NEW_RELEASE_AUDIO->R.layout.billboard_layout
 //            VIEW_POPULAR_PODCAST -> R.layout.item_top_trending
 //            VIEW_BL_MUSIC_OFFERS -> R.layout.item_my_bl_offers
             else -> throw IllegalArgumentException("Invalid view type")
@@ -82,7 +84,10 @@ internal class ParentAdapter(
             "download" -> VIEW_DOWNLOAD
             "PodcastLive" -> VIEW_PODCAST_LIVE
             "Show" -> VIEW_SHOW
-            "Discover"-> VIEW_BANNER
+            "Discover"-> VIEW_DISCOVER
+            "PDPS"-> VIEW_PDPS
+            "PodcastVideo"-> VIEW_LARGE_VIDEO
+            "NewReleaseAudio" ->VIEW_NEW_RELEASE_AUDIO
             //adapterData[0].data[0].Design -> VIEW_ARTIST
             //           is DataModel.Artist -> VIEW_ARTIST
 //            is DataModel.Search -> VIEW_SEARCH
@@ -255,6 +260,25 @@ internal class ParentAdapter(
             }
         }
 
+
+        private fun bindLargeVideos(
+            homePatchItem: HomePatchItemModel,
+        ) {
+            val title: TextView = itemView.findViewById(R.id.tvTitle)
+            title.text = homePatchItem.Name
+
+            val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
+            seeAll.setOnClickListener {
+                homeCallBack.onClickSeeAll(homePatchItem)
+            }
+            val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+            recyclerView.layoutManager =
+                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.adapter = LargeVideosAdapter(
+                homePatchItem,
+                homePatchDetail = homeListData[absoluteAdapterPosition].Data
+            )
+        }
         private fun bindBhoot(homePatchItemModel: HomePatchItemModel) {
 
             val image: ShapeableImageView = itemView.findViewById(R.id.image)
@@ -342,7 +366,26 @@ internal class ParentAdapter(
 //
 //
         }
+        private fun bindBillboard(homePatchItemModel: HomePatchItemModel) {
 
+            lateinit var sliderView: SliderView
+            lateinit var sliderAdapter: SliderpagerAdapter
+            Log.e("TAG","DATA: "+ homePatchItemModel.Data as MutableList)
+
+            // on below line we are initializing our
+            // slider adapter and adding our list to it.
+            //sliderAdapter =SliderpagerAdapter(imageUrl)
+            sliderView = itemView.findViewById(R.id.imageSlider)
+            sliderAdapter = SliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
+            sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+            sliderView.setSliderAdapter(sliderAdapter)
+            sliderView.setIndicatorEnabled(true)
+            sliderView.scrollTimeInSec = 2
+            sliderView.isAutoCycle = true
+            sliderView.startAutoCycle()
+//
+//
+        }
         private fun bindLatestRelease() {
             val title: TextView = itemView.findViewById(R.id.tvTitle)
             title.text = "Latest Release"
@@ -359,6 +402,18 @@ internal class ParentAdapter(
             recyclerView.adapter = MyBLOffersAdapter()
         }
 
+
+        private fun bindPDPS(homePatchItemModel: HomePatchItemModel) {
+            val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+            recyclerView.layoutManager = GridLayoutManager(
+                itemView.context,
+                2,
+                RecyclerView.HORIZONTAL,
+                false
+            )
+            recyclerView.adapter = PDPSAdapter(homePatchItemModel, homeCallBack)
+
+        }
         private fun bindTrendingMusic(homePatchItemModel: HomePatchItemModel) {
             val title: TextView = itemView.findViewById(R.id.tvTitle)
             title.text = homePatchItemModel.Name
@@ -375,6 +430,23 @@ internal class ParentAdapter(
                 homePatchDetail = homeListData[absoluteAdapterPosition].Data
             )
         }
+        private fun bindNewReleaseAudio(homePatchItemModel: HomePatchItemModel){
+            lateinit var sliderView: SliderView
+            lateinit var sliderAdapter: NewReleaseSliderpagerAdapter
+            Log.e("TAG","DATA: "+ homePatchItemModel.Data as MutableList)
+
+            // on below line we are initializing our
+            // slider adapter and adding our list to it.
+            //sliderAdapter =SliderpagerAdapter(imageUrl)
+            sliderView = itemView.findViewById(R.id.imageSlider)
+            sliderAdapter = NewReleaseSliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
+            sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+            sliderView.setSliderAdapter(sliderAdapter)
+            sliderView.setIndicatorEnabled(true)
+            sliderView.scrollTimeInSec = 2
+            sliderView.isAutoCycle = true
+            sliderView.startAutoCycle()
+        }
 
         fun bind(homePatchItemModel: HomePatchItemModel?) {
             when (homePatchItemModel?.Design) {
@@ -389,7 +461,10 @@ internal class ParentAdapter(
                 "download" -> bindDownload(homePatchItemModel)
                 "PodcastLive" -> bindBhoot(homePatchItemModel)
                 "Show"->bindPodcastShow(homePatchItemModel)
-                "Discover"->bindBanner(homePatchItemModel)
+                "Discover"->bindBillboard(homePatchItemModel)
+                "PDPS" -> bindPDPS(homePatchItemModel)
+                "PodcastVideo"-> bindLargeVideos(homePatchItemModel)
+                "NewReleaseAudio" ->bindNewReleaseAudio(homePatchItemModel)
 //                "Playlist" -> bundRadio(homePatchItemModel)
                 //"Artist"->bindPopularBands(homePatchItemModel)
 //                "Artist" ->bindAd()
@@ -434,6 +509,10 @@ internal class ParentAdapter(
         val VIEW_PODCAST_LIVE = 13
         val VIEW_SHOW= 14
         val  VIEW_BANNER = 15
+       val VIEW_DISCOVER = 16
+       val VIEW_PDPS = 17
+        val VIEW_LARGE_VIDEO =18
+       val VIEW_NEW_RELEASE_AUDIO= 19
         const val VIEW_TYPE = 10
     }
 }

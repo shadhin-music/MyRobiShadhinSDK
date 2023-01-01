@@ -9,7 +9,7 @@
     <color name="my_sdk_color_white">#FFFFFFFF</color>
     <color name="my_sdk_shadin_required_color">#EFEFEF</color>
     <color name="my_sdk_color_white_seventy_percent">#A3A0A0</color>
-    <color name="my_sdk_color_primary">#FF5757</color>
+    <color name="my_sdk_color_primary">#ed1c24</color>
     <color name="my_sdk_buffer_color">#8000AFF5</color>
     <color name="my_sdk_time_bar_bg_color">#4000AFF5</color>
     <color name="my_sdk_color_primary_dark">#CDFD3333</color>

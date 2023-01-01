@@ -49,13 +49,13 @@ internal class HomeContentPlaylistAdapter(
             val imageView: ImageView = itemView.findViewById(R.id.image)
             // val textView:TextView = itemView.findViewById(R.id.txt_title)
             val url: String? = homePatchItem.Data[absoluteAdapterPosition].imageUrl
-            val changeURL = url?.replace(".jpg", "_mybl.jpg")
+          //  val changeURL = url?.replace(".jpg", "_mybl.jpg")
 //                val newURL= changeURL+"_mybl.jpg"
             // val textArtist:TextView = itemView.findViewById(R.id.txt_name)
             //textArtist.setText(data.Data[absoluteAdapterPosition].Artist)
             // textView.setText(data.Data[absoluteAdapterPosition].title)
             Glide.with(mContext)
-                .load(changeURL)
+                .load(url)
                 .into(imageView)
 //            val textViewName = itemView.findViewById(R.id.txt_name) as TextView
 //            val imageView2 = itemView.findViewById(R.id.image) as ImageView

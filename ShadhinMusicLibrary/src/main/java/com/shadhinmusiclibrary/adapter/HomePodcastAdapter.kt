@@ -4,6 +4,7 @@ package com.shadhinmusiclibrary.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +27,7 @@ internal class HomePodcastAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.my_bl_sdk_top_trending_list, parent, false)
+                .inflate(R.layout.my_bl_sdk_podcast_pp_type_layout, parent, false)
         return ViewHolder(v)
     }
 
@@ -45,14 +46,14 @@ internal class HomePodcastAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val mContext = itemView.context
         fun bindItems() {
-            val imageView: ShapeableImageView = itemView.findViewById(R.id.image)
-            val textView: TextView = itemView.findViewById(R.id.txt_title)
+            val imageView: ImageView = itemView.findViewById(R.id.image)
+            val textView: TextView = itemView.findViewById(R.id.txt_name)
             val url: String = homePatchItem.Data[absoluteAdapterPosition].imageUrl.toString()
             textView.text = homePatchItem.Data[absoluteAdapterPosition].titleName ?: ""
-            val textViewArtist: TextView = itemView.findViewById(R.id.txt_name)
-            textViewArtist.text = homePatchItem.Data[absoluteAdapterPosition].artistName ?: ""
+//            val textViewArtist: TextView = itemView.findViewById(R.id.txt_name)
+//            textViewArtist.text = homePatchItem.Data[absoluteAdapterPosition].artistName ?: ""
             Glide.with(mContext)
-                .load(UtilHelper.getImageUrlSize300(url))
+                .load(UtilHelper.getImageUrlSize450(url))
                 .into(imageView)
 
         }
