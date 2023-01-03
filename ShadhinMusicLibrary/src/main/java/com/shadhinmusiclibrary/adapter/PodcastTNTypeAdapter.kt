@@ -144,8 +144,8 @@ internal class PodcastTNTypeAdapter(
         pd_favorite.setOnClickListener {
                 if (isFav.equals(true)) {
                     val contentType = patchItem.Data[position].ContentType
-                    val podcastType = contentType?.take(2)
-                    val Type = contentType?.takeLast(2)
+                    val podcastType = contentType.take(2)
+                    val Type = contentType.takeLast(2)
                     //todo iSongTrack.Id
                     favViewModel.deleteFavContent(
                         patchItem.Data[position].TracktId,
@@ -171,8 +171,6 @@ internal class PodcastTNTypeAdapter(
                         patchItem.Data[position].TracktId,
                         patchItem.Data[position].ContentType
                     )
-
-
 
                     // todo iSongTrack.Id.toString(),
                     //      iSongTrack.Id.toString(),

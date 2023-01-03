@@ -1,6 +1,5 @@
 package com.shadhinmusiclibrary.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +14,11 @@ import com.shadhinmusiclibrary.data.model.FeaturedPodcastDetailsModel
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.shadhinmusiclibrary.utils.UtilHelper
 
-internal class PDPSAdapter(val homePatchItemModel: HomePatchItemModel,val homeCallBack: HomeCallBack) : RecyclerView.Adapter<PDPSAdapter.ViewHolder>() {
+internal class HomeRadioAdapter(val homePatchItemModel: HomePatchItemModel) : RecyclerView.Adapter<HomeRadioAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.popular_show_item_layout, parent, false)
+            .inflate(R.layout.radio_layout, parent, false)
         return ViewHolder(v)
     }
 
@@ -27,7 +26,7 @@ internal class PDPSAdapter(val homePatchItemModel: HomePatchItemModel,val homeCa
         holder.bindItems()
         holder.itemView.setOnClickListener {
             //data.let { it1 -> clickCallback.onClickItem(it1, position) }
-           homeCallBack.onClickItemAndAllItem(0, homePatchItemModel)
+          // homeCallBack.onClickItemAndAllItem(0, homePatchItemModel)
             // homeCallBack.onClickItem(position, Track(data.get()) )
         }
     }
@@ -41,12 +40,11 @@ internal class PDPSAdapter(val homePatchItemModel: HomePatchItemModel,val homeCa
         fun bindItems() {
 //            val textViewName = itemView.findViewById(R.id.txt_title) as TextView
 //            val textViewArtist = itemView.findViewById(R.id.txt_name) as TextView
-            val imageView = itemView.findViewById(R.id.image) as ImageView
+            val imageView = itemView.findViewById(R.id.artist_img) as ImageView
             val url: String? =
                 homePatchItemModel.Data[absoluteAdapterPosition].imageUrl?.let {
                     UtilHelper.getImageUrlSize300(it)
                 }
-            Log.e("TAG","DATA: " + homePatchItemModel.Data[absoluteAdapterPosition].imageUrl )
            // textViewArtist.text = homePatchItemModel.Data[absoluteAdapterPosition].titleName
             Glide.with(context)
                 .load(url)

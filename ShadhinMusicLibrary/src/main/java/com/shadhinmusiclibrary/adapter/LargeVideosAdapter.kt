@@ -12,6 +12,7 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 
 import com.shadhinmusiclibrary.R
 import com.shadhinmusiclibrary.activities.video.VideoActivity
@@ -49,7 +50,7 @@ internal class LargeVideosAdapter(
 
           //  val textViewName = itemView.findViewById(R.id.txt_title) as TextView
             val textViewArtist = itemView.findViewById(R.id.txt_name) as TextView
-            val imageView = itemView.findViewById(R.id.iv_preview) as ImageView
+            val imageView = itemView.findViewById(R.id.image) as ImageView
             val url: String = homePatchItemModel.Data[position].imageUrl ?: ""
           //  textViewName.text = homePatchItemModel.Data[position].titleName
             textViewArtist.text = homePatchItemModel.Data[absoluteAdapterPosition].titleName

@@ -53,7 +53,9 @@ internal class ParentAdapter(
             VIEW_DISCOVER -> R.layout.billboard_layout
             VIEW_PDPS -> R.layout.my_bl_sdk_item_release_patch
             VIEW_LARGE_VIDEO -> R.layout.my_bl_sdk_item_release_patch
+            VIEW_PODCAST_VIDEO -> R.layout.my_bl_sdk_item_release_patch
             VIEW_NEW_RELEASE_AUDIO->R.layout.billboard_layout
+            VIEW_RADIO ->R.layout.my_bl_sdk_item_release_patch
 //            VIEW_POPULAR_PODCAST -> R.layout.item_top_trending
 //            VIEW_BL_MUSIC_OFFERS -> R.layout.item_my_bl_offers
             else -> throw IllegalArgumentException("Invalid view type")
@@ -88,6 +90,8 @@ internal class ParentAdapter(
             "PDPS"-> VIEW_PDPS
             "PodcastVideo"-> VIEW_LARGE_VIDEO
             "NewReleaseAudio" ->VIEW_NEW_RELEASE_AUDIO
+            "LargeVideo" -> VIEW_LARGE_VIDEO
+            "Radio" -> VIEW_RADIO
             //adapterData[0].data[0].Design -> VIEW_ARTIST
             //           is DataModel.Artist -> VIEW_ARTIST
 //            is DataModel.Search -> VIEW_SEARCH
@@ -132,11 +136,11 @@ internal class ParentAdapter(
             //this.homeListData.add(download!!)
         }
 
-        if (this.homeListData.size >= 3 && downloadNotAdded) {
-            downloadNotAdded = false
-            download = HomePatchItemModel("002", "download", listOf(), "download", "download", 0, 0)
-            this.homeListData.add(download!!)
-        }
+//        if (this.homeListData.size >= 3 && downloadNotAdded) {
+//            downloadNotAdded = false
+//            download = HomePatchItemModel("002", "download", listOf(), "download", "download", 0, 0)
+//            this.homeListData.add(download!!)
+//        }
         this.homeListData.addAll(data)
         val sizeNew = this.homeListData.size
         notifyItemRangeChanged(size, sizeNew)
@@ -404,6 +408,8 @@ internal class ParentAdapter(
 
 
         private fun bindPDPS(homePatchItemModel: HomePatchItemModel) {
+            val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
+            tvTitle.text = homePatchItemModel.Name
             val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
             recyclerView.layoutManager = GridLayoutManager(
                 itemView.context,
@@ -443,11 +449,26 @@ internal class ParentAdapter(
             sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
             sliderView.setSliderAdapter(sliderAdapter)
             sliderView.setIndicatorEnabled(true)
-            sliderView.scrollTimeInSec = 2
+            sliderView.scrollTimeInSec = 5
             sliderView.isAutoCycle = true
             sliderView.startAutoCycle()
         }
 
+        private fun bindRadio(homePatchItemModel: HomePatchItemModel){
+            val title: TextView = itemView.findViewById(R.id.tvTitle)
+            title.text = homePatchItemModel.Name
+
+            val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
+            seeAll.setOnClickListener {
+                homeCallBack.onClickSeeAll(homePatchItemModel)
+            }
+            val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+            recyclerView.layoutManager =
+                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.adapter = HomeRadioAdapter(
+                homePatchItemModel
+            )
+        }
         fun bind(homePatchItemModel: HomePatchItemModel?) {
             when (homePatchItemModel?.Design) {
                 "search" -> bindSearch(homePatchItemModel)
@@ -465,6 +486,8 @@ internal class ParentAdapter(
                 "PDPS" -> bindPDPS(homePatchItemModel)
                 "PodcastVideo"-> bindLargeVideos(homePatchItemModel)
                 "NewReleaseAudio" ->bindNewReleaseAudio(homePatchItemModel)
+                "LargeVideo" -> bindLargeVideos(homePatchItemModel)
+                "Radio" -> bindRadio(homePatchItemModel)
 //                "Playlist" -> bundRadio(homePatchItemModel)
                 //"Artist"->bindPopularBands(homePatchItemModel)
 //                "Artist" ->bindAd()
@@ -512,7 +535,9 @@ internal class ParentAdapter(
        val VIEW_DISCOVER = 16
        val VIEW_PDPS = 17
         val VIEW_LARGE_VIDEO =18
-       val VIEW_NEW_RELEASE_AUDIO= 19
-        const val VIEW_TYPE = 10
+        val VIEW_PODCAST_VIDEO =19
+       val VIEW_NEW_RELEASE_AUDIO= 20
+       val VIEW_RADIO = 21
+        const val VIEW_TYPE = 100
     }
 }

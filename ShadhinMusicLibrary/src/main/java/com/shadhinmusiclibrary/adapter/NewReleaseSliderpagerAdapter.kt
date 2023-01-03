@@ -12,6 +12,7 @@ import com.shadhinmusiclibrary.autoimageslider.SliderViewAdapter
 import com.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
+import com.shadhinmusiclibrary.utils.TimeParser
 import com.shadhinmusiclibrary.utils.UtilHelper
 
 internal class NewReleaseSliderpagerAdapter(
@@ -43,13 +44,12 @@ var sliderList: MutableList<HomePatchDetailModel> = homePatchDetailModel
 //            viewHolder.imageView?.scaleX = 1f
 //            viewHolder.imageView?.scaleY = 1f
             viewHolder.artistName?.text = sliderList.get(position).artistName
-            viewHolder.time?.text= sliderList.get(position).total_duration
+            viewHolder.time?.text=   TimeParser.secToMin(sliderList.get(position).total_duration)
             viewHolder.title?.text = "New release from"
             viewHolder.trackName?.text = sliderList.get(position).titleName
             Log.e("TAG","DATA: "+ sliderList.get(position).imageUrl)
             viewHolder.itemView?.let {
                 viewHolder.imageView?.let { it1 ->
-
                     Glide.with(it).load(UtilHelper.getImageUrlSize300(banner.toString()))
                         .into(it1)
                 }
@@ -61,7 +61,7 @@ var sliderList: MutableList<HomePatchDetailModel> = homePatchDetailModel
                 }
             }
         }
-        viewHolder?.imageView?.setOnClickListener {
+        viewHolder?.itemView?.setOnClickListener {
             homeCallBack.onClickItemAndAllItem(position,homePatchItemModel)
         }
     }

@@ -261,6 +261,7 @@ internal class HomeFragment : BaseFragment(),
     private fun isValidDesign(design: String): Int {
         return when (design) {
 //            "search" -> VIEW_SEARCH
+            "search" -> ParentAdapter.VIEW_SEARCH
             "Artist" -> ParentAdapter.VIEW_ARTIST
             "Playlist" -> ParentAdapter.VIEW_PLAYLIST
             "Release" -> ParentAdapter.VIEW_RELEASE
@@ -270,11 +271,13 @@ internal class HomeFragment : BaseFragment(),
             "amarTune" -> ParentAdapter.VIEW_POPULAR_AMAR_TUNES
             "download" -> ParentAdapter.VIEW_DOWNLOAD
             "PodcastLive" -> ParentAdapter.VIEW_PODCAST_LIVE
-            "Show" ->ParentAdapter.VIEW_PODCAST_LIVE
-            "Discover" ->ParentAdapter.VIEW_DISCOVER
-            "PDPS" -> ParentAdapter.VIEW_PDPS
+            "Show" -> ParentAdapter.VIEW_SHOW
+            "Discover"-> ParentAdapter.VIEW_DISCOVER
+            "PDPS"-> ParentAdapter.VIEW_PDPS
             "PodcastVideo"-> ParentAdapter.VIEW_LARGE_VIDEO
-            "NewReleaseAudio" ->ParentAdapter.VIEW_NEW_RELEASE_AUDIO
+            "NewReleaseAudio" -> ParentAdapter.VIEW_NEW_RELEASE_AUDIO
+            "LargeVideo" -> ParentAdapter.VIEW_LARGE_VIDEO
+            "Radio" -> ParentAdapter.VIEW_RADIO
             else -> {
                 -1
             }

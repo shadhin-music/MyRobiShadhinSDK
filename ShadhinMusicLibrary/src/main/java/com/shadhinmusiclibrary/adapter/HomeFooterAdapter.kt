@@ -47,7 +47,7 @@ internal class HomeFooterAdapter : RecyclerView.Adapter<HomeFooterAdapter.ViewHo
 
     }
     companion object {
-        const val VIEW_TYPE = 20
+        const val VIEW_TYPE = 200
     }
 }
 

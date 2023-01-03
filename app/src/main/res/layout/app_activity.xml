@@ -12,7 +12,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:background="#FF5722"
+        android:background="#00B0FF"
         android:elevation="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

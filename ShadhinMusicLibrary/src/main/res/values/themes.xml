@@ -6,25 +6,25 @@
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowNoTitle">true</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:statusBarColor">#D8F83E3E</item>
+        <item name="android:statusBarColor">#00B0FF</item>
     </style>
 
     <style name="light_theme_music_activity" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/my_sdk_color_primary</item>
-        <item name="colorPrimaryDark">@color/my_sdk_color_primary_dark</item>
-        <item name="colorAccent">@color/my_sdk_color_accent</item>
+        <item name="colorPrimaryDark">#00B0FF</item>
+        <item name="colorAccent">#00B0FF</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowNoTitle">true</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:statusBarColor">#D8F83E3E</item>
+        <item name="android:statusBarColor">#00B0FF</item>
     </style>
 
 
     <style name="videoAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/my_sdk_color_primary</item>
-        <item name="colorPrimaryDark">@color/my_sdk_color_primary_dark</item>
-        <item name="colorAccent">@color/my_sdk_color_accent</item>
+        <item name="colorPrimaryDark">#00B0FF</item>
+        <item name="colorAccent">#00B0FF</item>
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -43,7 +43,7 @@
     <style name="Theme.ShadhinMusicSDK.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
-        <item name="cornerSize">10%</item>
+        <item name="cornerSize">8%</item>
     </style>
     <style name="ShapeAppearanceOverlay.App.CornerSize30Percent" parent="">
         <item name="cornerSize">30%</item>

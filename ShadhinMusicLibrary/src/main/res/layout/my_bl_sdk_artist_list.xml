@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
     android:layout_marginEnd="4dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="8dp">
 
     <com.shadhinmusiclibrary.utils.CircleImageView
         android:id="@+id/image"

@@ -5,18 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:visibility="visible">
-
-    <com.shadhinmusiclibrary.autoimageslider.SliderView
-        android:id="@+id/imageSlider"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_slider_mainActivity"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        app:sliderIndicatorGravity="center|bottom"
-        app:sliderIndicatorMargin="15dp"
-        app:sliderIndicatorOrientation="horizontal"
-        app:sliderIndicatorPadding="2dp"
-        app:sliderIndicatorRadius="1dp"
-        app:sliderIndicatorSelectedColor="@color/my_sdk_color_primary"
-        app:sliderIndicatorUnselectedColor="@color/my_sdk_color_white"
-        />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="8dp">
+
+        <com.shadhinmusiclibrary.autoimageslider.SliderView
+            android:id="@+id/imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            app:sliderIndicatorGravity="center|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="2dp"
+            app:sliderIndicatorRadius="1dp"
+            app:sliderIndicatorSelectedColor="@color/my_sdk_color_primary"
+            app:sliderIndicatorUnselectedColor="@color/my_sdk_black2"
+            />
+
+    </androidx.cardview.widget.CardView>
+
 
 </RelativeLayout>

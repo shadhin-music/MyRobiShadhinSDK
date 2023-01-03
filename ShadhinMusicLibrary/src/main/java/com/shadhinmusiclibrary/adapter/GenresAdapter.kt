@@ -41,7 +41,7 @@ internal class GenresAdapter(
             val url: String = homePathitem.imageUrl ?: ""
             val imageView = itemView.findViewById(R.id.image) as ImageView
             Glide.with(context)
-                .load(url.replace(".jpg", "_mybl.jpg"))
+                .load(url)
                 .into(imageView)
             itemView.setOnClickListener {
             }

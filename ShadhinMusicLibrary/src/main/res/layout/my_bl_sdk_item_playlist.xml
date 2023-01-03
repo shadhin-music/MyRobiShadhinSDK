@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
-    android:layout_marginTop="12dp"
+    android:layout_marginTop="2dp"
     android:layout_marginEnd="16dp">
 
 <!--    <androidx.cardview.widget.CardView-->
@@ -34,8 +34,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:paddingStart="16dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="16dp"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:paddingEnd="16dp"
                     android:paddingBottom="16dp"
                     android:textColor="#2E2E2E"
@@ -65,9 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/constraintRelease"
-                android:clipToPadding="false"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp" />
+                android:clipToPadding="false" />
         </RelativeLayout>
 <!--    </androidx.cardview.widget.CardView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
