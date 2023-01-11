@@ -10,10 +10,9 @@ import com.bumptech.glide.Glide
 import com.shadhinmusiclibrary.R
 import com.shadhinmusiclibrary.autoimageslider.SliderViewAdapter
 import com.shadhinmusiclibrary.callBackService.HomeCallBack
-import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
-import com.shadhinmusiclibrary.fragments.home.newReleaseTrackCallback
+import com.shadhinmusiclibrary.fragments.home.NewReleaseTrackCallback
 import com.shadhinmusiclibrary.utils.TimeParser
 import com.shadhinmusiclibrary.utils.UtilHelper
 
@@ -21,7 +20,7 @@ internal class NewReleaseSliderpagerAdapter(
     val homePatchDetailModel: MutableList<HomePatchDetailModel>,
     val homeCallBack: HomeCallBack,
     val homePatchItemModel: HomePatchItemModel,
-    val newReleaseTrackCallback: newReleaseTrackCallback
+    val newReleaseTrackCallback: NewReleaseTrackCallback
 ) :
     SliderViewAdapter<NewReleaseSliderpagerAdapter.ViewHolder>() {
 var sliderList: MutableList<HomePatchDetailModel> = homePatchDetailModel

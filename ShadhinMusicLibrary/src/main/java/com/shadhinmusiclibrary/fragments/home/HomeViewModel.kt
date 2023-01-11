@@ -5,17 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shadhinmusiclibrary.ShadhinMusicSdkCore
 import com.shadhinmusiclibrary.data.model.HomeDataModel
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.shadhinmusiclibrary.data.model.RBTModel
 import com.shadhinmusiclibrary.data.repository.HomeContentRepository
 import com.shadhinmusiclibrary.utils.ApiResponse
 import com.shadhinmusiclibrary.utils.Status
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class HomeViewModel(private val homeContentRepository: HomeContentRepository) :
     ViewModel() {
-
+    private val patchSet: MutableSet<HomePatchItemModel> = LinkedHashSet()
     private val _isLoading:MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoading:LiveData<Boolean> = _isLoading
 
@@ -29,10 +31,32 @@ internal class HomeViewModel(private val homeContentRepository: HomeContentRepos
     private val _urlContent: MutableLiveData<ApiResponse<RBTModel>> = MutableLiveData()
     val urlContent: LiveData<ApiResponse<RBTModel>> = _urlContent
 
-    fun fetchHomeData(pageNumber: Int?, isPaid: Boolean?) = viewModelScope.launch {
+    private val _patchList: MutableLiveData<List<HomePatchItemModel>> = MutableLiveData()
+    val patchList: LiveData<List<HomePatchItemModel>> = _patchList
+
+    fun fetchHomeData() = viewModelScope.launch(Dispatchers.IO) {
+        var total:Int = 0
+        var pageNumber:Int = 1
+        do{
+            val response = homeContentRepository.fetchHomeData(pageNumber, false)
+            total = response.data?.total?:1
+            response.data?.data?.let { patchs ->
+
+                if(pageNumber == 2){
+                    patchs.add(0,HomePatchItemModel("002", "download", listOf(), "download", "download", 0, 0))
+                }
+                patchSet.addAll(patchs)
+                _patchList.postValue(patchSet.toList())
+            }
+            pageNumber++
+
+        }while (pageNumber<=total)
+
+    }
+  /*  fun fetchHomeData(pageNumber: Int?, isPaid: Boolean?) = viewModelScope.launch {
         val response = homeContentRepository.fetchHomeData(pageNumber, isPaid)
         _homeContent.postValue(response)
-    }
+    }*/
 
 
     fun fetchPatchData(patchCode: String) = viewModelScope.launch {

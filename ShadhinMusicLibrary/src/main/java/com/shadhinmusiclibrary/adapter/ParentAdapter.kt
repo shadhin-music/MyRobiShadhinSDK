@@ -2,7 +2,6 @@ package com.shadhinmusiclibrary.adapter
 
 
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,15 +19,15 @@ import com.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
-import com.shadhinmusiclibrary.data.model.RBTDATAModel
-import com.shadhinmusiclibrary.fragments.home.newReleaseTrackCallback
+import com.shadhinmusiclibrary.fragments.home.NewReleaseTrackCallback
 
 
 internal class ParentAdapter(
     var homeCallBack: HomeCallBack,
     val searchCb: SearchClickCallBack,
     val downloadClickCallBack: DownloadClickCallBack,
-    val podcastTrackClick: PodcastTrackCallback, val newReleaseTrackCallback: newReleaseTrackCallback
+    val podcastTrackClick: PodcastTrackCallback,
+    val newReleaseTrackCallback: NewReleaseTrackCallback
 ) : ListAdapter<HomePatchItemModel,ParentAdapter.DataAdapterViewHolder>(ParentAdapterDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataAdapterViewHolder {
@@ -50,7 +49,7 @@ internal class ParentAdapter(
             VIEW_PODCAST_VIDEO -> R.layout.my_bl_sdk_item_release_patch
             VIEW_NEW_RELEASE_AUDIO->R.layout.billboard_layout
             VIEW_RADIO ->R.layout.my_bl_sdk_item_release_patch
-            else -> throw IllegalArgumentException("Invalid view type")
+            else -> R.layout.my_bl_sdk_item_empty
         }
 
         val view = LayoutInflater
@@ -78,7 +77,12 @@ internal class ParentAdapter(
             "download" -> VIEW_DOWNLOAD
             "PodcastLive" -> VIEW_PODCAST_LIVE
             "Show" -> VIEW_SHOW
-            "Discover"-> VIEW_BANNER
+            "Discover"-> VIEW_DISCOVER
+            "PDPS"-> VIEW_PDPS
+            "PodcastVideo"-> VIEW_LARGE_VIDEO
+            "NewReleaseAudio" ->VIEW_NEW_RELEASE_AUDIO
+            "LargeVideo" -> VIEW_LARGE_VIDEO
+            "Radio" -> VIEW_RADIO
             else -> -1
 
         }

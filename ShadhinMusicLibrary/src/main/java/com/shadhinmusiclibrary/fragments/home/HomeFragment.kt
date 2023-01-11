@@ -33,7 +33,6 @@ import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.shadhinmusiclibrary.data.IMusicModel
 import com.shadhinmusiclibrary.data.model.*
-import com.shadhinmusiclibrary.data.model.HomeDataModel
 import com.shadhinmusiclibrary.data.model.SongDetailModel
 import com.shadhinmusiclibrary.data.model.podcast.EpisodeModel
 import com.shadhinmusiclibrary.fragments.amar_tunes.AmarTunesViewModel
@@ -42,10 +41,8 @@ import com.shadhinmusiclibrary.fragments.fav.FavViewModel
 import com.shadhinmusiclibrary.library.player.data.model.MusicPlayList
 import com.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.shadhinmusiclibrary.library.player.utils.isPlaying
-import com.shadhinmusiclibrary.utils.*
 import com.shadhinmusiclibrary.utils.AppConstantUtils
 import com.shadhinmusiclibrary.utils.DataContentType
-import com.shadhinmusiclibrary.utils.Status
 import com.shadhinmusiclibrary.utils.TimeParser
 import com.shadhinmusiclibrary.utils.UtilHelper
 import java.io.Serializable
@@ -54,9 +51,9 @@ internal class HomeFragment : BaseFragment(),
     HomeCallBack,
     SearchClickCallBack,
     DownloadClickCallBack,
-    PodcastTrackCallback,newReleaseTrackCallback {
+    PodcastTrackCallback,NewReleaseTrackCallback {
 
-    private lateinit var concatAdapter: ConcatAdapter
+    private  var concatAdapter: ConcatAdapter?=null
     private lateinit var favViewModel: FavViewModel
     private var globalRootContentId = ""
     //mini music player
@@ -79,7 +76,7 @@ internal class HomeFragment : BaseFragment(),
     var isLoading = false
     var isLastPage = false
 
-    private lateinit var footerAdapter: HomeFooterAdapter
+    private  var footerAdapter: HomeFooterAdapter?=null
     private lateinit var cacheRepository: CacheRepository
 
     override fun onCreateView(
@@ -95,6 +92,21 @@ internal class HomeFragment : BaseFragment(),
         super.onViewCreated(view, savedInstanceState)
         uiInitMiniMusicPlayer(view)
         cacheRepository = CacheRepository(requireContext())
+        setupViewModel()
+        setupAdapter(view)
+        homeViewModel.fetchHomeData()
+
+        favViewModel.getFavContentArtist("A")
+        favViewModel.getFavContentPodcast("PD")
+        favViewModel.getFavContentAlbum("R")
+        favViewModel.getFavContentVideo("V")
+        favViewModel.getFavContentSong("S")
+        favViewModel.getFavContentPlaylist("P")
+
+        observeData()
+    }
+    private fun setupViewModel() {
+        cacheRepository = CacheRepository(requireContext())
         homeViewModel = ViewModelProvider(
             this,
             injector.factoryHomeVM
@@ -109,34 +121,39 @@ internal class HomeFragment : BaseFragment(),
             this,
             injector.factoryFavContentVM
         )[FavViewModel::class.java]
-
-        homeViewModel.fetchHomeData(pageNum, false)
-
-        favViewModel.getFavContentArtist("A")
-        favViewModel.getFavContentPodcast("PD")
-        favViewModel.getFavContentAlbum("R")
-        favViewModel.getFavContentVideo("V")
-        favViewModel.getFavContentSong("S")
-        favViewModel.getFavContentPlaylist("P")
-
-        observeData()
     }
+    private fun setupAdapter(view: View) {
 
+        footerAdapter = HomeFooterAdapter()
+        dataAdapter = ParentAdapter(this, this, this, this,this)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        val layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        recyclerView.layoutManager = layoutManager
+
+        val config = ConcatAdapter.Config.Builder()
+            .setIsolateViewTypes(false)
+            .build()
+        concatAdapter = ConcatAdapter(config, dataAdapter)
+        recyclerView.adapter = concatAdapter
+
+    }
     private fun observeData() {
         playerViewModel.startObservePlayerProgress(viewLifecycleOwner)
         val progressBar: ProgressBar = requireView().findViewById(R.id.progress_bar)
-        homeViewModel.homeContent.observe(viewLifecycleOwner) { res ->
-            if (res.status == Status.SUCCESS) {
-                progressBar.visibility = GONE
-                if (res.data?.data?.isNotEmpty() == true) {
-                    viewDataInRecyclerView(res.data)
-                }
-            } else {
-                progressBar.visibility = GONE
-                pageNum = 1
-                homeViewModel.fetchHomeData(pageNum, false)
+
+        homeViewModel.patchList.observe(viewLifecycleOwner) { patchList ->
+            dataAdapter?.submitList(patchList)
+
+            progressBar.visibility = View.GONE
+            if(concatAdapter !=null && footerAdapter !=null && concatAdapter?.adapters?.contains(footerAdapter) == false){
+                concatAdapter?.addAdapter(footerAdapter!!)
+
             }
-            isLoading = false
+
         }
         playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMus ->
             if (itMus != null) {
@@ -194,7 +211,7 @@ internal class HomeFragment : BaseFragment(),
         }
     }
 
-    private fun viewDataInRecyclerView(homeData: HomeDataModel?) {
+    /*private fun viewDataInRecyclerView(homeData: HomeDataModel?) {
         if (dataAdapter == null) {
             footerAdapter = HomeFooterAdapter()
             dataAdapter = ParentAdapter(this, this, this, this,this)
@@ -227,11 +244,11 @@ internal class HomeFragment : BaseFragment(),
 
 //            concatAdapter.removeAdapter(dataAdapter)
         }
-        /* viewModelAmaraTunes.urlContent.observe(viewLifecycleOwner) { res ->
+        *//* viewModelAmaraTunes.urlContent.observe(viewLifecycleOwner) { res ->
              if (res.status == Status.SUCCESS) {
                  this.rbtData = res.data?.data
              }
-         }*/
+         }*//*
 
         homeData.let {
             for (item in it?.data?.indices!!) {
@@ -260,7 +277,7 @@ internal class HomeFragment : BaseFragment(),
             concatAdapter.addAdapter(footerAdapter)
             //recyclerView.adapter = ConcatAdapter(config, dataAdapter, footerAdapter)
         }
-    }
+    }*/
 
     private fun isValidDesign(design: String): Int {
         return when (design) {
@@ -768,7 +785,7 @@ internal class HomeFragment : BaseFragment(),
 
 
 }
-internal interface newReleaseTrackCallback {
+internal interface NewReleaseTrackCallback {
     fun getCurrentVH(
         currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
         data: List<IMusicModel>,
