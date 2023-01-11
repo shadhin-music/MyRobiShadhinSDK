@@ -31,6 +31,7 @@ object ShadhinMusicSdkCore {
     private var scope: CoroutineScope? = null
     private var sdkCallback:ShadhinSDKCallback ?= null
     //get Music frangment
+    @Deprecated("please use openMusic()")
     @JvmStatic
     fun getMusicFragment(): Fragment {
         return HomeFragment()
@@ -59,7 +60,9 @@ object ShadhinMusicSdkCore {
 
     @JvmStatic
     fun openMusic(reqContext: Context) {
-        reqContext.startActivity(Intent(reqContext, MusicActivity::class.java))
+        val intent = Intent(reqContext, SDKMainActivity::class.java)
+        intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
+        reqContext.startActivity(intent)
     }
 
     @JvmStatic

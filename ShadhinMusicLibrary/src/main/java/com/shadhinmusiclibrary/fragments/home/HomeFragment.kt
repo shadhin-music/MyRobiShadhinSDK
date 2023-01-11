@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,7 +42,9 @@ import com.shadhinmusiclibrary.fragments.fav.FavViewModel
 import com.shadhinmusiclibrary.library.player.data.model.MusicPlayList
 import com.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.shadhinmusiclibrary.library.player.utils.isPlaying
+import com.shadhinmusiclibrary.utils.*
 import com.shadhinmusiclibrary.utils.AppConstantUtils
+import com.shadhinmusiclibrary.utils.DataContentType
 import com.shadhinmusiclibrary.utils.Status
 import com.shadhinmusiclibrary.utils.TimeParser
 import com.shadhinmusiclibrary.utils.UtilHelper
@@ -291,7 +294,7 @@ internal class HomeFragment : BaseFragment(),
     ) {
 //        ShadhinMusicSdkCore.pressCountIncrement()
         patchMonitoring(selectedHomePatchItem)
-        val data = Bundle()
+        /*val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
@@ -305,9 +308,177 @@ internal class HomeFragment : BaseFragment(),
                     )
                     putExtra(AppConstantUtils.PatchItem, data)
                     putExtra(AppConstantUtils.SelectedPatchIndex, itemPosition)
-                })
+                })*/
+        route(selectedHomePatchItem, itemPosition)
 //        val valueCon = selectedHomePatchItem.Data[itemPosition].ContentID
 //        fetchOnlineData(valueCon)
+    }
+
+    private fun route(homePatchItem: HomePatchItemModel, selectedIndex: Int?) {
+
+        if (selectedIndex != null && homePatchItem.Data.size > selectedIndex) {
+            //Single Item Click event
+            val homePatchDetail = homePatchItem.Data[selectedIndex]
+
+            val podcast: String = homePatchDetail.content_Type ?: ""
+
+            if (homePatchDetail.content_Type?.contains("PD") == true) {
+                val bundle = Bundle().apply {
+                    putSerializable(
+                        AppConstantUtils.PatchItem,
+                        HomePatchItemModel(
+                            homePatchItem.Code,
+                            "PDBC",
+                            homePatchItem.Data,
+                            homePatchItem.Design,
+                            homePatchItem.Name,
+                            homePatchItem.Sort,
+                            homePatchItem.Total
+                        ) as Serializable
+                    )
+                    putSerializable(
+                        AppConstantUtils.PatchDetail,
+                        homePatchDetail as Serializable
+                    )
+                }
+
+                findNavController().navigate(R.id.to_podcast_details, bundle)
+            }
+            val bundle = Bundle().apply {
+                putSerializable(
+                    AppConstantUtils.PatchItem,
+                    homePatchItem
+                )
+                putSerializable(
+                    AppConstantUtils.PatchDetail,
+                    homePatchDetail as Serializable
+                )
+            }
+            val action = when (homePatchDetail.content_Type?.uppercase()) {
+                DataContentType.CONTENT_TYPE_A -> R.id.to_artist_details
+                DataContentType.CONTENT_TYPE_R -> R.id.to_album_details
+                DataContentType.CONTENT_TYPE_P -> R.id.to_playlist_details
+                DataContentType.CONTENT_TYPE_S -> R.id.to_s_type_details
+                else -> null
+            }
+            findNavController()
+            action?.let { a-> findNavController().navigate(a, bundle) }
+
+
+        } else {
+            if (homePatchItem.ContentType.contains("PD",true)) {
+
+                findNavController().navigate(R.id.to_podcast_see_all_fragment,   Bundle().apply {
+                    putSerializable(
+                        AppConstantUtils.PatchItem,
+                        homePatchItem as Serializable
+                    )
+                })
+
+                /* startDestination(
+
+                       Bundle().apply {
+                           putSerializable(
+                               AppConstantUtils.PatchItem,
+                               homePatchItem as Serializable
+                           )
+                       }, R.id.podcast_see_all_fragment
+                   )*/
+            }
+
+            //See All Item Click event
+            val bundle = Bundle().apply {
+                putSerializable(
+                    AppConstantUtils.PatchItem,
+                    homePatchItem as Serializable
+                )
+            }
+            when (homePatchItem.ContentType.uppercase()) {
+                DataContentType.CONTENT_TYPE_PS -> {
+                    //setupNavGraphAndArg(R.navigation.my_bl_sdk_nav_graph_podcast_list_and_details,
+                    /*startDestination(
+
+                        Bundle().apply {
+                            putSerializable(
+                                AppConstantUtils.PatchItem,
+                                homePatchItem as Serializable
+                            )
+                        }, R.id.podcast_see_all_fragment
+                    )*/
+                    findNavController().navigate(R.id.to_podcast_see_all_fragment,  bundle )
+                    Log.e("TAG", "CHECKING: " + DataContentType)
+                }
+                DataContentType.CONTENT_TYPE_A -> {
+                    //open artist details
+                    findNavController().navigate(R.id.to_popular_artist_fragment,bundle)
+                    /*startDestination(
+
+                        Bundle().apply {
+                            putSerializable(
+                                AppConstantUtils.PatchItem,
+                                homePatchItem as Serializable
+                            )
+                        }, R.id.popular_artist_fragment
+                    )*/
+                }
+
+                DataContentType.CONTENT_TYPE_R -> {
+                    findNavController().navigate(R.id.to_release_list_fragment,bundle)
+                    //open album details
+                    /*startDestination(
+
+                        Bundle().apply {
+                            putSerializable(
+                                AppConstantUtils.PatchItem,
+                                homePatchItem
+                            )
+                        }, R.id.release_list_fragment
+                    )*/
+                }
+
+                DataContentType.CONTENT_TYPE_P -> {
+                    //open playlist
+                    findNavController().navigate(R.id.to_playlist_list_fragment,bundle)
+                    /* startDestination(
+
+                         Bundle().apply {
+                             putSerializable(
+                                 AppConstantUtils.PatchItem,
+                                 homePatchItem as Serializable
+                             )
+                         }, R.id.playlist_list_fragment
+                     )*/
+                }
+
+                DataContentType.CONTENT_TYPE_S -> {
+                    //open songs
+                    findNavController().navigate(R.id.to_s_type_list_fragment,bundle)
+                    /* startDestination(
+
+                         Bundle().apply {
+                             putSerializable(
+                                 AppConstantUtils.PatchItem,
+                                 homePatchItem as Serializable
+                             )
+                         }, R.id.s_type_list_fragment
+                     )*/
+                }
+
+                DataContentType.CONTENT_TYPE_V -> {
+                    //open video
+                    findNavController().navigate(R.id.to_video_list_fragment,bundle)
+                    /*startDestination(
+
+                        Bundle().apply {
+                            putSerializable(
+                                AppConstantUtils.PatchItem,
+                                homePatchItem as Serializable
+                            )
+                        }, R.id.video_list_fragment
+                    )*/
+                }
+            }
+        }
     }
 
     override fun onClickSeeAll(selectedHomePatchItem: HomePatchItemModel) {
@@ -318,7 +489,7 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(
+       /* startActivity(
             Intent(requireActivity(), SDKMainActivity::class.java)
                 .apply {
                     putExtra(
@@ -326,7 +497,8 @@ internal class HomeFragment : BaseFragment(),
                         AppConstantUtils.Requester_Name_Home
                     )
                     putExtra(AppConstantUtils.PatchItem, data)
-                })
+                })*/
+        route(selectedHomePatchItem,null)
     }
 
     override fun onClickItemPodcastEpisode(

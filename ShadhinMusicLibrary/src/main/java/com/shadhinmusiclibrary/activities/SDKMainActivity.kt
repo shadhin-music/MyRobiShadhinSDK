@@ -192,7 +192,10 @@ internal class SDKMainActivity : BaseActivity(),
         if (uiRequest == AppConstantUtils.RequesterRC) {
             routeFromRC()
         }
+        if(uiRequest == AppConstantUtils.HOME_PATCH){
+            startDestination(resId = R.id.homeFragment)
 
+        }
         if (uiRequest == AppConstantUtils.Requester_Name_Home) {
             homeFragmentAccess()
         }
@@ -299,8 +302,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun routePlaylist(patch: HomePatchItemModel) {
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -311,8 +314,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun routeRelease(patch: HomePatchItemModel) {
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -323,8 +326,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun routeVideo(patch: HomePatchItemModel) {
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -335,8 +338,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun routePodcastShow(patch: HomePatchItemModel) {
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -347,8 +350,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun routeArtist(patch: HomePatchItemModel) {
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -370,8 +373,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun routePodcast(id: String?, type: String?) {
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 val details = HomePatchDetailModel().apply {
 
@@ -391,8 +394,8 @@ internal class SDKMainActivity : BaseActivity(),
     private fun routeContent(id: String?, type: String?) {
         when (type?.uppercase()) {
             DataContentType.CONTENT_TYPE_A -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         val details = HomePatchDetailModel().apply {
                             this.artist_Id = id ?: ""
@@ -406,8 +409,8 @@ internal class SDKMainActivity : BaseActivity(),
                 )
             }
             DataContentType.CONTENT_TYPE_R -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         val details = HomePatchDetailModel().apply {
                             this.album_Id = id ?: ""
@@ -421,8 +424,8 @@ internal class SDKMainActivity : BaseActivity(),
                 )
             }
             DataContentType.CONTENT_TYPE_S -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         val details = HomePatchDetailModel().apply {
                             this.content_Id = id ?: ""
@@ -437,8 +440,8 @@ internal class SDKMainActivity : BaseActivity(),
             }
             DataContentType.CONTENT_TYPE_P -> {
                 //open playlist
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         val details = HomePatchDetailModel().apply {
                             this.content_Id = id ?: ""
@@ -465,8 +468,8 @@ internal class SDKMainActivity : BaseActivity(),
         /*      val patch = intent.extras!!.getBundle(PatchItem)!!
             .getSerializable(PatchItem) as HomePatchItem
         */
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply { }, R.id.search_fragment
         )
     }
@@ -476,8 +479,7 @@ internal class SDKMainActivity : BaseActivity(),
             .getSerializable(PatchItem) as HomePatchItemModel
         val patchDetail = intent.extras!!.getBundle(PatchDetail)!!
             .getSerializable(PatchDetail) as HomePatchDetailModel
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -495,8 +497,7 @@ internal class SDKMainActivity : BaseActivity(),
         val patch = intent.extras!!.getBundle(PatchItem)!!
             .getSerializable(PatchItem) as HomePatchItemModel
 
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -510,8 +511,8 @@ internal class SDKMainActivity : BaseActivity(),
         val patch = intent.extras!!.getBundle(PatchItem)!!
             .getSerializable(PatchItem) as HomePatchItemModel
 
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -537,8 +538,8 @@ internal class SDKMainActivity : BaseActivity(),
         val patch = intent.extras!!.getBundle(PatchItem)!!
             .getSerializable(PatchItem) as HomePatchItemModel
 
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -552,8 +553,8 @@ internal class SDKMainActivity : BaseActivity(),
         val patch = intent.extras!!.getBundle(PatchItem)!!
             .getSerializable(PatchItem) as HomePatchItemModel
 
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -567,8 +568,8 @@ internal class SDKMainActivity : BaseActivity(),
         val patch = intent.extras!!.getBundle(PatchItem)!!
             .getSerializable(PatchItem) as HomePatchItemModel
 
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -598,8 +599,8 @@ internal class SDKMainActivity : BaseActivity(),
             .getSerializable(PatchItem) as HomePatchItemModel
         val id = intent.extras!!.getBundle(PlaylistId)!!.getSerializable(PlaylistId) as String
         val name = intent.extras!!.getBundle(PlaylistName)!!.getSerializable(PlaylistName) as String
-        setupNavGraphAndArg(
-            R.navigation.my_bl_sdk_nav_graph_common,
+        startDestination(
+
             Bundle().apply {
                 putSerializable(
                     PatchItem,
@@ -625,56 +626,56 @@ internal class SDKMainActivity : BaseActivity(),
     private fun routeDataPatch(contentType: String) {
         when (contentType.toUpperCase(Locale.ENGLISH)) {
             DataContentType.CONTENT_TYPE_R_RC201 -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.TITLE, "Latest Release")
                     }, R.id.latest_release_fragment
                 )
             }
             DataContentType.CONTENT_TYPE_PD_RC202 -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.TITLE, "Featured Podcast")
                     }, R.id.featured_podcast_fragment
                 )
             }
             DataContentType.CONTENT_TYPE_A_RC203 -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.TITLE, "Popular Artists")
                     }, R.id.featured_popular_artist_fragment
                 )
             }
             DataContentType.AMR_TUNE_ALL -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.CONTENT_TYPE, contentType)
                     }, R.id.amartunes_web_view_fragment
                 )
             }
             DataContentType.AMR_TUNE -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.CONTENT_TYPE, contentType)
                     }, R.id.amartunes_web_view_fragment
                 )
             }
             DataContentType.CONTENT_TYPE_V_RC204 -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.TITLE, "Music Video")
                     }, R.id.music_video_fragment
                 )
             }
             DataContentType.CONTENT_TYPE_RADIO -> {
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putString(DataContentType.TITLE, "Radio")
                     }, R.id.radio_fragment
@@ -695,8 +696,8 @@ internal class SDKMainActivity : BaseActivity(),
 //            homePatchDetail.content_Id = ""
             if (homePatchDetail.content_Type?.contains("PD") == true) {
                 //onPodcastClick(homePatchDetail,homePatchDetail)
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putSerializable(
                             PatchItem,
@@ -774,8 +775,8 @@ internal class SDKMainActivity : BaseActivity(),
             when (homePatchDetail.content_Type?.toUpperCase()) {
                 DataContentType.CONTENT_TYPE_A -> {
                     //open artist details
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -790,8 +791,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_R -> {
                     //open album details
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -808,8 +809,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_P -> {
                     //open playlist
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -824,8 +825,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_S -> {
                     //open songs
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -850,8 +851,8 @@ internal class SDKMainActivity : BaseActivity(),
             if (homePatchItem.ContentType.toUpperCase().contains("PD")) {
                 //open podcast
                 //setupNavGraphAndArg(R.navigation.my_bl_sdk_nav_graph_podcast_list_and_details,
-                setupNavGraphAndArg(
-                    R.navigation.my_bl_sdk_nav_graph_common,
+                startDestination(
+
                     Bundle().apply {
                         putSerializable(
                             PatchItem,
@@ -865,8 +866,8 @@ internal class SDKMainActivity : BaseActivity(),
             when (homePatchItem.ContentType.toUpperCase()) {
                 DataContentType.CONTENT_TYPE_PS -> {
                     //setupNavGraphAndArg(R.navigation.my_bl_sdk_nav_graph_podcast_list_and_details,
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -878,8 +879,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_A -> {
                     //open artist details
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -890,8 +891,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_R -> {
                     //open album details
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -902,8 +903,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_P -> {
                     //open playlist
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -914,8 +915,8 @@ internal class SDKMainActivity : BaseActivity(),
                 }
                 DataContentType.CONTENT_TYPE_S -> {
                     //open songs
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -927,8 +928,8 @@ internal class SDKMainActivity : BaseActivity(),
 
                 DataContentType.CONTENT_TYPE_V -> {
                     //open video
-                    setupNavGraphAndArg(
-                        R.navigation.my_bl_sdk_nav_graph_common,
+                    startDestination(
+
                         Bundle().apply {
                             putSerializable(
                                 PatchItem,
@@ -941,13 +942,12 @@ internal class SDKMainActivity : BaseActivity(),
         }
     }
 
-    private fun setupNavGraphAndArg(
-        @NavigationRes graphResId: Int,
-        bundleData: Bundle,
+    private fun startDestination(
+        bundleData: Bundle?=null,
         resId: Int,
     ) {
         val inflater = navHostFragment.navController.navInflater
-        val navGraph = inflater.inflate(graphResId)
+        val navGraph = inflater.inflate(R.navigation.my_bl_sdk_nav_graph_common)
         navGraph.startDestination = resId
         navController.setGraph(navGraph, bundleData)
     }

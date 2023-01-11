@@ -40,6 +40,7 @@ internal object AppConstantUtils {
     const val Requester_Name_API = "AllMusic"
     const val RequesterHomePatch= "all_home_patch"
     const val RequesterRC = "RC_CODE"
+    const val HOME_PATCH = "my_bl_home"
     const val PlaylistId = "PlaylistId"
     const val PlaylistName = "PlaylistName"
     const val PlaylistGradientId = "PlaylistGradientId"
