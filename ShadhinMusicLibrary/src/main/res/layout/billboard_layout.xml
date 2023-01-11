@@ -1,35 +1,42 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/discover_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:visibility="visible">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_slider_mainActivity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="2dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
-        app:cardCornerRadius="8dp">
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:cardBackgroundColor="@color/my_sdk_color_green">
 
         <com.shadhinmusiclibrary.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="match_parent"
             app:sliderIndicatorGravity="center|bottom"
             app:sliderIndicatorMargin="15dp"
             app:sliderIndicatorOrientation="horizontal"
             app:sliderIndicatorPadding="2dp"
             app:sliderIndicatorRadius="1dp"
             app:sliderIndicatorSelectedColor="@color/my_sdk_color_primary"
-            app:sliderIndicatorUnselectedColor="@color/my_sdk_black2"
-            />
+            app:sliderIndicatorUnselectedColor="@color/my_sdk_black2" />
 
     </androidx.cardview.widget.CardView>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

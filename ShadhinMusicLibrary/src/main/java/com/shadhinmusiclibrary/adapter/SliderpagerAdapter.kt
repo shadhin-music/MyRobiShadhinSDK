@@ -11,6 +11,7 @@ import com.shadhinmusiclibrary.autoimageslider.SliderViewAdapter
 import com.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
+import com.shadhinmusiclibrary.utils.AppConstantUtils.BILLBOARD_IMAGE_URL
 
 internal class SliderpagerAdapter(
     val homePatchDetailModel: MutableList<HomePatchDetailModel>,
@@ -35,14 +36,15 @@ var sliderList: MutableList<HomePatchDetailModel> = homePatchDetailModel
     override fun onBindViewHolder(viewHolder: SliderViewHolder?, position: Int) {
 
         if (viewHolder != null) {
-            val image = sliderList.get(position).imageUrl
+            val imageUrl = "$BILLBOARD_IMAGE_URL${sliderList[position].newBanner?.split("/")?.last()}"
+
             viewHolder.imageView?.alpha = 1f
             viewHolder.imageView?.scaleX = 1f
             viewHolder.imageView?.scaleY = 1f
-            Log.e("TAG","DATA: "+ sliderList.get(position).imageUrl)
+
             viewHolder.itemView?.let {
                 viewHolder.imageView?.let { it1 ->
-                    Glide.with(it).load(image)
+                    Glide.with(it).load(imageUrl)
                         .into(it1)
                 }
             }
