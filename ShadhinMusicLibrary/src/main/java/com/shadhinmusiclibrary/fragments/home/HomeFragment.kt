@@ -57,14 +57,14 @@ internal class HomeFragment : BaseFragment(),
     private lateinit var favViewModel: FavViewModel
     private var globalRootContentId = ""
     //mini music player
-    private lateinit var llMiniMusicPlayer: CardView
+   /* private lateinit var llMiniMusicPlayer: CardView
     private lateinit var ivSongThumbMini: ImageView
     private lateinit var tvSongNameMini: TextView
     private lateinit var tvSingerNameMini: TextView
     private lateinit var tvTotalDurationMini: TextView
     private lateinit var ibtnSkipPreviousMini: ImageButton
     private lateinit var ibtnPlayPauseMini: ImageButton
-    private lateinit var ibtnSkipNextMini: ImageButton
+    private lateinit var ibtnSkipNextMini: ImageButton*/
 
     private var dataAdapter: ParentAdapter? = null
     private var pageNum = 1
@@ -164,7 +164,7 @@ internal class HomeFragment : BaseFragment(),
             if (it != null)
                 miniPlayerPlayPauseState(it.isPlaying)
         }
-        playerViewModel.playerProgress.observe(viewLifecycleOwner) {
+       /* playerViewModel.playerProgress.observe(viewLifecycleOwner) {
             tvTotalDurationMini.text = it.currentPositionTimeLabel()
         }
 
@@ -172,7 +172,7 @@ internal class HomeFragment : BaseFragment(),
             llMiniMusicPlayer.visibility = View.VISIBLE
         } else {
             llMiniMusicPlayer.visibility = GONE
-        }
+        }*/
 
         try {
             favViewModel.getFavContentAlbum.observe(viewLifecycleOwner) { res ->
@@ -573,19 +573,19 @@ internal class HomeFragment : BaseFragment(),
 
     //Copy paste from SDKMainActivity
     private fun uiInitMiniMusicPlayer(view: View) {
-        llMiniMusicPlayer = view.findViewById(R.id.include_mini_music_player)
+        /*llMiniMusicPlayer = view.findViewById(R.id.include_mini_music_player)
         ivSongThumbMini = view.findViewById(R.id.iv_song_thumb_mini)
         tvSongNameMini = view.findViewById(R.id.tv_song_name_mini)
         tvSingerNameMini = view.findViewById(R.id.tv_singer_name_mini)
         tvTotalDurationMini = view.findViewById(R.id.tv_total_duration_mini)
         ibtnSkipPreviousMini = view.findViewById(R.id.ibtn_skip_previous_mini)
         ibtnPlayPauseMini = view.findViewById(R.id.ibtn_play_pause_mini)
-        ibtnSkipNextMini = view.findViewById(R.id.ibtn_skip_next_mini)
+        ibtnSkipNextMini = view.findViewById(R.id.ibtn_skip_next_mini)*/
     }
 
     //Copy paste from SDKMainActivity
     private fun setupMiniMusicPlayerAndFunctionality(mSongDetails: SongDetailModel) {
-        if (mSongDetails.isSeekAble!!) {
+      /*  if (mSongDetails.isSeekAble!!) {
             ibtnSkipPreviousMini.visibility = View.VISIBLE
             ibtnSkipPreviousMini.setOnClickListener {
                 playerViewModel.skipToPrevious()
@@ -597,34 +597,34 @@ internal class HomeFragment : BaseFragment(),
         } else {
             ibtnSkipPreviousMini.visibility = View.INVISIBLE
             ibtnSkipNextMini.visibility = View.INVISIBLE
-        }
+        }*/
 
-        Glide.with(this)
+    /*    Glide.with(this)
             .load(UtilHelper.getImageUrlSize300(mSongDetails.imageUrl ?: ""))
             .transition(DrawableTransitionOptions().crossFade(500))
             .fitCenter()
             .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA))
             .placeholder(R.drawable.my_bl_sdk_default_song)
             .error(R.drawable.my_bl_sdk_default_song)
-            .into(ivSongThumbMini)
+            .into(ivSongThumbMini)*/
 
-        tvSongNameMini.text = mSongDetails.titleName
+      /*  tvSongNameMini.text = mSongDetails.titleName
         tvSingerNameMini.text = mSongDetails.artistName
         tvTotalDurationMini.text = TimeParser.secToMin(mSongDetails.total_duration)
         llMiniMusicPlayer.visibility = View.VISIBLE
 
         ibtnPlayPauseMini.setOnClickListener {
             playerViewModel.togglePlayPause()
-        }
+        }*/
     }
 
     //Copy paste from SDKMainActivity
     private fun miniPlayerPlayPauseState(playing: Boolean) {
-        if (playing) {
+        /*if (playing) {
             ibtnPlayPauseMini.setImageResource(R.drawable.my_bl_sdk_ic_baseline_pause_24)
         } else {
             ibtnPlayPauseMini.setImageResource(R.drawable.my_bl_sdk_ic_baseline_play_arrow_black_24)
-        }
+        }*/
     }
 
     override fun clickOnDownload(selectedHomePatchItem: HomePatchItemModel) {
@@ -697,10 +697,10 @@ internal class HomeFragment : BaseFragment(),
 
     override fun onResume() {
         super.onResume()
-        playerViewModel.startObservePlayerProgress(viewLifecycleOwner)
-        playerViewModel.playerProgress.observe(viewLifecycleOwner) {
+       // playerViewModel.startObservePlayerProgress(viewLifecycleOwner)
+       /* playerViewModel.playerProgress.observe(viewLifecycleOwner) {
             tvTotalDurationMini.text = it.currentPositionTimeLabel()
-        }
+        }*/
     }
 
     override fun onClickItem(mSongDetails: MutableList<IMusicModel>, clickItemPosition: Int) {
