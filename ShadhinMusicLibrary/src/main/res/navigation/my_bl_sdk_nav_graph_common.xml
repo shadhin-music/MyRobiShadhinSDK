@@ -233,7 +233,7 @@
 
     <fragment
         android:id="@+id/podcast_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.podcast.PodcastDetailsFragment"
+            android:name="com.shadhinmusiclibrary.fragments.podcast.PodcastDetailsFragment"
         android:label="Podcast Details"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout" />
 
@@ -257,7 +257,7 @@
 
         <action
             android:id="@+id/to_s_type_details"
-            app:destination="@id/s_type_details_fragment" />
+            app:destination="@id/album_details_fragment" />
     </fragment>
 
     <fragment

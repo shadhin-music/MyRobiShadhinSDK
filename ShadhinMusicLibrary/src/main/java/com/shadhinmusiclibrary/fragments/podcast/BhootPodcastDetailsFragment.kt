@@ -222,7 +222,7 @@ internal class BhootPodcastDetailsFragment : BaseFragment(),
     private fun showDialog() {
         AlertDialog.Builder(requireContext()) //set icon
             .setIcon(android.R.drawable.ic_dialog_alert) //set title
-            .setTitle("An Error Happend") //set message
+            .setTitle("An Error Happened") //set message
             .setMessage("Go back to previous page") //set positive button
             .setPositiveButton("Okay",
                 DialogInterface.OnClickListener { dialogInterface, i ->

@@ -1,6 +1,7 @@
 package com.shadhinmusiclibrary.adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,10 +36,10 @@ internal class HomePodcastAdapter(
         holder.bindItems()
         holder.itemView.setOnClickListener {
             //homeCallBack.onClickItemAndAllItem(position, homePatchItem)
+            Log.e("TAG","DATA: " + homePatchItem.Data )
             podcastTrackClick.onClickItem(homePatchItem.Data.toMutableList(),position)
         }
     }
-
     override fun getItemCount(): Int {
         return homePatchItem.Data.size
     }

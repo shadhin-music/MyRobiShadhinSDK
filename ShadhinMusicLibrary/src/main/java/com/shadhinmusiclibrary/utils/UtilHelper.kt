@@ -147,7 +147,37 @@ internal object UtilHelper {
         }
         return songDetailList
     }
+    fun getHomeDetailToMusic(musicList: MutableList<HomePatchDetailModel>): MutableList<IMusicModel> {
+        val songDetailList = mutableListOf<IMusicModel>()
+        for (musicItem in musicList) {
 
+            songDetailList.add(
+                SongDetailModel()
+                    .apply {
+                        content_Id = musicItem.content_Id ?: ""
+                        imageUrl = musicItem.imageUrl ?: ""
+                        titleName = musicItem.titleName ?: ""
+                        content_Type = musicItem.content_Type ?: ""
+                        playingUrl = musicItem.playingUrl ?: ""
+                        artistName = musicItem.artistName
+                        total_duration = musicItem.total_duration
+                        copyright = ""
+                        labelname = ""
+                        releaseDate = ""
+                        fav = musicItem.fav
+                        artist_Id = ""
+                        album_Id = ""
+                        rootContentId = musicItem.artist_Id ?: ""
+                        rootContentType = "A"
+                        rootImage = musicItem.rootImage ?: ""
+                        isSeekAble = musicItem.isSeekAble
+                        trackType = musicItem.trackType?: ""
+                    }
+            )
+        }
+        return songDetailList
+
+    }
     fun getSongDetailToMusic(mMusic: Music): SongDetailModel {
 //            val songDetail = SongDetail()
         return SongDetailModel().apply {

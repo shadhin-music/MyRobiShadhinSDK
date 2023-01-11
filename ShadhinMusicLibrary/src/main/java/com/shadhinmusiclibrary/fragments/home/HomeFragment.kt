@@ -21,22 +21,23 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.shadhinmusiclibrary.R
+import com.shadhinmusiclibrary.ShadhinMusicSdkCore
 import com.shadhinmusiclibrary.activities.SDKMainActivity
 import com.shadhinmusiclibrary.adapter.HomeFooterAdapter
+import com.shadhinmusiclibrary.adapter.NewReleaseSliderpagerAdapter
 import com.shadhinmusiclibrary.adapter.ParentAdapter
 import com.shadhinmusiclibrary.callBackService.DownloadClickCallBack
 import com.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.shadhinmusiclibrary.data.IMusicModel
+import com.shadhinmusiclibrary.data.model.*
 import com.shadhinmusiclibrary.data.model.HomeDataModel
-import com.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.shadhinmusiclibrary.data.model.SongDetailModel
 import com.shadhinmusiclibrary.data.model.podcast.EpisodeModel
 import com.shadhinmusiclibrary.fragments.amar_tunes.AmarTunesViewModel
 import com.shadhinmusiclibrary.fragments.base.BaseFragment
 import com.shadhinmusiclibrary.fragments.fav.FavViewModel
-import com.shadhinmusiclibrary.fragments.history.ClientActivityViewModel
 import com.shadhinmusiclibrary.library.player.data.model.MusicPlayList
 import com.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.shadhinmusiclibrary.library.player.utils.isPlaying
@@ -50,11 +51,11 @@ internal class HomeFragment : BaseFragment(),
     HomeCallBack,
     SearchClickCallBack,
     DownloadClickCallBack,
-    PodcastTrackCallback {
+    PodcastTrackCallback,newReleaseTrackCallback {
 
     private lateinit var concatAdapter: ConcatAdapter
     private lateinit var favViewModel: FavViewModel
-
+    private var globalRootContentId = ""
     //mini music player
     private lateinit var llMiniMusicPlayer: CardView
     private lateinit var ivSongThumbMini: ImageView
@@ -193,7 +194,7 @@ internal class HomeFragment : BaseFragment(),
     private fun viewDataInRecyclerView(homeData: HomeDataModel?) {
         if (dataAdapter == null) {
             footerAdapter = HomeFooterAdapter()
-            dataAdapter = ParentAdapter(this, this, this, this)
+            dataAdapter = ParentAdapter(this, this, this, this,this)
 
             val recyclerView: RecyclerView = view?.findViewById(R.id.recyclerView)!!
             val layoutManager =
@@ -515,25 +516,90 @@ internal class HomeFragment : BaseFragment(),
 
     override fun onClickItem(mSongDetails: MutableList<IMusicModel>, clickItemPosition: Int) {
         Log.e("podcast", "clickItemPosition " + mSongDetails[clickItemPosition].titleName)
-/*        if (playerViewModel.currentMusic != null &&
-            (mSongDetails[clickItemPosition].rootContentId == playerViewModel.currentMusic?.rootId)
-        ) {
-            if ((mSongDetails[clickItemPosition].content_Id != playerViewModel.currentMusic?.mediaId)) {
-                playerViewModel.skipToQueueItem(clickItemPosition)
-            } else {
-                playerViewModel.togglePlayPause()
-            }
-        } else {
-            playItem(
-                mSongDetails as MutableList<IMusicModel>,
-                clickItemPosition
-            )
-        }*/
-
-/*        playItem(
-            mSongDetails as MutableList<IMusicModel>,
-            clickItemPosition
-        )*/
         setMusicPlayerInitData(mSongDetails, clickItemPosition)
     }
+
+    override fun onClickRadioItem(currentSong: IMusicModel) {
+        globalRootContentId = currentSong.content_Id
+        if (playerViewModel.currentMusic != null) {
+            if ((globalRootContentId == playerViewModel.currentMusic?.rootId)) {
+                playerViewModel.togglePlayPause()
+            } else {
+                ShadhinMusicSdkCore.openRadio(requireContext(), globalRootContentId)
+            }
+        } else {
+            ShadhinMusicSdkCore.openRadio(requireContext(), globalRootContentId)
+        }
+    }
+
+
+
+        override fun getCurrentVH(
+            currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
+            data: List<IMusicModel>
+        ) {
+            val trackViewHolder = currentVH as NewReleaseSliderpagerAdapter.ViewHolder
+
+            trackViewHolder.let {
+                if (isAdded) {
+                    playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMusic ->
+                        if (itMusic != null) {
+                            trackViewHolder.item.let {
+
+                                    playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
+                                        if (it?.content_Id == itMusic.mediaId &&
+                                            it?.content_Type == itMusic.contentType
+                                        ) {
+                                            if (itPla != null){
+                                                playPauseStateRed(itPla.isPlaying,
+                                                    trackViewHolder.ivPlayBtn!!)
+                                                Log.e("TAG","DATA: " + itMusic.mediaId)
+                                            }
+                                        } else {
+                                            Log.e("TAG","DATA: " + isAdded)
+                                            Log.e("TAG","DATA123: " + itMusic.rootType)
+                                            trackViewHolder.ivPlayBtn?.let { playPauseStateRed(false, it) }
+                                        }
+                                    }
+
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        override fun onTrackClick(data:  MutableList<IMusicModel>, position: Int) {
+
+            if (playerViewModel.currentMusic != null && (data[position].content_Id == playerViewModel.currentMusic?.mediaId)) {
+                if ((data[position].content_Id!= playerViewModel.currentMusic?.mediaId)) {
+                    playerViewModel.skipToQueueItem(position)
+                } else {
+                    playerViewModel.togglePlayPause()
+                }
+            } else {
+                playerViewModel.unSubscribe()
+                playerViewModel.subscribe(
+                    MusicPlayList(
+                        UtilHelper.getMusicListToSongDetailList(data),
+
+                        0
+                    ),
+                    false,
+                    position
+                )
+            }
+        }
+
+
+
+}
+internal interface newReleaseTrackCallback {
+    fun getCurrentVH(
+        currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
+        data: List<IMusicModel>,
+    )
+    fun onTrackClick(data: MutableList<IMusicModel>, position: Int)
 }

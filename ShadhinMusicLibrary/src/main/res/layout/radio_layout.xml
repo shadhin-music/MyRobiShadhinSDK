@@ -27,7 +27,6 @@
                     android:id="@+id/artist_img"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-
                     android:layout_centerInParent="true" />
 
                 <!--    <com.gm.shadhin.widget.MyTextView

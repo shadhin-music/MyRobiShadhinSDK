@@ -689,8 +689,10 @@ internal class SDKMainActivity : BaseActivity(),
             val homePatchDetail = homePatchItem.Data[selectedIndex]
 
             val podcast: String = homePatchDetail.content_Type ?: ""
-            val podcastType = podcast.take(2)
-            val contentType = podcast.takeLast(2)
+/*            val podcastType = podcast.take(2)
+            val contentType = podcast.takeLast(2)*/
+            homePatchDetail.album_Id = ""
+//            homePatchDetail.content_Id = ""
             if (homePatchDetail.content_Type?.contains("PD") == true) {
                 //onPodcastClick(homePatchDetail,homePatchDetail)
                 setupNavGraphAndArg(
@@ -700,7 +702,7 @@ internal class SDKMainActivity : BaseActivity(),
                             PatchItem,
                             HomePatchItemModel(
                                 homePatchItem.Code,
-                                "PDBC",
+                                homePatchItem.ContentType,
                                 homePatchItem.Data,
                                 homePatchItem.Design,
                                 homePatchItem.Name,
@@ -802,6 +804,7 @@ internal class SDKMainActivity : BaseActivity(),
                         }, R.id.album_details_fragment
                     )
                     Log.e("TAG", "CHECKING: " + homePatchDetail.content_Type)
+                    Log.e("TAG", "CHECKING: " + homePatchDetail.content_Id)
                 }
                 DataContentType.CONTENT_TYPE_P -> {
                     //open playlist
@@ -832,7 +835,7 @@ internal class SDKMainActivity : BaseActivity(),
                                 AppConstantUtils.PatchDetail,
                                 homePatchDetail as Serializable
                             )
-                        }, R.id.s_type_details_fragment
+                        }, R.id.album_details_fragment
                     )
                     Log.e("TAG", "CHECKING: " + homePatchDetail.content_Type)
                 }

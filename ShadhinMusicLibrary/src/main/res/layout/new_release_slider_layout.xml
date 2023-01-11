@@ -156,7 +156,7 @@
                     android:elevation="2.75dp"
                     android:background = "@null"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/my_bl_sdk_ic_play_n"
+                    app:srcCompat="@drawable/ic_pd_pause"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/cardView2" />

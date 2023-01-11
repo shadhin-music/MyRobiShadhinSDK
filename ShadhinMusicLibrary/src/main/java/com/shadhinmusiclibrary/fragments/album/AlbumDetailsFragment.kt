@@ -86,9 +86,10 @@ internal class AlbumDetailsFragment : BaseFragment(),
         albumsTrackAdapter = AlbumsTrackAdapter(this, this, cacheRepository)
         footerAdapter = HomeFooterAdapter()
         setupViewModel()
-
+       Log.e("TAG","DATA: "+  argHomePatchDetail!!.content_Id)
+        Log.e("TAG","DATA: "+  argHomePatchDetail!!.album_Id)
         observeData(
-            argHomePatchDetail!!.album_Id ?: "",
+            argHomePatchDetail!!.content_Id ?: "",
             argHomePatchDetail!!.artist_Id ?: "",
             argHomePatchDetail!!.content_Type ?: ""
         )

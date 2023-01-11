@@ -27,7 +27,7 @@ internal class PDPSAdapter(val homePatchItemModel: HomePatchItemModel,val homeCa
         holder.bindItems()
         holder.itemView.setOnClickListener {
             //data.let { it1 -> clickCallback.onClickItem(it1, position) }
-           homeCallBack.onClickItemAndAllItem(0, homePatchItemModel)
+           homeCallBack.onClickItemAndAllItem(position, homePatchItemModel)
             // homeCallBack.onClickItem(position, Track(data.get()) )
         }
     }

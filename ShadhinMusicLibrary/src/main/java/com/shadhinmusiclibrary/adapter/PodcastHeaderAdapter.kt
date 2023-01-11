@@ -62,21 +62,25 @@ internal class PodcastHeaderAdapter(
         data: MutableList<SongTrackModel>,
         rootPatch: HomePatchDetailModel
     ) {
-        this.listSongTrack = mutableListOf()
-        for (songItem in data) {
-            listSongTrack.add(
-                songItem.apply {
-                    rootContentId = episodeId
-                    rootContentType = rootPatch.content_Type
-                    rootImage = rootPatch.imageUrl
-                    isSeekAble = true
-                }
-            )
-        }
+//        this.listSongTrack = mutableListOf()
+//        for (songItem in data) {
+//            listSongTrack.add(
+//                songItem.apply {
+//                    rootContentId = episodeId
+//                    rootContentType = rootPatch.content_Type
+//                    rootImage = rootPatch.imageUrl
+//                    isSeekAble = true
+//                }
+//            )
+//        }
 
         this.episode = ArrayList(episode)
         notifyDataSetChanged()
     }
+
+//    fun setHeader(itEpisod: MutableList<EpisodeModel>, trackList: MutableList<SongTrackModel>) {
+//
+//    }
 
     /* @SuppressLint("NotifyDataSetChanged")
      fun setHeader(episode: List<EpisodeModel>, trackList: MutableList<SongTrackModel>) {

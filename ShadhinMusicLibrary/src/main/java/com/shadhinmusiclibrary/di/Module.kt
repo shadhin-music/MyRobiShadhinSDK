@@ -82,7 +82,6 @@ internal class Module(private val applicationContext: Context) {
         return Retrofit.Builder()
             .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(UtilsOkHttp.getBaseOkHttpClient())
             .build()
     }
     private fun getRetrofitAPIShadhinMusicInstanceV5WithBearerTokenAndClient(): Retrofit {

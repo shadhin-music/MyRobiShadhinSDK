@@ -18,7 +18,7 @@ internal class BearerTokenWithClientIdHeaderInterceptor : Interceptor {
                 request()
                     .newBuilder()
                     .addHeader("Authorization", finalToken)
-                    .addHeader("Client", "2")
+//                    .addHeader("Client", "2")
                     .build()
             )
         }

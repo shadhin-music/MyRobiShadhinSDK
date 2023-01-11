@@ -23,13 +23,14 @@ import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.shadhinmusiclibrary.data.model.RBTDATAModel
+import com.shadhinmusiclibrary.fragments.home.newReleaseTrackCallback
 
 
 internal class ParentAdapter(
     var homeCallBack: HomeCallBack,
     val searchCb: SearchClickCallBack,
     val downloadClickCallBack: DownloadClickCallBack,
-    val podcastTrackClick: PodcastTrackCallback,
+    val podcastTrackClick: PodcastTrackCallback, val newReleaseTrackCallback: newReleaseTrackCallback
     /*,val radioCallBack: RadioTrackCallBack*/
 ) : RecyclerView.Adapter<ParentAdapter.DataAdapterViewHolder>() {
     private var homeListData: MutableList<HomePatchItemModel> = mutableListOf()
@@ -411,6 +412,7 @@ internal class ParentAdapter(
             val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
             tvTitle.text = homePatchItemModel.Name
             val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+
             recyclerView.layoutManager = GridLayoutManager(
                 itemView.context,
                 2,
@@ -418,7 +420,11 @@ internal class ParentAdapter(
                 false
             )
             recyclerView.adapter = PDPSAdapter(homePatchItemModel, homeCallBack)
-
+            val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
+            seeAll.setOnClickListener {
+                homeCallBack.onClickSeeAll(homePatchItemModel)
+                Log.e("TAG","PATCH: "+ homePatchItemModel)
+            }
         }
         private fun bindTrendingMusic(homePatchItemModel: HomePatchItemModel) {
             val title: TextView = itemView.findViewById(R.id.tvTitle)
@@ -437,21 +443,22 @@ internal class ParentAdapter(
             )
         }
         private fun bindNewReleaseAudio(homePatchItemModel: HomePatchItemModel){
+            for (hoPatItem in homePatchItemModel.Data) {
+                hoPatItem.apply {
+                    isSeekAble = true
+                }
+            }
             lateinit var sliderView: SliderView
             lateinit var sliderAdapter: NewReleaseSliderpagerAdapter
             Log.e("TAG","DATA: "+ homePatchItemModel.Data as MutableList)
-
-            // on below line we are initializing our
-            // slider adapter and adding our list to it.
-            //sliderAdapter =SliderpagerAdapter(imageUrl)
             sliderView = itemView.findViewById(R.id.imageSlider)
-            sliderAdapter = NewReleaseSliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
+            sliderAdapter = NewReleaseSliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel,newReleaseTrackCallback)
             sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
             sliderView.setSliderAdapter(sliderAdapter)
             sliderView.setIndicatorEnabled(true)
             sliderView.scrollTimeInSec = 5
-            sliderView.isAutoCycle = true
-            sliderView.startAutoCycle()
+            sliderView.isAutoCycle = false
+            //sliderView.startAutoCycle()
         }
 
         private fun bindRadio(homePatchItemModel: HomePatchItemModel){
@@ -466,7 +473,7 @@ internal class ParentAdapter(
             recyclerView.layoutManager =
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = HomeRadioAdapter(
-                homePatchItemModel
+                homePatchItemModel,podcastTrackClick
             )
         }
         fun bind(homePatchItemModel: HomePatchItemModel?) {

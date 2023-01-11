@@ -26,7 +26,7 @@ internal interface ApiService {
         @Query("patchCode") patchCode: String,
     ): PatchDataModel
 
-    @GET("Album/GetAlbumDetailsFC")
+    @GET("album/GetAlbumDetailsFC")
     suspend fun fetchAlbumContent(
         @Query("id") contentId: String,
     ): APIResponse<MutableList<SongDetailModel>>
