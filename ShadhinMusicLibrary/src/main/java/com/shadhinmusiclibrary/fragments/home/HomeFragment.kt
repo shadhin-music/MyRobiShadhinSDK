@@ -361,7 +361,7 @@ internal class HomeFragment : BaseFragment(),
                 DataContentType.CONTENT_TYPE_S -> R.id.to_s_type_details
                 else -> null
             }
-            findNavController()
+
             action?.let { a-> findNavController().navigate(a, bundle) }
 
 
