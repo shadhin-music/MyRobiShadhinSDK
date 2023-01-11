@@ -56,25 +56,12 @@ internal class HomeFragment : BaseFragment(),
     private  var concatAdapter: ConcatAdapter?=null
     private lateinit var favViewModel: FavViewModel
     private var globalRootContentId = ""
-    //mini music player
-   /* private lateinit var llMiniMusicPlayer: CardView
-    private lateinit var ivSongThumbMini: ImageView
-    private lateinit var tvSongNameMini: TextView
-    private lateinit var tvSingerNameMini: TextView
-    private lateinit var tvTotalDurationMini: TextView
-    private lateinit var ibtnSkipPreviousMini: ImageButton
-    private lateinit var ibtnPlayPauseMini: ImageButton
-    private lateinit var ibtnSkipNextMini: ImageButton*/
 
     private var dataAdapter: ParentAdapter? = null
     private var pageNum = 1
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var viewModelAmaraTunes: AmarTunesViewModel
-//    private lateinit var albumVM: AlbumViewModel
 
-    //var page = -1
-    var isLoading = false
-    var isLastPage = false
 
     private  var footerAdapter: HomeFooterAdapter?=null
     private lateinit var cacheRepository: CacheRepository
@@ -90,7 +77,7 @@ internal class HomeFragment : BaseFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        uiInitMiniMusicPlayer(view)
+
         cacheRepository = CacheRepository(requireContext())
         setupViewModel()
         setupAdapter(view)
@@ -155,24 +142,9 @@ internal class HomeFragment : BaseFragment(),
             }
 
         }
-        playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMus ->
-            if (itMus != null) {
-                setupMiniMusicPlayerAndFunctionality(UtilHelper.getSongDetailToMusic(itMus))
-            }
-        }
-        playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) {
-            if (it != null)
-                miniPlayerPlayPauseState(it.isPlaying)
-        }
-       /* playerViewModel.playerProgress.observe(viewLifecycleOwner) {
-            tvTotalDurationMini.text = it.currentPositionTimeLabel()
-        }
 
-        if (playerViewModel.isMediaDataAvailable()) {
-            llMiniMusicPlayer.visibility = View.VISIBLE
-        } else {
-            llMiniMusicPlayer.visibility = GONE
-        }*/
+
+
 
         try {
             favViewModel.getFavContentAlbum.observe(viewLifecycleOwner) { res ->
@@ -211,130 +183,18 @@ internal class HomeFragment : BaseFragment(),
         }
     }
 
-    /*private fun viewDataInRecyclerView(homeData: HomeDataModel?) {
-        if (dataAdapter == null) {
-            footerAdapter = HomeFooterAdapter()
-            dataAdapter = ParentAdapter(this, this, this, this,this)
-
-            val recyclerView: RecyclerView = view?.findViewById(R.id.recyclerView)!!
-            val layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            recyclerView.layoutManager = layoutManager
-            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    val visibleItemCount = layoutManager.childCount
-                    val totalItemCount = layoutManager.itemCount
-                    val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                    if (!isLoading && !isLastPage) {
-                        if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
-                            isLoading = true
-                            homeViewModel.fetchHomeData(++pageNum, false)
-                        }
-                    }
-                    super.onScrolled(recyclerView, dx, dy)
-                }
-            })
-            val config = ConcatAdapter.Config.Builder()
-                .setIsolateViewTypes(false)
-                .build()
-            concatAdapter = ConcatAdapter(config, dataAdapter)
-            recyclerView.adapter = concatAdapter
-            //recyclerView.adapter =  dataAdapter
-
-//            concatAdapter.removeAdapter(dataAdapter)
-        }
-        *//* viewModelAmaraTunes.urlContent.observe(viewLifecycleOwner) { res ->
-             if (res.status == Status.SUCCESS) {
-                 this.rbtData = res.data?.data
-             }
-         }*//*
-
-        homeData.let {
-            for (item in it?.data?.indices!!) {
-                if (isValidDesign(it.data[item].Design) == -1) {
-                    it.data[item].Design = ""
-                }
-                if (it.data[item].Design.isNotEmpty()) {
-                    it.data[item].let { it1 ->
-                        dataAdapter?.setData(listOf(it1))
-                        //dataAdapter?.notifyItemChanged(pageNum)
-                        dataAdapter?.notifyDataSetChanged()
-                    }
-//                  it.data.let {
-                    //   it1 ->
-                    // }
-                }
-            }
-        }
-        if (homeData?.total == pageNum) {
-            isLastPage = true
-            //Log.e("TAG","PAGE NUMBER: "+ pageNum)
-            val config = ConcatAdapter.Config.Builder()
-                .setIsolateViewTypes(false)
-                .build()
-            val recyclerView: RecyclerView = view?.findViewById(R.id.recyclerView)!!
-            concatAdapter.addAdapter(footerAdapter)
-            //recyclerView.adapter = ConcatAdapter(config, dataAdapter, footerAdapter)
-        }
-    }*/
-
-    private fun isValidDesign(design: String): Int {
-        return when (design) {
-//            "search" -> VIEW_SEARCH
-            "search" -> ParentAdapter.VIEW_SEARCH
-            "Artist" -> ParentAdapter.VIEW_ARTIST
-            "Playlist" -> ParentAdapter.VIEW_PLAYLIST
-            "Release" -> ParentAdapter.VIEW_RELEASE
-            "Track" -> ParentAdapter.VIEW_RELEASE
-            "Podcast" -> ParentAdapter.VIEW_POPULAR_PODCAST
-            "SmallVideo" -> ParentAdapter.VIEW_TRENDING_MUSIC_VIDEO
-            "amarTune" -> ParentAdapter.VIEW_POPULAR_AMAR_TUNES
-            "download" -> ParentAdapter.VIEW_DOWNLOAD
-            "PodcastLive" -> ParentAdapter.VIEW_PODCAST_LIVE
-            "Show" -> ParentAdapter.VIEW_SHOW
-            "Discover"-> ParentAdapter.VIEW_DISCOVER
-            "PDPS"-> ParentAdapter.VIEW_PDPS
-            "PodcastVideo"-> ParentAdapter.VIEW_LARGE_VIDEO
-            "NewReleaseAudio" -> ParentAdapter.VIEW_NEW_RELEASE_AUDIO
-            "LargeVideo" -> ParentAdapter.VIEW_LARGE_VIDEO
-            "Radio" -> ParentAdapter.VIEW_RADIO
-            else -> {
-                -1
-            }
-        }
-    }
-
     override fun onClickItemAndAllItem(
         itemPosition: Int,
         selectedHomePatchItem: HomePatchItemModel
     ) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
         patchMonitoring(selectedHomePatchItem)
-        /*val data = Bundle()
-        data.putSerializable(
-            AppConstantUtils.PatchItem,
-            selectedHomePatchItem as Serializable
-        )
-        startActivity(
-            Intent(requireActivity(), SDKMainActivity::class.java)
-                .apply {
-                    putExtra(
-                        AppConstantUtils.UI_Request_Type,
-                        AppConstantUtils.Requester_Name_Home
-                    )
-                    putExtra(AppConstantUtils.PatchItem, data)
-                    putExtra(AppConstantUtils.SelectedPatchIndex, itemPosition)
-                })*/
         route(selectedHomePatchItem, itemPosition)
-//        val valueCon = selectedHomePatchItem.Data[itemPosition].ContentID
-//        fetchOnlineData(valueCon)
     }
 
     private fun route(homePatchItem: HomePatchItemModel, selectedIndex: Int?) {
 
         if (selectedIndex != null && homePatchItem.Data.size > selectedIndex) {
-            //Single Item Click event
+
             val homePatchDetail = homePatchItem.Data[selectedIndex]
 
             val podcast: String = homePatchDetail.content_Type ?: ""
@@ -391,19 +251,9 @@ internal class HomeFragment : BaseFragment(),
                         homePatchItem as Serializable
                     )
                 })
-
-                /* startDestination(
-
-                       Bundle().apply {
-                           putSerializable(
-                               AppConstantUtils.PatchItem,
-                               homePatchItem as Serializable
-                           )
-                       }, R.id.podcast_see_all_fragment
-                   )*/
             }
 
-            //See All Item Click event
+
             val bundle = Bundle().apply {
                 putSerializable(
                     AppConstantUtils.PatchItem,
@@ -412,109 +262,41 @@ internal class HomeFragment : BaseFragment(),
             }
             when (homePatchItem.ContentType.uppercase()) {
                 DataContentType.CONTENT_TYPE_PS -> {
-                    //setupNavGraphAndArg(R.navigation.my_bl_sdk_nav_graph_podcast_list_and_details,
-                    /*startDestination(
 
-                        Bundle().apply {
-                            putSerializable(
-                                AppConstantUtils.PatchItem,
-                                homePatchItem as Serializable
-                            )
-                        }, R.id.podcast_see_all_fragment
-                    )*/
                     findNavController().navigate(R.id.to_podcast_see_all_fragment,  bundle )
-                    Log.e("TAG", "CHECKING: " + DataContentType)
+
                 }
                 DataContentType.CONTENT_TYPE_A -> {
-                    //open artist details
                     findNavController().navigate(R.id.to_popular_artist_fragment,bundle)
-                    /*startDestination(
-
-                        Bundle().apply {
-                            putSerializable(
-                                AppConstantUtils.PatchItem,
-                                homePatchItem as Serializable
-                            )
-                        }, R.id.popular_artist_fragment
-                    )*/
                 }
 
                 DataContentType.CONTENT_TYPE_R -> {
                     findNavController().navigate(R.id.to_release_list_fragment,bundle)
-                    //open album details
-                    /*startDestination(
-
-                        Bundle().apply {
-                            putSerializable(
-                                AppConstantUtils.PatchItem,
-                                homePatchItem
-                            )
-                        }, R.id.release_list_fragment
-                    )*/
                 }
 
                 DataContentType.CONTENT_TYPE_P -> {
-                    //open playlist
                     findNavController().navigate(R.id.to_playlist_list_fragment,bundle)
-                    /* startDestination(
-
-                         Bundle().apply {
-                             putSerializable(
-                                 AppConstantUtils.PatchItem,
-                                 homePatchItem as Serializable
-                             )
-                         }, R.id.playlist_list_fragment
-                     )*/
                 }
 
                 DataContentType.CONTENT_TYPE_S -> {
-                    //open songs
                     findNavController().navigate(R.id.to_s_type_list_fragment,bundle)
-                    /* startDestination(
-
-                         Bundle().apply {
-                             putSerializable(
-                                 AppConstantUtils.PatchItem,
-                                 homePatchItem as Serializable
-                             )
-                         }, R.id.s_type_list_fragment
-                     )*/
                 }
 
                 DataContentType.CONTENT_TYPE_V -> {
-                    //open video
                     findNavController().navigate(R.id.to_video_list_fragment,bundle)
-                    /*startDestination(
-
-                        Bundle().apply {
-                            putSerializable(
-                                AppConstantUtils.PatchItem,
-                                homePatchItem as Serializable
-                            )
-                        }, R.id.video_list_fragment
-                    )*/
                 }
             }
         }
     }
 
     override fun onClickSeeAll(selectedHomePatchItem: HomePatchItemModel) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
+
         patchMonitoring(selectedHomePatchItem)
         val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-       /* startActivity(
-            Intent(requireActivity(), SDKMainActivity::class.java)
-                .apply {
-                    putExtra(
-                        AppConstantUtils.UI_Request_Type,
-                        AppConstantUtils.Requester_Name_Home
-                    )
-                    putExtra(AppConstantUtils.PatchItem, data)
-                })*/
         route(selectedHomePatchItem,null)
     }
 
@@ -526,18 +308,8 @@ internal class HomeFragment : BaseFragment(),
     }
 
 
-    private fun fetchOnlineData(playlistId: String) {
-//        albumVM.fetchPlaylistContent(playlistId)
-//        albumVM.albumContent.observe(viewLifecycleOwner) { res ->
-//            if (res.data?.data != null && res.status == Status.SUCCESS) {
-//                setMusicPlayerInitData(res.data.data.toMutableList(), 0)
-//                res.data.data
-//            }
-//        }
-    }
-
     override fun clickOnSearchBar(selectedHomePatchItem: HomePatchItemModel) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
+
         val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
@@ -555,11 +327,7 @@ internal class HomeFragment : BaseFragment(),
     }
 
     fun setMusicPlayerInitData(mSongDetails: MutableList<IMusicModel>, clickItemPosition: Int) {
-        /* if(BuildConfig.DEBUG){
-       mSongDetails.forEach {
-           it.PlayUrl = "https://cdn.pixabay.com/download/audio/2022/01/14/audio_88400099c4.mp3?filename=madirfan-demo-20-11-2021-14154.mp3"
-       }
-   }*/
+
         playerViewModel.unSubscribe()
         playerViewModel.subscribe(
             MusicPlayList(
@@ -570,65 +338,7 @@ internal class HomeFragment : BaseFragment(),
             clickItemPosition
         )
     }
-
-    //Copy paste from SDKMainActivity
-    private fun uiInitMiniMusicPlayer(view: View) {
-        /*llMiniMusicPlayer = view.findViewById(R.id.include_mini_music_player)
-        ivSongThumbMini = view.findViewById(R.id.iv_song_thumb_mini)
-        tvSongNameMini = view.findViewById(R.id.tv_song_name_mini)
-        tvSingerNameMini = view.findViewById(R.id.tv_singer_name_mini)
-        tvTotalDurationMini = view.findViewById(R.id.tv_total_duration_mini)
-        ibtnSkipPreviousMini = view.findViewById(R.id.ibtn_skip_previous_mini)
-        ibtnPlayPauseMini = view.findViewById(R.id.ibtn_play_pause_mini)
-        ibtnSkipNextMini = view.findViewById(R.id.ibtn_skip_next_mini)*/
-    }
-
-    //Copy paste from SDKMainActivity
-    private fun setupMiniMusicPlayerAndFunctionality(mSongDetails: SongDetailModel) {
-      /*  if (mSongDetails.isSeekAble!!) {
-            ibtnSkipPreviousMini.visibility = View.VISIBLE
-            ibtnSkipPreviousMini.setOnClickListener {
-                playerViewModel.skipToPrevious()
-            }
-            ibtnSkipNextMini.visibility = View.VISIBLE
-            ibtnSkipNextMini.setOnClickListener {
-                playerViewModel.skipToNext()
-            }
-        } else {
-            ibtnSkipPreviousMini.visibility = View.INVISIBLE
-            ibtnSkipNextMini.visibility = View.INVISIBLE
-        }*/
-
-    /*    Glide.with(this)
-            .load(UtilHelper.getImageUrlSize300(mSongDetails.imageUrl ?: ""))
-            .transition(DrawableTransitionOptions().crossFade(500))
-            .fitCenter()
-            .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA))
-            .placeholder(R.drawable.my_bl_sdk_default_song)
-            .error(R.drawable.my_bl_sdk_default_song)
-            .into(ivSongThumbMini)*/
-
-      /*  tvSongNameMini.text = mSongDetails.titleName
-        tvSingerNameMini.text = mSongDetails.artistName
-        tvTotalDurationMini.text = TimeParser.secToMin(mSongDetails.total_duration)
-        llMiniMusicPlayer.visibility = View.VISIBLE
-
-        ibtnPlayPauseMini.setOnClickListener {
-            playerViewModel.togglePlayPause()
-        }*/
-    }
-
-    //Copy paste from SDKMainActivity
-    private fun miniPlayerPlayPauseState(playing: Boolean) {
-        /*if (playing) {
-            ibtnPlayPauseMini.setImageResource(R.drawable.my_bl_sdk_ic_baseline_pause_24)
-        } else {
-            ibtnPlayPauseMini.setImageResource(R.drawable.my_bl_sdk_ic_baseline_play_arrow_black_24)
-        }*/
-    }
-
     override fun clickOnDownload(selectedHomePatchItem: HomePatchItemModel) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
         val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
@@ -645,7 +355,6 @@ internal class HomeFragment : BaseFragment(),
     }
 
     override fun clickOnWatchLater(selectedHomePatchItem: HomePatchItemModel) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
         val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
@@ -662,7 +371,6 @@ internal class HomeFragment : BaseFragment(),
     }
 
     override fun clickOnMyPlaylist(selectedHomePatchItem: HomePatchItemModel) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
         val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
@@ -679,7 +387,6 @@ internal class HomeFragment : BaseFragment(),
     }
 
     override fun clickOnMyFavorite(selectedHomePatchItem: HomePatchItemModel) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
         val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
@@ -695,16 +402,8 @@ internal class HomeFragment : BaseFragment(),
             })
     }
 
-    override fun onResume() {
-        super.onResume()
-       // playerViewModel.startObservePlayerProgress(viewLifecycleOwner)
-       /* playerViewModel.playerProgress.observe(viewLifecycleOwner) {
-            tvTotalDurationMini.text = it.currentPositionTimeLabel()
-        }*/
-    }
 
     override fun onClickItem(mSongDetails: MutableList<IMusicModel>, clickItemPosition: Int) {
-        Log.e("podcast", "clickItemPosition " + mSongDetails[clickItemPosition].titleName)
         setMusicPlayerInitData(mSongDetails, clickItemPosition)
     }
 
