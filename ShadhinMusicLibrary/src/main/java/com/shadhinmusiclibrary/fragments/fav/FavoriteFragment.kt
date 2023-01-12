@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -93,12 +94,13 @@ internal class FavoriteFragment : Fragment() {
         }
     }
     private fun openSearch() {
-        startActivity(Intent(requireContext(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_search)
+       /* startActivity(Intent(requireContext(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Search
                 )
-            })
+            })*/
     }
 }

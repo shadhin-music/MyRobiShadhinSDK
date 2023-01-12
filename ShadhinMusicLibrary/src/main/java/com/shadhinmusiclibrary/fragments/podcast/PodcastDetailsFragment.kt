@@ -152,13 +152,14 @@ internal class PodcastDetailsFragment : BaseFragment(),
         }
     }
     private fun openSearch() {
-        startActivity(Intent(requireContext(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_search)
+        /*startActivity(Intent(requireContext(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Search
                 )
-            })
+            })*/
     }
     private fun getPodcastShowDetailsInitialize() {
         Log.e("PDF", "getPodcastShowDetailsInitialize: ")

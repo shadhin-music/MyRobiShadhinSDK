@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -310,13 +311,14 @@ internal class WatchLaterFragment : BaseFragment(),
         }
     }
     private fun openSearch() {
-        startActivity(Intent(requireContext(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_search)
+       /* startActivity(Intent(requireContext(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Search
                 )
-            })
+            })*/
     }
 }
 

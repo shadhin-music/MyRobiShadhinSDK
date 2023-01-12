@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.shadhinmusiclibrary.R
 import com.shadhinmusiclibrary.utils.AppConstantUtils
 
@@ -23,12 +25,13 @@ internal class MusicActivity : AppCompatActivity() {
     }
 
     private fun openSearch() {
-        startActivity(Intent(this, SDKMainActivity::class.java)
+        //findNavController().navigate(R.id.to_search)
+        /*startActivity(Intent(this, SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Search
                 )
-            })
+            })*/
     }
 }

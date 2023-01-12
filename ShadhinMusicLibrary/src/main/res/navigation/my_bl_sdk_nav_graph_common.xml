@@ -302,7 +302,11 @@
         android:id="@+id/s_type_details_fragment"
         android:name="com.shadhinmusiclibrary.fragments.STypeDetailsFragment"
         android:label="Playlist Details"
-        tools:layout="@layout/my_bl_sdk_common_rv_layout" />
+        tools:layout="@layout/my_bl_sdk_common_rv_layout" >
+        <action
+            android:id="@+id/to_search"
+            app:destination="@id/search_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/s_type_list_fragment"
@@ -310,6 +314,9 @@
         android:label="fragment_playlist_list"
         tools:layout="@layout/my_bl_sdk_common_rv_layout">
 
+        <action
+            android:id="@+id/to_search"
+            app:destination="@id/search_fragment" />
         <action
             android:id="@+id/to_s_type_details"
             app:destination="@id/s_type_details_fragment" />
