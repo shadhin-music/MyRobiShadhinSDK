@@ -9,6 +9,7 @@ internal object AppConstantUtils {
     var BASE_URL = "https://shadhinmusic.com/api/"
     var BASE_URL_API_shadhinmusic = "https://api.shadhinmusic.com/api/v5/"
     const val LAST_FM_API_URL = "https://ws.audioscrobbler.com/2.0/"
+    const val BILLBOARD_IMAGE_URL = "https://shadhinmusiccontent.sgp1.digitaloceanspaces.com/BillBoard/Web/"
 
     const val SingleDataItem = "single_data_item"
     const val PatchItem = "patch_item"
@@ -39,6 +40,7 @@ internal object AppConstantUtils {
     const val Requester_Name_API = "AllMusic"
     const val RequesterHomePatch= "all_home_patch"
     const val RequesterRC = "RC_CODE"
+    const val HOME_PATCH = "my_bl_home"
     const val PlaylistId = "PlaylistId"
     const val PlaylistName = "PlaylistName"
     const val PlaylistGradientId = "PlaylistGradientId"

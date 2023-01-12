@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
+        <!--<FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +46,6 @@
                 android:visibility="gone"
 
                 tools:visibility="visible" />
-        </FrameLayout>
+        </FrameLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -82,12 +83,13 @@ internal class TopTrendingBanglaMusicFragment : BaseFragment() {
         }
     }
     private fun openSearch() {
-        startActivity(Intent(requireContext(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_search)
+        /*startActivity(Intent(requireContext(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Search
                 )
-            })
+            })*/
     }
 }

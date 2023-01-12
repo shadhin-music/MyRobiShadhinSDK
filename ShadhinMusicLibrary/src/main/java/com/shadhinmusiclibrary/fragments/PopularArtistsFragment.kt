@@ -83,13 +83,14 @@ internal class PopularArtistsFragment : BaseFragment(), HomeCallBack {
         }
     }
     private fun openSearch() {
-        startActivity(Intent(requireContext(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_search)
+      /*  startActivity(Intent(requireContext(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Search
                 )
-            })
+            })*/
     }
     override fun onClickItemAndAllItem(
         itemPosition: Int,

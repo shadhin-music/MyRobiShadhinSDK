@@ -17,8 +17,8 @@ open class ViewPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
 //        return  SearchFragment()
-
-        return when (position) {
+        return FeaturedHomeFragment()
+       /* return when (position) {
             0 -> {
                 ShadhinMusicSdkCore.getMusicFragment()
             }
@@ -37,7 +37,7 @@ open class ViewPagerAdapter(
 //                HomeFragment();
 //            }
             else -> getItem(position)
-        }
+        }*/
     }
 
     override fun getCount(): Int {

@@ -28,6 +28,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ExoPlayer
@@ -197,6 +198,7 @@ internal class VideoActivity : AppCompatActivity(),
     }
 
     private fun openSearch() {
+      //  findNavController().navigate(R.id.to_search)
         startActivity(Intent(this, SDKMainActivity::class.java)
             .apply {
                 putExtra(

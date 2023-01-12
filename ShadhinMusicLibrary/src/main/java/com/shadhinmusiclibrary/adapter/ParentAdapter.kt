@@ -2,16 +2,13 @@ package com.shadhinmusiclibrary.adapter
 
 
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.shadhinmusiclibrary.R
@@ -22,21 +19,16 @@ import com.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.shadhinmusiclibrary.data.model.HomePatchItemModel
-import com.shadhinmusiclibrary.data.model.RBTDATAModel
-import com.shadhinmusiclibrary.fragments.home.newReleaseTrackCallback
+import com.shadhinmusiclibrary.fragments.home.NewReleaseTrackCallback
 
 
 internal class ParentAdapter(
     var homeCallBack: HomeCallBack,
     val searchCb: SearchClickCallBack,
     val downloadClickCallBack: DownloadClickCallBack,
-    val podcastTrackClick: PodcastTrackCallback, val newReleaseTrackCallback: newReleaseTrackCallback
-    /*,val radioCallBack: RadioTrackCallBack*/
-) : RecyclerView.Adapter<ParentAdapter.DataAdapterViewHolder>() {
-    private var homeListData: MutableList<HomePatchItemModel> = mutableListOf()
-    var search: HomePatchItemModel? = null
-    var download: HomePatchItemModel? = null
-    private var rbtData: MutableList<RBTDATAModel> = mutableListOf()
+    val podcastTrackClick: PodcastTrackCallback,
+    val newReleaseTrackCallback: NewReleaseTrackCallback
+) : ListAdapter<HomePatchItemModel,ParentAdapter.DataAdapterViewHolder>(ParentAdapterDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataAdapterViewHolder {
         val layout = when (viewType) {
@@ -57,9 +49,7 @@ internal class ParentAdapter(
             VIEW_PODCAST_VIDEO -> R.layout.my_bl_sdk_item_release_patch
             VIEW_NEW_RELEASE_AUDIO->R.layout.billboard_layout
             VIEW_RADIO ->R.layout.my_bl_sdk_item_release_patch
-//            VIEW_POPULAR_PODCAST -> R.layout.item_top_trending
-//            VIEW_BL_MUSIC_OFFERS -> R.layout.item_my_bl_offers
-            else -> throw IllegalArgumentException("Invalid view type")
+            else -> R.layout.my_bl_sdk_item_empty
         }
 
         val view = LayoutInflater
@@ -69,13 +59,13 @@ internal class ParentAdapter(
     }
 
     override fun onBindViewHolder(holder: DataAdapterViewHolder, position: Int) {
-        holder.bind(homeListData.get(position))
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = homeListData.size
+
 
     override fun getItemViewType(position: Int): Int {
-        return when (homeListData[position].Design) {
+        return when (getItem(position).Design) {
             "search" -> VIEW_SEARCH
             "Artist" -> VIEW_ARTIST
             "Playlist" -> VIEW_PLAYLIST
@@ -93,80 +83,11 @@ internal class ParentAdapter(
             "NewReleaseAudio" ->VIEW_NEW_RELEASE_AUDIO
             "LargeVideo" -> VIEW_LARGE_VIDEO
             "Radio" -> VIEW_RADIO
-            //adapterData[0].data[0].Design -> VIEW_ARTIST
-            //           is DataModel.Artist -> VIEW_ARTIST
-//            is DataModel.Search -> VIEW_SEARCH
-//            is DataModel.Artist -> VIEW_ARTIST
-//            is DataModel.TopTrending -> VIEW_TOP_TRENDING
-//            is DataModel.BrowseAll -> VIEW_BROWSE_ALL
-//            is DataModel.Ad -> VIEW_AD
-//            is DataModel.Download -> VIEW_DOWNLOAD
-//            is DataModel.PopularAmarTunes -> VIEW_POPULAR_AMAR_TUNES
-//            is DataModel.PopularBands -> VIEW_POPULAR_BANDS
-//            is DataModel.MadeForYou -> VIEW_MADE_FOR_YOU
-//            is DataModel.LatestRelease -> VIEW_LATEST_RELEASE
-//            is DataModel.PopularPodcast -> VIEW_POPULAR_PODCAST
-//            is DataModel.BlOffers -> VIEW_BL_MUSIC_OFFERS
-//            is DataModel.TrendingMusicVideo -> VIEW_TRENDING_MUSIC_VIDEO
-            else -> {
-                -1
-            }
+            else -> -1
+
         }
     }
 
-    var downloadNotAdded = true
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(data: List<HomePatchItemModel>) {
-        val size = this.homeListData.size
-        if (this.homeListData.isEmpty()) {
-            for (item in data.indices) {
-                search =
-                    HomePatchItemModel(
-                        "007",
-                        "searchBar",
-                        data[item].Data,
-                        "search",
-                        "search",
-                        0,
-                        0
-                    )
-                // download = HomePatchItem("002","download",data[item].Data,"download","download",0,0)
-            }
-            this.homeListData.add(search!!)
-            //this.homeListData.add(download!!)
-        }
-
-        if (this.homeListData.size >= 3 && downloadNotAdded) {
-            downloadNotAdded = false
-            download = HomePatchItemModel("002", "download", listOf(), "download", "download", 0, 0)
-            this.homeListData.add(download!!)
-        }
-        this.homeListData.addAll(data)
-        val sizeNew = this.homeListData.size
-        notifyItemRangeChanged(size, sizeNew)
-//        var exists :Boolean = false
-//        if (this.homeListData.isNotEmpty() && this.homeListData.size >= 3) {
-//            for (item in data.indices) {
-//                Log.e("TaG","Items: "+ data[item].ContentType)
-//                download = HomePatchItem("002",
-//                    "download",
-//                    listOf(),
-//                    "download",
-//                    "download",
-//                    0,
-//                    0)
-//                if (homeListData[item].ContentType==data[item].ContentType){
-//                    exists = true
-//                }
-//            }
-//
-//            if(exists) {
-//                Log.e("TaG","Items321: "+ exists)
-//                this.homeListData.add(download!!)
-//            }
-//        }
-    }
 
     inner class DataAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val mContext = itemView.context
@@ -241,11 +162,7 @@ internal class ParentAdapter(
                 //PodcastDetailsFragment
                 homeCallBack.onClickSeeAll(homePatchItem)
             }
-/*            itemView.setOnClickListener {
-                Log.e("TAG", "URL1233444: " + homePatchItem.Data[absoluteAdapterPosition])
-                // homeCallBack.onClickItemPodcastEpisode()
-                podcastTrackClick.onClickItem(homePatchItem.Data,absoluteAdapterPosition)
-            }*/
+
         }
 
         private fun bindPopularAmarTunes(
@@ -281,7 +198,7 @@ internal class ParentAdapter(
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = LargeVideosAdapter(
                 homePatchItem,
-                homePatchDetail = homeListData[absoluteAdapterPosition].Data
+                homePatchDetail = getItem(absoluteAdapterPosition).Data
             )
         }
         private fun bindBhoot(homePatchItemModel: HomePatchItemModel) {
@@ -293,41 +210,23 @@ internal class ParentAdapter(
                 .into(image)
             itemView.setOnClickListener {
                 homeCallBack.onClickItemAndAllItem(0, homePatchItemModel)
-                // homeCallBack.onClickItemAndAllItem(position,homePatchItemModel)
             }
-            //  val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
-            //  Do your view assignment here from the data model
-//            itemView.findViewById<ConstraintLayout>(R.id.clRoot)?.setBackgroundColor(item.bgColor)
-//            itemView.findViewById<AppCompatTextView>(R.id.tvNameLabel)?.text = item.title
+
         }
 
-//        private fun bundRadio(homePatchItemModel: HomePatchItemModel) {
-//            val mSongDetMod = homePatchItemModel.Data[0]
-//            val sivRadioIcon: ShapeableImageView = itemView.findViewById(R.id.siv_radio_icon)
-//            val tvRadioSongName: TextView = itemView.findViewById(R.id.tv_radio_song_name)
-////            val ivRadioFavorite: ImageView = itemView.findViewById(R.id.iv_radio_favorite)
-//            var ivRadioPlay: ImageView = itemView.findViewById(R.id.iv_radio_play)
-//
-//            Glide.with(itemView.context)
-//                .load(UtilHelper.getImageUrlSize300(mSongDetMod.image))
-//                .into(sivRadioIcon)
-//            tvRadioSongName.text = mSongDetMod.AlbumName
-////            ivRadioPlay.setOnClickListener {
-//////                radioCallBack.onClickOpenRadio(mSongDetMod.ContentID)
-////            }
-//        }
+
 
         private fun bindDownload(homePatchItemModel: HomePatchItemModel) {
             val download: LinearLayout = itemView.findViewById(R.id.Download)
-         //   val watchlater: LinearLayout = itemView.findViewById(R.id.WatchLater)
+            val watchlater: LinearLayout = itemView.findViewById(R.id.WatchLater)
             val playlist: LinearLayout = itemView.findViewById(R.id.Playlists)
             val favorite: LinearLayout = itemView.findViewById(R.id.Fav)
             download.setOnClickListener {
                 downloadClickCallBack.clickOnDownload(homePatchItemModel)
             }
-//            watchlater.setOnClickListener {
-//                downloadClickCallBack.clickOnWatchLater(homePatchItemModel)
-//            }
+            watchlater.setOnClickListener {
+                downloadClickCallBack.clickOnWatchLater(homePatchItemModel)
+            }
             playlist.setOnClickListener {
                 downloadClickCallBack.clickOnMyPlaylist(homePatchItemModel)
             }
@@ -353,43 +252,27 @@ internal class ParentAdapter(
 
         private fun bindBanner(homePatchItemModel: HomePatchItemModel) {
 
-            lateinit var sliderView: SliderView
-            lateinit var sliderAdapter: SliderpagerAdapter
-            Log.e("TAG","DATA: "+ homePatchItemModel.Data as MutableList)
-
-            // on below line we are initializing our
-            // slider adapter and adding our list to it.
-            //sliderAdapter =SliderpagerAdapter(imageUrl)
-            sliderView = itemView.findViewById(R.id.imageSlider)
-            sliderAdapter = SliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
+            val sliderView: SliderView = itemView.findViewById(R.id.imageSlider)
+            val sliderAdapter: SliderpagerAdapter = SliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
             sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
             sliderView.setSliderAdapter(sliderAdapter)
             sliderView.setIndicatorEnabled(true)
             sliderView.scrollTimeInSec = 2
             sliderView.isAutoCycle = true
             sliderView.startAutoCycle()
-//
-//
+
         }
         private fun bindBillboard(homePatchItemModel: HomePatchItemModel) {
 
-            lateinit var sliderView: SliderView
-            lateinit var sliderAdapter: SliderpagerAdapter
-            Log.e("TAG","DATA: "+ homePatchItemModel.Data as MutableList)
-
-            // on below line we are initializing our
-            // slider adapter and adding our list to it.
-            //sliderAdapter =SliderpagerAdapter(imageUrl)
-            sliderView = itemView.findViewById(R.id.imageSlider)
-            sliderAdapter = SliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
+            val sliderView: SliderView = itemView.findViewById(R.id.imageSlider)
+            val sliderAdapter: SliderpagerAdapter = SliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel)
             sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
             sliderView.setSliderAdapter(sliderAdapter)
             sliderView.setIndicatorEnabled(true)
             sliderView.scrollTimeInSec = 2
             sliderView.isAutoCycle = true
             sliderView.startAutoCycle()
-//
-//
+
         }
         private fun bindLatestRelease() {
             val title: TextView = itemView.findViewById(R.id.tvTitle)
@@ -439,7 +322,7 @@ internal class ParentAdapter(
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = TopTrendingVideosAdapter(
                 homePatchItemModel,
-                homePatchDetail = homeListData[absoluteAdapterPosition].Data
+                homePatchDetail = getItem(absoluteAdapterPosition).Data
             )
         }
         private fun bindNewReleaseAudio(homePatchItemModel: HomePatchItemModel){
@@ -448,17 +331,15 @@ internal class ParentAdapter(
                     isSeekAble = true
                 }
             }
-            lateinit var sliderView: SliderView
-            lateinit var sliderAdapter: NewReleaseSliderpagerAdapter
-            Log.e("TAG","DATA: "+ homePatchItemModel.Data as MutableList)
-            sliderView = itemView.findViewById(R.id.imageSlider)
-            sliderAdapter = NewReleaseSliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel,newReleaseTrackCallback)
+
+            val sliderView: SliderView = itemView.findViewById(R.id.imageSlider)
+            val sliderAdapter: NewReleaseSliderpagerAdapter = NewReleaseSliderpagerAdapter(homePatchItemModel.Data as MutableList, homeCallBack, homePatchItemModel,newReleaseTrackCallback)
             sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
             sliderView.setSliderAdapter(sliderAdapter)
             sliderView.setIndicatorEnabled(true)
             sliderView.scrollTimeInSec = 5
             sliderView.isAutoCycle = false
-            //sliderView.startAutoCycle()
+
         }
 
         private fun bindRadio(homePatchItemModel: HomePatchItemModel){
@@ -495,56 +376,54 @@ internal class ParentAdapter(
                 "NewReleaseAudio" ->bindNewReleaseAudio(homePatchItemModel)
                 "LargeVideo" -> bindLargeVideos(homePatchItemModel)
                 "Radio" -> bindRadio(homePatchItemModel)
-//                "Playlist" -> bundRadio(homePatchItemModel)
-                //"Artist"->bindPopularBands(homePatchItemModel)
-//                "Artist" ->bindAd()
+
             }
 
-            /*when (dataModel) {
-                     dataModel-> bindArtist(dataModel!!)
- //                is DataModel.Search -> bindSearch()
- //                is DataModel.Artist -> bindArtist()
- //                is DataModel.TopTrending -> bindTopTrending()
- //                is DataModel.BrowseAll -> bindBrowseAll()
- //                is DataModel.Ad -> bindAd()
- //                is DataModel.Download -> bindDownload()
- //                is DataModel.PopularAmarTunes -> bindPopularAmarTunes()
- //                is DataModel.PopularBands -> bindPopularBands()
- //                is DataModel.MadeForYou -> bindMadeForYou()
- //                is DataModel.LatestRelease -> bindLatestRelease()
- //                is DataModel.PopularPodcast -> bindPopularPodcast()
- //                is DataModel.BlOffers -> bindBlOffers()
- //                is DataModel.TrendingMusicVideo -> bindTrendingMusic()
- ////                is DataModel.BlOffers -> bindBlOffers(dataModel)
-             }*/
+
         }
     }
 
 
 
     public companion object {
-        val VIEW_SEARCH = 0
-        val VIEW_ARTIST = 1
-        val VIEW_RELEASE = 2
-        val VIEW_PLAYLIST = 3
-        val VIEW_AD = 4
-        val VIEW_DOWNLOAD = 5
-        val VIEW_POPULAR_AMAR_TUNES = 6
-        val VIEW_POPULAR_BANDS = 7
-        val VIEW_MADE_FOR_YOU = 8
-        val VIEW_LATEST_RELEASE = 9
-        val VIEW_POPULAR_PODCAST = 10
-        val VIEW_BL_MUSIC_OFFERS = 11
-        val VIEW_TRENDING_MUSIC_VIDEO = 12
-        val VIEW_PODCAST_LIVE = 13
-        val VIEW_SHOW= 14
-        val  VIEW_BANNER = 15
-       val VIEW_DISCOVER = 16
-       val VIEW_PDPS = 17
-        val VIEW_LARGE_VIDEO =18
-        val VIEW_PODCAST_VIDEO =19
-       val VIEW_NEW_RELEASE_AUDIO= 20
-       val VIEW_RADIO = 21
+        const val VIEW_SEARCH = 0
+        const val VIEW_ARTIST = 1
+        const val VIEW_RELEASE = 2
+        const val VIEW_PLAYLIST = 3
+        const val VIEW_AD = 4
+        const val VIEW_DOWNLOAD = 5
+        const val VIEW_POPULAR_AMAR_TUNES = 6
+        const val VIEW_POPULAR_BANDS = 7
+        const val VIEW_MADE_FOR_YOU = 8
+        const val VIEW_LATEST_RELEASE = 9
+        const val VIEW_POPULAR_PODCAST = 10
+        const val VIEW_BL_MUSIC_OFFERS = 11
+        const val VIEW_TRENDING_MUSIC_VIDEO = 12
+        const val VIEW_PODCAST_LIVE = 13
+        const val VIEW_SHOW= 14
+        const val  VIEW_BANNER = 15
+        const val VIEW_DISCOVER = 16
+        const val VIEW_PDPS = 17
+        const val VIEW_LARGE_VIDEO =18
+        const val VIEW_PODCAST_VIDEO =19
+        const val VIEW_NEW_RELEASE_AUDIO= 20
+        const val VIEW_RADIO = 21
         const val VIEW_TYPE = 100
     }
+}
+class ParentAdapterDiffCallback: DiffUtil.ItemCallback<HomePatchItemModel>() {
+    override fun areItemsTheSame(
+        oldItem: HomePatchItemModel,
+        newItem: HomePatchItemModel
+    ): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(
+        oldItem: HomePatchItemModel,
+        newItem: HomePatchItemModel
+    ): Boolean {
+        return oldItem.Code == newItem.Code
+    }
+
 }
