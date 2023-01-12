@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 <LinearLayout
@@ -141,7 +140,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/podscast_card"
+            android:id="@+id/podcast_card"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
@@ -150,7 +149,7 @@
             >
 
             <LinearLayout
-                android:id="@+id/podcast"
+                android:id="@+id/Podcast"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -251,12 +250,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ProConstraint"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_blue"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
-        tools:layout_editor_absoluteX="-30dp">
+        tools:layout_editor_absoluteX="-20dp">
 
         <TextView
             android:id="@+id/Protext"
@@ -266,7 +266,7 @@
             android:paddingTop="8dp"
             android:text="Upgrade to Pro"
             android:textColor="@color/my_sdk_color_white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -280,16 +280,17 @@
             android:paddingBottom="8dp"
             android:text="Ad-free,unlimited offline\ndownloads and create playlist"
             android:textColor="@color/my_sdk_color_white"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Protext" />
 
-        <Button
+        <TextView
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_white"
             android:padding="8dp"
+            android:gravity ="center"
             android:text="Get Pro"
             android:textAllCaps="false"
             android:textColor="@color/my_sdk_color_primary"

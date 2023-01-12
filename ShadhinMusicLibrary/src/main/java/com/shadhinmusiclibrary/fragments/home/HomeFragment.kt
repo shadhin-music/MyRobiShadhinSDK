@@ -205,7 +205,7 @@ internal class HomeFragment : BaseFragment(),
                         AppConstantUtils.PatchItem,
                         HomePatchItemModel(
                             homePatchItem.Code,
-                            "PDBC",
+                            homePatchItem.ContentType,
                             homePatchItem.Data,
                             homePatchItem.Design,
                             homePatchItem.Name,
@@ -397,6 +397,22 @@ internal class HomeFragment : BaseFragment(),
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_MyFavorite
+                )
+                putExtra(AppConstantUtils.PatchItem, data)
+            })
+    }
+
+    override fun clickOnPodcast(selectedHomePatchItem: HomePatchItemModel) {
+        val data = Bundle()
+        data.putSerializable(
+            AppConstantUtils.PatchItem,
+            selectedHomePatchItem as Serializable
+        )
+        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+            .apply {
+                putExtra(
+                    AppConstantUtils.UI_Request_Type,
+                    AppConstantUtils.Requester_Name_Podcast
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
             })

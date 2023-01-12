@@ -61,4 +61,5 @@
     <color name="my_sdk_down_item_desc">#757575</color>
     <color name="my_sdk_down_background">#F2F2F2</color>
     <color name="my_sdk_bottom_bar_bg_dark">#212121</color>
+    <color name="v2_black_white_card_dark">#353840</color>
 </resources>

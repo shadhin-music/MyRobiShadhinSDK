@@ -7,4 +7,5 @@ internal interface DownloadClickCallBack {
     fun clickOnWatchLater(selectedHomePatchItem: HomePatchItemModel)
     fun clickOnMyPlaylist(selectedHomePatchItem: HomePatchItemModel)
     fun clickOnMyFavorite(selectedHomePatchItem: HomePatchItemModel)
+    fun clickOnPodcast(selectedHomePatchItem: HomePatchItemModel)
 }

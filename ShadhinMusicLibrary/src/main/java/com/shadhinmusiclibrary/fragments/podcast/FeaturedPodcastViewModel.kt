@@ -31,4 +31,8 @@ internal class FeaturedPodcastViewModel(private val featuredPodcastRepository: F
         val response = featuredPodcastRepository.fetchPodcastSeeAll(isPaid)
         _podcastSeeAllContent.postValue(response)
     }
+    fun fetchShadhinPodcastSeeAll(isPaid: Boolean) = viewModelScope.launch {
+        val response = featuredPodcastRepository.fetchShadhinPodcastSeeAll(isPaid)
+        _podcastSeeAllContent.postValue(response)
+    }
 }

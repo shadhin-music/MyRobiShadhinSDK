@@ -221,6 +221,9 @@ internal class SDKMainActivity : BaseActivity(),
         if (uiRequest == AppConstantUtils.Requester_Name_MyFavorite) {
             myFavoriteFragmentAccess()
         }
+        if (uiRequest == AppConstantUtils.Requester_Name_Podcast) {
+           podcastSeeAllFragmentAccess()
+        }
         if (uiRequest == AppConstantUtils.Requester_Name_CreatePlaylist) {
             createPlaylistFragmentAccess()
         }
@@ -280,6 +283,23 @@ internal class SDKMainActivity : BaseActivity(),
             Log.e("SDKMA", "onCreate: called")
             Toast.makeText(applicationContext, res.status.toString(), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun podcastSeeAllFragmentAccess() {
+        startDestination(
+
+            Bundle().apply {
+                val details = HomePatchDetailModel().apply {
+
+                    this.content_Type = type
+                }
+                putSerializable(
+                    AppConstantUtils.PatchDetail,
+                    details as Serializable
+                )
+            }, R.id.podcast_see_all_fragment
+
+        )
     }
 
 

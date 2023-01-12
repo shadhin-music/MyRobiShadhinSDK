@@ -40,6 +40,9 @@ internal object UtilHelper {
     fun getImageUrlSize300(imageUrl: String): String {
         return imageUrl.replace("<\$size\$>", "300")
     }
+    fun getImageUrlSize1280(imageUrl: String): String {
+        return imageUrl.replace("<\$size\$>", "1280")
+    }
     fun getImageUrlSize450(imageUrl: String): String {
         return imageUrl.replace("<\$size\$>", "450")
     }

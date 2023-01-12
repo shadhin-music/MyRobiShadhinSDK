@@ -5,9 +5,11 @@ package com.shadhinmusiclibrary.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -158,6 +160,7 @@ internal class ParentAdapter(
             recyclerView.adapter =
                 HomePodcastAdapter(homePatchItem, homeCallBack, podcastTrackClick)
             val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
+            seeAll.visibility = GONE
             seeAll.setOnClickListener {
                 //PodcastDetailsFragment
                 homeCallBack.onClickSeeAll(homePatchItem)
@@ -221,6 +224,8 @@ internal class ParentAdapter(
             val watchlater: LinearLayout = itemView.findViewById(R.id.WatchLater)
             val playlist: LinearLayout = itemView.findViewById(R.id.Playlists)
             val favorite: LinearLayout = itemView.findViewById(R.id.Fav)
+            val artist: LinearLayout = itemView.findViewById(R.id.Artist)
+            val podcast: LinearLayout = itemView.findViewById(R.id.Podcast)
             download.setOnClickListener {
                 downloadClickCallBack.clickOnDownload(homePatchItemModel)
             }
@@ -233,12 +238,23 @@ internal class ParentAdapter(
             favorite.setOnClickListener {
                 downloadClickCallBack.clickOnMyFavorite(homePatchItemModel)
             }
+            artist.setOnClickListener{
+                Log.e("TAG","DATA: " + homePatchItemModel)
+                ShadhinMusicSdkCore.openPatch(itemView.context, "RC203")
+                //homeCallBack.onClickSeeAll(homePatchItemModel)
+            }
+            podcast.setOnClickListener{
+
+                downloadClickCallBack.clickOnPodcast(homePatchItemModel)
+
+            }
         }
 
         private fun bindPodcastShow(homePatchItemModel: HomePatchItemModel) {
             val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
             val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
             tvTitle.text = homePatchItemModel.Name
+            seeAll.visibility = GONE
             seeAll.setOnClickListener {
                 homeCallBack.onClickSeeAll(homePatchItemModel)
                 Log.e("TAG","PATCH: "+ homePatchItemModel)
@@ -304,6 +320,7 @@ internal class ParentAdapter(
             )
             recyclerView.adapter = PDPSAdapter(homePatchItemModel, homeCallBack)
             val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
+             seeAll.visibility = GONE
             seeAll.setOnClickListener {
                 homeCallBack.onClickSeeAll(homePatchItemModel)
                 Log.e("TAG","PATCH: "+ homePatchItemModel)

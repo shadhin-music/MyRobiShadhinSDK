@@ -95,6 +95,11 @@ internal interface ApiService {
         @Query("isPaid") isPaid: Boolean,
     ): FeaturedPodcastModel
 
+    @GET("Podcast/PodcastHomeDataV1")
+    suspend fun fetchShadhinPodcastSeeAll(
+        @Query("isPaid") isPaid: Boolean,
+    ): FeaturedPodcastModel
+
     @GET("artist/getpopularartist")
     suspend fun fetchPopularArtist(): PopularArtistModel
 

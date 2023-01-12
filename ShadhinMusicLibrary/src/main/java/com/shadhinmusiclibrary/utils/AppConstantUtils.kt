@@ -35,6 +35,7 @@ internal object AppConstantUtils {
     const val Requester_Name_Watchlater = "WatchlaterFragment"
     const val Requester_Name_MyPlaylist = "MyPlaylistFragment"
     const val Requester_Name_MyFavorite = "MyFavoriteFragment"
+    const val Requester_Name_Podcast = "Podcast"
     const val Requester_Name_CreatePlaylist = "CreatePlaylistFragment"
     const val Requester_Name_CreatedPlaylistDetails = "CreatedPlaylistDetails"
     const val Requester_Name_API = "AllMusic"

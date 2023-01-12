@@ -18,8 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shadhinmusiclibrary.R
 import com.shadhinmusiclibrary.activities.SDKMainActivity
+import com.shadhinmusiclibrary.adapter.*
 import com.shadhinmusiclibrary.adapter.HomeFooterAdapter
-import com.shadhinmusiclibrary.adapter.ParentAdapter
+import com.shadhinmusiclibrary.adapter.PodcastSeeAllDetails2Adapter
 import com.shadhinmusiclibrary.adapter.PodcastSeeAllDetailsAdapter
 import com.shadhinmusiclibrary.adapter.PodcastTNTypeAdapter
 import com.shadhinmusiclibrary.data.IMusicModel
@@ -39,7 +40,7 @@ internal class PodcastSeeAllDetailsFragment : BaseFragment(),
 
     lateinit var viewModel: FeaturedPodcastViewModel
     private lateinit var navController: NavController
-    private var dataAdapter: PodcastSeeAllDetailsAdapter? = null
+    private var dataAdapter: PodcastSeeAllDetails2Adapter? = null
     private lateinit var footerAdapter: HomeFooterAdapter
     private fun setupViewModel() {
         viewModel =
@@ -62,7 +63,7 @@ internal class PodcastSeeAllDetailsFragment : BaseFragment(),
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
 
-        viewModel.fetchPodcastSeeAll(false)
+        viewModel.fetchShadhinPodcastSeeAll(false)
         observeData()
         val imageBackBtn: AppCompatImageView = view.findViewById(R.id.imageBack)
         imageBackBtn.setOnClickListener {
@@ -85,7 +86,7 @@ internal class PodcastSeeAllDetailsFragment : BaseFragment(),
         footerAdapter = HomeFooterAdapter()
 
         viewModel.podcastSeeAllContent.observe(viewLifecycleOwner) { res ->
-            dataAdapter = PodcastSeeAllDetailsAdapter(this, cacheRepository, favViewModel, injector)
+            dataAdapter = PodcastSeeAllDetails2Adapter(this, cacheRepository, favViewModel, injector)
            // progress.visibility = GONE
             val recyclerView: RecyclerView? = view?.findViewById(R.id.recyclerView)
             val layoutManager =
@@ -117,9 +118,13 @@ internal class PodcastSeeAllDetailsFragment : BaseFragment(),
 
     private fun isValidDesign(patchType: String): Int {
         return when (patchType) {
-            "PP" -> PodcastSeeAllDetailsAdapter.VIEW_PP
-            "TN" -> PodcastSeeAllDetailsAdapter.VIEW_TN
-            "SS" -> PodcastSeeAllDetailsAdapter.VIEW_SS
+            "PP" -> PodcastSeeAllDetails2Adapter.VIEW_PP
+            "TN" -> PodcastSeeAllDetails2Adapter.VIEW_TN
+            "SS" -> PodcastSeeAllDetails2Adapter.VIEW_SS
+            "VP" -> PodcastSeeAllDetails2Adapter.VIEW_VP
+            "VL" -> PodcastSeeAllDetails2Adapter.VIEW_VL
+            "LE" -> PodcastSeeAllDetails2Adapter.VIEW_LE
+            "PS" -> PodcastSeeAllDetails2Adapter.VIEW_PS
             else -> {
                 -1
             }
