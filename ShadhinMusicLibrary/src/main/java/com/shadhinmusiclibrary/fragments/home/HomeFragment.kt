@@ -5,22 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.shadhinmusiclibrary.R
 import com.shadhinmusiclibrary.ShadhinMusicSdkCore
 import com.shadhinmusiclibrary.activities.SDKMainActivity
@@ -33,7 +25,6 @@ import com.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.shadhinmusiclibrary.data.IMusicModel
 import com.shadhinmusiclibrary.data.model.*
-import com.shadhinmusiclibrary.data.model.SongDetailModel
 import com.shadhinmusiclibrary.data.model.podcast.EpisodeModel
 import com.shadhinmusiclibrary.fragments.amar_tunes.AmarTunesViewModel
 import com.shadhinmusiclibrary.fragments.base.BaseFragment
@@ -43,7 +34,6 @@ import com.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.shadhinmusiclibrary.library.player.utils.isPlaying
 import com.shadhinmusiclibrary.utils.AppConstantUtils
 import com.shadhinmusiclibrary.utils.DataContentType
-import com.shadhinmusiclibrary.utils.TimeParser
 import com.shadhinmusiclibrary.utils.UtilHelper
 import java.io.Serializable
 
@@ -70,14 +60,13 @@ internal class HomeFragment : BaseFragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val viewRef = inflater.inflate(R.layout.my_bl_sdk_fragment_home, container, false)
 
-        return viewRef
+        return inflater.inflate(R.layout.my_bl_sdk_fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupUi(view)
         cacheRepository = CacheRepository(requireContext())
         setupViewModel()
         setupAdapter(view)
@@ -92,6 +81,21 @@ internal class HomeFragment : BaseFragment(),
 
         observeData()
     }
+    private fun setupUi(view: View) {
+        val imageBackBtn: AppCompatImageView = view.findViewById(R.id.imageBack)
+        imageBackBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        val searchBar: AppCompatImageView = requireView().findViewById(R.id.search_bar)
+        searchBar.setOnClickListener {
+            openSearch()
+        }
+    }
+
+    private fun openSearch() {
+        findNavController().navigate(R.id.to_search)
+    }
+
     private fun setupViewModel() {
         cacheRepository = CacheRepository(requireContext())
         homeViewModel = ViewModelProvider(
@@ -129,7 +133,7 @@ internal class HomeFragment : BaseFragment(),
 
     }
     private fun observeData() {
-        playerViewModel.startObservePlayerProgress(viewLifecycleOwner)
+      //  playerViewModel.startObservePlayerProgress(viewLifecycleOwner)
         val progressBar: ProgressBar = requireView().findViewById(R.id.progress_bar)
 
         homeViewModel.patchList.observe(viewLifecycleOwner) { patchList ->
@@ -344,14 +348,15 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_download,data)
+      /*  startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Download
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
-            })
+            })*/
     }
 
     override fun clickOnWatchLater(selectedHomePatchItem: HomePatchItemModel) {
@@ -360,14 +365,15 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_watch_later,data)
+       /* startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Watchlater
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
-            })
+            })*/
     }
 
     override fun clickOnMyPlaylist(selectedHomePatchItem: HomePatchItemModel) {
@@ -376,14 +382,15 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_my_playlist,data)
+      /*  startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_MyPlaylist
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
-            })
+            })*/
     }
 
     override fun clickOnMyFavorite(selectedHomePatchItem: HomePatchItemModel) {
@@ -392,14 +399,15 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_favorite,data)
+        /*startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_MyFavorite
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
-            })
+            })*/
     }
 
 

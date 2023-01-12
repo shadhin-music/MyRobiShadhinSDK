@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,15 +59,11 @@ internal class MyPlaylistFragment : BaseFragment(),
         val verticalSpanCount = 1
         val horizontalSpanCount = 2
 
-//        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-//        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        // recyclerView.adapter = concatAdapter
+
         val textTitle: TextView = requireView().findViewById(R.id.tvTitle)
         textTitle.text = "My Playlist"
         imageBackBtn.setOnClickListener {
-            /* if (ShadhinMusicSdkCore.pressCountDecrement() == 0) {
-                 requireActivity().finish()
-             }*/
+
             requireActivity().onBackPressed()
         }
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
@@ -131,14 +128,15 @@ internal class MyPlaylistFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+        findNavController().navigate(R.id.to_create_playlist,data)
+        /*startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_CreatePlaylist
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
-            })
+            })*/
     }
 
     override fun onResume() {

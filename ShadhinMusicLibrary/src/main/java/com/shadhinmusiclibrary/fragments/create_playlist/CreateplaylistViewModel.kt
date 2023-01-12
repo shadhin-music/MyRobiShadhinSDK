@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 
 import com.shadhinmusiclibrary.data.repository.CreatePlaylistRepository
 import com.shadhinmusiclibrary.utils.ApiResponse
+import com.shadhinmusiclibrary.utils.Status
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -34,7 +35,10 @@ internal class CreateplaylistViewModel (private val createPlaylistRepository: Cr
 
     fun createPlaylist(name: String) = viewModelScope.launch {
         val response = createPlaylistRepository.createPlaylist(name)
-        _createPlaylist.postValue(response.data)
+        if(response.status == Status.SUCCESS && response.data !=null){
+            _createPlaylist.postValue(response.data)
+        }
+
     }
 
     fun getuserPlaylist() = viewModelScope.launch {

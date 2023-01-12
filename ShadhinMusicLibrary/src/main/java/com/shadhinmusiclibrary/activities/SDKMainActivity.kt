@@ -133,6 +133,7 @@ internal class SDKMainActivity : BaseActivity(),
     private lateinit var mainMusicPlayerAdapter: MusicPlayAdapter
     private lateinit var queueTrackAdapter: QueueTrackAdapter
     private lateinit var listData: MutableList<HomePatchDetailModel>
+    private var uiRequest:String?= null
 
     private fun uiInitMiniMusicPlayer() {
         llMiniMusicPlayer = findViewById(R.id.include_mini_music_player)
@@ -188,7 +189,7 @@ internal class SDKMainActivity : BaseActivity(),
         mainMusicPlayerAdapter = MusicPlayAdapter(this)
 
         //Will received request from Any page from MYBLL app
-        val uiRequest = intent.extras!!.get(AppConstantUtils.UI_Request_Type)
+        uiRequest = intent.extras?.getString(AppConstantUtils.UI_Request_Type)
         if (uiRequest == AppConstantUtils.RequesterRC) {
             routeFromRC()
         }
@@ -267,11 +268,13 @@ internal class SDKMainActivity : BaseActivity(),
             toggleMiniPlayerView(false)
         }
 
-        //DO NOT Call this function multiple times
+
         playerViewModel.startObservePlayerProgress(this)
-        //  routeDataArtistType()
+
         Log.e("SDKMA", "onCreate: " + playerViewModel.isMediaDataAvailable())
-        playerViewModel.startUserSession()
+        if(uiRequest != AppConstantUtils.Requester_Name_Search){
+            playerViewModel.startUserSession()
+        }
         viewModel.createPlaylist.observe(this) { res ->
             Toast.makeText(applicationContext, res.status.toString(), Toast.LENGTH_LONG).show()
             Log.e("SDKMA", "onCreate123: called")
@@ -1543,10 +1546,11 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     override fun onDestroy() {
-        // DownloadOrDeleteObserver.removeSubscriber()
-        playerViewModel.endUserSession()
+        if(uiRequest != AppConstantUtils.Requester_Name_Search){
+            playerViewModel.endUserSession()
+        }
         super.onDestroy()
-        //   playerViewModel.disconnect()
+
     }
 
     fun showBottomSheetDialog(

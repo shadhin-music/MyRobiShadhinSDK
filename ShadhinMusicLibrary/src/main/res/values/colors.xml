@@ -61,4 +61,33 @@
     <color name="my_sdk_down_item_desc">#757575</color>
     <color name="my_sdk_down_background">#F2F2F2</color>
     <color name="my_sdk_bottom_bar_bg_dark">#212121</color>
+
+    <color name="my_sdk_v2_background">#2A2D36</color>
+    <color name="my_sdk_v2_black">#252830</color>
+    <color name="my_sdk_v2_white">#fff</color>
+    <color name="my_sdk_v2_text_dark">#FFFFFF</color>
+    <color name="my_sdk_v2_text_light">#2A2D36</color>
+    <color name="my_sdk_v2_btn_disabled">#BEBEBE</color>
+
+    <color name="my_sdk_down_icon">#DE000000</color>
+    <color name="my_sdk_down_icon_n">#FFFFFF</color>
+
+    <color name="my_sdk_down_title_n">#FFFFFF</color>
+    <color name="my_sdk_down_desc">#2A2D36</color>
+    <color name="my_sdk_down_desc_n">#B3FFFFFF</color>
+    <color name="my_sdk_down_sky">#00B0FF</color>
+    <color name="my_sdk_down_sky_n">#00B0FF</color>
+    <color name="my_sdk_down_select_all">#2A2D36</color>
+    <color name="my_sdk_down_select_all_n">#B3FFFFFF</color>
+    <color name="my_sdk_down_item_title">#DE000000</color>
+    <color name="my_sdk_down_item_title_n">#FFFFFF</color>
+
+    <color name="my_sdk_down_item_desc_n">#B3FFFFFF</color>
+
+    <color name="my_sdk_down_background_n">#303030</color>
+    <color name="my_sdk_down_icon_sub">#424242</color>
+    <color name="my_sdk_down_icon_sub_n">#B3FFFFFF</color>
+
+    <color name="my_sdk_v2_btn_disabled_dark">#8BFFFFFF</color>
+    <color name="my_sdk_v2_light_divider_col">#1F000000</color>
 </resources>

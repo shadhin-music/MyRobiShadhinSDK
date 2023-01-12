@@ -3,20 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#EFEFEF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.home.HomeFragment">
+        tools:context=".fragments.home.HomeFragment"
+        android:background="#EFEFEF">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/my_sdk_color_primary"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetEnd="0dp"
+                android:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_constraintTop_toTopOf="@id/parentRelative">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageBack"
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:padding="12dp"
+                    android:src="@drawable/my_bl_sdk_ic_arrow_back"
+                    app:layout_constraintBottom_toBottomOf="@id/parentRelative"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/parentRelative" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:textColor="@color/my_sdk_white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/search_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/my_bl_sdk_ic_search_download"
+                android:tint="@color/my_sdk_color_white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/parentRelative"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/parentRelative" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="50dp"
-            android:clipToPadding="false"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/parentRelative" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -24,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:theme="@style/ProgressBarTheme"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,14 +100,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <include
+          &lt;!&ndash;  <include
                 android:id="@+id/include_mini_music_player"
                 layout="@layout/my_bl_sdk_mini_music_player"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
 
-                tools:visibility="visible" />
+                tools:visibility="visible" />&ndash;&gt;
         </FrameLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

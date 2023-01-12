@@ -50,7 +50,10 @@ internal class CreatePlaylistFragment : BaseFragment(),
         }
         viewModel.createPlaylist.observe(viewLifecycleOwner) { res ->
 
-            Toast.makeText(requireContext(), res.status.toString(), Toast.LENGTH_LONG).show()
+            res?.status?.let {
+                Toast.makeText(requireContext(),it , Toast.LENGTH_LONG).show()
+            }
+
         }
         val btnCreatePlaylist: AppCompatButton = requireView().findViewById(R.id.btnCreatePlaylist)
         btnCreatePlaylist.setOnClickListener {
