@@ -47,7 +47,7 @@ internal class ParentAdapter(
             VIEW_POPULAR_PODCAST -> R.layout.my_bl_sdk_item_release_patch
             VIEW_TRENDING_MUSIC_VIDEO -> R.layout.my_bl_sdk_item_trending_music_videos
             VIEW_PODCAST_LIVE -> R.layout.my_bl_sdk_item_bhoot_podcast
-            VIEW_DOWNLOAD -> R.layout.my_bl_sdk_item_my_fav
+            VIEW_DOWNLOAD -> R.layout.download_fav_playlist_layout
             VIEW_POPULAR_AMAR_TUNES -> R.layout.my_bl_sdk_item_popular_amar_tunes
             VIEW_SHOW ->R.layout.my_bl_sdk_item_release_patch
             VIEW_BANNER ->R.layout.my_bl_sdk_banner
@@ -137,11 +137,11 @@ internal class ParentAdapter(
             //this.homeListData.add(download!!)
         }
 
-//        if (this.homeListData.size >= 3 && downloadNotAdded) {
-//            downloadNotAdded = false
-//            download = HomePatchItemModel("002", "download", listOf(), "download", "download", 0, 0)
-//            this.homeListData.add(download!!)
-//        }
+        if (this.homeListData.size >= 3 && downloadNotAdded) {
+            downloadNotAdded = false
+            download = HomePatchItemModel("002", "download", listOf(), "download", "download", 0, 0)
+            this.homeListData.add(download!!)
+        }
         this.homeListData.addAll(data)
         val sizeNew = this.homeListData.size
         notifyItemRangeChanged(size, sizeNew)
@@ -319,15 +319,15 @@ internal class ParentAdapter(
 
         private fun bindDownload(homePatchItemModel: HomePatchItemModel) {
             val download: LinearLayout = itemView.findViewById(R.id.Download)
-            val watchlater: LinearLayout = itemView.findViewById(R.id.WatchLater)
+         //   val watchlater: LinearLayout = itemView.findViewById(R.id.WatchLater)
             val playlist: LinearLayout = itemView.findViewById(R.id.Playlists)
             val favorite: LinearLayout = itemView.findViewById(R.id.Fav)
             download.setOnClickListener {
                 downloadClickCallBack.clickOnDownload(homePatchItemModel)
             }
-            watchlater.setOnClickListener {
-                downloadClickCallBack.clickOnWatchLater(homePatchItemModel)
-            }
+//            watchlater.setOnClickListener {
+//                downloadClickCallBack.clickOnWatchLater(homePatchItemModel)
+//            }
             playlist.setOnClickListener {
                 downloadClickCallBack.clickOnMyPlaylist(homePatchItemModel)
             }
