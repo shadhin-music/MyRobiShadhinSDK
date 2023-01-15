@@ -16,7 +16,7 @@ public class ScrollListenerAdapter<T extends RecyclerView.ViewHolder> implements
     private DiscreteScrollView.ScrollListener<T> adaptee;
 
     public ScrollListenerAdapter(@NonNull DiscreteScrollView.ScrollListener<?> adaptee) {
-        this.adaptee = adaptee;
+        this.adaptee = (DiscreteScrollView.ScrollListener<T>) adaptee;
     }
 
     @Override
