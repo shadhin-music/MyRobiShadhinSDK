@@ -10,6 +10,7 @@ import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.myrobi.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
+import com.myrobi.shadhinmusiclibrary.utils.CircleImageView
 
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 

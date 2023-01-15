@@ -13,6 +13,10 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.callBackService.LatestReleaseOnCallBack
 import com.myrobi.shadhinmusiclibrary.data.IMusicModel
+import com.myrobi.shadhinmusiclibrary.data.model.FeaturedSongDetailModel
+import com.myrobi.shadhinmusiclibrary.utils.AnyTrackDiffCB
+import com.myrobi.shadhinmusiclibrary.utils.TimeParser
+import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 
 
 internal class FeaturedLatestTracksAdapter(
