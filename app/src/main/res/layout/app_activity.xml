@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEFEF"
-    tools:context=".AppActivity">
+    tools:context="com.co.shadhinmusicsdk.AppActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -70,7 +70,7 @@
 
 <!--            <fragment-->
 <!--                android:id="@+id/app_home_fragment"-->
-<!--                android:name="com.co.shadhinmusicsdk.AppHomeFragment"-->
+<!--                android:name="com.co.myrobi.shadhinmusicsdk.AppHomeFragment"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="match_parent"-->
 <!--                app:layout_constraintTop_toTopOf="parent"-->

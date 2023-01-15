@@ -76,7 +76,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = "com.myrobi.shadhinmusiclibrary"
-                artifactId = "shadhinSDK"
+                artifactId = "myrobishadhinSDK"
                 version = "1.0.7"
             }
         }
