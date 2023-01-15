@@ -38,7 +38,7 @@
                     android:orientation="vertical"
                     android:padding="8dp">
 
-                    <com.shadhinmusiclibrary.utils.CircleImageView
+                    <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/my_bl_sdk_ic_icon_download" />
@@ -61,7 +61,7 @@
                     android:padding="8dp"
                     android:visibility="visible">
 
-                    <com.shadhinmusiclibrary.utils.CircleImageView
+                    <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/my_bl_sdk_ic_icon_fav" />
@@ -84,7 +84,7 @@
                     android:padding="8dp"
                     android:visibility="visible">
 
-                    <com.shadhinmusiclibrary.utils.CircleImageView
+                    <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/my_bl_sdk_ic_icon_playlist" />
@@ -106,7 +106,7 @@
                     android:orientation="vertical"
                     android:padding="8dp">
 
-                    <com.shadhinmusiclibrary.utils.CircleImageView
+                    <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
                         android:layout_width="42dp"
                         android:layout_height="wrap_content"
                         android:src="@drawable/my_bl_sdk_ic_icon_watch_later" />

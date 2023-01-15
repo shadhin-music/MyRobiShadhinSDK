@@ -1,3 +1,0 @@
-package com.shadhinmusiclibrary.library.player.connection
-
-internal interface MusicServiceController : MusicServiceActions, MusicServiceListeners

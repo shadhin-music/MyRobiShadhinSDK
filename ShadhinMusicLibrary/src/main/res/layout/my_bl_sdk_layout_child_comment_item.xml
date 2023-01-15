@@ -10,7 +10,7 @@
     android:paddingEnd="16dp"
     android:paddingBottom="8dp">
 
-    <com.shadhinmusiclibrary.utils.CircleImageView
+    <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
         android:id="@+id/user_icon"
         android:layout_width="32dp"
         android:layout_height="32dp"

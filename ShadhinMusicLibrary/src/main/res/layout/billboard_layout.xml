@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:cardBackgroundColor="@color/my_sdk_color_green">
 
-        <com.shadhinmusiclibrary.autoimageslider.SliderView
+        <com.myrobi.shadhinmusiclibrary.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

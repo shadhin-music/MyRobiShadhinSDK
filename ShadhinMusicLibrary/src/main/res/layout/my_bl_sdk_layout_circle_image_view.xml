@@ -6,7 +6,7 @@
     android:paddingTop="2dp"
     android:paddingBottom="2dp">
 
-    <com.shadhinmusiclibrary.utils.CircleImageView
+    <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
         android:id="@+id/civ_person_image"
         android:layout_width="80dp"
         android:layout_height="80dp"

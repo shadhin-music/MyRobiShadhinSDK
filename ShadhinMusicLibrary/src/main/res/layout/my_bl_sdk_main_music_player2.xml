@@ -72,7 +72,7 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.shadhinmusiclibrary.library.discretescrollview.DiscreteScrollView
+    <com.myrobi.shadhinmusiclibrary.library.discretescrollview.DiscreteScrollView
         android:id="@+id/dsv_current_play_songs_thumb"
         android:layout_width="match_parent"
         android:layout_height="0dp"

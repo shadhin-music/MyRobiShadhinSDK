@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/album_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.album.AlbumDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.album.AlbumDetailsFragment"
         android:label="Details"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout">
 
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/artist_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.artist.ArtistDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.artist.ArtistDetailsFragment"
         android:label="Artist Details"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout">
 
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/featured_podcast_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.FeaturedPodcastFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.FeaturedPodcastFragment"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout">
         <action
             android:id="@+id/to_podcast_details"
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/podcast_see_all_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.podcast.PodcastSeeAllDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.podcast.PodcastSeeAllDetailsFragment"
         tools:layout="@layout/my_bl_sdk_common_rv_layout">
         <action
             android:id="@+id/to_podcast_details"
@@ -69,7 +69,7 @@
 
     <fragment
         android:id="@+id/songs_download_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.SongsDownloadFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.SongsDownloadFragment"
         android:label="fragment_download_album"
         tools:layout="@layout/my_bl_sdk_fragment_download_details">
 
@@ -80,7 +80,7 @@
 
     <fragment
         android:id="@+id/release_list_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.ReleaseListFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.ReleaseListFragment"
         android:label="fragment_relese_list"
         tools:layout="@layout/my_bl_sdk_common_rv_layout">
 
@@ -94,7 +94,7 @@
 
     <fragment
         android:id="@+id/favorite_album_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.fav.AlbumsFavFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.fav.AlbumsFavFragment"
         android:label="fragment_fav album"
         tools:layout="@layout/my_bl_sdk_fragment_download_details">
         <action
@@ -108,7 +108,7 @@
 
     <fragment
         android:id="@+id/playlist_fav_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.fav.PlaylistFavFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.fav.PlaylistFavFragment"
         android:label="fragment_favplaylist"
         tools:layout="@layout/my_bl_sdk_fragment_download_details">
 
@@ -123,7 +123,7 @@
 
     <fragment
         android:id="@+id/download_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.DownloadFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.DownloadFragment"
         android:label="fragment_download"
         >
 
@@ -137,7 +137,7 @@
 
     <fragment
         android:id="@+id/popular_artist_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.PopularArtistsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.PopularArtistsFragment"
         android:label="fragment_popular_artist"
         tools:layout="@layout/my_bl_sdk_common_rv_layout">
 
@@ -151,7 +151,7 @@
 
     <fragment
         android:id="@+id/bottom_artist_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.artist.BottomSheetArtistDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.artist.BottomSheetArtistDetailsFragment"
         android:label="fragment_artist_details"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout">
 
@@ -162,13 +162,13 @@
 
     <fragment
         android:id="@+id/create_playlist_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.create_playlist.CreatePlaylistFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.create_playlist.CreatePlaylistFragment"
         android:label="fragment_create_playlist"
         tools:layout="@layout/my_bl_sdk_fragment_create_playlist" />
 
     <fragment
         android:id="@+id/artist_fav_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.fav.ArtistFavFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.fav.ArtistFavFragment"
         tools:layout="@layout/my_bl_sdk_fragment_download_details">
 
         <action
@@ -178,7 +178,7 @@
 
     <fragment
         android:id="@+id/favorite_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.fav.FavoriteFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.fav.FavoriteFragment"
         android:label="fragment_favorite"
         >
 
@@ -202,7 +202,7 @@
 
     <fragment
         android:id="@+id/my_playlist_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.create_playlist.MyPlaylistFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.create_playlist.MyPlaylistFragment"
         android:label="fragment_my_playlist"
         tools:layout="@layout/my_bl_sdk_fragment_my_playlist" >
 
@@ -216,7 +216,7 @@
 
     <fragment
         android:id="@+id/featured_popular_artist_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.FeaturedPopularArtistFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.FeaturedPopularArtistFragment"
         tools:layout="@layout/my_bl_sdk_fragment_featured_popular_artist">
         <action
             android:id="@+id/to_artist_details"
@@ -228,12 +228,12 @@
 
     <fragment
         android:id="@+id/amartunes_web_view_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.amar_tunes.AmartunesWebviewFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.amar_tunes.AmartunesWebviewFragment"
         tools:layout="@layout/my_bl_sdk_fragment_amar_tunes_webview" />
 
     <fragment
         android:id="@+id/latest_release_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.LatestReleaseFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.LatestReleaseFragment"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout" >
 
         <action
@@ -243,7 +243,7 @@
 
     <fragment
         android:id="@+id/playlist_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.PlaylistDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.PlaylistDetailsFragment"
         android:label="Playlist Details"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout">
 
@@ -260,7 +260,7 @@
 
     <fragment
         android:id="@+id/playlist_list_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.PlaylistListFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.PlaylistListFragment"
         android:label="fragment_playlist_list"
         tools:layout="@layout/my_bl_sdk_common_rv_layout">
 
@@ -280,7 +280,7 @@
 
     <fragment
         android:id="@+id/podcast_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.podcast.PodcastDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.podcast.PodcastDetailsFragment"
         android:label="Podcast Details"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout" >
         <action
@@ -290,7 +290,7 @@
 
     <fragment
         android:id="@+id/radio_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.RadioFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.RadioFragment"
         android:label="Radio"
         tools:layout="@layout/my_bl_sdk_common_rv_pb_layout" >
         <action
@@ -300,7 +300,7 @@
 
     <fragment
         android:id="@+id/s_type_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.STypeDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.STypeDetailsFragment"
         android:label="Playlist Details"
         tools:layout="@layout/my_bl_sdk_common_rv_layout" >
         <action
@@ -310,7 +310,7 @@
 
     <fragment
         android:id="@+id/s_type_list_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.STypeListFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.STypeListFragment"
         android:label="fragment_playlist_list"
         tools:layout="@layout/my_bl_sdk_common_rv_layout">
 
@@ -324,7 +324,7 @@
 
     <fragment
         android:id="@+id/search_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.search.SearchFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/my_bl_sdk_fragment_search">
         <action
@@ -343,13 +343,13 @@
 
     <fragment
         android:id="@+id/user_playlist_details_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.create_playlist.UserCreatedPlaylistDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.create_playlist.UserCreatedPlaylistDetailsFragment"
         android:label="Details"
         tools:layout="@layout/my_bl_sdk_fragment_playlist_details" />
 
     <fragment
         android:id="@+id/video_list_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.TopTrendingBanglaMusicFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.TopTrendingBanglaMusicFragment"
         android:label="fragment_video_list"
         tools:layout="@layout/my_bl_sdk_fragment_top_trending_bangla_music" >
         <action
@@ -359,7 +359,7 @@
 
     <fragment
         android:id="@+id/watch_later_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.WatchLaterFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.WatchLaterFragment"
         android:label="fragment_watchlater"
         tools:layout="@layout/my_bl_sdk_fragment_watch_later" >
         <action
@@ -369,7 +369,7 @@
 
     <fragment
         android:id="@+id/music_video_fragment"
-        android:name="com.shadhinmusiclibrary.fragments.MusicVideoFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.MusicVideoFragment"
         android:label="Music Video" >
         <action
             android:id="@+id/to_search"
@@ -383,7 +383,7 @@
         tools:layout="@layout/my_bl_sdk_fragment_home"
 
 
-        android:name="com.shadhinmusiclibrary.fragments.home.HomeFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/to_podcast_details"

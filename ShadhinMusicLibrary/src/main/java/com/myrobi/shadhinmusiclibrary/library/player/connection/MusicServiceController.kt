@@ -1,0 +1,3 @@
+package com.myrobi.shadhinmusiclibrary.library.player.connection
+
+internal interface MusicServiceController : MusicServiceActions, MusicServiceListeners

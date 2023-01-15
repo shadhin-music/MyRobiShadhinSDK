@@ -12,8 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import com.shadhinmusiclibrary.ShadhinMusicSdkCore
-import com.shadhinmusiclibrary.utils.share.ShareRC
+import com.myrobi.shadhinmusiclibrary.ShadhinMusicSdkCore
+import com.myrobi.shadhinmusiclibrary.utils.share.ShareRC
 
 
 internal class FeaturedHomeFragment : Fragment() {

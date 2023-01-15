@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <com.shadhinmusiclibrary.utils.CircleImageView
+            <com.myrobi.shadhinmusiclibrary.utils.CircleImageView
                 android:id="@+id/thumb1"
                 android:layout_width="132dp"
                 android:layout_height="132dp"

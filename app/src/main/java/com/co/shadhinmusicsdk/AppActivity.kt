@@ -7,9 +7,9 @@ import androidx.viewpager.widget.ViewPager
 import com.co.shadhinmusicsdk.data.model.LoginData
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.shadhinmusiclibrary.ShadhinMusicSdkCore
-import com.shadhinmusiclibrary.ShadhinSDKCallback
-import com.shadhinmusiclibrary.utils.share.ShareRC
+import com.myrobi.shadhinmusiclibrary.ShadhinMusicSdkCore
+import com.myrobi.shadhinmusiclibrary.ShadhinSDKCallback
+import com.myrobi.shadhinmusiclibrary.utils.share.ShareRC
 
 
 class AppActivity : AppCompatActivity(), ShadhinSDKCallback {

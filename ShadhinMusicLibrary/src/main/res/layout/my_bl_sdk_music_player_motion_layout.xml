@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.shadhinmusiclibrary.cview.MusicPlayerML xmlns:android="http://schemas.android.com/apk/res/android"
+<com.myrobi.shadhinmusiclibrary.cview.MusicPlayerML xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/svmv_custom_motion_view"
     android:layout_width="match_parent"
@@ -234,4 +234,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/play_pause_layout"
         app:srcCompat="@drawable/my_bl_sdk_ic_volume_30" />
-</com.shadhinmusiclibrary.cview.MusicPlayerML>
+</com.myrobi.shadhinmusiclibrary.cview.MusicPlayerML>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.shadhinmusiclibrary">
+    package="com.myrobi.shadhinmusiclibrary">
 
     <uses-sdk tools:overrideLibrary="com.google.android.exoplayer2.ext.okhttp" />
 
@@ -31,7 +31,7 @@
             android:theme="@style/light_theme" />
 
         <service
-            android:name="com.shadhinmusiclibrary.library.player.ShadhinMusicPlayer"
+            android:name="com.myrobi.shadhinmusiclibrary.library.player.ShadhinMusicPlayer"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
@@ -48,7 +48,7 @@
 
         <provider
             android:name=".utils.MySuggestionProvider"
-            android:authorities="${applicationId}.com.shadhinmusiclibrary.utils.MySuggestionProvider"
+            android:authorities="${applicationId}.com.myrobi.shadhinmusiclibrary.utils.MySuggestionProvider"
             android:enabled="true"
             android:exported="false" />
 

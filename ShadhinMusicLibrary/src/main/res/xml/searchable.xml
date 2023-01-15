@@ -3,6 +3,6 @@
 android:label="MY BL SDK"
 android:hint="@string/search"
     android:queryAfterZeroResults="true"
-android:searchSuggestAuthority="com.shadhinmusiclibrary.MySuggestionProvider"
+android:searchSuggestAuthority="com.myrobi.shadhinmusiclibrary.MySuggestionProvider"
 android:searchSuggestSelection=" ?" >
 </searchable>
