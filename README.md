@@ -16,7 +16,7 @@
 **Gradle**
 
     dependencies {
-       implementation 'com.github.shadhin-music:MYBLMusicSDK:Tag'
+      com.github.shadhin-music:MyRobiShadhinSDK:Tag
     }
     
 [More about developer complany: Shadhin Music Limited <img src="https://shadhinmusic.com/img/shadhinlogo.svg" width="200" height="40" />](https://shadhinmusic.com)
