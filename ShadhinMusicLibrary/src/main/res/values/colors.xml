@@ -14,7 +14,8 @@
 <!--    <color name="my_sdk_color_primary">#ed1c24</color>-->
     <color name="my_sdk_buffer_color">#8000AFF5</color>
     <color name="my_sdk_time_bar_bg_color">#4000AFF5</color>
-    <color name="my_sdk_color_primary_dark">#CDFD3333</color>
+    <color name="my_sdk_color_primary_dark">#0277BD</color>
+<!--    <color name="my_sdk_color_primary_dark">#CDFD3333</color>-->
     <color name="my_sdk_color_accent">#00B0FF</color>
     <color name="my_sdk_color_transparent">#9FFFFFFF</color>
     <color name="my_sdk_color_text">#212121</color>
@@ -83,7 +84,7 @@
     <color name="my_sdk_down_item_title_n">#FFFFFF</color>
 
     <color name="my_sdk_down_item_desc_n">#B3FFFFFF</color>
-
+    <color name="background_color">#202128</color>
     <color name="my_sdk_down_background_n">#303030</color>
     <color name="my_sdk_down_icon_sub">#424242</color>
     <color name="my_sdk_down_icon_sub_n">#B3FFFFFF</color>

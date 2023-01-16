@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Point
 import android.net.Uri
+import android.util.TypedValue
 import com.shadhinmusiclibrary.data.IMusicModel
 import com.shadhinmusiclibrary.data.model.*
 import com.shadhinmusiclibrary.data.model.podcast.SongTrackModel
