@@ -43,3 +43,5 @@ local.properties
 /library/ui/build/
 /library/ui/buildout/
 /.idea/
+/sampleImage/
+/credentials.jks
