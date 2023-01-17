@@ -32,7 +32,7 @@ class AppActivity : AppCompatActivity(), ShadhinSDKCallback {
             Log.e("AA", "onCreate: " + mLoginData.accessToken)
             ShadhinMusicSdkCore.initializeSDK(
                 applicationContext,
-                mLoginData.accessToken.toString(),
+                USER_TOKEN,
                 this
             )
 
@@ -82,5 +82,5 @@ class AppActivity : AppCompatActivity(), ShadhinSDKCallback {
     override fun onShare(rc: String) {
         Log.i("onShare", "onShare: ${ShareRC(rc)}")
     }
-
+    var USER_TOKEN = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkJlYXJlciJ9.eyJjbGllbnQiOiJNWUJMIiwiZnVsbE5hbWUiOiIiLCJtc2lzZG4iOiI4ODAxOTAwMDAwMDAwIiwiaW1hZ2VVUkwiOiIiLCJnZW5kZXIiOiIiLCJkZXZpY2VUb2tlbiI6IiIsIm5iZiI6MTY3Mzk0NDIyOCwiZXhwIjoxNjczOTkyODI0LCJpYXQiOjE2NzM5NDQyMjgsImlzcyI6IkJMTVVTSUMgIiwiYXVkIjoiU2hhZGhpbiAifQ.VvIHFyUcVSKBI0knxLEHQscMo9BHLbgICpRwecjuAy_C66ir_eBvFKzNumA_zYGnlBDmJbirRwfeIFHH5twG4g"
 }
