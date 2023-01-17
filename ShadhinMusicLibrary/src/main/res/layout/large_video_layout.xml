@@ -39,4 +39,12 @@
         android:padding="4dp"
         android:layout_below="@+id/cardImage"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_artist"
+        android:padding="4dp"
+        android:layout_below="@+id/txt_name"
+        android:visibility ="gone"
+        />
 </RelativeLayout>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.shadhinmusiclibrary.library.slidinguppanel.SlidingUpPanelLayout
+    <com.myrobi.shadhinmusiclibrary.library.slidinguppanel.SlidingUpPanelLayout
         android:id="@+id/sl_custom_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,6 +83,6 @@
                            android:layout_height="wrap_content" />-->
 
         </RelativeLayout>
-    </com.shadhinmusiclibrary.library.slidinguppanel.SlidingUpPanelLayout>
+    </com.myrobi.shadhinmusiclibrary.library.slidinguppanel.SlidingUpPanelLayout>
     <!--    <include layout="@layout/music_player_motion_layout" />-->
 </FrameLayout>

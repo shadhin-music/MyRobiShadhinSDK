@@ -91,4 +91,5 @@
 
     <color name="my_sdk_v2_btn_disabled_dark">#8BFFFFFF</color>
     <color name="my_sdk_v2_light_divider_col">#1F000000</color>
+    <color name="v2_black_white_card_dark">#353840</color>
 </resources>

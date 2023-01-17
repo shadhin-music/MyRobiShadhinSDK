@@ -13,7 +13,7 @@
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="12dp">
 
-        <com.shadhinmusiclibrary.autoimageslider.SliderView
+        <com.myrobi.shadhinmusiclibrary.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="120dp"
