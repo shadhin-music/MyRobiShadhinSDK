@@ -14,6 +14,7 @@ internal object DataContentType {
     const val CONTENT_TYPE_PS = "PS"
     const val CONTENT_TYPE_PE = "PE"
     const val CONTENT_TYPE_V = "V"
+    const val CONTENT_TYPE_PODCAST_VIDEO = "VD"
     const val CONTENT_TYPE_WV = "AT"
 
     const val AMR_TUNE_ALL = "BNALL01"

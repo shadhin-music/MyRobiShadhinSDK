@@ -48,6 +48,7 @@ import com.google.android.exoplayer2.offline.DownloadRequest
 import com.google.android.exoplayer2.offline.DownloadService
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.myrobi.shadhinmusiclibrary.R
+
 import com.myrobi.shadhinmusiclibrary.adapter.CreatePlaylistListAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.MusicPlayAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.QueueTrackAdapter
@@ -947,6 +948,18 @@ internal class SDKMainActivity : BaseActivity(),
                 }
 
                 DataContentType.CONTENT_TYPE_V -> {
+                    //open video
+                    startDestination(
+
+                        Bundle().apply {
+                            putSerializable(
+                                PatchItem,
+                                homePatchItem as Serializable
+                            )
+                        }, R.id.video_list_fragment
+                    )
+                }
+                DataContentType.CONTENT_TYPE_PODCAST_VIDEO -> {
                     //open video
                     startDestination(
 

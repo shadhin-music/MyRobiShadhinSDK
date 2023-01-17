@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.myrobi.shadhinmusiclibrary.R
+
 import com.myrobi.shadhinmusiclibrary.ShadhinMusicSdkCore
 import com.myrobi.shadhinmusiclibrary.autoimageslider.SliderView
 import com.myrobi.shadhinmusiclibrary.callBackService.DownloadClickCallBack
@@ -22,6 +23,7 @@ import com.myrobi.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.myrobi.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.myrobi.shadhinmusiclibrary.fragments.home.NewReleaseTrackCallback
+
 
 
 internal class ParentAdapter(
@@ -195,6 +197,7 @@ internal class ParentAdapter(
             val seeAll: TextView = itemView.findViewById(R.id.tvSeeALL)
             seeAll.setOnClickListener {
                 homeCallBack.onClickSeeAll(homePatchItem)
+                Log.e("TAG","PATCH: "+ homePatchItem)
             }
             val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
             recyclerView.layoutManager =
@@ -239,7 +242,7 @@ internal class ParentAdapter(
                 downloadClickCallBack.clickOnMyFavorite(homePatchItemModel)
             }
             artist.setOnClickListener{
-                Log.e("TAG","DATA: " + homePatchItemModel)
+            //    Log.e("TAG","DATA: " + homePatchItemModel)
                 ShadhinMusicSdkCore.openPatch(itemView.context, "RC203")
                 //homeCallBack.onClickSeeAll(homePatchItemModel)
             }
@@ -257,7 +260,7 @@ internal class ParentAdapter(
             seeAll.visibility = GONE
             seeAll.setOnClickListener {
                 homeCallBack.onClickSeeAll(homePatchItemModel)
-                Log.e("TAG","PATCH: "+ homePatchItemModel)
+               // Log.e("TAG","PATCH: "+ homePatchItemModel)
             }
 
             val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
@@ -323,7 +326,7 @@ internal class ParentAdapter(
              seeAll.visibility = GONE
             seeAll.setOnClickListener {
                 homeCallBack.onClickSeeAll(homePatchItemModel)
-                Log.e("TAG","PATCH: "+ homePatchItemModel)
+              //  Log.e("TAG","PATCH: "+ homePatchItemModel)
             }
         }
         private fun bindTrendingMusic(homePatchItemModel: HomePatchItemModel) {

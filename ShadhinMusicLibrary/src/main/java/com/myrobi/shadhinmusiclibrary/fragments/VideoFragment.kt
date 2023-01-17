@@ -15,14 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.activities.SDKMainActivity
 import com.myrobi.shadhinmusiclibrary.adapter.HomeFooterAdapter
+import com.myrobi.shadhinmusiclibrary.adapter.LargeVideoAdapter
+import com.myrobi.shadhinmusiclibrary.adapter.LargeVideosAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.TopTrendingBanglaMusicAdapter
 import com.myrobi.shadhinmusiclibrary.fragments.base.BaseFragment
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 
 
-internal class TopTrendingBanglaMusicFragment : BaseFragment() {
+internal class VideoFragment : BaseFragment() {
 
-    private lateinit var adapter: TopTrendingBanglaMusicAdapter
+    private lateinit var adapter: LargeVideoAdapter
     private lateinit var footerAdapter: HomeFooterAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +53,7 @@ internal class TopTrendingBanglaMusicFragment : BaseFragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         Log.e("TAG","HELLO: "+ argHomePatchItem)
         //  recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        adapter = TopTrendingBanglaMusicAdapter(argHomePatchItem!!)
+        adapter = LargeVideoAdapter(argHomePatchItem!!)
         footerAdapter = HomeFooterAdapter()
         val config = ConcatAdapter.Config.Builder()
             .setIsolateViewTypes(false)

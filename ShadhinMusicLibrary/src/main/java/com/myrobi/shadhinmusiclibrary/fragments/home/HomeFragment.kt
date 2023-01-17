@@ -252,7 +252,15 @@ internal class HomeFragment : BaseFragment(),
                     )
                 })
             }
+            if (homePatchItem.ContentType.contains("VD",true)) {
 
+                findNavController().navigate(R.id.to_large_video_list_fragment,   Bundle().apply {
+                    putSerializable(
+                        AppConstantUtils.PatchItem,
+                        homePatchItem as Serializable
+                    )
+                })
+            }
 
             val bundle = Bundle().apply {
                 putSerializable(
@@ -285,6 +293,9 @@ internal class HomeFragment : BaseFragment(),
                 DataContentType.CONTENT_TYPE_V -> {
                     findNavController().navigate(R.id.to_video_list_fragment,bundle)
                 }
+//                DataContentType.CONTENT_TYPE_PODCAST_VIDEO -> {
+//                    findNavController().navigate(R.id.to_video_list_fragment,bundle)
+//                }
             }
         }
     }

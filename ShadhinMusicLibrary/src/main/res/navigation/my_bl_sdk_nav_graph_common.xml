@@ -356,7 +356,15 @@
             android:id="@+id/to_search"
             app:destination="@id/search_fragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/large_video_list_fragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.VideoFragment"
+        android:label="fragment_large_video_list"
+        tools:layout="@layout/my_bl_sdk_fragment_top_trending_bangla_music" >
+        <action
+            android:id="@+id/to_search"
+            app:destination="@id/search_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/watch_later_fragment"
         android:name="com.myrobi.shadhinmusiclibrary.fragments.WatchLaterFragment"
@@ -420,6 +428,9 @@
         <action
             android:id="@+id/to_video_list_fragment"
             app:destination="@id/video_list_fragment" />
+        <action
+            android:id="@+id/to_large_video_list_fragment"
+            app:destination="@id/large_video_list_fragment" />
         <action
             android:id="@+id/to_search"
             app:destination="@id/search_fragment" />
