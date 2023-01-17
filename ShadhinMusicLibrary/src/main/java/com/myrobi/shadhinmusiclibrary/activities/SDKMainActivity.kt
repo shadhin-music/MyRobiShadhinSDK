@@ -21,7 +21,6 @@ import android.view.View.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
-import androidx.annotation.NavigationRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
@@ -1956,7 +1955,7 @@ internal class SDKMainActivity : BaseActivity(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.textColor(R.color.my_sdk_color_white)
                 savePlaylist?.setOnClickListener {

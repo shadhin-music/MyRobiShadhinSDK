@@ -652,7 +652,7 @@ internal class AllDownloadDetailsFragment : BaseFragment(),
         etCreatePlaylist?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.text.toString()
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {
                     viewModel.createPlaylist(name)

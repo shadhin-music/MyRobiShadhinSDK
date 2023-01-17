@@ -22,8 +22,6 @@ import com.myrobi.shadhinmusiclibrary.callBackService.CreatePlaylistBottomsheetC
 import com.myrobi.shadhinmusiclibrary.fragments.base.BaseFragment
 import com.myrobi.shadhinmusiclibrary.utils.textColor
 
-import org.json.JSONObject
-
 internal class CreatePlaylistFragment : BaseFragment(),
     CreatePlaylistBottomsheetCallback {
 
@@ -101,7 +99,7 @@ internal class CreatePlaylistFragment : BaseFragment(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.textColor(R.color.my_sdk_color_white)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {

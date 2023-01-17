@@ -471,7 +471,7 @@ internal class SongsDownloadFragment : BaseFragment(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {
                     viewModel.createPlaylist(name)

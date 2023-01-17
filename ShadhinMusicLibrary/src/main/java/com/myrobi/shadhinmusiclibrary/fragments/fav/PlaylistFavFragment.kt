@@ -36,7 +36,6 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.activities.ItemClickListener
 import com.myrobi.shadhinmusiclibrary.adapter.CreatePlaylistListAdapter
-import com.myrobi.shadhinmusiclibrary.adapter.FavoriteAlbumAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.FavoritePlaylistAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.HomeFooterAdapter
 import com.myrobi.shadhinmusiclibrary.callBackService.CommonPSVCallback
@@ -45,7 +44,6 @@ import com.myrobi.shadhinmusiclibrary.data.IMusicModel
 import com.myrobi.shadhinmusiclibrary.data.model.DownloadingItem
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
-import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.fav.FavDataModel
 import com.myrobi.shadhinmusiclibrary.download.MyBLDownloadService
 import com.myrobi.shadhinmusiclibrary.download.room.DownloadedContent
@@ -572,7 +570,7 @@ internal class PlaylistFavFragment : BaseFragment(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {
 

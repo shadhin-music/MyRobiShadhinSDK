@@ -24,7 +24,7 @@
     <color name="my_sdk_color_yellow">#D4DF4D</color>
     <color name="my_sdk_color_green">#00FE81</color>
     <color name="my_sdk_color_orange">#FF7F00</color>
-    <color name="my_sdk_color_background">#FAF8F8</color>
+    <color name="my_sdk_color_background">#FFF2F2F2</color>
     <color name="my_sdk_home_content_background">#fafafa</color>
     <color name="my_sdk__icons">#fff</color>
     <color name="my_sdk_color_grey">#757575</color>

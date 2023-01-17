@@ -43,7 +43,6 @@ import com.myrobi.shadhinmusiclibrary.data.IMusicModel
 import com.myrobi.shadhinmusiclibrary.data.model.DownloadingItem
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
-import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.fav.FavDataModel
 import com.myrobi.shadhinmusiclibrary.download.MyBLDownloadService
 import com.myrobi.shadhinmusiclibrary.download.room.DownloadedContent
@@ -535,7 +534,7 @@ internal class SongsFavoriteFragment : BaseFragment(),
         etCreatePlaylist?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.text.toString()
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {
                     viewModel.createPlaylist(name)

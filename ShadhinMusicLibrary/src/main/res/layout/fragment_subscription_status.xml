@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.main.fragment.dialog.SubscriptionStatusFragment">
-   <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
        android:background="@drawable/bg_alert_dialog_rounded"
        android:layout_width="264dp"
        android:layout_height="wrap_content">
@@ -69,4 +68,3 @@
 
 
    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

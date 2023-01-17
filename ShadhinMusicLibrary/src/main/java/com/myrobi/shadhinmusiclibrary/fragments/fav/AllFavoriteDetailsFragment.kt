@@ -37,7 +37,6 @@ import com.myrobi.shadhinmusiclibrary.callBackService.DownloadedSongOnCallBack
 import com.myrobi.shadhinmusiclibrary.data.IMusicModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
-import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
 import com.myrobi.shadhinmusiclibrary.data.model.fav.FavDataModel
 import com.myrobi.shadhinmusiclibrary.data.model.podcast.SongTrackModel
@@ -726,7 +725,7 @@ internal class AllFavoriteDetailsFragment : BaseFragment(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {
                     viewModel.createPlaylist(name)

@@ -37,7 +37,6 @@ import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.activities.ItemClickListener
 import com.myrobi.shadhinmusiclibrary.adapter.CreatePlaylistListAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.FavoriteAlbumAdapter
-import com.myrobi.shadhinmusiclibrary.adapter.FavoriteArtistAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.HomeFooterAdapter
 import com.myrobi.shadhinmusiclibrary.callBackService.CommonPSVCallback
 import com.myrobi.shadhinmusiclibrary.callBackService.DownloadedSongOnCallBack
@@ -592,7 +591,7 @@ internal class AlbumsFavFragment : BaseFragment(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.setOnClickListener {
 
