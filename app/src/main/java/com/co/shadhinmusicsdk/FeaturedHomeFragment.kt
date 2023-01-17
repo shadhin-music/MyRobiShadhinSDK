@@ -73,7 +73,7 @@ internal class FeaturedHomeFragment : Fragment() {
         }
 
         btnMusic.setOnClickListener {
-            ShadhinMusicSdkCore.openShadhin(requireContext())
+            ShadhinMusicSdkCore.openShadhin(requireContext(), "01234556666666")
         }
         var count:Int = 0
         btnShare.setOnClickListener {

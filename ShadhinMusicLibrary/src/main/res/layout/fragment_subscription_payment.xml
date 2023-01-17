@@ -140,7 +140,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:contentDescription="@string/content_des"
                         app:srcCompat="@drawable/ic_plan_b" />
 
                     <TextView
@@ -148,7 +147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/plan_a_img"
-                        android:layout_marginStart="@dimen/margin_padding_20"
+                        android:layout_marginStart="20dp"
                         android:layout_toStartOf="@+id/plan_a_arrow"
                         android:layout_toEndOf="@+id/plan_a_img"
                         android:text="Monthly plan"
@@ -174,7 +173,7 @@
                         android:layout_alignStart="@+id/plan_a_title"
                         android:layout_toStartOf="@+id/plan_a_arrow"
                         android:text="@string/plan_extra_text_for_vat"
-                        android:textColor="?attr/dim_text_color"
+                        android:textColor="#FF999999"
                         android:textSize="12sp"
                         android:visibility="gone" />
 
@@ -312,7 +311,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:clickable="false"
-                        android:contentDescription="@string/content_des"
                         app:srcCompat="@drawable/ic_see_all_arrow" />
 
                 </RelativeLayout>
@@ -442,7 +440,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:clickable="false"
-                        android:contentDescription="@string/content_des"
                         app:srcCompat="@drawable/ic_see_all_arrow" />
 
                 </RelativeLayout>

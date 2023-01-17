@@ -14,7 +14,6 @@
             android:id="@+id/cardView8"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:foreground="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
             android:layout_marginStart="16dp"
@@ -41,7 +40,7 @@
 
             android:elevation="3dp"
             android:outlineProvider="none"
-            android:background="@color/colorPrimary"
+            android:background="@color/my_sdk_color_primary"
             app:layout_constraintEnd_toEndOf="@+id/imageView13"
             app:layout_constraintStart_toStartOf="@+id/imageView13"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
