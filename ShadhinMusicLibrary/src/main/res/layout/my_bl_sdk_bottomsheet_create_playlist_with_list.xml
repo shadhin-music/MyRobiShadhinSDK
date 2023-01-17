@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/my_bl_sdk_rounded_button_red"
+        android:background="@drawable/my_bl_sdk_rounded_button_blue"
         android:gravity="center"
         android:paddingStart="20dp"
         android:paddingTop="8dp"

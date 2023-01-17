@@ -45,7 +45,6 @@ internal class STypeListFragment : BaseFragment(), HomeCallBack {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
-        //  recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         releaseAdapter = ReleaseAdapter(argHomePatchItem!!, this)
         footerAdapter = HomeFooterAdapter()
         val config = ConcatAdapter.Config.Builder()
@@ -79,7 +78,7 @@ internal class STypeListFragment : BaseFragment(), HomeCallBack {
         itemPosition: Int,
         selectedHomePatchItem: HomePatchItemModel
     ) {
-//        ShadhinMusicSdkCore.pressCountIncrement()
+
         val homePatchDetail = selectedHomePatchItem.Data[itemPosition]
         navController.navigate(
             R.id.to_s_type_details,
@@ -103,13 +102,6 @@ internal class STypeListFragment : BaseFragment(), HomeCallBack {
     }
     private fun openSearch() {
         findNavController().navigate(R.id.to_search)
-       /* startActivity(Intent(requireContext(), SDKMainActivity::class.java)
-            .apply {
-                putExtra(
-                    AppConstantUtils.UI_Request_Type,
-                    AppConstantUtils.Requester_Name_Search
-                )
-            })*/
     }
 
 }

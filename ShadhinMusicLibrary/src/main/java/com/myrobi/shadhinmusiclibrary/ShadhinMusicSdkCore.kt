@@ -60,7 +60,7 @@ object ShadhinMusicSdkCore {
     }
 
     @JvmStatic
-    fun openMusic(reqContext: Context) {
+    fun openShadhin(reqContext: Context, msisdn:String) {
         val intent = Intent(reqContext, SDKMainActivity::class.java)
         intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
         reqContext.startActivity(intent)

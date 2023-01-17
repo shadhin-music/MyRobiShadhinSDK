@@ -7,7 +7,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="plan_extra_text_for_vat"><![CDATA[Price Exclusive of VAT, SD & SC]]></string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="search">Search</string>
@@ -16,7 +16,22 @@
     <string name="add_comment_hint">Write a comment</string>
     <string name="more_text">Read more</string>
 
-
+    <string name="sub_desc">You already in a subscription plan, please unsubscribe current plan first  to activate new plan</string>
+    <string name="sub_title_text">Enjoy Unlimited Music, Podcast and Video with Shadhin Premium</string>
+    <string name="choose_a_payment_method_to_continue">Choose a payment method to continue</string>
+    <string name="why_upgrade_to_premium">Why Upgrade to Premium?</string>
+    <string name="subscription">Subscription</string>
+    <string name="text_telco">Robi/Airtel</string>
+    <string name="undsd">Unlimited Download</string>
+    <string name="ad_free_streaming">Ad Free Streaming</string>
+    <string name="exclusive_original_podcast"><![CDATA[Exclusive & Original Podcast]]></string>
+    <string name="xfsdfsdf">Listen Offline</string>
+    <string name="your_contribution_will_enrich_our_music_industry">Your contribution will enrich our music industry.</string>
+    <string name="commentsa">Enjoy 100% ad free access to bengali largest collection of songs, videos, podcasts and comment to chat with your favorite RJ</string>
+    <string name="sdsafsdf">Unlimited Downloads\n100% Ad Free\nCreate Playlist\nHD Music Streaming\nUnlimited Comments</string>
+    <string name="your_favorite_artists">Your favorite artists that you followed earlier</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="playlists_S">Playlists</string>
     <!--For DiscreteScrollView-->
     <string name="dsv_ex_msg_dont_set_lm">You should not set LayoutManager on DiscreteScrollView.class instance. Library uses a special one. Just don\'t call the method.</string>
     <string name="dsv_ex_msg_adapter_wrong_recycler">InfiniteScrollAdapter is supposed to work only with DiscreteScrollView</string>

@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/my_bl_sdk_rounded_button_red"
+        android:background="@drawable/my_bl_sdk_rounded_button_blue"
         android:text="Create new Play list"
         android:textColor="@color/my_sdk_color_white"
         app:layout_constraintBottom_toBottomOf="parent"

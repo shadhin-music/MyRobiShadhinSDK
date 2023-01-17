@@ -2,6 +2,7 @@ package com.myrobi.shadhinmusiclibrary.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,7 @@ internal class TopTrendingBanglaMusicFragment : BaseFragment() {
         val horizontalSpanCount = 2
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-
+        Log.e("TAG","HELLO: "+ argHomePatchItem)
         //  recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         adapter = TopTrendingBanglaMusicAdapter(argHomePatchItem!!)
         footerAdapter = HomeFooterAdapter()

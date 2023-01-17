@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/my_sdk_color_background"
+    >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/my_sdk_color_primary"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintTop_toTopOf="@id/parentRelative">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageBack"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:padding="12dp"
+                android:src="@drawable/my_bl_sdk_ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@id/parentRelative"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/parentRelative" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/my_sdk_white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/parentRelative"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:id="@+id/plan_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/selected_plan_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Payment option selected"
+                    android:textColor="@color/my_sdk_color_black"
+                    android:textSize="16sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/selected_plan_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selected_plan_title"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+                    android:paddingStart="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/payment_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/selected_plan_img"
+                        android:text="Mobile Banking"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/selected_plan_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/payment_type"
+                        android:layout_toStartOf="@+id/selected_plan_img"
+                        android:gravity="center_vertical"
+                        android:text="Robi"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/selected_plan_img"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_robi_charging" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/choose_plan_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selected_plan_layout"
+                    android:layout_marginTop="24sp"
+                    android:text="Choose a plan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/my_sdk_color_black"
+                    android:textSize="16sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/plan_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/choose_plan_title"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/plan_a_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/content_des"
+                        app:srcCompat="@drawable/ic_plan_b" />
+
+                    <TextView
+                        android:id="@+id/plan_a_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/plan_a_img"
+                        android:layout_marginStart="@dimen/margin_padding_20"
+                        android:layout_toStartOf="@+id/plan_a_arrow"
+                        android:layout_toEndOf="@+id/plan_a_img"
+                        android:text="Monthly plan"
+                        android:textColor="@color/my_sdk_color_primary"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/plan_a_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_a_title"
+                        android:layout_alignStart="@+id/plan_a_title"
+                        android:layout_toStartOf="@+id/plan_a_arrow"
+                        android:text="৳20.00"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/plan_a_extra_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_a_price"
+                        android:layout_alignStart="@+id/plan_a_title"
+                        android:layout_toStartOf="@+id/plan_a_arrow"
+                        android:text="@string/plan_extra_text_for_vat"
+                        android:textColor="?attr/dim_text_color"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/plan_a_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        app:srcCompat="@drawable/ic_see_all_arrow" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/plan_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/plan_a"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/plan_b_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_plan_a" />
+
+                    <TextView
+                        android:id="@+id/plan_b_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/plan_b_img"
+                        android:layout_marginStart="20dp"
+                        android:layout_toStartOf="@+id/plan_b_arrow"
+                        android:layout_toEndOf="@+id/plan_b_img"
+                        android:text="Half yearly"
+                        android:textColor="@color/my_sdk_color_primary_dark"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/plan_b_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_b_title"
+                        android:layout_alignStart="@+id/plan_b_title"
+                        android:layout_toStartOf="@+id/plan_b_arrow"
+                        android:text="৳99.00"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/plan_b_extra_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_b_price"
+                        android:layout_alignStart="@+id/plan_b_title"
+                        android:layout_toStartOf="@+id/plan_b_arrow"
+                        android:text="@string/plan_extra_text_for_vat"
+                        android:textColor="#FF999999"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        tools:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/plan_b_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        app:srcCompat="@drawable/ic_see_all_arrow" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/plan_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/plan_b"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+                    android:padding="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/plan_c_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_plan_a" />
+
+                    <TextView
+                        android:id="@+id/plan_c_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/plan_c_img"
+                        android:layout_marginStart="20dp"
+                        android:layout_toStartOf="@+id/plan_c_arrow"
+                        android:layout_toEndOf="@+id/plan_c_img"
+                        android:text="Yearly Plan"
+                        android:textColor="@color/my_sdk_color_primary_dark"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/plan_c_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_c_title"
+                        android:layout_alignStart="@+id/plan_c_title"
+                        android:layout_toStartOf="@+id/plan_c_arrow"
+                        android:text="৳199.00"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/plan_c_extra_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_c_price"
+                        android:layout_alignStart="@+id/plan_c_title"
+                        android:layout_toStartOf="@+id/plan_c_arrow"
+                        android:text="@string/plan_extra_text_for_vat"
+                        android:textColor="#FF999999"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/plan_c_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        android:contentDescription="@string/content_des"
+                        app:srcCompat="@drawable/ic_see_all_arrow" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/plan_d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/plan_c"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+                    android:padding="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/plan_d_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_plan_a" />
+
+                    <TextView
+                        android:id="@+id/plan_d_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/plan_d_img"
+                        android:layout_marginStart="20dp"
+                        android:layout_toStartOf="@+id/plan_d_arrow"
+                        android:layout_toEndOf="@+id/plan_d_img"
+                        android:text="Yearly Plan"
+                        android:textColor="@color/my_sdk_color_primary_dark"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/plan_d_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_d_title"
+                        android:layout_alignStart="@+id/plan_d_title"
+                        android:layout_toStartOf="@+id/plan_d_arrow"
+                        android:text="৳199.00"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/plan_d_extra_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_d_price"
+                        android:layout_alignStart="@+id/plan_d_title"
+                        android:layout_toStartOf="@+id/plan_d_arrow"
+                        android:text="@string/plan_extra_text_for_vat"
+                        android:textColor="#FF999999"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/plan_d_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        app:srcCompat="@drawable/ic_see_all_arrow" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/plan_e"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/plan_d"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/my_bl_sdk_bg_rounded_corner"
+
+                    android:padding="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/plan_e_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_plan_a" />
+
+                    <TextView
+                        android:id="@+id/plan_e_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/plan_e_img"
+                        android:layout_marginStart="20dp"
+                        android:layout_toStartOf="@+id/plan_e_arrow"
+                        android:layout_toEndOf="@+id/plan_e_img"
+                        android:text="Yearly plan"
+                        android:textColor="@color/my_sdk_color_primary_dark"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/plan_e_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_e_title"
+                        android:layout_alignStart="@+id/plan_e_title"
+                        android:layout_toStartOf="@+id/plan_e_arrow"
+                        android:text="৳199.00"
+                        android:textColor="@color/my_sdk_color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/plan_e_extra_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/plan_e_price"
+                        android:layout_alignStart="@+id/plan_e_title"
+                        android:layout_toStartOf="@+id/plan_e_arrow"
+                        android:text="@string/plan_extra_text_for_vat"
+                        android:textColor="#FF999999"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/plan_e_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        android:contentDescription="@string/content_des"
+                        app:srcCompat="@drawable/ic_see_all_arrow" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+
+
+
+    <!--
+          <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_padding_16"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/payment_top_bg"
+                        android:padding="@dimen/margin_padding_16">
+
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            app:srcCompat="@drawable/ic_payment_top" />
+
+                        <com.gm.shadhin.widget.MyTextViewBold
+                            android:id="@+id/plan_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@id/icon"
+                            android:text="Monthly Plan"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_24"
+                            tools:text="Monthly Plan" />
+
+                        <com.gm.shadhin.widget.MyTextView
+                            android:id="@+id/plan_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/plan_name"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/one_eight_day"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16"
+                            android:visibility="visible" />
+
+                        <com.gm.shadhin.widget.MyTextView
+                            android:id="@+id/plan_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/plan_duration"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="Total BDT 20.0"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16" />
+
+
+                        <com.gm.shadhin.widget.MyTextView
+                            android:id="@+id/change_plan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/plan_price"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_40sdp"
+                            android:drawableEnd="@drawable/ic_arrow_right_white"
+                            android:drawablePadding="@dimen/margin_padding_8"
+                            android:text="@string/change_plan"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16" />
+
+                        <com.gm.shadhin.widget.MyTextView
+                            android:id="@+id/auto_renew_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/change_plan"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/auto_renewable"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16" />
+
+                    </RelativeLayout>
+
+                    <com.gm.shadhin.widget.MyTextViewBold
+                        android:id="@+id/payment_method"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/top"
+                        android:layout_marginTop="@dimen/margin_padding_16"
+                        android:paddingTop="@dimen/margin_padding_4"
+                        android:paddingBottom="@dimen/margin_padding_4"
+                        android:text="@string/payment_methods"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/radio_root"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/payment_method"
+                        android:layout_marginTop="@dimen/margin_padding_8"
+                        app:cardBackgroundColor="@color/bg"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="false">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:paddingStart="@dimen/margin_padding_8"
+                            android:paddingEnd="@dimen/margin_padding_8">
+
+                            <RadioButton
+                                android:id="@+id/radio_bkash"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:background="@color/white"
+                                android:checked="true"
+                                android:drawableEnd="@drawable/ic_bkash"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/margin_padding_16"
+                                android:paddingEnd="@dimen/margin_padding_16"
+                                android:text="@string/bKash"
+                                android:textSize="@dimen/text_size_14" />
+
+                            <View
+                                android:id="@+id/margin_one"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/bg" />
+
+                            <RadioButton
+                                android:id="@+id/radio_celcom"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@color/white"
+                                android:drawableEnd="@drawable/logo_celcom"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/margin_padding_16"
+                                android:paddingEnd="@dimen/margin_padding_16"
+                                android:text="@string/text_celcom"
+                                android:textSize="@dimen/text_size_14" />
+
+                            <View
+                                android:id="@+id/margin_two"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/bg" />
+
+                            <RadioButton
+                                android:id="@+id/radio_umobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@color/white"
+                                android:drawableEnd="@drawable/logo_u_mobile"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/margin_padding_16"
+                                android:paddingEnd="@dimen/margin_padding_16"
+                                android:text="@string/text_u_mobile"
+                                android:textSize="@dimen/text_size_14" />
+
+                            <View
+                                android:id="@+id/margin_three"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/bg" />
+
+                            <RadioButton
+                                android:id="@+id/radio_inapp"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@color/white"
+                                android:drawableEnd="@drawable/ic_gpay"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/margin_padding_16"
+                                android:paddingEnd="@dimen/margin_padding_16"
+                                android:text="@string/text_inapp"
+                                android:textSize="@dimen/text_size_14" />
+
+                            <View
+                                android:id="@+id/margin_four"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/bg" />
+
+                            <RadioButton
+                                android:id="@+id/radio_telco"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@color/white"
+                                android:drawableEnd="@drawable/logo_telco"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/margin_padding_16"
+                                android:paddingEnd="@dimen/margin_padding_16"
+                                android:text="@string/text_telco"
+                                android:textSize="@dimen/text_size_14" />
+
+                            <View
+                                android:id="@+id/margin_five"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/bg" />
+
+                            <RadioButton
+                                android:id="@+id/radio_credit"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@color/white"
+                                android:drawableEnd="@drawable/ic_card_payment"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/margin_padding_16"
+                                android:paddingEnd="@dimen/margin_padding_16"
+                                android:text="@string/text_credit_card"
+                                android:textSize="@dimen/text_size_14" />
+
+                        </RadioGroup>
+                    </androidx.cardview.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/radio_root">
+
+                        <Button
+                            android:id="@+id/continue_btn"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="@dimen/margin_padding_16"
+                            android:background="@drawable/btn_update"
+                            android:text="@string/continue_text"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>-->

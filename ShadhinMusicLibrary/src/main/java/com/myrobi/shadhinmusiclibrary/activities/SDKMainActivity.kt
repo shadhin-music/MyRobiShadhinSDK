@@ -21,7 +21,6 @@ import android.view.View.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
-import androidx.annotation.NavigationRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
@@ -48,6 +47,7 @@ import com.google.android.exoplayer2.offline.DownloadRequest
 import com.google.android.exoplayer2.offline.DownloadService
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.myrobi.shadhinmusiclibrary.R
+
 import com.myrobi.shadhinmusiclibrary.adapter.CreatePlaylistListAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.MusicPlayAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.QueueTrackAdapter
@@ -133,6 +133,7 @@ internal class SDKMainActivity : BaseActivity(),
     private lateinit var mainMusicPlayerAdapter: MusicPlayAdapter
     private lateinit var queueTrackAdapter: QueueTrackAdapter
     private lateinit var listData: MutableList<HomePatchDetailModel>
+    private var uiRequest:String?= null
 
     private fun uiInitMiniMusicPlayer() {
         llMiniMusicPlayer = findViewById(R.id.include_mini_music_player)
@@ -188,7 +189,7 @@ internal class SDKMainActivity : BaseActivity(),
         mainMusicPlayerAdapter = MusicPlayAdapter(this)
 
         //Will received request from Any page from MYBLL app
-        val uiRequest = intent.extras!!.get(AppConstantUtils.UI_Request_Type)
+        uiRequest = intent.extras?.getString(AppConstantUtils.UI_Request_Type)
         if (uiRequest == AppConstantUtils.RequesterRC) {
             routeFromRC()
         }
@@ -270,11 +271,13 @@ internal class SDKMainActivity : BaseActivity(),
             toggleMiniPlayerView(false)
         }
 
-        //DO NOT Call this function multiple times
+
         playerViewModel.startObservePlayerProgress(this)
-        //  routeDataArtistType()
+
         Log.e("SDKMA", "onCreate: " + playerViewModel.isMediaDataAvailable())
-        playerViewModel.startUserSession()
+        if(uiRequest != AppConstantUtils.Requester_Name_Search){
+            playerViewModel.startUserSession()
+        }
         viewModel.createPlaylist.observe(this) { res ->
             Toast.makeText(applicationContext, res.status.toString(), Toast.LENGTH_LONG).show()
             Log.e("SDKMA", "onCreate123: called")
@@ -958,6 +961,18 @@ internal class SDKMainActivity : BaseActivity(),
                         }, R.id.video_list_fragment
                     )
                 }
+                DataContentType.CONTENT_TYPE_PODCAST_VIDEO -> {
+                    //open video
+                    startDestination(
+
+                        Bundle().apply {
+                            putSerializable(
+                                PatchItem,
+                                homePatchItem as Serializable
+                            )
+                        }, R.id.video_list_fragment
+                    )
+                }
             }
         }
     }
@@ -1563,10 +1578,11 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     override fun onDestroy() {
-        // DownloadOrDeleteObserver.removeSubscriber()
-        playerViewModel.endUserSession()
+        if(uiRequest != AppConstantUtils.Requester_Name_Search){
+            playerViewModel.endUserSession()
+        }
         super.onDestroy()
-        //   playerViewModel.disconnect()
+
     }
 
     fun showBottomSheetDialog(
@@ -1939,7 +1955,7 @@ internal class SDKMainActivity : BaseActivity(),
             override fun afterTextChanged(s: Editable?) {
                 val name: String = etCreatePlaylist.getText().toString()
                 Log.e("TAG", "NAME: " + name)
-                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_red)
+                savePlaylist?.setBackgroundResource(R.drawable.my_bl_sdk_rounded_button_blue)
                 savePlaylist?.isEnabled = true
                 savePlaylist?.textColor(R.color.my_sdk_color_white)
                 savePlaylist?.setOnClickListener {

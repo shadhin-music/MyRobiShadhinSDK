@@ -265,7 +265,7 @@ internal class VideoActivity : AppCompatActivity(),
                 cacheRepository.getDownloadById(videoList?.get(currentPosition)?.contentID.toString())
             val watched =
                 cacheRepository.getWatchedVideoById(videoList?.get(currentPosition)?.contentID.toString())
-             Log.e("TAG","Message: " + watched?.isWatched)
+             Log.e("TAG","Message: " + downloaded?.playingUrl)
             if (downloaded?.playingUrl != null) {
                 downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_color_primary))
                 isDownloaded = true

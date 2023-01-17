@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingTop="20dp"
+        android:layout_height="match_parent">
+
+<!--        <include-->
+<!--            android:id="@+id/toolbar"-->
+<!--            layout="@layout/my_toolbar_all" />-->
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Enter the OTP you received in your mobile via SMS. Which has been sent to "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.shadhinmusiclibrary.utils.OtpEditText
+            android:id="@+id/edittext_code"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="36dp"
+            android:focusable="true"
+            android:inputType="number"
+            android:digits="0123456789"
+            android:maxLength="6"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textIsSelectable="true"
+            android:textSize="28sp"
+            android:fontFamily="@font/roboto"
+            app:layout_constraintEnd_toEndOf="@+id/desc"
+            app:layout_constraintStart_toStartOf="@+id/desc"
+            app:layout_constraintTop_toBottomOf="@+id/desc"
+            tools:ignore="Autofill" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/my_bl_sdk_rounded_button_blue"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textColor="@color/my_sdk_white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_code"
+            tools:ignore="UnusedAttribute"/>
+
+        <TextView
+            android:id="@+id/didntReceiveTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Didn't receive it?"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/btn_confirm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_confirm" />
+
+        <TextView
+            android:id="@+id/resendTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Resend Code"
+            android:textColor="@color/my_sdk_light_blue_a400"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/didntReceiveTxt"
+            app:layout_constraintTop_toBottomOf="@+id/btn_confirm"
+            android:clickable="true"
+            android:focusable="true"
+            tools:ignore="UnusedAttribute"/>
+
+
+
+
+        <TextView
+            android:id="@+id/countTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="(60)"
+            android:textSize="12dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/resendTxt"
+            app:layout_constraintTop_toBottomOf="@+id/btn_confirm"
+            tools:ignore="UnusedAttribute" />
+
+        <ProgressBar
+            android:id="@+id/home_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:theme="@style/ProgressBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</RelativeLayout>
