@@ -15,7 +15,7 @@
         android:layout_margin="10dp"
         android:hint="8801XXXXXX000"
         android:inputType="phone"
-        android:text="8801960685935" />
+        android:text="8801861901236" />
 
     <Button
         android:id="@+id/btn_home_fragment"

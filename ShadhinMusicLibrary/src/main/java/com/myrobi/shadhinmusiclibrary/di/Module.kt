@@ -101,6 +101,13 @@ internal class Module(private val applicationContext: Context) {
             .build()
     }
 
+    private fun getRetrofitAPIShadhinMusicRobiApiLoginInstanceV5(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic_robi)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(UtilsOkHttp.getBaseOkHttpClientRequest())
+            .build()
+    }
     private fun getShadhinMusicAuthServiceV5(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic)
@@ -119,10 +126,13 @@ internal class Module(private val applicationContext: Context) {
         return getRetrofitFMAPIInstance().create(ApiService::class.java)
     }
 
-    private fun getShadhinMusicLoginAuthServiceV5(): ApiLoginService {
-        return getRetrofitAPIShadhinMusicApiLoginInstanceV5().create(ApiLoginService::class.java)
-    }
+//    private fun getShadhinMusicLoginAuthServiceV5(): ApiLoginService {
+//        return getRetrofitAPIShadhinMusicApiLoginInstanceV5().create(ApiLoginService::class.java)
+//    }
 
+    private fun getShadhinMusicRobiLoginService(): ApiLoginService {
+        return getRetrofitAPIShadhinMusicRobiApiLoginInstanceV5().create(ApiLoginService::class.java)
+    }
     private fun getApiShadhinMusicServiceV5(): ApiService {
         return getShadhinMusicAuthServiceV5().create(ApiService::class.java)
     }
@@ -135,7 +145,7 @@ internal class Module(private val applicationContext: Context) {
         return RetrofitClient.getInstance(UtilsOkHttp.getBaseOkHttpClientWithTokenAndClient())
     }
 
-    fun authRepository() = AuthRepository(getShadhinMusicLoginAuthServiceV5())
+    fun authRepository() = AuthRepository(getShadhinMusicRobiLoginService())
 
     private val repositoryArtistContent: ArtistContentRepository =
         ArtistContentRepository(getFMService())

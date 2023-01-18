@@ -1,4 +1,4 @@
-package com.co.shadhinmusicsdk.data.model
+package com.myrobi.shadhinmusiclibrary.data.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -26,7 +26,4 @@ class LoginData : Serializable {
     @SerializedName("expire")
     @Expose
     var expire: Long? = null
-    @SerializedName("msisdn")
-    @Expose
-    var msisdn: String? = null
 }

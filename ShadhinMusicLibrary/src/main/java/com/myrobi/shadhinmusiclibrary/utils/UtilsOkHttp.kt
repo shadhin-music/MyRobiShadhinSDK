@@ -2,6 +2,7 @@ package com.myrobi.shadhinmusiclibrary.utils
 
 import com.myrobi.shadhinmusiclibrary.di.BearerTokenWithClientIdHeaderInterceptor
 import com.myrobi.shadhinmusiclibrary.di.ClientIdHeaderInterceptor
+import com.myrobi.shadhinmusiclibrary.di.ClientIdRequestIdHeaderInterceptor
 import com.myrobi.shadhinmusiclibrary.di.single.BearerTokenHeaderInterceptor
 import com.myrobi.shadhinmusiclibrary.fragments.artist.LastFMApiKeyHeaderInterceptor
 import okhttp3.OkHttpClient
@@ -21,6 +22,12 @@ internal object UtilsOkHttp {
             ).build()
     }
 
+    fun getBaseOkHttpClientRequest(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(
+                ClientIdRequestIdHeaderInterceptor()
+            ).build()
+    }
     @Deprecated("Only Token not have client ID")
     fun getBaseOkHttpClientWithToken(): OkHttpClient {
         return OkHttpClient.Builder()
