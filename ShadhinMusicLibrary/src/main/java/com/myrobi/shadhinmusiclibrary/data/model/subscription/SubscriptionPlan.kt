@@ -28,7 +28,7 @@ data class SubscriptionPlan(
     @Expose
     override val isAutoRenewal: Boolean = false,
     override val amount: Float? = null,
-    override val type: Type?,
+    override val type: Type? = null,
     override val currency: Currency = Currency.BDT
 
 ) :Plan{

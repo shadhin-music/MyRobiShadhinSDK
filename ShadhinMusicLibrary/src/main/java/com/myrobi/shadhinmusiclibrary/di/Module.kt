@@ -165,7 +165,7 @@ internal class Module(private val applicationContext: Context) {
         get() = ClientActivityViewModelFactory(clientActivityRep)
 
     val factoryHomeVM: HomeViewModelFactory
-        get() = HomeViewModelFactory(repositoryHomeContent)
+        get() = HomeViewModelFactory(repositoryHomeContent,subscriptionRepository)
 
     val factoryAmarTuneVM: AmarTunesViewModelFactory
         get() = AmarTunesViewModelFactory(repositoryHomeContentRBT)
@@ -265,13 +265,13 @@ internal class Module(private val applicationContext: Context) {
     val playerViewModelFactory: PlayerViewModelFactory
         get() = PlayerViewModelFactory(musicServiceController, userSessionRepository)
 
-    private fun subscriptionApiService(): SubscriptionApiService {
-        return getRetrofitAPIShadhinMusicInstanceV5WithBearerTokenAndClient().create<SubscriptionApiService>()
-    }
-    val subscriptionCheckRepository:SubscriptionCheckRepository
-        get() = SubscriptionCheckRepositoryImpl(subscriptionApiService())
-    val subscriptionRepository:SubscriptionRepository
-        get() = SubscriptionRepositoryImpl(subscriptionCheckRepository)
+     val  subscriptionApiService: SubscriptionApiService  =
+         getRetrofitAPIShadhinMusicInstanceV5WithBearerTokenAndClient().create<SubscriptionApiService>()
+
+    val subscriptionCheckRepository:SubscriptionCheckRepository = SubscriptionCheckRepositoryImpl(subscriptionApiService)
+
+    val subscriptionRepository:SubscriptionRepository = SubscriptionRepositoryImpl(subscriptionCheckRepository)
+
 
     val subscriptionViewModelFactory:SubscriptionViewModelFactory
         get() = SubscriptionViewModelFactory(subscriptionRepository)

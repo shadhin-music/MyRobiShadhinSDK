@@ -187,6 +187,7 @@ internal class SDKMainActivity : BaseActivity(),
 
         uiInitMiniMusicPlayer()
         uiInitMainMusicPlayer()
+        homeViewModel.reloadSubscriptionPlan()
         mainMusicPlayerAdapter = MusicPlayAdapter(this)
 
         //Will received request from Any page from MYBLL app
@@ -195,11 +196,11 @@ internal class SDKMainActivity : BaseActivity(),
             routeFromRC()
         }
         if(uiRequest == AppConstantUtils.HOME_PATCH){
-            if(BuildConfig.DEBUG){
+           /* if(BuildConfig.DEBUG){
                 startDestination(resId = R.id.subscription_fragment)
-            }else{
+            }else{*/
                 startDestination(resId = R.id.homeFragment)
-            }
+           // }
 
         }
         if (uiRequest == AppConstantUtils.Requester_Name_Home) {

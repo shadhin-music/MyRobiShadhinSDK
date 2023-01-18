@@ -22,6 +22,8 @@ import com.myrobi.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.myrobi.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.myrobi.shadhinmusiclibrary.callBackService.SearchClickCallBack
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.fragments.home.NewReleaseTrackCallback
 
 
@@ -229,6 +231,19 @@ internal class ParentAdapter(
             val favorite: LinearLayout = itemView.findViewById(R.id.Fav)
             val artist: LinearLayout = itemView.findViewById(R.id.Artist)
             val podcast: LinearLayout = itemView.findViewById(R.id.Podcast)
+
+            val proText: TextView = itemView.findViewById(R.id.Protext)
+            val proSubtext: TextView = itemView.findViewById(R.id.ProSubtext)
+
+
+            val customData = homePatchItemModel.customData
+
+            if(customData !=null && customData is Plan && customData.status == Status.SUBSCRIBED  ){
+                proText.text = "${customData.type?.name?:"Others"} Plan Activate"
+               // proSubtext.text = "Ad-free, unlimited offline downloads and create playlist"
+            }
+
+
             download.setOnClickListener {
                 downloadClickCallBack.clickOnDownload(homePatchItemModel)
             }
@@ -247,10 +262,9 @@ internal class ParentAdapter(
                 //homeCallBack.onClickSeeAll(homePatchItemModel)
             }
             podcast.setOnClickListener{
-
                 downloadClickCallBack.clickOnPodcast(homePatchItemModel)
-
             }
+
         }
 
         private fun bindPodcastShow(homePatchItemModel: HomePatchItemModel) {

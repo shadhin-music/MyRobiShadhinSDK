@@ -273,24 +273,28 @@
 
         <TextView
             android:id="@+id/ProSubtext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:paddingStart="16dp"
             android:paddingTop="2dp"
             android:paddingBottom="8dp"
             android:text="Ad-free,unlimited offline\ndownloads and create playlist"
             android:textColor="@color/my_sdk_color_white"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Protext" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_white"
+            android:gravity="center"
             android:padding="8dp"
-            android:gravity ="center"
             android:text="Get Pro"
             android:textAllCaps="false"
             android:textColor="@color/my_sdk_color_primary"
