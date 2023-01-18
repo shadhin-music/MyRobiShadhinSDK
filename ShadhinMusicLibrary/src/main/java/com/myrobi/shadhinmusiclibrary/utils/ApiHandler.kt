@@ -72,7 +72,7 @@ internal suspend fun <T> safeApiCall(responseFunction: suspend () -> T): ApiResp
     }
 }
 
-internal fun Exception.apiError(): ApiError {
+internal fun Throwable.toApiError(): ApiError {
     return when(this){
         is HttpException -> {
             val errorResponse = kotlin.runCatching {  this.response()?.errorBody()?.string()}.getOrNull()
