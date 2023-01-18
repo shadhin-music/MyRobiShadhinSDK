@@ -5,12 +5,17 @@ import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.myrobi.shadhinmusiclibrary.ShadhinSDKCallback
 import com.myrobi.shadhinmusiclibrary.data.remote.ApiLoginService
 import com.myrobi.shadhinmusiclibrary.data.remote.ApiService
+import com.myrobi.shadhinmusiclibrary.data.remote.SubscriptionApiService
 import com.myrobi.shadhinmusiclibrary.data.repository.*
 import com.myrobi.shadhinmusiclibrary.data.repository.ArtistBannerContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.ArtistContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.AuthRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.ClientActivityContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.HomeContentRepository
+import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionCheckRepository
+import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionCheckRepositoryImpl
+import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepository
+import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepositoryImpl
 import com.myrobi.shadhinmusiclibrary.di.single.*
 import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient
 import com.myrobi.shadhinmusiclibrary.di.single.SingleDownloadMap
@@ -31,6 +36,7 @@ import com.myrobi.shadhinmusiclibrary.fragments.home.HomeViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.podcast.FeaturedPodcastViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.podcast.PodcastViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.search.SearchViewModelFactory
+import com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionViewModelFactory
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.MusicRepository
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.PlayerApiService
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.ShadhinMusicRepository
@@ -45,6 +51,7 @@ import com.myrobi.shadhinmusiclibrary.library.player.ui.PlayerViewModelFactory
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 internal class Module(private val applicationContext: Context) {
 
@@ -257,6 +264,17 @@ internal class Module(private val applicationContext: Context) {
 
     val playerViewModelFactory: PlayerViewModelFactory
         get() = PlayerViewModelFactory(musicServiceController, userSessionRepository)
+
+    private fun subscriptionApiService(): SubscriptionApiService {
+        return getRetrofitAPIShadhinMusicInstanceV5WithBearerTokenAndClient().create<SubscriptionApiService>()
+    }
+    val subscriptionCheckRepository:SubscriptionCheckRepository
+        get() = SubscriptionCheckRepositoryImpl(subscriptionApiService())
+    val subscriptionRepository:SubscriptionRepository
+        get() = SubscriptionRepositoryImpl(subscriptionCheckRepository)
+
+    val subscriptionViewModelFactory:SubscriptionViewModelFactory
+        get() = SubscriptionViewModelFactory(subscriptionRepository)
 
     val sdkCallback: ShadhinSDKCallback?
         get() = SingleCallback.INSTANCE

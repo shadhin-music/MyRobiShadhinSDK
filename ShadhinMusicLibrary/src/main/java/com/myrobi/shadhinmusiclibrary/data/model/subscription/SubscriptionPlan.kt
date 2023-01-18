@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Keep
-data class SubscriptionData(
+data class SubscriptionPlan(
     @SerializedName("MSISDN")
     @Expose
     override val msisdn: String? = null,
@@ -28,10 +28,10 @@ data class SubscriptionData(
     @Expose
     override val isAutoRenewal: Boolean = false,
     override val amount: Float? = null,
-    override val plan: Plan?,
+    override val type: Type?,
     override val currency: Currency = Currency.BDT
 
-) :Subscription{
+) :Plan{
 
     override val status: Status
         get() = if(regStatus.equals("Subscribed",true)) Status.SUBSCRIBED else Status.UNSUBSCRIBED

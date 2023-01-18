@@ -452,5 +452,10 @@
 
 
     </fragment>
+    <fragment
+        android:id="@+id/subscription_fragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionFragment"
+        tools:layout="@layout/my_bl_sdk_subscription_fragment"
+        android:label="SubscriptionFragment" />
 
 </navigation>

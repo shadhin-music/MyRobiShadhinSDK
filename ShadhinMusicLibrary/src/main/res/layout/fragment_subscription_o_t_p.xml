@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.shadhinmusiclibrary.utils.OtpEditText
+        <com.myrobi.shadhinmusiclibrary.utils.OtpEditText
             android:id="@+id/edittext_code"
             android:layout_width="match_parent"
             android:layout_height="42dp"

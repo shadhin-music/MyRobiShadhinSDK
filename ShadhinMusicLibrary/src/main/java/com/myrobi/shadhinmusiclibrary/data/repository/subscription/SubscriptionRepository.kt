@@ -1,12 +1,16 @@
 package com.myrobi.shadhinmusiclibrary.data.repository.subscription
 
-import com.myrobi.shadhinmusiclibrary.data.model.subscription.Subscription
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 
 interface SubscriptionRepository {
 
-    suspend fun haveSubscription():Boolean
-    suspend fun fetchSubscription():Subscription
-    suspend fun subscriptionRequest()
-    suspend fun plans()
+    suspend fun haveActiveSubscriptionPlan():Boolean
+    suspend fun fetchSubscriptionPlan():Plan?
+    suspend fun subscriptionRequest(){
+
+    }
+    suspend fun plans():List<Plan>?{
+        return emptyList()
+    }
 
 }

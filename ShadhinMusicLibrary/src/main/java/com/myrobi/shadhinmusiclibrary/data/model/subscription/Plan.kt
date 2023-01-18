@@ -1,15 +1,15 @@
 package com.myrobi.shadhinmusiclibrary.data.model.subscription
 
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.days
+import java.util.Date
 
-sealed class Plan(val duration: Duration) {
-    class Daily:Plan(1.days)
-    class Monthly:Plan(30.days)
-    class HalfYearly:Plan(182.days)
-    class Yearly:Plan(365.days)
-    class Coupon(duration: Duration):Plan(duration)
-    class Custom(duration: Duration):Plan(duration)
+
+interface Plan{
+     val serviceId:String?
+     val msisdn:String?
+     val type:Type?
+     val status:Status
+     val amount:Float?
+     val currency:Currency?
+     val registerDate:Date?
+     val isAutoRenewal: Boolean
 }
-
-
