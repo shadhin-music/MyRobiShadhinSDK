@@ -11,5 +11,6 @@ interface Plan{
      val amount:Float?
      val currency:Currency?
      val registerDate:Date?
-     val isAutoRenewal: Boolean
+     val isAutoRenewal: Boolean?
+     val extraVatText:String?
 }

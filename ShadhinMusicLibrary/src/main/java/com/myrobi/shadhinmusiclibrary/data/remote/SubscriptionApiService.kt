@@ -4,7 +4,7 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionPlan
 import retrofit2.http.GET
 
 interface SubscriptionApiService {
-    @GET("subscriptiondetails/get")
+    @GET("SubscriptionDetails/RobiUserSubscriberStatus")
     suspend fun fetchSubscriptionPlans(
     ): List<SubscriptionPlan>?
 }

@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -225,22 +229,26 @@ internal class ParentAdapter(
 
 
         private fun bindDownload(homePatchItemModel: HomePatchItemModel) {
-            val download: LinearLayout = itemView.findViewById(R.id.Download)
-            val watchlater: LinearLayout = itemView.findViewById(R.id.WatchLater)
-            val playlist: LinearLayout = itemView.findViewById(R.id.Playlists)
-            val favorite: LinearLayout = itemView.findViewById(R.id.Fav)
-            val artist: LinearLayout = itemView.findViewById(R.id.Artist)
-            val podcast: LinearLayout = itemView.findViewById(R.id.Podcast)
+            val cardItem: View = itemView.findViewById(R.id.ProConstraint)
+            val download: View = itemView.findViewById(R.id.Download)
+            val watchlater: View = itemView.findViewById(R.id.WatchLater)
+            val playlist: View = itemView.findViewById(R.id.Playlists)
+            val favorite: View = itemView.findViewById(R.id.Fav)
+            val artist: View = itemView.findViewById(R.id.Artist)
+            val podcast: View = itemView.findViewById(R.id.Podcast)
 
             val proText: TextView = itemView.findViewById(R.id.Protext)
             val proSubtext: TextView = itemView.findViewById(R.id.ProSubtext)
+            val arrowNtn: ImageView = itemView.findViewById(R.id.arrow_btn)
+            val getPro: TextView = itemView.findViewById(R.id.textView2)
 
 
             val customData = homePatchItemModel.customData
 
             if(customData !=null && customData is Plan && customData.status == Status.SUBSCRIBED  ){
                 proText.text = "${customData.type?.name?:"Others"} Plan Activate"
-               // proSubtext.text = "Ad-free, unlimited offline downloads and create playlist"
+                arrowNtn.visibility = View.VISIBLE
+                getPro.visibility = View.GONE
             }
 
 
@@ -264,6 +272,10 @@ internal class ParentAdapter(
             podcast.setOnClickListener{
                 downloadClickCallBack.clickOnPodcast(homePatchItemModel)
             }
+            cardItem.setOnClickListener {
+                it.findNavController().navigate(R.id.to_subscription)
+            }
+
 
         }
 

@@ -1,9 +1,11 @@
 package com.myrobi.shadhinmusiclibrary.data.repository.subscription
 
+import com.myrobi.shadhinmusiclibrary.BuildConfig
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionPlan
 import com.myrobi.shadhinmusiclibrary.data.remote.SubscriptionApiService
+import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionPlanStaticData.subscriptionPlanMap
 import kotlinx.coroutines.*
 
 class SubscriptionCheckRepositoryImpl(private val subscriptionApiService: SubscriptionApiService) :
@@ -32,10 +34,23 @@ class SubscriptionCheckRepositoryImpl(private val subscriptionApiService: Subscr
         return subscriptionJob?.await()
     }
 
+
     private suspend fun parseSubscriptionPlan(): SubscriptionPlan? {
         val plans = subscriptionApiService.fetchSubscriptionPlans()
-        return kotlin.runCatching {
+        val plan:SubscriptionPlan? = kotlin.runCatching {
             plans?.first { it.status == Status.SUBSCRIBED }
         }.getOrNull()
+
+        val localPlanInfo = if(BuildConfig.DEBUG){
+            subscriptionPlanMap["2250"]
+        }else{
+            subscriptionPlanMap[plan?.serviceId]
+        }
+        return  plan?.copy(
+            type = localPlanInfo?.type,
+            amount =  localPlanInfo?.amount,
+            extraVatText = localPlanInfo?.extraVatText,
+            isAutoRenewal = localPlanInfo?.isAutoRenewal
+        )
     }
 }

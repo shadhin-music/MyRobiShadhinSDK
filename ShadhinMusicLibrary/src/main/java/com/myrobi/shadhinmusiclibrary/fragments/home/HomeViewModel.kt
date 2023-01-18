@@ -1,6 +1,5 @@
 package com.myrobi.shadhinmusiclibrary.fragments.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,10 +11,10 @@ import com.myrobi.shadhinmusiclibrary.data.repository.HomeContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepository
 import com.myrobi.shadhinmusiclibrary.utils.ApiResponse
 import com.myrobi.shadhinmusiclibrary.utils.Status
-import com.myrobi.shadhinmusiclibrary.utils.toApiError
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class HomeViewModel(
     private val homeContentRepository: HomeContentRepository,
@@ -38,13 +37,13 @@ internal class HomeViewModel(
 
     private val _patchList: MutableLiveData<List<HomePatchItemModel>> = MutableLiveData()
     val patchList: LiveData<List<HomePatchItemModel>> = _patchList
-    private val coroutineContext = Dispatchers.IO+ CoroutineExceptionHandler { _, exception ->
+    private val errorHandler = Dispatchers.IO+ CoroutineExceptionHandler { _, exception ->
 
     }
-    fun reloadSubscriptionPlan() = viewModelScope.launch(coroutineContext){
+    fun reloadSubscriptionPlan() = viewModelScope.launch(errorHandler){
         subscriptionRepository.fetchSubscriptionPlan(true)
     }
-    fun fetchHomeData() = viewModelScope.launch(coroutineContext) {
+    fun fetchHomeData() = viewModelScope.launch(errorHandler) {
         var total:Int = 0
         var pageNumber:Int = 1
         do{
@@ -53,15 +52,19 @@ internal class HomeViewModel(
             response.data?.data?.let { patchs ->
 
                 if(pageNumber == 2){
-                    val plan = subscriptionRepository.fetchSubscriptionPlan()
-                    patchs.add(0,HomePatchItemModel("002",
-                        "download",
-                        listOf(),
-                        "download",
-                        "download",
-                        0,
-                        0,
-                        customData = plan)
+
+                   val plan =  kotlin.runCatching { subscriptionRepository.fetchSubscriptionPlan( )}.getOrNull()
+                    patchs.add(
+                        0, HomePatchItemModel(
+                            "002",
+                            "download",
+                            listOf(),
+                            "download",
+                            "download",
+                            0,
+                            0,
+                            customData = plan
+                        )
                     )
                 }
                 patchSet.addAll(patchs)

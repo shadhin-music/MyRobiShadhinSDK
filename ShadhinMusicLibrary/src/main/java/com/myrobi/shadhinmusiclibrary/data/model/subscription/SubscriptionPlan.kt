@@ -26,11 +26,11 @@ data class SubscriptionPlan(
     override val serviceId: String? = null,
     @SerializedName("isAutoRenewal")
     @Expose
-    override val isAutoRenewal: Boolean = false,
+    override val isAutoRenewal: Boolean? = false,
     override val amount: Float? = null,
     override val type: Type? = null,
-    override val currency: Currency = Currency.BDT
-
+    override val currency: Currency = Currency.BDT,
+    override val extraVatText: String? = null
 ) :Plan{
 
     override val status: Status

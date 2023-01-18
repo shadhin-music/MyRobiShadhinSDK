@@ -448,6 +448,9 @@
             android:id="@+id/to_favorite"
             app:destination="@id/favorite_fragment" />
 
+        <action android:id="@+id/to_subscription"
+            app:destination="@id/subscription_fragment"
+            />
 
 
 
