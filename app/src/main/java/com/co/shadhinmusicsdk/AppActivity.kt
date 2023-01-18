@@ -26,17 +26,17 @@ class AppActivity : AppCompatActivity(), ShadhinSDKCallback {
         setContentView(R.layout.app_activity)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val data = intent.extras?.getBundle("loginData")
+        /*val data = intent.extras?.getBundle("loginData")
         if (data != null) {
             val mLoginData: LoginData = data.getSerializable("loginData") as LoginData
-            Log.e("AA", "onCreate: " + mLoginData.accessToken)
-            ShadhinMusicSdkCore.initializeSDK(
+            Log.e("AA", "onCreate: " + mLoginData.accessToken)*/
+            /*ShadhinMusicSdkCore.initializeSDK(
                 applicationContext,
                 USER_TOKEN,
                 this
-            )
+            )*/
 
-        }
+       // }
 
 
         tabLayout = findViewById(R.id.tabLayout)

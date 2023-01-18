@@ -201,8 +201,6 @@ internal class SDKMainActivity : BaseActivity(),
                 startDestination(resId = R.id.homeFragment)
             }
 
-
-
         }
         if (uiRequest == AppConstantUtils.Requester_Name_Home) {
             homeFragmentAccess()
