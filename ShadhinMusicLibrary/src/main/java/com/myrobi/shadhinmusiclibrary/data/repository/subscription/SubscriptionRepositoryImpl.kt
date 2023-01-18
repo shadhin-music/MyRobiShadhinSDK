@@ -6,12 +6,12 @@ import okhttp3.internal.wait
 
 class SubscriptionRepositoryImpl(private val subscriptionCheckRepository: SubscriptionCheckRepository):SubscriptionRepository {
 
-    override suspend fun haveActiveSubscriptionPlan(): Boolean {
-        return subscriptionCheckRepository.haveActiveSubscriptionPlan()
+    override suspend fun haveActiveSubscriptionPlan(reload:Boolean): Boolean {
+        return subscriptionCheckRepository.haveActiveSubscriptionPlan(reload)
     }
 
-    override suspend fun fetchSubscriptionPlan(): Plan? {
-        return subscriptionCheckRepository.fetchSubscriptionPlan()
+    override suspend fun fetchSubscriptionPlan(reload:Boolean): Plan? {
+        return subscriptionCheckRepository.fetchSubscriptionPlan(reload)
     }
     private fun load(){
 

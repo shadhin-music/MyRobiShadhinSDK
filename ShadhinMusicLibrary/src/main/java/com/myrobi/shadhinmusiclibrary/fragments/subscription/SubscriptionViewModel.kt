@@ -17,8 +17,9 @@ class SubscriptionViewModel(private val subscriptionRepository: SubscriptionRepo
        Log.i("SubscriptionViewModel", "${exception.toApiError().toString()}")
     }
     fun haveActiveSubscriptionPlan() = viewModelScope.launch(coroutineContext) {
+        Log.i(TAG, "haveActiveSubscriptionPlan: start")
         measureTimeMillis {
-            val a = subscriptionRepository.haveActiveSubscriptionPlan()
+            val a = subscriptionRepository.haveActiveSubscriptionPlan(false)
             Log.i(TAG, "haveActiveSubscriptionPlan: $a")
         }.also {
             Log.i(TAG, "haveActiveSubscriptionPlan: $it ms")
@@ -27,7 +28,7 @@ class SubscriptionViewModel(private val subscriptionRepository: SubscriptionRepo
     fun fetchSubscriptionPlan() = viewModelScope.launch(coroutineContext) {
         Log.i(TAG, "fetchSubscriptionPlan: start")
         measureTimeMillis {
-            val plan = subscriptionRepository.fetchSubscriptionPlan()
+            val plan = subscriptionRepository.fetchSubscriptionPlan(true)
         }.also {
             Log.i(TAG, "fetchSubscriptionPlan: $it ms")
         }

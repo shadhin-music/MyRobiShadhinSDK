@@ -4,8 +4,8 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 
 interface SubscriptionRepository {
 
-    suspend fun haveActiveSubscriptionPlan():Boolean
-    suspend fun fetchSubscriptionPlan():Plan?
+    suspend fun haveActiveSubscriptionPlan(reload:Boolean = false):Boolean
+    suspend fun fetchSubscriptionPlan(reload:Boolean = false):Plan?
     suspend fun subscriptionRequest(){
 
     }
