@@ -26,17 +26,17 @@ class AppActivity : AppCompatActivity(), ShadhinSDKCallback {
         setContentView(R.layout.app_activity)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val data = intent.extras?.getBundle("loginData")
-        if (data != null) {
-            val mLoginData: LoginData = data.getSerializable("loginData") as LoginData
-            Log.e("AA", "onCreate: " + mLoginData.accessToken)
-            ShadhinMusicSdkCore.initializeSDK(
-                applicationContext,
-                USER_TOKEN,
-                this
-            )
-
-        }
+//        val data = intent.extras?.getBundle("loginData")
+//        if (data != null) {
+//            val mLoginData: LoginData = data.getSerializable("loginData") as LoginData
+//            Log.e("AA", "onCreate: " + mLoginData.accessToken)
+//            ShadhinMusicSdkCore.initializeSDK(
+//                applicationContext,
+//                mLoginData.accessToken.toString(),
+//                this
+//            )
+            //ShadhinMusicSdkCore.openShadhin(applicationContext, "01234556666666")
+      //  }
 
 
         tabLayout = findViewById(R.id.tabLayout)
@@ -82,5 +82,5 @@ class AppActivity : AppCompatActivity(), ShadhinSDKCallback {
     override fun onShare(rc: String) {
         Log.i("onShare", "onShare: ${ShareRC(rc)}")
     }
-    var USER_TOKEN = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkJlYXJlciJ9.eyJjbGllbnQiOiJNWUJMIiwiZnVsbE5hbWUiOiIiLCJtc2lzZG4iOiI4ODAxOTAwMDAwMDAwIiwiaW1hZ2VVUkwiOiIiLCJnZW5kZXIiOiIiLCJkZXZpY2VUb2tlbiI6IiIsIm5iZiI6MTY3Mzk0NDIyOCwiZXhwIjoxNjczOTkyODI0LCJpYXQiOjE2NzM5NDQyMjgsImlzcyI6IkJMTVVTSUMgIiwiYXVkIjoiU2hhZGhpbiAifQ.VvIHFyUcVSKBI0knxLEHQscMo9BHLbgICpRwecjuAy_C66ir_eBvFKzNumA_zYGnlBDmJbirRwfeIFHH5twG4g"
+  //  var USER_TOKEN = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkJlYXJlciJ9.eyJjbGllbnQiOiJNWUJMIiwiZnVsbE5hbWUiOiIiLCJtc2lzZG4iOiI4ODAxOTAwMDAwMDAwIiwiaW1hZ2VVUkwiOiIiLCJnZW5kZXIiOiIiLCJkZXZpY2VUb2tlbiI6IiIsIm5iZiI6MTY3Mzk0NDIyOCwiZXhwIjoxNjczOTkyODI0LCJpYXQiOjE2NzM5NDQyMjgsImlzcyI6IkJMTVVTSUMgIiwiYXVkIjoiU2hhZGhpbiAifQ.VvIHFyUcVSKBI0knxLEHQscMo9BHLbgICpRwecjuAy_C66ir_eBvFKzNumA_zYGnlBDmJbirRwfeIFHH5twG4g"
 }

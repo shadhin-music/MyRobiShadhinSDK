@@ -41,13 +41,13 @@ class RootAppActivity : AppCompatActivity() {
             val mobileNm = etMobileNumber.text.toString()
 
             if (mobileNm.isNotEmpty()) {
-                callApi.fetchMyBlLogin(LoginModel()
+                callApi.fetchMyRobiLogin(LoginModel()
                     .apply {
                         msisdn = mobileNm
-                        userFullName = "test"
-                        deviceToken = ""
-                        gender = "test"
-                        imageURL = ""
+//                        userFullName = "test"
+//                        deviceToken = ""
+//                        gender = "test"
+//                        imageURL = ""
                     }).enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(
                         call: Call<LoginResponse>,

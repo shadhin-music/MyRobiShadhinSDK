@@ -1,4 +1,4 @@
-package com.co.shadhinmusicsdk.data.model
+package com.myrobi.shadhinmusiclibrary.data.model
 
 import com.google.gson.annotations.Expose
 

@@ -52,12 +52,11 @@ object ShadhinMusicSdkCore {
         SingleCallback.INSTANCE = refSdkCall
         scope = CoroutineScope(Dispatchers.IO)
         scope?.launch {
-            val res = ShadhinApp.module(context).authRepository().login(token)
-            withContext(Dispatchers.Main) {
-                SingleCallback.INSTANCE?.tokenStatus(res.first, res.second ?: "")
+//            val res = ShadhinApp.module(context).authRepository().login()
+//                SingleCallback.INSTANCE?.tokenStatus(res.first, res.second ?: "")
             }
         }
-    }
+
 
     @JvmStatic
     fun openShadhin(reqContext: Context, msisdn:String) {

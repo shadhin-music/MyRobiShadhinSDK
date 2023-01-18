@@ -15,15 +15,15 @@ internal data class LoginResponse(
 ) {
     @Keep
     internal data class Data(
-        @SerializedName("fullName")
-        var fullName: Any? = null,
-        @SerializedName("gender")
-        var gender: Any? = null,
+       // @SerializedName("fullName")
+//        var fullName: Any? = null,
+//        @SerializedName("gender")
+//        var gender: Any? = null,
         @SerializedName("msisdn")
         var msisdn: String? = null,
         @SerializedName("Token")
-        var token: String? = null,
-        @SerializedName("userPic")
-        var userPic: Any? = null
+        var Token: String? = null,
+//        @SerializedName("userPic")
+//        var userPic: Any? = null
     )
 }
