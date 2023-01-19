@@ -4,7 +4,7 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 
-class SubscriptionRepositoryImpl(private val subscriptionCheckRepository: SubscriptionCheckRepository):SubscriptionRepository {
+internal class SubscriptionRepositoryImpl(private val subscriptionCheckRepository: SubscriptionCheckRepository):SubscriptionRepository {
 
     override suspend fun haveActiveSubscriptionPlan(reload:Boolean): Boolean {
         return subscriptionCheckRepository.haveActiveSubscriptionPlan(reload)

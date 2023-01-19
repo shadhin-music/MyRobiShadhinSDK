@@ -9,7 +9,7 @@ import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionP
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 
-class SubscriptionCheckRepositoryImpl(private val subscriptionApiService: SubscriptionApiService) :
+internal class SubscriptionCheckRepositoryImpl(private val subscriptionApiService: SubscriptionApiService) :
     SubscriptionCheckRepository {
 
     private var subscriptionJob: Deferred<Plan?>? = null
@@ -21,18 +21,18 @@ class SubscriptionCheckRepositoryImpl(private val subscriptionApiService: Subscr
 
     override suspend fun fetchSubscriptionPlan(reload:Boolean): Plan? {
 
-        suspend fun reload(): Deferred<Plan?>? {
+        suspend fun reload(): Plan? {
             subscriptionJob?.cancelAndJoin()
             withContext(Dispatchers.IO) {
                 subscriptionJob = async {
                     parseSubscriptionPlan()
                 }
             }
-            return subscriptionJob
+            return subscriptionJob?.await()
         }
 
         return if(reload || subscriptionJob == null){
-            reload()?.await()
+            reload()
         }else{
             runCatching { subscriptionJob?.await() }
                 .getOrNull()
