@@ -738,3 +738,6 @@ fun String.toBase64(): String {
 fun String.fromBase64(): String {
     return String(android.util.Base64.decode(this, android.util.Base64.DEFAULT),  StandardCharsets.UTF_8)
 }
+fun Float.format(pointCount:Int): String {
+    return String.format("%.${pointCount}f",this)
+}
