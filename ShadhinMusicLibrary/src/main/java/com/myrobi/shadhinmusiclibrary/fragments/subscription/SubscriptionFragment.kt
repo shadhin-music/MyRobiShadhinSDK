@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
+import com.myrobi.shadhinmusiclibrary.utils.px
 
 
 class SubscriptionFragment: Fragment(),FragmentEntryPoint {
@@ -31,6 +35,8 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
     private var errorMessage:TextView?=null
     private var errorLayout:View?=null
     private var parentLayout:View?=null
+    private var topImage:ImageView?=null
+    private var scrollView:NestedScrollView?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -121,6 +127,17 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         errorLayout = view.findViewById(R.id.error_layout)
         errorMessage = view.findViewById(R.id.location_error_tv)
         price  = view.findViewById(R.id.price)
+        topImage = view.findViewById(R.id.imageView10)
+        scrollView = view.findViewById(R.id.listscrollview)
+
+
+        topImage?.viewTreeObserver?.addOnGlobalLayoutListener(object :ViewTreeObserver.OnGlobalLayoutListener{
+            override fun onGlobalLayout() {
+                val height = topImage?.measuredHeight?:0
+                scrollView?.setPadding(0, height-(72.px/2), 0, 0)
+                topImage?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
+            }
+        })
     }
 
     private fun setupViewModel() {
@@ -140,6 +157,8 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         errorLayout = null
         parentLayout = null
         errorMessage = null
+        topImage = null
+        scrollView = null
         super.onDestroyView()
     }
 
