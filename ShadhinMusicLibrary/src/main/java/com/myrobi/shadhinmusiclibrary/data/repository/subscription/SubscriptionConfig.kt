@@ -2,7 +2,7 @@ package com.myrobi.shadhinmusiclibrary.data.repository.subscription
 
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionPlan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Type
-object SubscriptionConfig {
+internal object SubscriptionConfig {
 
     val robiPlans = mapOf(
         "2250" to SubscriptionPlan(

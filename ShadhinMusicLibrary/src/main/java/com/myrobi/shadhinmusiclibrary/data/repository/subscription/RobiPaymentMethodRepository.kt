@@ -10,8 +10,8 @@ internal class RobiPaymentMethodRepository(private val paymentMethod: PaymentMet
         val robiUrl =  "${BASE_URL_API_shadhinmusic}RobiDCB/ReqSubsRDCB?mid=%s&subscriptionID=%s&chargetype=SMS&callbackurl=https://shadhinmusic.com/"
         val url = String.format(
             robiUrl,
-            paymentMethod.plan.msisdn,
-            paymentMethod.plan.serviceId
+            paymentMethod.plan?.msisdn,
+            paymentMethod.plan?.serviceId
         )
         return SubscriptionResponse.Robi(url)
     }

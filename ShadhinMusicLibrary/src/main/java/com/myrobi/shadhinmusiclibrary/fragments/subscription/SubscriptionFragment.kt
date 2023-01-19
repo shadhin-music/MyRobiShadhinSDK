@@ -12,11 +12,14 @@ import androidx.cardview.widget.CardView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
 import com.myrobi.shadhinmusiclibrary.utils.px
+import kotlinx.coroutines.launch
 
 
 class SubscriptionFragment: Fragment(),FragmentEntryPoint {
@@ -35,6 +38,7 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
     private var parentLayout:View?=null
     private var topImage:ImageView?=null
     private var scrollView:NestedScrollView?=null
+    private var robiSubButton:CardView?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,11 +53,15 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         setupViewModel()
         observeData()
 
-        planCard?.setOnClickListener {
-            viewModel.haveActiveSubscriptionPlan(false)
-            Toast.makeText(requireContext(),"cc",Toast.LENGTH_SHORT).show()
+        robiSubButton?.setOnClickListener {
+            lifecycleScope.launch {
+                val plans = viewModel.robiPlans()
+
+                findNavController().navigate(R.id.to_subscription_dialog)
+            }
         }
     }
+
 
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner){ isLoading ->
@@ -127,6 +135,7 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         price  = view.findViewById(R.id.price)
         topImage = view.findViewById(R.id.imageView10)
         scrollView = view.findViewById(R.id.listscrollview)
+        robiSubButton = view.findViewById(R.id.robiAirBtn)
 
 
         topImage?.viewTreeObserver?.addOnGlobalLayoutListener(object :ViewTreeObserver.OnGlobalLayoutListener{
@@ -136,6 +145,10 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
                 topImage?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
             }
         })
+
+        robiSubButton?.setOnClickListener {
+
+        }
     }
 
     private fun setupViewModel() {
@@ -157,6 +170,7 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         errorMessage = null
         topImage = null
         scrollView = null
+        robiSubButton = null
         super.onDestroyView()
     }
 

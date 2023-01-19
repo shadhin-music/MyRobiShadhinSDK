@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.PaymentMethod
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepository
 import com.myrobi.shadhinmusiclibrary.utils.ApiError
@@ -50,4 +51,5 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
         _activePlan.postValue(plan)
         _isLoading.postValue(false)
     }
+    suspend fun robiPlans() = subscriptionRepository.plans(PaymentMethod.Robi())
 }

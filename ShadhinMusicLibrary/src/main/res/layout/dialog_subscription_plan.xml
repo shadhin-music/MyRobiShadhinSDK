@@ -10,8 +10,9 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="@android:color/transparent"
-        tools:background="@color/my_sdk_color_white">
+        tools:background="#000000">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -128,6 +129,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:overScrollMode="never"
+                            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            tools:spanCount="2"
                             tools:listitem="@layout/row_plan_sub" />
 
 

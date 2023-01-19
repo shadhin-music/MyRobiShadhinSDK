@@ -459,6 +459,14 @@
         android:id="@+id/subscription_fragment"
         android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionFragment"
         tools:layout="@layout/my_bl_sdk_subscription_fragment"
-        android:label="SubscriptionFragment" />
+        android:label="SubscriptionFragment" >
+        <action android:id="@+id/to_subscription_dialog"
+            app:destination="@id/subscription_dialog_fragment"/>
+    </fragment>
+    <dialog
+        android:id="@+id/subscription_dialog_fragment"
+        tools:layout="@layout/dialog_subscription_plan"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionDialogFragment"
+        android:label="SubscriptionDialogFragment" />
 
 </navigation>
