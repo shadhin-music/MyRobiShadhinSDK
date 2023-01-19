@@ -1,9 +1,10 @@
 package com.myrobi.shadhinmusiclibrary.data.model.subscription
 
+import androidx.annotation.Keep
 import java.util.Date
 
-
-interface Plan{
+@Keep
+internal interface Plan{
      val title:String?
      val duration:String?
      val serviceId:String?

@@ -5,9 +5,7 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionPlan
 import com.myrobi.shadhinmusiclibrary.data.remote.SubscriptionApiService
-import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionPlanStaticData.subscriptionPlanMap
 import kotlinx.coroutines.*
-import okhttp3.internal.wait
 
 internal class SubscriptionCheckRepositoryImpl(private val subscriptionApiService: SubscriptionApiService) :
     SubscriptionCheckRepository {
@@ -48,9 +46,9 @@ internal class SubscriptionCheckRepositoryImpl(private val subscriptionApiServic
         }.getOrNull()
 
         val localPlanInfo = if(BuildConfig.DEBUG){
-            subscriptionPlanMap["2250"]
+            SubscriptionConfig.findPlan("2250")
         }else{
-            subscriptionPlanMap[plan?.serviceId]
+            SubscriptionConfig.findPlan(plan?.serviceId)
         }
         return  plan?.copy(
             type = localPlanInfo?.type,

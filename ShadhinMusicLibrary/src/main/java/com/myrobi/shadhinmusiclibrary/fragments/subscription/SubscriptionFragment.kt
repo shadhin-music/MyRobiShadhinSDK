@@ -21,8 +21,6 @@ import com.myrobi.shadhinmusiclibrary.utils.px
 
 class SubscriptionFragment: Fragment(),FragmentEntryPoint {
     private lateinit var viewModel: SubscriptionViewModel
-
-
     private var progress:View? = null
     private var planList:View? = null
     private var paymentList:View? = null

@@ -12,6 +12,7 @@ import com.myrobi.shadhinmusiclibrary.data.repository.ArtistContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.AuthRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.ClientActivityContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.HomeContentRepository
+import com.myrobi.shadhinmusiclibrary.data.repository.subscription.*
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionCheckRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionCheckRepositoryImpl
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepository
@@ -270,7 +271,8 @@ internal class Module(private val applicationContext: Context) {
 
     val subscriptionCheckRepository:SubscriptionCheckRepository = SubscriptionCheckRepositoryImpl(subscriptionApiService)
 
-    val subscriptionRepository:SubscriptionRepository = SubscriptionRepositoryImpl(subscriptionCheckRepository)
+    val paymentMethodRepositoryFactory:PaymentMethodRepositoryFactory = PaymentMethodRepositoryFactory()
+    val subscriptionRepository:SubscriptionRepository = SubscriptionRepositoryImpl(subscriptionCheckRepository,paymentMethodRepositoryFactory)
 
 
     val subscriptionViewModelFactory:SubscriptionViewModelFactory

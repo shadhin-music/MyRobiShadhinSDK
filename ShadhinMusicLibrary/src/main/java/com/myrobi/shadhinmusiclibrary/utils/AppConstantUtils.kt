@@ -9,7 +9,9 @@ internal object AppConstantUtils {
     var BASE_URL = "https://shadhinmusic.com/api/"
    // var BASE_URL_API_shadhinmusic = "https://api.shadhinmusic.com/api/v5/"
     var BASE_URL_API_shadhinmusic = "https://salute.gakktech.com/api/v5/"
-    const val LAST_FM_API_URL = "https://ws.audioscrobbler.com/2.0/"
+
+
+ const val LAST_FM_API_URL = "https://ws.audioscrobbler.com/2.0/"
     const val BILLBOARD_IMAGE_URL = "https://shadhinmusiccontent.sgp1.digitaloceanspaces.com/BillBoard/Web/"
 
     const val SingleDataItem = "single_data_item"

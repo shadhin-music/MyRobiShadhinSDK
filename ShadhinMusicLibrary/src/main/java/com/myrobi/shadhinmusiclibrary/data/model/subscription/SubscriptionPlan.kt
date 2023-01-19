@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Keep
-data class SubscriptionPlan(
+ data class SubscriptionPlan(
     @SerializedName("MSISDN")
     @Expose
     override val msisdn: String? = null,

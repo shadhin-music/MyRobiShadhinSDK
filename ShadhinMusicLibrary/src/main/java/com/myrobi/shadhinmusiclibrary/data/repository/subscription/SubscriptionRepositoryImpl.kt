@@ -1,10 +1,13 @@
 package com.myrobi.shadhinmusiclibrary.data.repository.subscription
 
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.PaymentMethod
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
-import kotlinx.coroutines.*
-import okhttp3.internal.wait
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionResponse
 
-internal class SubscriptionRepositoryImpl(private val subscriptionCheckRepository: SubscriptionCheckRepository):SubscriptionRepository {
+internal class SubscriptionRepositoryImpl(
+    private val subscriptionCheckRepository: SubscriptionCheckRepository,
+    private val paymentMethodRepositoryFactory: PaymentMethodRepositoryFactory
+):SubscriptionRepository {
 
     override suspend fun haveActiveSubscriptionPlan(reload:Boolean): Boolean {
         return subscriptionCheckRepository.haveActiveSubscriptionPlan(reload)
@@ -13,7 +16,17 @@ internal class SubscriptionRepositoryImpl(private val subscriptionCheckRepositor
     override suspend fun fetchSubscriptionPlan(reload:Boolean): Plan? {
         return subscriptionCheckRepository.fetchSubscriptionPlan(reload)
     }
-    private fun load(){
 
+    override suspend fun subscriptionRequest(paymentMethod: PaymentMethod): SubscriptionResponse? {
+        return paymentMethodRepositoryFactory
+            .repository(paymentMethod)
+            .subscriptionRequest()
     }
+
+    override suspend fun plans(paymentMethod: PaymentMethod): List<Plan>? {
+        return paymentMethodRepositoryFactory
+            .repository(paymentMethod)
+            .plans()
+    }
+
 }
