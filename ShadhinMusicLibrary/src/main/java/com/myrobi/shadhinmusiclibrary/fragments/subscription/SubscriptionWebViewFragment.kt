@@ -38,10 +38,11 @@ internal class SubscriptionWebViewFragment:Fragment(),FragmentEntryPoint {
     private fun readData() {
         val title =arguments?.getString(TITLE_ARGS)
         val url = arguments?.getString(URL_ARGS)
-        titleTextview?.text = title
+        titleTextview?.text = title?:""
         backButton?.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        Log.i(TAG, "readData: ${url}")
         url?.let { openWebView(it) }
 
     }
@@ -117,14 +118,11 @@ internal class SubscriptionWebViewFragment:Fragment(),FragmentEntryPoint {
             return false
         }
 
-        override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
-            super.onPageStarted(view, url, favicon)
-
-        }
 
         override fun onPageFinished(view: WebView, url: String) {
             super.onPageFinished(view, url)
 
+            progressBar?.visibility = View.GONE
             if (url.startsWith("http://shadhin.co/?statusCode=200&referenceCode=")) {
                 requireActivity().onBackPressed()
             }

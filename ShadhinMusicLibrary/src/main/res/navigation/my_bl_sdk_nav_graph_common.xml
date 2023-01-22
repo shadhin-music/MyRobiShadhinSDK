@@ -399,11 +399,7 @@
 
             />
 
-        <action
-            android:id="@+id/to_subscription_web_view"
-            app:destination="@id/subscription_web_view_fragment"
 
-            />
         <action
             android:id="@+id/to_artist_details"
             app:destination="@id/artist_details_fragment" />
@@ -468,6 +464,10 @@
         android:label="SubscriptionFragment" >
         <action android:id="@+id/to_subscription_dialog"
             app:destination="@id/subscription_dialog_fragment"/>
+        <action
+            android:id="@+id/to_subscription_web_view"
+            app:destination="@id/subscription_web_view_fragment"
+            />
     </fragment>
     <dialog
         android:id="@+id/subscription_dialog_fragment"
