@@ -64,9 +64,9 @@ class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint 
 
         planAdapter.onSubscriptionClickListeners { plan ->
             subscriptionDetails?.paymentMethod?.let { paymentMethod ->
+                dismiss()
                 paymentMethod.selectedPlan = plan
                 viewModel.requestSubscription(paymentMethod)
-                dismiss()
             }
         }
     }

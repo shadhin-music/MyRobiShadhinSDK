@@ -24,7 +24,10 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionDetail
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
 import com.myrobi.shadhinmusiclibrary.utils.px
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SubscriptionFragment : Fragment(), FragmentEntryPoint {
@@ -82,19 +85,26 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
 
 
     private fun observeData() {
-        viewModel.subscriptionResponse.observe(viewLifecycleOwner, Observer { response ->
 
+        lifecycleScope.launchWhenStarted {
 
-            view?.post {
-                val bundle=  bundleOf(
-                    Pair<String,String>(SubscriptionWebViewFragment.TITLE_ARGS , "Robi"),
-                    Pair<String,String>(SubscriptionWebViewFragment.URL_ARGS,response.redirectURL?:"")
-                )
-                findNavController().navigate(R.id.to_subscription_web_view,bundle)
-                Log.i(TAG, "observeData: ${response.redirectURL}")
+            viewModel.subscriptionResponse.collectLatest { response ->
+                requireActivity().runOnUiThread(Runnable {
+
+                    val bundle = bundleOf(
+                        Pair(SubscriptionWebViewFragment.TITLE_ARGS, "Robi"),
+                        Pair(
+                            SubscriptionWebViewFragment.URL_ARGS,
+                            response.redirectURL ?: ""
+                        )
+                    )
+                    if (findNavController().currentDestination?.id == R.id.subscription_fragment) {
+                        findNavController().navigate(R.id.to_subscription_web_view, bundle)
+                    }
+                })
             }
+        }
 
-        })
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             progressVisibility(isLoading)
         }

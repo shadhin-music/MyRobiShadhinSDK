@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
 
@@ -40,7 +41,7 @@ internal class SubscriptionWebViewFragment:Fragment(),FragmentEntryPoint {
         val url = arguments?.getString(URL_ARGS)
         titleTextview?.text = title?:""
         backButton?.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().navigateUp()
         }
         Log.i(TAG, "readData: ${url}")
         url?.let { openWebView(it) }

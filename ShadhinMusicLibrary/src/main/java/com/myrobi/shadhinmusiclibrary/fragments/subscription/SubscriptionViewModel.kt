@@ -11,6 +11,9 @@ import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionR
 import com.myrobi.shadhinmusiclibrary.utils.ApiError
 import com.myrobi.shadhinmusiclibrary.utils.toApiError
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 
 const val TAG = "SubscriptionViewModel"
 internal class SubscriptionViewModel(private val subscriptionRepository: SubscriptionRepository): ViewModel() {
@@ -27,8 +30,8 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
     private val _error:MutableLiveData<ApiError> = MutableLiveData()
     val error:LiveData<ApiError> = _error
 
-    private val _subscriptionResponse:MutableLiveData<SubscriptionResponse> = MutableLiveData()
-    val subscriptionResponse:LiveData<SubscriptionResponse> = _subscriptionResponse
+    private val _subscriptionResponse:MutableSharedFlow<SubscriptionResponse> = MutableSharedFlow()
+    val subscriptionResponse:Flow<SubscriptionResponse> = _subscriptionResponse.asSharedFlow()
 
     private val _plans:MutableLiveData<List<Plan>> = MutableLiveData()
     val plans:LiveData<List<Plan>> = _plans
@@ -62,6 +65,9 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
         _isLoading.postValue(false)
     }
     fun requestSubscription(paymentMethod: PaymentMethod) = viewModelScope.launch{
-        _subscriptionResponse.postValue(subscriptionRepository.subscriptionRequest(paymentMethod))
+        subscriptionRepository.subscriptionRequest(paymentMethod)?.let { response ->
+            delay(1000)
+            _subscriptionResponse.emit(response)
+        }
     }
 }
