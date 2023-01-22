@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.core.widget.NestedScrollView
@@ -23,9 +22,7 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.PaymentMethod
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionDetails
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
-import com.myrobi.shadhinmusiclibrary.data.repository.AuthRepository
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
-import com.myrobi.shadhinmusiclibrary.utils.getNavigationResult
 import com.myrobi.shadhinmusiclibrary.utils.px
 import kotlinx.coroutines.launch
 
@@ -67,14 +64,19 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
     }
 
     private fun uiAction() {
+
         robiSubButton?.setOnClickListener {
+            val paymentMethod = PaymentMethod.Robi()
             val bundle =
                 bundleOf(
                     SUBSCRIPTION_DETAILS_ARGS
                             to
-                            SubscriptionDetails(PaymentMethod.Robi(AuthRepository.msisdn))
+                            SubscriptionDetails(paymentMethod)
                 )
-            findNavController().navigate(R.id.to_subscription_dialog, bundle)
+            lifecycleScope.launch {
+                viewModel.loadPlans(paymentMethod)
+                findNavController().navigate(R.id.to_subscription_dialog, bundle)
+            }
         }
     }
 
@@ -166,9 +168,7 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
             }
         })
 
-        robiSubButton?.setOnClickListener {
 
-        }
     }
 
     private fun setupViewModel() {

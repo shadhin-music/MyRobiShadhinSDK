@@ -48,13 +48,9 @@ class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint 
     }
 
     private fun observeData() {
-
         viewModel.plans.observe(viewLifecycleOwner, Observer { plans ->
             planAdapter.submitList(plans)
         })
-        subscriptionDetails?.paymentMethod?.let { viewModel.loadPlans(it) }
-
-
     }
 
     private fun setupViewModel() {
@@ -62,6 +58,10 @@ class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint 
     }
 
     private fun uiAction(){
+        subscriptionDetails?.paymentMethod?.icon?.let { icon?.setImageResource(it) }
+        paymentMethod?.text = subscriptionDetails?.paymentMethod?.name
+
+
         planAdapter.onSubscriptionClickListeners { plan ->
             subscriptionDetails?.paymentMethod?.let { paymentMethod ->
                 paymentMethod.selectedPlan = plan
@@ -73,12 +73,6 @@ class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint 
     private fun setupUi(view: View) {
         recyclerView = view.findViewById(R.id.recycler_view)
         paymentMethod = view.findViewById(R.id.payment_method)
-
-
-        subscriptionDetails?.paymentMethod?.icon?.let { icon?.setImageResource(it) }
-        paymentMethod?.text = subscriptionDetails?.paymentMethod?.name
-
-
     }
 
     private fun setupAdapter() {

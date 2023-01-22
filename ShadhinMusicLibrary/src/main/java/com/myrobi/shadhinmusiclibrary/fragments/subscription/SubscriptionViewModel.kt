@@ -10,9 +10,7 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionRespon
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepository
 import com.myrobi.shadhinmusiclibrary.utils.ApiError
 import com.myrobi.shadhinmusiclibrary.utils.toApiError
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 const val TAG = "SubscriptionViewModel"
 internal class SubscriptionViewModel(private val subscriptionRepository: SubscriptionRepository): ViewModel() {
@@ -56,12 +54,12 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
         _activePlan.postValue(plan)
         _isLoading.postValue(false)
     }
-    fun loadPlans(paymentMethod:PaymentMethod) = viewModelScope.launch{
-
+   suspend fun loadPlans(paymentMethod:PaymentMethod){
+        _isLoading.postValue(true)
         subscriptionRepository.plans(paymentMethod)?.let { plans->
             _plans.postValue(plans)
         }
-
+        _isLoading.postValue(false)
     }
     fun requestSubscription(paymentMethod: PaymentMethod) = viewModelScope.launch{
         _subscriptionResponse.postValue(subscriptionRepository.subscriptionRequest(paymentMethod))
