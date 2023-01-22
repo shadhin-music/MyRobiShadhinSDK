@@ -43,6 +43,9 @@ internal class HomeViewModel(
     fun reloadSubscriptionPlan() = viewModelScope.launch(errorHandler){
         subscriptionRepository.fetchSubscriptionPlan(true)
     }
+    suspend fun haveActiveSubscriptionPlan(): Boolean {
+       return subscriptionRepository.haveActiveSubscriptionPlan()
+    }
     fun fetchHomeData() = viewModelScope.launch(errorHandler) {
         var total:Int = 0
         var pageNumber:Int = 1

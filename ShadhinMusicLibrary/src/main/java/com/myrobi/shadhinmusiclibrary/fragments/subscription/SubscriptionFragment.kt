@@ -62,8 +62,6 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
         setupViewModel()
         uiAction()
         observeData()
-
-
     }
 
     private fun uiAction() {
@@ -80,6 +78,9 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
                 viewModel.loadPlans(paymentMethod)
                 findNavController().navigate(R.id.to_subscription_dialog, bundle)
             }
+        }
+        cancelButton?.setOnClickListener {
+            viewModel.cancelSubscription()
         }
     }
 

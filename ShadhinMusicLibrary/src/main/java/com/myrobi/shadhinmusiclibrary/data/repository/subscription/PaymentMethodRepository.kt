@@ -6,4 +6,5 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionRespon
 internal interface PaymentMethodRepository {
     suspend fun subscriptionRequest(): SubscriptionResponse?
     suspend fun plans():List<Plan>?
+    suspend fun cancel()
 }

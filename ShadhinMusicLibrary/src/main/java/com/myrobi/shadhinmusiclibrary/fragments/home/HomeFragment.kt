@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,6 +42,7 @@ import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 import com.myrobi.shadhinmusiclibrary.utils.DataContentType
 import com.myrobi.shadhinmusiclibrary.utils.TimeParser
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
+import kotlinx.coroutines.launch
 import java.io.Serializable
 
 internal class HomeFragment : BaseFragment(),
@@ -360,12 +362,21 @@ internal class HomeFragment : BaseFragment(),
         )
     }
     override fun clickOnDownload(selectedHomePatchItem: HomePatchItemModel) {
-        val data = Bundle()
-        data.putSerializable(
-            AppConstantUtils.PatchItem,
-            selectedHomePatchItem as Serializable
-        )
-        findNavController().navigate(R.id.to_download,data)
+        lifecycleScope.launch {
+
+            val data = Bundle()
+            data.putSerializable(
+                AppConstantUtils.PatchItem,
+                selectedHomePatchItem as Serializable
+            )
+
+            if(homeViewModel.haveActiveSubscriptionPlan()) {
+                findNavController().navigate(R.id.to_download, data)
+            }else{
+                findNavController().navigate(R.id.to_subscription_not_found)
+            }
+        }
+
       /*  startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
@@ -382,7 +393,8 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        findNavController().navigate(R.id.to_watch_later,data)
+        findNavController().navigate(R.id.to_watch_later, data)
+
        /* startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
@@ -399,7 +411,14 @@ internal class HomeFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        findNavController().navigate(R.id.to_my_playlist,data)
+        lifecycleScope.launch {
+            if (homeViewModel.haveActiveSubscriptionPlan()) {
+                findNavController().navigate(R.id.to_my_playlist,data)
+            } else {
+                findNavController().navigate(R.id.to_subscription_not_found)
+            }
+        }
+
       /*  startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(

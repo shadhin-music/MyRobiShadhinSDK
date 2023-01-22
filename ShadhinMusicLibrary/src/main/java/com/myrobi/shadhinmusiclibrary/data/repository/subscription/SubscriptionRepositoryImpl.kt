@@ -29,4 +29,10 @@ internal class SubscriptionRepositoryImpl(
             .plans()
     }
 
+    override suspend fun cancel(paymentMethod: PaymentMethod) {
+        paymentMethodRepositoryFactory
+            .repository(paymentMethod)
+            .cancel()
+    }
+
 }

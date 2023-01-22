@@ -271,7 +271,7 @@ internal class Module(private val applicationContext: Context) {
 
     val subscriptionCheckRepository:SubscriptionCheckRepository = SubscriptionCheckRepositoryImpl(subscriptionApiService)
 
-    val paymentMethodRepositoryFactory:PaymentMethodRepositoryFactory = PaymentMethodRepositoryFactory()
+    val paymentMethodRepositoryFactory:PaymentMethodRepositoryFactory = PaymentMethodRepositoryFactory(subscriptionApiService)
     val subscriptionRepository:SubscriptionRepository = SubscriptionRepositoryImpl(subscriptionCheckRepository,paymentMethodRepositoryFactory)
 
 

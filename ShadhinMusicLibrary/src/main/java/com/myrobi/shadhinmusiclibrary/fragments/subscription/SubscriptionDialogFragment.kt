@@ -43,8 +43,6 @@ class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint 
         readData()
         uiAction()
         observeData()
-
-
     }
 
     private fun observeData() {

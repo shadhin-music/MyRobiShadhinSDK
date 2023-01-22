@@ -70,4 +70,9 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
             _subscriptionResponse.emit(response)
         }
     }
+
+    fun cancelSubscription() = viewModelScope.launch{
+        subscriptionRepository.cancel(PaymentMethod.Robi(subscriptionRepository.fetchSubscriptionPlan()))
+        fetchSubscriptionPlan(true)
+    }
 }

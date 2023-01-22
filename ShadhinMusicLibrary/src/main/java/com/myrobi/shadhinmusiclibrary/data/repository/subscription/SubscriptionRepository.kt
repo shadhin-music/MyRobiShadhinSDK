@@ -10,5 +10,6 @@ internal interface SubscriptionRepository {
     suspend fun fetchSubscriptionPlan(reload:Boolean = false):Plan?
     suspend fun subscriptionRequest(paymentMethod: PaymentMethod): SubscriptionResponse?
     suspend fun plans(paymentMethod: PaymentMethod):List<Plan>?
+    suspend fun cancel(paymentMethod: PaymentMethod)
 
 }
