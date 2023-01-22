@@ -398,6 +398,12 @@
             app:destination="@id/podcast_details_fragment"
 
             />
+
+        <action
+            android:id="@+id/to_subscription_web_view"
+            app:destination="@id/subscription_web_view_fragment"
+
+            />
         <action
             android:id="@+id/to_artist_details"
             app:destination="@id/artist_details_fragment" />
@@ -468,5 +474,10 @@
         tools:layout="@layout/dialog_subscription_plan"
         android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionDialogFragment"
         android:label="SubscriptionDialogFragment" />
+    <fragment
+        android:id="@+id/subscription_web_view_fragment"
+        tools:layout="@layout/subscription_webview_fragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionWebViewFragment"
+        android:label="SubscriptionWebViewFragment" />
 
 </navigation>

@@ -83,6 +83,12 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
 
     private fun observeData() {
         viewModel.subscriptionResponse.observe(viewLifecycleOwner, Observer { response ->
+
+           val bundle=  bundleOf(
+                SubscriptionWebViewFragment.TITLE_ARGS to "Robi",
+                SubscriptionWebViewFragment.URL_ARGS to response.redirectURL
+            )
+            findNavController().navigate(R.id.to_subscription_web_view,bundle)
             Log.i(TAG, "observeData: ${response.redirectURL}")
         })
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -94,6 +100,8 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
         viewModel.error.observe(viewLifecycleOwner) { error ->
             errorUiVisibility(!error.message.isNullOrEmpty(), error.message)
         }
+
+
 
         viewModel.fetchSubscriptionPlan(true)
 
