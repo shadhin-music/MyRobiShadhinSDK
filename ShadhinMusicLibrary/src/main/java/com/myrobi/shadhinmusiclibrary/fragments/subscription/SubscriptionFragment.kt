@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.os.bundleOf
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.myrobi.shadhinmusiclibrary.R
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.PaymentMethod
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionDetails
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
 import com.myrobi.shadhinmusiclibrary.utils.px
@@ -56,8 +58,8 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         robiSubButton?.setOnClickListener {
             lifecycleScope.launch {
                 val plans = viewModel.robiPlans()
-
-                findNavController().navigate(R.id.to_subscription_dialog)
+                val bundle = bundleOf(SUBSCRIPTION_DETAILS_ARGS to SubscriptionDetails(PaymentMethod.Robi(),plans))
+                findNavController().navigate(R.id.to_subscription_dialog,bundle)
             }
         }
     }
@@ -172,6 +174,9 @@ class SubscriptionFragment: Fragment(),FragmentEntryPoint {
         scrollView = null
         robiSubButton = null
         super.onDestroyView()
+    }
+    companion object{
+        const val SUBSCRIPTION_DETAILS_ARGS = "sub_details_args"
     }
 
 }

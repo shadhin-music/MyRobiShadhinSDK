@@ -1,6 +1,7 @@
 package com.myrobi.shadhinmusiclibrary.data.model.subscription
 
 
+import android.text.TextUtils
 import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -32,22 +33,41 @@ internal data class SubscriptionPlan(
     override val type: Type? = null,
     override val currency: Currency = Currency.BDT,
     override val extraVatText: String? = null
-) :Plan{
+) : Plan {
     override val title: String?
-        get() = type?.name?:"Other"
+        get() = type?.name ?: "Other"
     override val duration: String?
-        get(){
-           val days =  type?.duration?.inWholeDays?:return null
-           return if(days<=1) "$days day" else "$days days"
+        get() {
+            val days = type?.duration?.inWholeDays ?: return null
+            return if (days <= 1) "$days day" else "$days days"
         }
     override val amountWithCurrency: String?
         get() = "${currency.symbol}${amount?.format(2)}"
     override val status: Status
-        get() = if(regStatus.equals("Subscribed",true)) Status.SUBSCRIBED else Status.UNSUBSCRIBED
+        get() = if (regStatus.equals("Subscribed", true)) Status.SUBSCRIBED else Status.UNSUBSCRIBED
 
     override val registerDate: Date?
         get() = kotlin.runCatching {
-            SimpleDateFormat("yyyy-MM-ddTHH:mm:ss",Locale.getDefault()).parse(regDate?:"")
+            SimpleDateFormat("yyyy-MM-ddTHH:mm:ss", Locale.getDefault()).parse(regDate ?: "")
         }.getOrNull()
+
+    override val desc: String?
+        get() {
+            val strings: MutableList<String?> = ArrayList()
+            if (extraVatText != null) {
+                strings.add(extraVatText)
+            }
+            val autoText = autoRenewalText()
+            if (autoText != null) {
+                strings.add(autoText)
+            }
+            return TextUtils.join("\n", strings)
+        }
+
+    private fun autoRenewalText(): String? {
+        return if (isAutoRenewal!!) {
+            "Auto-Renewal"
+        } else "Non Auto Renewal"
+    }
 
 }
