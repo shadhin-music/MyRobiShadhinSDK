@@ -9,6 +9,7 @@ import com.myrobi.shadhinmusiclibrary.activities.SDKMainActivity
 import com.myrobi.shadhinmusiclibrary.data.model.APIResponse
 import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
 import com.myrobi.shadhinmusiclibrary.data.remote.ApiService
+import com.myrobi.shadhinmusiclibrary.data.repository.AuthRepository
 import com.myrobi.shadhinmusiclibrary.di.ShadhinApp
 import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient
 import com.myrobi.shadhinmusiclibrary.di.single.SingleCallback
@@ -61,6 +62,7 @@ object ShadhinMusicSdkCore {
 
     @JvmStatic
     fun openShadhin(reqContext: Context, msisdn:String) {
+        AuthRepository.msisdn = msisdn
         val intent = Intent(reqContext, SDKMainActivity::class.java)
         intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
         reqContext.startActivity(intent)

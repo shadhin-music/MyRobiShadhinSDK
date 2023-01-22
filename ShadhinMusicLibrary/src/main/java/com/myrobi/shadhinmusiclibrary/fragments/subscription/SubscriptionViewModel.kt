@@ -1,22 +1,18 @@
 package com.myrobi.shadhinmusiclibrary.fragments.subscription
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.PaymentMethod
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionResponse
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepository
 import com.myrobi.shadhinmusiclibrary.utils.ApiError
 import com.myrobi.shadhinmusiclibrary.utils.toApiError
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import kotlin.system.measureTimeMillis
 
 const val TAG = "SubscriptionViewModel"
 internal class SubscriptionViewModel(private val subscriptionRepository: SubscriptionRepository): ViewModel() {
@@ -32,6 +28,15 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
 
     private val _error:MutableLiveData<ApiError> = MutableLiveData()
     val error:LiveData<ApiError> = _error
+
+    private val _subscriptionResponse:MutableLiveData<SubscriptionResponse> = MutableLiveData()
+    val subscriptionResponse:LiveData<SubscriptionResponse> = _subscriptionResponse
+
+    private val _plans:MutableLiveData<List<Plan>> = MutableLiveData()
+    val plans:LiveData<List<Plan>> = _plans
+
+
+
 
 
 
@@ -51,5 +56,14 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
         _activePlan.postValue(plan)
         _isLoading.postValue(false)
     }
-    suspend fun robiPlans() = subscriptionRepository.plans(PaymentMethod.Robi())
+    fun loadPlans(paymentMethod:PaymentMethod) = viewModelScope.launch{
+
+        subscriptionRepository.plans(paymentMethod)?.let { plans->
+            _plans.postValue(plans)
+        }
+
+    }
+    fun requestSubscription(paymentMethod: PaymentMethod) = viewModelScope.launch{
+        _subscriptionResponse.postValue(subscriptionRepository.subscriptionRequest(paymentMethod))
+    }
 }

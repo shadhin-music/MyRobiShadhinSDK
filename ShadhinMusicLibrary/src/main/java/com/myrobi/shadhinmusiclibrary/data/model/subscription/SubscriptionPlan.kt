@@ -13,7 +13,7 @@ import java.util.*
 internal data class SubscriptionPlan(
     @SerializedName("MSISDN")
     @Expose
-    override val msisdn: String? = null,
+    val msisdn: String? = null,
     @SerializedName("RegDate")
     @Expose
     val regDate: String? = null,
