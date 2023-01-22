@@ -45,11 +45,11 @@ internal class SubscriptionCheckRepositoryImpl(private val subscriptionApiServic
             plans?.first { it.status == Status.SUBSCRIBED }
         }.getOrNull()
 
-        val localPlanInfo = if(BuildConfig.DEBUG){
+        val localPlanInfo = /*if(BuildConfig.DEBUG){
             SubscriptionConfig.findPlan("2250")
-        }else{
+        }else{*/
             SubscriptionConfig.findPlan(plan?.serviceId)
-        }
+       // }
         return  plan?.copy(
             type = localPlanInfo?.type,
             amount =  localPlanInfo?.amount,

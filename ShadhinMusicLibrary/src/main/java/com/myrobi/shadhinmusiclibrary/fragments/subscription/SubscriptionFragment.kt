@@ -143,6 +143,11 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
 
 
     private fun planUiUpdate(plan: Plan?) {
+        if(plan?.type == null){
+            cancelButton?.visibility = View.INVISIBLE
+            price?.visibility= View.INVISIBLE
+
+        }
         planAndPaymentVisibility(plan?.status == Status.SUBSCRIBED)
         if (plan != null) {
             errorUiVisibility(false)
