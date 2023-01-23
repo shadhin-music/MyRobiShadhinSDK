@@ -399,6 +399,17 @@
 
             />
 
+        <action
+            android:id="@+id/to_featured_popular_artist"
+            app:destination="@id/featured_popular_artist_fragment"
+
+            />
+        <action
+            android:id="@+id/to_all_details"
+            app:destination="@id/podcast_see_all_fragment"
+
+            />
+
 
         <action
             android:id="@+id/to_artist_details"

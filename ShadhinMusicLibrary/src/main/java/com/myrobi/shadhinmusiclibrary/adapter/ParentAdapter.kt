@@ -266,8 +266,9 @@ internal class ParentAdapter(
             }
             artist.setOnClickListener{
             //    Log.e("TAG","DATA: " + homePatchItemModel)
-                ShadhinMusicSdkCore.openPatch(itemView.context, "RC203")
+              //  ShadhinMusicSdkCore.openPatch(itemView.context, "RC203")
                 //homeCallBack.onClickSeeAll(homePatchItemModel)
+                downloadClickCallBack.clickOnArtist(homePatchItemModel)
             }
             podcast.setOnClickListener{
                 downloadClickCallBack.clickOnPodcast(homePatchItemModel)

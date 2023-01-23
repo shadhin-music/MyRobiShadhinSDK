@@ -90,8 +90,6 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
 
     private fun observeData() {
 
-
-
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             progressVisibility(isLoading)
         })
@@ -103,12 +101,6 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
                 Toast.makeText(requireActivity(),error.message,Toast.LENGTH_SHORT).show()
             }
         }
-       /* viewModel.error.observe(viewLifecycleOwner, Observer { error ->
-            Toast.makeText(requireActivity(),error.message,Toast.LENGTH_SHORT).show()
-            //errorUiVisibility(!error.message.isNullOrEmpty(), error.message)
-        })*/
-
-
 
         viewModel.fetchSubscriptionPlan(true)
 

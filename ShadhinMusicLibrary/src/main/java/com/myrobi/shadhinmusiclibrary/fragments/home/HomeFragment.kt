@@ -446,20 +446,41 @@ internal class HomeFragment : BaseFragment(),
             })*/
     }
 
+    override fun clickOnArtist(selectedHomePatchItem: HomePatchItemModel) {
+
+        val bundle = Bundle().apply {
+            putSerializable(
+                AppConstantUtils.PatchItem,
+                selectedHomePatchItem as Serializable
+            )
+        }
+        findNavController().navigate(R.id.to_featured_popular_artist,bundle)
+    }
     override fun clickOnPodcast(selectedHomePatchItem: HomePatchItemModel) {
-        val data = Bundle()
+      /*  val data = Bundle()
         data.putSerializable(
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
+
+        Bundle().apply {
+            val details = HomePatchDetailModel().apply {
+                this.content_Type = type
+            }
+            putSerializable(
+                AppConstantUtils.PatchDetail,
+                details as Serializable
+            )
+        }*/
+        findNavController().navigate(R.id.podcast_see_all_fragment)
+       /* startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
             .apply {
                 putExtra(
                     AppConstantUtils.UI_Request_Type,
                     AppConstantUtils.Requester_Name_Podcast
                 )
                 putExtra(AppConstantUtils.PatchItem, data)
-            })
+            })*/
     }
 
 
