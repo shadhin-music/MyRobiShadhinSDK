@@ -73,6 +73,7 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
                             to
                             SubscriptionDetails(paymentMethod)
                 )
+            //To
             lifecycleScope.launch {
                 viewModel.loadPlans(paymentMethod)
                 findNavController().navigate(R.id.to_subscription_dialog, bundle)
