@@ -32,7 +32,7 @@ internal class ShadhinVideoMediaSourceHls(
 
     private fun createSource(video: VideoModel): HlsMediaSource {
         val dataSource: DataSource.Factory =
-            ShadhinDataSourceFactory.buildWithoutWriteCache(
+            ShadhinHlsDataSourceFactory.buildWithoutWriteCache(
                 context,
                 toMusic(video),
                 cache,

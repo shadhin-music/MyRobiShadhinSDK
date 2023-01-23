@@ -725,7 +725,7 @@ internal fun getRandomString(length: Int): String {
 }
 
 fun Long.toSecond(): Long {
-    return this / 1000 % 60
+    return this / 1000
 }
 
 fun Long.toDateTimeString(): String {
