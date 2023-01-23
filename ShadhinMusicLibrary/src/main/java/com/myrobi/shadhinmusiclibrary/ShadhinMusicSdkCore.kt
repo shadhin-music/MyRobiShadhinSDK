@@ -65,6 +65,9 @@ object ShadhinMusicSdkCore {
         val intent = Intent(reqContext, SDKMainActivity::class.java)
         intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
         reqContext.startActivity(intent)
+        scope?.launch {
+            SingleCallback.INSTANCE?.tokenStatus(true, "0")
+        }
     }
 
     @JvmStatic

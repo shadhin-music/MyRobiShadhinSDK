@@ -19,6 +19,7 @@ import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionR
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepositoryImpl
 import com.myrobi.shadhinmusiclibrary.di.single.*
 import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient
+import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient.Companion.getInstance
 import com.myrobi.shadhinmusiclibrary.di.single.SingleDownloadMap
 import com.myrobi.shadhinmusiclibrary.di.single.SingleMusicServiceConnection
 import com.myrobi.shadhinmusiclibrary.di.single.SinglePlayerApiService
@@ -144,6 +145,9 @@ internal class Module(private val applicationContext: Context) {
     private fun getRetrofitInstance(): Retrofit {
         return RetrofitClient.getInstance(UtilsOkHttp.getBaseOkHttpClientWithTokenAndClient())
     }
+    private fun getRobiRetrofitInstance(): Retrofit {
+        return ShadhinRetrofitClient.getInstance(UtilsOkHttp.getBaseOkHttpClientWithTokenAndClient())
+    }
 
     fun authRepository() = AuthRepository(getShadhinMusicRobiLoginService())
 
@@ -255,6 +259,11 @@ internal class Module(private val applicationContext: Context) {
 
     private val playerApiService: PlayerApiService
         get() = SinglePlayerApiService.getInstance(getRetrofitInstance())
+
+    private val robiplayerApiService: PlayerApiService
+        get() = SinglePlayerApiService.getInstance(getRobiRetrofitInstance())
+
+    val robimusicRepository: MusicRepository = ShadhinMusicRepository(robiplayerApiService)
 
     val musicRepository: MusicRepository = ShadhinMusicRepository(playerApiService)
 

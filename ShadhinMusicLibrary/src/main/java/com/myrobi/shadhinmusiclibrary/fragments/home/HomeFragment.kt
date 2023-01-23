@@ -240,11 +240,14 @@ internal class HomeFragment : BaseFragment(),
                     homePatchDetail as Serializable
                 )
             }
+            Log.e("TAG","data: " +homePatchDetail.content_Type )
             val action = when (homePatchDetail.content_Type?.uppercase()) {
+
                 DataContentType.CONTENT_TYPE_A -> R.id.to_artist_details
                 DataContentType.CONTENT_TYPE_R -> R.id.to_album_details
                 DataContentType.CONTENT_TYPE_P -> R.id.to_playlist_details
                 DataContentType.CONTENT_TYPE_S -> R.id.to_s_type_details
+
                 else -> null
             }
 

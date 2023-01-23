@@ -1201,7 +1201,9 @@ internal class SDKMainActivity : BaseActivity(),
         })
 
         playerViewModel.playbackStateLiveData.observe(this) {
-            mainPlayerPlayPauseState(it.isPlaying)
+            if(it !=null) {
+                mainPlayerPlayPauseState(it.isPlaying)
+            }
         }
 
         playerViewModel.repeatModeLiveData.observe(this) {

@@ -208,7 +208,7 @@ internal class ParentAdapter(
             val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
             recyclerView.layoutManager =
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.adapter = LargeVideosAdapter(
+            recyclerView.adapter = ParentLargeVideosAdapter(
                 homePatchItem,
                 homePatchDetail = getItem(absoluteAdapterPosition).Data
             )
