@@ -157,10 +157,10 @@ internal interface ApiService {
     @HTTP(method = "DELETE", path = "Favourite", hasBody = true)
     suspend fun deleteFavorite(@Body body: AddtoFavBody): FavDataResponseModel
 
-    @POST("ClientActivity/UserSession")
+    @POST("RobiUserActivity/UserSession")
     suspend fun userSession(@Body body: UserSessionBody): UserSessionResponse
 
-    @POST("ClientActivity/PatchClickhistory")
+    @POST("RobiUserActivity/PatchClickhistory")
     suspend fun fetchPatchClickHistory(@Body body: HistoryModel): ClickHistoryModel
 
 
