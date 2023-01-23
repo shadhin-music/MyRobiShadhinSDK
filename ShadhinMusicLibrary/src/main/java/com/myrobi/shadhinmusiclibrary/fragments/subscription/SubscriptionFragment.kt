@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.core.widget.NestedScrollView
@@ -97,9 +98,15 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
         viewModel.activePlan.observe(viewLifecycleOwner, Observer { plan ->
             planUiUpdate(plan)
         })
-        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
-            errorUiVisibility(!error.message.isNullOrEmpty(), error.message)
-        })
+        lifecycleScope.launch {
+            viewModel.error.collectLatest { error ->
+                Toast.makeText(requireActivity(),error.message,Toast.LENGTH_SHORT).show()
+            }
+        }
+       /* viewModel.error.observe(viewLifecycleOwner, Observer { error ->
+            Toast.makeText(requireActivity(),error.message,Toast.LENGTH_SHORT).show()
+            //errorUiVisibility(!error.message.isNullOrEmpty(), error.message)
+        })*/
 
 
 

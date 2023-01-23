@@ -1,5 +1,6 @@
 package com.myrobi.shadhinmusiclibrary.data.repository.subscription
 
+import android.util.Log
 import com.myrobi.shadhinmusiclibrary.BuildConfig
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
@@ -14,6 +15,7 @@ internal class SubscriptionCheckRepositoryImpl(private val subscriptionApiServic
 
     override suspend fun haveActiveSubscriptionPlan(reload:Boolean): Boolean {
         val plan = fetchSubscriptionPlan(reload)
+
         return plan !=null
     }
 
@@ -40,16 +42,24 @@ internal class SubscriptionCheckRepositoryImpl(private val subscriptionApiServic
 
 
     private suspend fun parseSubscriptionPlan(): SubscriptionPlan? {
-        val plans = subscriptionApiService.fetchSubscriptionPlans()
+        var plans = subscriptionApiService.fetchSubscriptionPlans()
+
+      /*  if(BuildConfig.DEBUG){
+            plans = listOf(
+                SubscriptionPlan(
+                    msisdn = "01855290",
+                    serviceId = "2251",
+                    regStatus = "Subscribed"
+                )
+            )
+        }*/
         val plan:SubscriptionPlan? = kotlin.runCatching {
             plans?.first { it.status == Status.SUBSCRIBED }
         }.getOrNull()
 
-        val localPlanInfo = /*if(BuildConfig.DEBUG){
-            SubscriptionConfig.findPlan("2250")
-        }else{*/
-            SubscriptionConfig.findPlan(plan?.serviceId)
-       // }
+
+        val localPlanInfo = SubscriptionConfig.findPlan(plan?.serviceId)
+
         return  plan?.copy(
             type = localPlanInfo?.type,
             amount =  localPlanInfo?.amount,

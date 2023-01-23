@@ -1,5 +1,6 @@
 package com.myrobi.shadhinmusiclibrary.fragments.subscription
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,8 +26,8 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
     val isLoading:LiveData<Boolean> = _isLoading
 
 
-    private val _error:MutableLiveData<ApiError> = MutableLiveData()
-    val error:LiveData<ApiError> = _error
+    private val _error:MutableSharedFlow<ApiError> = MutableSharedFlow()
+    val error:Flow<ApiError> = _error.asSharedFlow()
 
     private val _subscriptionResponse:MutableSharedFlow<SubscriptionResponse> = MutableSharedFlow()
     val subscriptionResponse:Flow<SubscriptionResponse> = _subscriptionResponse.asSharedFlow()
@@ -34,14 +35,12 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
     private val _plans:MutableLiveData<List<Plan>> = MutableLiveData()
     val plans:LiveData<List<Plan>> = _plans
 
-
-
-
-
-
    private val exceptionHandler = Dispatchers.IO+CoroutineExceptionHandler { _, exception ->
        _isLoading.postValue(false)
-       _error.postValue(exception.toApiError())
+       viewModelScope.launch {
+           _error.emit(exception.toApiError())
+       }
+
     }
     fun haveActiveSubscriptionPlan(reload:Boolean = false) = viewModelScope.launch(exceptionHandler) {
         _isLoading.postValue(true)
@@ -51,28 +50,29 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
     }
     fun fetchSubscriptionPlan(reload:Boolean = false) = viewModelScope.launch(exceptionHandler) {
         _isLoading.postValue(true)
+
         val plan = subscriptionRepository.fetchSubscriptionPlan(reload)
+        Log.i(TAG, "haveActiveSubscriptionPlan: ${plan.toString()}")
         _activePlan.postValue(plan)
         _isLoading.postValue(false)
     }
    suspend fun loadPlans(paymentMethod:PaymentMethod){
         _isLoading.postValue(true)
         subscriptionRepository.plans(paymentMethod)?.let { plans->
+
+
             _plans.postValue(plans)
         }
         _isLoading.postValue(false)
     }
    suspend fun requestSubscription(paymentMethod: PaymentMethod): SubscriptionResponse? {
         return subscriptionRepository.subscriptionRequest(paymentMethod)
-        /*
-            ?.let { response ->
-            delay(1000)
-            _subscriptionResponse.emit(response)
-        }*/
     }
 
     fun cancelSubscription() = viewModelScope.launch{
+        _isLoading.postValue(true)
         subscriptionRepository.cancel(PaymentMethod.Robi(subscriptionRepository.fetchSubscriptionPlan()))
         fetchSubscriptionPlan(true)
+
     }
 }
