@@ -104,7 +104,7 @@ internal class Module(private val applicationContext: Context) {
 
     private fun getRetrofitAPIShadhinMusicRobiApiLoginInstanceV5(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic_robi)
+            .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic)
             .addConverterFactory(GsonConverterFactory.create())
             .client(UtilsOkHttp.getBaseOkHttpClientRequest())
             .build()

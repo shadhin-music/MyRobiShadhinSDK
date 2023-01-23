@@ -8,7 +8,7 @@ import com.myrobi.shadhinmusiclibrary.utils.safeApiCall
 
 
 internal class AuthRepository(private val apiLoginSer: ApiLoginService) {
-    suspend fun login(token: String): Pair<Boolean, String?> {
+   /* suspend fun login(token: String): Pair<Boolean, String?> {
         val response = safeApiCall { apiLoginSer.login("Bearer $token") }
         return if (response.status == Status.SUCCESS) {
             appToken = response.data?.data?.token
@@ -19,7 +19,7 @@ internal class AuthRepository(private val apiLoginSer: ApiLoginService) {
             appToken = null
             Pair(false, response.message)
         }
-    }
+    }*/
 
     companion object {
         //TODO this time static it will dynamic

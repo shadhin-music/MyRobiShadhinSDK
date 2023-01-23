@@ -46,6 +46,7 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
     private var topImage: ImageView? = null
     private var scrollView: NestedScrollView? = null
     private var robiSubButton: CardView? = null
+    private var backButton2: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,12 +74,12 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
                             to
                             SubscriptionDetails(paymentMethod)
                 )
-            //To
             lifecycleScope.launch {
                 viewModel.loadPlans(paymentMethod)
                 findNavController().navigate(R.id.to_subscription_dialog, bundle)
             }
         }
+
         cancelButton?.setOnClickListener {
             viewModel.cancelSubscription()
         }
@@ -89,22 +90,6 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
     private fun observeData() {
 
 
-        lifecycleScope.launch(Dispatchers.Main) {
-
-            viewModel.subscriptionResponse.collectLatest { response ->
-                val bundle = bundleOf(
-                    Pair(SubscriptionWebViewFragment.TITLE_ARGS, "Robi"),
-                    Pair(
-                        SubscriptionWebViewFragment.URL_ARGS,
-                        response.redirectURL ?: ""
-                    )
-                )
-                Log.i(TAG, "collectLatest: ${response.redirectURL}")
-                if (findNavController().currentDestination?.id == R.id.subscription_fragment) {
-                    findNavController().navigate(R.id.to_subscription_web_view, bundle)
-                }
-            }
-        }
 
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             progressVisibility(isLoading)
@@ -185,6 +170,7 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
         topImage = view.findViewById(R.id.imageView10)
         scrollView = view.findViewById(R.id.listscrollview)
         robiSubButton = view.findViewById(R.id.robiAirBtn)
+        backButton2 = view.findViewById(R.id.backButton2)
 
 
         topImage?.viewTreeObserver?.addOnGlobalLayoutListener(object :
@@ -195,6 +181,9 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
                 topImage?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
             }
         })
+        backButton2?.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
 
     }

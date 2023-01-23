@@ -450,9 +450,9 @@
             android:id="@+id/to_favorite"
             app:destination="@id/favorite_fragment" />
 
-        <action android:id="@+id/to_subscription"
+        <!--<action android:id="@+id/to_subscription"
             app:destination="@id/subscription_fragment"
-            />
+            />-->
 
 
 
@@ -473,7 +473,12 @@
         android:id="@+id/subscription_dialog_fragment"
         tools:layout="@layout/dialog_subscription_plan"
         android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionDialogFragment"
-        android:label="SubscriptionDialogFragment" />
+        android:label="SubscriptionDialogFragment" >
+        <action
+            android:id="@+id/to_subscription_web_view"
+            app:destination="@id/subscription_web_view_fragment"
+            />
+    </dialog>
     <fragment
         android:id="@+id/subscription_web_view_fragment"
         tools:layout="@layout/subscription_webview_fragment"
@@ -483,6 +488,10 @@
         android:id="@+id/subscriptionNotFoundDialogFragment"
         android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionNotFoundDialogFragment"
         android:label="SubscriptionNotFoundDialogFragment" />
-    <action android:id="@+id/to_subscription_not_found" app:destination="@id/subscriptionNotFoundDialogFragment"/>
+    <action android:id="@+id/to_subscription_not_found"
+        app:destination="@id/subscriptionNotFoundDialogFragment"/>
+    <action android:id="@+id/to_subscription"
+        app:destination="@id/subscription_fragment"/>
+
 
 </navigation>

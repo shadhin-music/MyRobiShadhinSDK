@@ -2,13 +2,17 @@ package com.myrobi.shadhinmusiclibrary.fragments.subscription
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,6 +20,7 @@ import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.adapter.subscription.SubscriptionPlanAdapter
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionDetails
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
+import kotlinx.coroutines.launch
 
 class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint {
     private lateinit var planAdapter: SubscriptionPlanAdapter
@@ -64,7 +69,25 @@ class SubscriptionDialogFragment:BottomSheetDialogFragment(),FragmentEntryPoint 
             subscriptionDetails?.paymentMethod?.let { paymentMethod ->
                 dismiss()
                 paymentMethod.selectedPlan = plan
-                viewModel.requestSubscription(paymentMethod)
+
+                lifecycleScope.launch {
+                    val response = viewModel.requestSubscription(paymentMethod)
+
+                    val bundle = bundleOf(
+                        Pair(SubscriptionWebViewFragment.TITLE_ARGS, "Robi"),
+                        Pair(
+                            SubscriptionWebViewFragment.URL_ARGS,
+                            response?.redirectURL ?: ""
+                        )
+                    )
+                    Log.i(TAG, "collectLatest: ${response?.redirectURL}")
+                    findNavController().navigate(R.id.to_subscription_web_view, bundle)
+                }
+
+
+
+
+
             }
         }
     }

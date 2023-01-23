@@ -76,7 +76,7 @@ internal fun Throwable.toApiError(): ApiError {
     return when(this){
         is HttpException -> {
             val errorResponse = kotlin.runCatching {  this.response()?.errorBody()?.string()}.getOrNull()
-            val error = errorResponse?.let { JSONObject(it) }
+            val error = kotlin.runCatching {  errorResponse?.let { JSONObject(it) }}.getOrNull()
             val message = if(error?.has("Message") == true) {
                 error.get("Message").toString()
             }else{

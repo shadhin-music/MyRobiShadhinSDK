@@ -17,7 +17,7 @@ internal class ShadhinRetrofitClient private constructor() {
 
         private fun newInstance(client: OkHttpClient): Retrofit {
             return Retrofit.Builder()
-                .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic_robi)
+                .baseUrl(AppConstantUtils.BASE_URL_API_shadhinmusic)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

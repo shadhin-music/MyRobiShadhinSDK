@@ -62,11 +62,13 @@ internal class SubscriptionViewModel(private val subscriptionRepository: Subscri
         }
         _isLoading.postValue(false)
     }
-    fun requestSubscription(paymentMethod: PaymentMethod) = viewModelScope.launch{
-        subscriptionRepository.subscriptionRequest(paymentMethod)?.let { response ->
+   suspend fun requestSubscription(paymentMethod: PaymentMethod): SubscriptionResponse? {
+        return subscriptionRepository.subscriptionRequest(paymentMethod)
+        /*
+            ?.let { response ->
             delay(1000)
             _subscriptionResponse.emit(response)
-        }
+        }*/
     }
 
     fun cancelSubscription() = viewModelScope.launch{

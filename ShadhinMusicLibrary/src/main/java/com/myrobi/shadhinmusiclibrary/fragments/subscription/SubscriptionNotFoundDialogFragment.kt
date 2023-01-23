@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.myrobi.shadhinmusiclibrary.R
@@ -14,6 +15,9 @@ import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
 
 internal class SubscriptionNotFoundDialogFragment: BottomSheetDialogFragment() , FragmentEntryPoint {
    private  var bottomSheet:View?=null
+    private var parent:View?=null
+    private var btnMonthlyPlan:View?=null
+    private var btnSeeAll:View?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.SheetDialogV2)
@@ -28,8 +32,25 @@ internal class SubscriptionNotFoundDialogFragment: BottomSheetDialogFragment() ,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUi(view)
 
     }
+
+    private fun setupUi(view: View) {
+        parent = view.findViewById(R.id.parent)
+        btnMonthlyPlan = view.findViewById(R.id.btnMonthlyPlan)
+        btnSeeAll = view.findViewById(R.id.btnSeeAll)
+
+
+        parent?.setOnClickListener { dismiss() }
+        btnSeeAll?.setOnClickListener { goToSubscription() }
+        btnMonthlyPlan?.setOnClickListener { goToSubscription() }
+
+    }
+    private fun goToSubscription(){
+        findNavController().navigate(R.id.to_subscription)
+    }
+
     override fun onStart() {
         super.onStart()
         val dialog = dialog
