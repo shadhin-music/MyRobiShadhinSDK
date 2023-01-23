@@ -10,8 +10,10 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 internal interface ApiLoginService {
-    @GET("mybl/Login")
-    suspend fun login(@Header("Authorization") token: String): LoginResponse
+//    @GET("mybl/Login")
+//    suspend fun login(@Header("Authorization") token: String): LoginResponse
+    @POST("ROBI/Login")
+    suspend fun fetchMyRobiLogin(@Body loginData: LoginModel):LoginResponse
 //    @POST("ROBI/Login")
 //    suspend fun login(): LoginResponse
 //    @POST("ROBI/Login")

@@ -2,6 +2,7 @@ package com.myrobi.shadhinmusiclibrary
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.Keep
 import androidx.fragment.app.Fragment
@@ -60,12 +61,13 @@ object ShadhinMusicSdkCore {
 
     @JvmStatic
     fun openShadhin(reqContext: Context, msisdn:String) {
-//        SingleCallback.INSTANCE = refSdkCall
-        val intent = Intent(reqContext, SDKMainActivity::class.java)
-        intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
-        reqContext.startActivity(intent)
+        scope = CoroutineScope(Dispatchers.IO)
         scope?.launch {
-            SingleCallback.INSTANCE?.tokenStatus(true, "0")
+            ShadhinApp.module(reqContext).authRepository().login(msisdn)
+            val intent = Intent(reqContext, SDKMainActivity::class.java)
+            intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
+            reqContext.startActivity(intent)
+            Log.e("LOgin", "Login: " + msisdn)
         }
     }
 

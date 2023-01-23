@@ -16,7 +16,9 @@ internal interface PlayerApiService {
 
     ): ContentUrlResponse
 
-    @GET("streaming/getdwnpth")
+    @GET("clientstreaming/getdwnpth")
+   // @GET("robistreaming/getdwnpth")
+    //@GET("streaming/getdwnpth")
     suspend fun fetchDownloadContentUrl(
         @Query("name") name: String?
     ): ContentUrlResponse
