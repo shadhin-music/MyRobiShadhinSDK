@@ -87,7 +87,6 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
     }
 
 
-
     private fun observeData() {
 
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
@@ -98,7 +97,7 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
         })
         lifecycleScope.launch {
             viewModel.error.collectLatest { error ->
-                Toast.makeText(requireActivity(),error.message,Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), error.message, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -127,9 +126,9 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
 
 
     private fun planUiUpdate(plan: Plan?) {
-        if(plan?.type == null){
+        if (plan?.type == null) {
             cancelButton?.visibility = View.INVISIBLE
-            price?.visibility= View.INVISIBLE
+            price?.visibility = View.INVISIBLE
 
         }
         planAndPaymentVisibility(plan?.status == Status.SUBSCRIBED)
