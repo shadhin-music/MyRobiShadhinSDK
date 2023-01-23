@@ -25,6 +25,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/videoAppTheme" />
         <activity
+            android:name=".activities.HlsVideoActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/videoAppTheme" />
+        <activity
             android:name=".activities.SDKMainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"

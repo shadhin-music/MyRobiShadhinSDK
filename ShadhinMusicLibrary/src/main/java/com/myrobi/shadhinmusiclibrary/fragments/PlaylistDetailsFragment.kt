@@ -207,7 +207,10 @@ internal class PlaylistDetailsFragment : BaseFragment(),
                     ) {
                         //DO NOT USE requireActivity()
                         playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
-                            playPauseStateRed(itPla!!.isPlaying, playlistHeaderVH.ivPlayBtn!!)
+                            playlistHeaderVH.ivPlayBtn?.let {
+                                playPauseStateRed(itPla.isPlaying,
+                                    it)
+                            }
                         }
                     } else {
                         playlistHeaderVH.ivPlayBtn?.let { playPauseStateRed(false, it) }

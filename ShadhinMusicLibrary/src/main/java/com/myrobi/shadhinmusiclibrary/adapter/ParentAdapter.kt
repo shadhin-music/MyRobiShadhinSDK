@@ -9,7 +9,6 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -202,7 +201,7 @@ internal class ParentAdapter(
             val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
             recyclerView.layoutManager =
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.adapter = LargeVideosAdapter(
+            recyclerView.adapter = ParentLargeVideosAdapter(
                 homePatchItem,
                 homePatchDetail = getItem(absoluteAdapterPosition).Data
             )

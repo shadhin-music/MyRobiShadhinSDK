@@ -68,6 +68,7 @@ internal class ShadhinMusicPlayer : MediaBrowserServiceCompat(),
             this,
             musicPlaybackPreparer,
             injector.musicRepository,
+           // injector.robimusicRepository,
             injector.userHistoryRepository
         )
         shadhinPlayerListener?.let {
@@ -98,6 +99,7 @@ internal class ShadhinMusicPlayer : MediaBrowserServiceCompat(),
                 exoPlayer,
                 injector.exoplayerCache,
                 injector.musicRepository
+               // injector.robimusicRepository
             )
         shadhinMusicQueueNavigator = mediaSession?.let { ShadhinMusicQueueNavigator(it) }
         mediaSessionConnector?.setQueueNavigator(shadhinMusicQueueNavigator)

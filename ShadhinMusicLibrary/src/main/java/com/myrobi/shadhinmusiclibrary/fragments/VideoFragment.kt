@@ -1,6 +1,5 @@
 package com.myrobi.shadhinmusiclibrary.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,13 +12,9 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.myrobi.shadhinmusiclibrary.R
-import com.myrobi.shadhinmusiclibrary.activities.SDKMainActivity
 import com.myrobi.shadhinmusiclibrary.adapter.HomeFooterAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.LargeVideoAdapter
-import com.myrobi.shadhinmusiclibrary.adapter.LargeVideosAdapter
-import com.myrobi.shadhinmusiclibrary.adapter.TopTrendingBanglaMusicAdapter
 import com.myrobi.shadhinmusiclibrary.fragments.base.BaseFragment
-import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 
 
 internal class VideoFragment : BaseFragment() {

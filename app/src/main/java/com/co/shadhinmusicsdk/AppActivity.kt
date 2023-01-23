@@ -62,6 +62,7 @@ class AppActivity : AppCompatActivity(), ShadhinSDKCallback {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
+
             }
         })
 

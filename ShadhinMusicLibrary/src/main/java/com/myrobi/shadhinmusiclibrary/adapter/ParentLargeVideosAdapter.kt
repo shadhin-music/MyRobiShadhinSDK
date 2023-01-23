@@ -12,19 +12,18 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.imageview.ShapeableImageView
 import com.myrobi.shadhinmusiclibrary.R
-import com.myrobi.shadhinmusiclibrary.activities.video.VideoActivity
+import com.myrobi.shadhinmusiclibrary.activities.HlsVideoActivity
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 
 
-internal class LargeVideosAdapter(
+internal class ParentLargeVideosAdapter(
     val homePatchItemModel: HomePatchItemModel,
     val homePatchDetail: List<HomePatchDetailModel>
-) : RecyclerView.Adapter<LargeVideosAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ParentLargeVideosAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,7 +54,7 @@ internal class LargeVideosAdapter(
             textViewArtist.text = homePatchItemModel.Data[absoluteAdapterPosition].titleName
             Glide.with(itemView.context).load(UtilHelper.getImageUrlSize300(url)).into(imageView)
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, VideoActivity::class.java)
+                val intent = Intent(itemView.context, HlsVideoActivity::class.java)
                 val videoArray = ArrayList<VideoModel>()
                 for (item in homePatchItemModel.Data) {
                     val video = VideoModel()
@@ -63,8 +62,8 @@ internal class LargeVideosAdapter(
                     videoArray.add(video)
                 }
                 val videos: ArrayList<VideoModel> = videoArray
-                intent.putExtra(VideoActivity.INTENT_KEY_POSITION, absoluteAdapterPosition)
-                intent.putExtra(VideoActivity.INTENT_KEY_DATA_LIST, videos)
+                intent.putExtra(HlsVideoActivity.INTENT_KEY_POSITION, absoluteAdapterPosition)
+                intent.putExtra(HlsVideoActivity.INTENT_KEY_DATA_LIST, videos)
                 itemView.context.startActivity(intent)
             }
 

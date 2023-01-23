@@ -6,8 +6,8 @@ import com.myrobi.shadhinmusiclibrary.library.player.data.model.SongTrackingMode
 import retrofit2.http.*
 
 internal interface PlayerApiService {
-
-    @GET("streaming/getpth")
+   // @GET("streaming/getpth")
+    @GET("robistreaming/getpth")
     suspend fun fetchContentUrl(
         @Query("ptype") ptype: String?,
         @Query("type") type: String?,

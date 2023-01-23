@@ -167,6 +167,19 @@ internal data class Music(
         return contentType != null && contentType?.contains("VD", true) == true
     }
 
+    fun videoSubType(): String? {
+        if (isVideo()) {
+            return contentType?.toUpperCase()?.split("VD")?.last()
+        }
+        return null
+    }
+    fun videoTrackType(): String? {
+        if (isVideo()) {
+            return trackType?.toUpperCase()
+        }
+        return null
+    }
+
     fun podcastSubType(): String? {
         if (isPodCast()) {
             return contentType?.toUpperCase()?.split("PD")?.last()
