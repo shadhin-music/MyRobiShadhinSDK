@@ -11,8 +11,10 @@ data class HomePatchItemModel(
     var Design: String,
     val Name: String,
     val Sort: Int,
-    val Total: Int
+    val Total: Int,
+    var customData:Any?=null
 ) : Serializable{
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -20,6 +20,8 @@ import androidx.annotation.Keep
 import androidx.annotation.RawRes
 import androidx.annotation.RequiresApi
 import androidx.core.text.HtmlCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -737,4 +739,14 @@ fun String.toBase64(): String {
 
 fun String.fromBase64(): String {
     return String(android.util.Base64.decode(this, android.util.Base64.DEFAULT),  StandardCharsets.UTF_8)
+}
+fun Float.format(pointCount:Int): String {
+    return String.format("%.${pointCount}f",this)
+}
+
+inline fun <reified T>Fragment.getNavigationResult(key: String = "result") =
+    this.findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)
+
+fun <T> Fragment.setNavigationResult(result: T, key: String = "result") {
+    this.findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
 }

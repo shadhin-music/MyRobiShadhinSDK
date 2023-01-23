@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_bl_sdk_nav_graph_common"
-   >
+    app:startDestination="@id/subscriptionNotFoundDialogFragment">
 
     <fragment
         android:id="@+id/album_details_fragment"
@@ -398,6 +398,19 @@
             app:destination="@id/podcast_details_fragment"
 
             />
+
+        <action
+            android:id="@+id/to_featured_popular_artist"
+            app:destination="@id/featured_popular_artist_fragment"
+
+            />
+        <action
+            android:id="@+id/to_all_details"
+            app:destination="@id/podcast_see_all_fragment"
+
+            />
+
+
         <action
             android:id="@+id/to_artist_details"
             app:destination="@id/artist_details_fragment" />
@@ -448,9 +461,48 @@
             android:id="@+id/to_favorite"
             app:destination="@id/favorite_fragment" />
 
+        <!--<action android:id="@+id/to_subscription"
+            app:destination="@id/subscription_fragment"
+            />-->
 
 
 
     </fragment>
+    <fragment
+        android:id="@+id/subscription_fragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionFragment"
+        tools:layout="@layout/my_bl_sdk_subscription_fragment"
+        android:label="SubscriptionFragment" >
+        <action android:id="@+id/to_subscription_dialog"
+            app:destination="@id/subscription_dialog_fragment"/>
+        <action
+            android:id="@+id/to_subscription_web_view"
+            app:destination="@id/subscription_web_view_fragment"
+            />
+    </fragment>
+    <dialog
+        android:id="@+id/subscription_dialog_fragment"
+        tools:layout="@layout/dialog_subscription_plan"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionDialogFragment"
+        android:label="SubscriptionDialogFragment" >
+        <action
+            android:id="@+id/to_subscription_web_view"
+            app:destination="@id/subscription_web_view_fragment"
+            />
+    </dialog>
+    <fragment
+        android:id="@+id/subscription_web_view_fragment"
+        tools:layout="@layout/subscription_webview_fragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionWebViewFragment"
+        android:label="SubscriptionWebViewFragment" />
+    <dialog
+        android:id="@+id/subscriptionNotFoundDialogFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionNotFoundDialogFragment"
+        android:label="SubscriptionNotFoundDialogFragment" />
+    <action android:id="@+id/to_subscription_not_found"
+        app:destination="@id/subscriptionNotFoundDialogFragment"/>
+    <action android:id="@+id/to_subscription"
+        app:destination="@id/subscription_fragment"/>
+
 
 </navigation>

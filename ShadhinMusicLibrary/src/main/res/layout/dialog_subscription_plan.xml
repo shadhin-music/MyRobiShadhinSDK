@@ -10,8 +10,9 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="@android:color/transparent"
-        tools:background="@color/my_sdk_color_white">
+        tools:background="#000000">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -74,7 +75,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
                             <TextView
-                                android:id="@+id/textView12"
+                                android:id="@+id/payment_method"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -128,6 +129,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:overScrollMode="never"
+                            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            tools:spanCount="2"
                             tools:listitem="@layout/row_plan_sub" />
 
 
@@ -141,6 +144,7 @@
             android:id="@+id/progressBar4"
             style="?android:attr/progressBarStyle"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </FrameLayout>

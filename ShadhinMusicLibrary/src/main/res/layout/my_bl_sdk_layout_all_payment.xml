@@ -8,8 +8,9 @@
     tools:ignore="UnusedAttribute">
 
 
-   <LinearLayout
-        android:id="@+id/sub_root"
+    <LinearLayout
+
+        android:id="@+id/plan_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,7 +19,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/monthly_plan_root"
+            android:id="@+id/plan_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="32dp"
@@ -32,35 +33,27 @@
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="false"
             tools:ignore="UnusedAttribute"
-            tools:layout_marginTop="24dp"
-            tools:visibility="visible">
+            tools:layout_marginTop="24dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
-                <ImageView
-                    android:id="@+id/monthly_img"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/my_bl_sdk_ic_plan_a"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="16dp" />
-
                 <TextView
-                    android:id="@+id/plan_a_tv"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/plan_name"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/monthly_img"
+
                     android:layout_marginStart="16dp"
 
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto"
                     android:text="Monthly"
+                    android:maxLines="2"
                     android:textColor="@color/my_sdk_white"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/price"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +61,7 @@
                     android:id="@+id/plan_duration"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/plan_a_tv"
+                    android:layout_below="@+id/plan_name"
                     android:layout_marginStart="16dp"
                     android:text="30 days"
                     android:textColor="@color/my_sdk_white"
@@ -76,51 +69,27 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/plan_extra_text"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plan_a_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/plan_name"
                     tools:visibility="visible" />
 
 
                 <TextView
-                    android:id="@+id/plan_a_price"
+                    android:id="@+id/price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/plan_duration"
-                    android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="right"
-                    app:layout_constraintRight_toRightOf="parent"
                     android:textColor="@color/my_sdk_white"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/plan_a_tv"
-                    tools:layout_editor_absoluteY="16dp"
-                    tools:text="100"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/plan_name"
+                    tools:ignore="MissingConstraints"
+                    tools:text="100" />
 
-                <View
-                    android:id="@+id/margin_one"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_below="@+id/plan_a_price"
-                    android:background="@color/my_sdk_white"
-                    android:visibility="gone"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="16dp"
-                    tools:ignore="MissingConstraints" />
-
-
-                <TextView
-                    android:id="@+id/plan_a_expiration_date_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/my_sdk_white"
-                    android:textSize="12sp"
-                    android:visibility="visible"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/plan_extra_text"
@@ -135,13 +104,13 @@
                     android:textSize="12sp"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/buttonMonthlyC"
+                    app:layout_constraintEnd_toStartOf="@+id/cancel_button_card"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/plan_duration" />
 
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/buttonMonthlyC"
+                    android:id="@+id/cancel_button_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -150,10 +119,10 @@
                     app:cardCornerRadius="4dp"
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plan_a_price">
+                    app:layout_constraintTop_toBottomOf="@+id/price">
 
                     <TextView
-                        android:id="@+id/button_monthly"
+                        android:id="@+id/cancel_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -176,14 +145,13 @@
         </androidx.cardview.widget.CardView>
 
 
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/payment_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+      
         android:orientation="vertical">
 
 

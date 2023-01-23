@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.annotation.Keep
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
@@ -13,7 +14,7 @@ internal enum class Status {
     SUCCESS,
     ERROR, LOADING
 }
-
+internal data class ApiError(val errorCode:Int?, val message: String?)
 @Keep
 internal data class ApiResponse<out T>(
     val status: Status,
@@ -71,27 +72,24 @@ internal suspend fun <T> safeApiCall(responseFunction: suspend () -> T): ApiResp
     }
 }
 
-//inline fun <ResultType, RequestType> networkBoundResource(
-//    //*Internet call*//
-//    crossinline fetch: suspend () -> RequestType,
-//    crossinline saveFetchResult: suspend (RequestType) -> Unit,
-//    crossinline shouldFetch: (ResultType) -> Boolean = { true }
-//) = flow {
-//    val data = query().first()
-//    val flow = if (shouldFetch(data)) {
-//        emit(Resource.Loading(data))
-//        try {
-//            saveFetchResult(fetch())
-//            query().map { Resource.Success(it) }
-//        } catch (throwable: Throwable) {
-////            throwable.fillInStackTrace().
-//            query().map { Resource.Error(throwable, it) }
-//        }
-//    } else {
-//        query().map { Resource.Success(it) }
-//    }
-//    emitAll(flow)
-//}
+internal fun Throwable.toApiError(): ApiError {
+    return when(this){
+        is HttpException -> {
+            val errorResponse = kotlin.runCatching {  this.response()?.errorBody()?.string()}.getOrNull()
+            val error = kotlin.runCatching {  errorResponse?.let { JSONObject(it) }}.getOrNull()
+            val message = if(error?.has("Message") == true) {
+                error.get("Message").toString()
+            }else{
+                this.message()
+            }
+            ApiError(this.code(),message)
+        }
+        is UnknownHostException -> ApiError(null,"Please check your internet connection")
+        else -> ApiError(null,this.message)
+    }
+
+}
+
 
 internal sealed class Resource<T>(
     val status: Status,

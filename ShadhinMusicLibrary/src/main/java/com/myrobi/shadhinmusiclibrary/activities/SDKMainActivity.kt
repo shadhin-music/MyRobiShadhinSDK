@@ -46,6 +46,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.exoplayer2.offline.DownloadRequest
 import com.google.android.exoplayer2.offline.DownloadService
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.myrobi.shadhinmusiclibrary.BuildConfig
 import com.myrobi.shadhinmusiclibrary.R
 
 import com.myrobi.shadhinmusiclibrary.adapter.CreatePlaylistListAdapter
@@ -186,6 +187,7 @@ internal class SDKMainActivity : BaseActivity(),
 
         uiInitMiniMusicPlayer()
         uiInitMainMusicPlayer()
+        homeViewModel.reloadSubscriptionPlan()
         mainMusicPlayerAdapter = MusicPlayAdapter(this)
 
         //Will received request from Any page from MYBLL app
@@ -194,7 +196,11 @@ internal class SDKMainActivity : BaseActivity(),
             routeFromRC()
         }
         if(uiRequest == AppConstantUtils.HOME_PATCH){
-            startDestination(resId = R.id.homeFragment)
+           /* if(BuildConfig.DEBUG){
+                startDestination(resId = R.id.subscription_fragment)
+            }else{*/
+                startDestination(resId = R.id.homeFragment)
+           // }
 
         }
         if (uiRequest == AppConstantUtils.Requester_Name_Home) {

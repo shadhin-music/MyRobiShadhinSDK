@@ -254,6 +254,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
         android:background="@drawable/rounded_blue"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         tools:layout_editor_absoluteX="-20dp">
@@ -273,31 +276,50 @@
 
         <TextView
             android:id="@+id/ProSubtext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:paddingStart="16dp"
             android:paddingTop="2dp"
             android:paddingBottom="8dp"
             android:text="Ad-free,unlimited offline\ndownloads and create playlist"
             android:textColor="@color/my_sdk_color_white"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Protext" />
 
+        <ImageView
+            android:id="@+id/arrow_btn"
+            android:clickable="false"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            tools:visibility="invisible"
+            android:background="@drawable/my_bl_sdk_background_round"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_white"
+            android:gravity="center"
             android:padding="8dp"
-            android:gravity ="center"
             android:text="Get Pro"
             android:textAllCaps="false"
             android:textColor="@color/my_sdk_color_primary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+             />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
