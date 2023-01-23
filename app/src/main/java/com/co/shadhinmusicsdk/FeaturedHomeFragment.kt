@@ -80,47 +80,48 @@ internal class FeaturedHomeFragment : Fragment() {
         btnMusic.setOnClickListener {
 
                 val mobileNm = etMobileNumber.text.toString()
-
-                if (mobileNm.isNotEmpty()) {
-                    callApi.fetchMyRobiLogin(LoginModel()
-                        .apply {
-                            msisdn = mobileNm
-//                        userFullName = "test"
-//                        deviceToken = ""
-//                        gender = "test"
-//                        imageURL = ""
-                        }).enqueue(object : Callback<LoginResponse> {
-                        override fun onResponse(
-                            call: Call<LoginResponse>,
-                            response: Response<LoginResponse>
-                        ) {
-                            if (response.isSuccessful) {
-                                loginResponse = response.body()
-                                ShadhinMusicSdkCore.openShadhin(requireContext(),
-                                    loginResponse?.data?.msisdn.toString())
+                ShadhinMusicSdkCore.openShadhin(requireContext(),
+                   mobileNm)
+//                if (mobileNm.isNotEmpty()) {
+//                    callApi.fetchMyRobiLogin(LoginModel()
+//                        .apply {
+//                            msisdn = mobileNm
+////                        userFullName = "test"
+////                        deviceToken = ""
+////                        gender = "test"
+////                        imageURL = ""
+//                        }).enqueue(object : Callback<LoginResponse> {
+//                        override fun onResponse(
+//                            call: Call<LoginResponse>,
+//                            response: Response<LoginResponse>
+//                        ) {
+//                            if (response.isSuccessful) {
+//                                loginResponse = response.body()
+//                                ShadhinMusicSdkCore.openShadhin(requireContext(),
+//                                    loginResponse?.data?.msisdn.toString())
                                 //goToSdk()
-                                Log.e("RAppA", "onResponse: " + response.code())
-                            } else {
-                                Log.e(
-                                    "RAppA",
-                                    "onResponse: " + response.body()?.message + " \n" + response.message()
-                                )
-                                Toast.makeText(
-                                    requireContext(),
-                                    response.body()?.message.toString() + "",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-
-                        override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                            Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    })
-                } else {
-                    Toast.makeText(requireContext(), "Please enter mobile number", Toast.LENGTH_SHORT).show()
-                }
+                              //  Log.e("RAppA", "onResponse: " + response.code())
+//                            } else {
+//                                Log.e(
+//                                    "RAppA",
+//                                    "onResponse: " + response.body()?.message + " \n" + response.message()
+//                                )
+//                                Toast.makeText(
+//                                    requireContext(),
+//                                    response.body()?.message.toString() + "",
+//                                    Toast.LENGTH_SHORT
+//                                ).show()
+//                            }
+//                        }
+//
+//                        override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+//                            Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT)
+//                                .show()
+//                        }
+//                    })
+//                } else {
+//                    Toast.makeText(requireContext(), "Please enter mobile number", Toast.LENGTH_SHORT).show()
+//                }
 
            // ShadhinMusicSdkCore.openShadhin(requireContext(), "01234556666666")
         }
