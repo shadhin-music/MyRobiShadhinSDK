@@ -24,10 +24,9 @@ import com.myrobi.shadhinmusiclibrary.data.model.subscription.SubscriptionDetail
 import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.di.FragmentEntryPoint
 import com.myrobi.shadhinmusiclibrary.utils.px
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.lang.Runnable
 
 
 class SubscriptionFragment : Fragment(), FragmentEntryPoint {
@@ -85,36 +84,36 @@ class SubscriptionFragment : Fragment(), FragmentEntryPoint {
     }
 
 
+
     private fun observeData() {
 
-        lifecycleScope.launchWhenStarted {
+
+        lifecycleScope.launch(Dispatchers.Main) {
 
             viewModel.subscriptionResponse.collectLatest { response ->
-                requireActivity().runOnUiThread(Runnable {
-
-                    val bundle = bundleOf(
-                        Pair(SubscriptionWebViewFragment.TITLE_ARGS, "Robi"),
-                        Pair(
-                            SubscriptionWebViewFragment.URL_ARGS,
-                            response.redirectURL ?: ""
-                        )
+                val bundle = bundleOf(
+                    Pair(SubscriptionWebViewFragment.TITLE_ARGS, "Robi"),
+                    Pair(
+                        SubscriptionWebViewFragment.URL_ARGS,
+                        response.redirectURL ?: ""
                     )
-                    if (findNavController().currentDestination?.id == R.id.subscription_fragment) {
-                        findNavController().navigate(R.id.to_subscription_web_view, bundle)
-                    }
-                })
+                )
+                Log.i(TAG, "collectLatest: ${response.redirectURL}")
+                if (findNavController().currentDestination?.id == R.id.subscription_fragment) {
+                    findNavController().navigate(R.id.to_subscription_web_view, bundle)
+                }
             }
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             progressVisibility(isLoading)
-        }
-        viewModel.activePlan.observe(viewLifecycleOwner) { plan ->
+        })
+        viewModel.activePlan.observe(viewLifecycleOwner, Observer { plan ->
             planUiUpdate(plan)
-        }
-        viewModel.error.observe(viewLifecycleOwner) { error ->
+        })
+        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
             errorUiVisibility(!error.message.isNullOrEmpty(), error.message)
-        }
+        })
 
 
 
