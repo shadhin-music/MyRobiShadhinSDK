@@ -2,6 +2,7 @@ package com.myrobi.shadhinmusiclibrary
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.Keep
 import androidx.fragment.app.Fragment
@@ -9,7 +10,6 @@ import com.myrobi.shadhinmusiclibrary.activities.SDKMainActivity
 import com.myrobi.shadhinmusiclibrary.data.model.APIResponse
 import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
 import com.myrobi.shadhinmusiclibrary.data.remote.ApiService
-import com.myrobi.shadhinmusiclibrary.data.repository.AuthRepository
 import com.myrobi.shadhinmusiclibrary.di.ShadhinApp
 import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient
 import com.myrobi.shadhinmusiclibrary.di.single.SingleCallback
@@ -61,12 +61,13 @@ object ShadhinMusicSdkCore {
 
     @JvmStatic
     fun openShadhin(reqContext: Context, msisdn:String) {
-        AuthRepository.msisdn = msisdn
-        val intent = Intent(reqContext, SDKMainActivity::class.java)
-        intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
-        reqContext.startActivity(intent)
+        scope = CoroutineScope(Dispatchers.IO)
         scope?.launch {
-            SingleCallback.INSTANCE?.tokenStatus(true, "0")
+            ShadhinApp.module(reqContext).authRepository().login(msisdn)
+            val intent = Intent(reqContext, SDKMainActivity::class.java)
+            intent.putExtra(AppConstantUtils.UI_Request_Type, AppConstantUtils.HOME_PATCH)
+            reqContext.startActivity(intent)
+            Log.e("LOgin", "Login: " + msisdn)
         }
     }
 

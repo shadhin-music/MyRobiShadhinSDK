@@ -1,14 +1,21 @@
 package com.myrobi.shadhinmusiclibrary.data.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
+@Keep
 
-class LoginModel {
+internal data class LoginModel (
     @SerializedName("msisdn")
     @Expose
-    var msisdn: String? = null
+    var msisdn: String? = null)
+
+
+
+
+
 
 //    @SerializedName("userFullName")
 //    @Expose
@@ -25,4 +32,4 @@ class LoginModel {
 //    @SerializedName("deviceToken")
 //    @Expose
 //    var deviceToken: String? = null
-}
+//}
