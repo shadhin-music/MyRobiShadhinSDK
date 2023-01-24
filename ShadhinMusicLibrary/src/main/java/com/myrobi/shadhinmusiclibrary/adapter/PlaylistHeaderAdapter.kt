@@ -1,5 +1,6 @@
 package com.myrobi.shadhinmusiclibrary.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,7 @@ internal class PlaylistHeaderAdapter(
     override fun onBindViewHolder(holder: PlaylistHeaderVH, position: Int) {
         holder.bindItems(homePatchDetail)
         itemClickCB.getCurrentVH(holder, dataSongDetail)
-        holder.ivPlayBtn?.setOnClickListener {
+        holder.ivPlayBtn.setOnClickListener {
             itemClickCB.onRootClickItem(dataSongDetail, position)
         }
     }
@@ -50,12 +51,13 @@ internal class PlaylistHeaderAdapter(
         return 1
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setSongAndData(data: MutableList<SongDetailModel>, homePatchDetail: HomePatchDetailModel) {
         this.dataSongDetail = mutableListOf()
         for (songItem in data) {
             dataSongDetail.add(
                 UtilHelper.getMixdUpIMusicWithRootData(
-                    songItem.apply { isSeekAble = true },
+                    songItem.apply { isSeekAble = true},
                     homePatchDetail
                 )
             )
@@ -64,6 +66,7 @@ internal class PlaylistHeaderAdapter(
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(homePatchDetail: HomePatchDetailModel) {
         this.homePatchDetail = homePatchDetail
         notifyDataSetChanged()
@@ -74,8 +77,9 @@ internal class PlaylistHeaderAdapter(
         private lateinit var ivThumbCurrentPlayItem: ImageView
         private lateinit var tvCurrentAlbumName: TextView
         private lateinit var tvArtistName: TextView
+        internal lateinit var ivPlayBtn: ImageView
         var ivFavorite: ImageView? = null
-        var ivPlayBtn: ImageView? = null
+        //var ivPlayBtn: ImageView? = null
         var menu: ImageView? = null
         val formatedDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
         val formatedTime = SimpleDateFormat("HH:mm").format(Date())
