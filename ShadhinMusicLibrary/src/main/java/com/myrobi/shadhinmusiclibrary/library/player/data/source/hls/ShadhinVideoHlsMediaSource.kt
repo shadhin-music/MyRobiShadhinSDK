@@ -1,50 +1,48 @@
-package com.myrobi.shadhinmusiclibrary.library.player.data.source
-
-
+package com.myrobi.shadhinmusiclibrary.library.player.data.source.hls
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.core.net.toUri
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.hls.DefaultHlsDataSourceFactory
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
-import com.google.android.exoplayer2.upstream.*
+import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
 import com.myrobi.shadhinmusiclibrary.library.player.Constants
 import com.myrobi.shadhinmusiclibrary.library.player.data.model.Music
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.MusicRepository
+import com.myrobi.shadhinmusiclibrary.library.player.data.source.MediaSources
+import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinDataSourceFactory
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CharParser
 import com.myrobi.shadhinmusiclibrary.utils.exH
 import com.myrobi.shadhinmusiclibrary.utils.randomString
 
-internal class ShadhinVideoMediaSourceHls(
+internal class ShadhinVideoHlsMediaSource(
     private val context: Context,
     private val videoList: List<VideoModel>,
     private val cache: SimpleCache,
-    private val musicRepository: MusicRepository,
+    private val musicRepository: MusicRepository
 ) : MediaSources {
     override fun createSources(): List<MediaSource> {
         return videoList.map { createSource(it) }
     }
 
-    private fun createSource(video: VideoModel): HlsMediaSource {
-        val  dataSourceFactory : DataSource.Factory=  DefaultDataSourceFactory(context, "")
+    private fun createSource(video: VideoModel): MediaSource {
 
-        return HlsMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(toVideoMediaItem(video))
-//        val dataSource: HlsDataSourceFactory = DefaultHlsDataSourceFactory(DataSource)
-////            ShadhinDataSourceFactory.buildWithoutWriteCache(
-////                context,
-////                toMusic(video),
-////                cache,
-////                musicRepository
-////            )
-//        val pla = toVideoMediaItem(video)
-//        return HlsMediaSource.Factory(dataSource)
-//            .createMediaSource(pla)
+        val dataSource: DataSource.Factory =
+            ShadhinDataHlsSourceFactory.buildWithoutWriteCache(
+                context,
+                toMusic(video),
+                cache,
+                musicRepository
+            )
+        val pla = toVideoMediaItem(video)
+        return HlsMediaSource.Factory(dataSource)
+            .createMediaSource(pla)
     }
 
     private fun toMusic(video: VideoModel): Music {
@@ -71,7 +69,7 @@ internal class ShadhinVideoMediaSourceHls(
 
     private fun toVideoMediaItem(video: VideoModel): MediaItem {
         val videoUrl = "${Constants.FILE_BASE_URL}${video.playUrl}"
-        
+
         return MediaItem.Builder()
             .setMediaId(video.contentID ?: randomString(5))
             .setUri(videoUrl)

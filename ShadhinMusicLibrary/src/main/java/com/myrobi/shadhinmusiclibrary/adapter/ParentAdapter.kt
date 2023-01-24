@@ -50,7 +50,7 @@ internal class ParentAdapter(
             VIEW_TRENDING_MUSIC_VIDEO -> R.layout.my_bl_sdk_item_trending_music_videos
             VIEW_PODCAST_LIVE -> R.layout.my_bl_sdk_item_bhoot_podcast
             VIEW_DOWNLOAD -> R.layout.download_fav_playlist_layout
-            VIEW_POPULAR_AMAR_TUNES -> R.layout.my_bl_sdk_item_popular_amar_tunes
+//            VIEW_POPULAR_AMAR_TUNES -> R.layout.my_bl_sdk_item_popular_amar_tunes
             VIEW_SHOW ->R.layout.my_bl_sdk_item_release_patch
             VIEW_BANNER ->R.layout.my_bl_sdk_banner
             VIEW_DISCOVER -> R.layout.billboard_layout
@@ -83,7 +83,7 @@ internal class ParentAdapter(
             "Track" -> VIEW_RELEASE
             "Podcast" -> VIEW_POPULAR_PODCAST
             "SmallVideo" -> VIEW_TRENDING_MUSIC_VIDEO
-            "amarTune" -> VIEW_POPULAR_AMAR_TUNES
+//            "amarTune" -> VIEW_POPULAR_AMAR_TUNES
             "download" -> VIEW_DOWNLOAD
             "PodcastLive" -> VIEW_PODCAST_LIVE
             "Show" -> VIEW_SHOW
@@ -413,7 +413,7 @@ internal class ParentAdapter(
                 "Track" -> bindRelease(homePatchItemModel)
                 "Podcast" -> bindPopularPodcast(homePatchItemModel)
                 "SmallVideo" -> bindTrendingMusic(homePatchItemModel)
-                "amarTune" -> bindPopularAmarTunes(homePatchItemModel)
+//                "amarTune" -> bindPopularAmarTunes(homePatchItemModel)
                 "download" -> bindDownload(homePatchItemModel)
                 "PodcastLive" -> bindBhoot(homePatchItemModel)
                 "Show"->bindPodcastShow(homePatchItemModel)

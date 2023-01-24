@@ -300,7 +300,7 @@
 
     <fragment
         android:id="@+id/s_type_details_fragment"
-        android:name="com.myrobi.shadhinmusiclibrary.fragments.STypeDetailsFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.album.AlbumDetailsFragment"
         android:label="Playlist Details"
         tools:layout="@layout/my_bl_sdk_common_rv_layout" >
         <action

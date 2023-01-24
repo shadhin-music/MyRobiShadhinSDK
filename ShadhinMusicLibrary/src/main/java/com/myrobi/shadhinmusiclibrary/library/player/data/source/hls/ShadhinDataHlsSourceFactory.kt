@@ -1,4 +1,4 @@
-package com.myrobi.shadhinmusiclibrary.library.player.data.source
+package com.myrobi.shadhinmusiclibrary.library.player.data.source.hls
 
 import android.content.Context
 import android.util.Log
@@ -9,15 +9,20 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource
 
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
+import com.myrobi.shadhinmusiclibrary.library.player.Constants
 import com.myrobi.shadhinmusiclibrary.library.player.data.model.Music
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.MusicRepository
+import com.myrobi.shadhinmusiclibrary.library.player.data.source.PlayerInterceptor
+import com.myrobi.shadhinmusiclibrary.library.player.singleton.DataSourceInfo
 import com.myrobi.shadhinmusiclibrary.library.player.singleton.DataSourceInfo.isDataSourceError
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 
 
 private const val TAG = "DataSourceFactory"
 
-internal open class ShadhinDataSourceFactory constructor(
+internal open class ShadhinDataHlsSourceFactory constructor(
     private val context: Context,
     private val music: Music,
     private val musicRepository: MusicRepository
@@ -32,7 +37,20 @@ internal open class ShadhinDataSourceFactory constructor(
         isDataSourceError = false
         val client = OkHttpClient()
             .newBuilder()
-            .addInterceptor(PlayerInterceptor(musicRepository, music))
+            .addInterceptor(Interceptor { chain ->
+                DataSourceInfo.isDataSourceError = false
+                val newUrl = musicRepository.fetchURL(music)
+             //   chain.request()
+               /* val newRequest =
+                    chain.request().newBuilder()
+                        .url(newUrl)
+                        .header("User-Agent", Constants.userAgent)
+                        .method("GET", null)
+                        .build()
+
+                Log.i(TAG, "initialization: ${chain.request().url.encodedFragment}")*/
+                chain.proceed(chain.request())
+            })
             .build()
 
 
@@ -57,7 +75,7 @@ internal open class ShadhinDataSourceFactory constructor(
             return CacheDataSource.Factory()
                 .setCache(cache)
                 .setUpstreamDataSourceFactory(
-                    ShadhinDataSourceFactory(context, music, musicRepository)
+                    ShadhinDataHlsSourceFactory(context, music, musicRepository)
                 )
                 // TODO must be remove setCacheWriteDataSinkFactory(null) this line when download done . but this time for testing
                 // .setCacheWriteDataSinkFactory(null)
@@ -75,7 +93,7 @@ internal open class ShadhinDataSourceFactory constructor(
             return CacheDataSource.Factory()
                 .setCache(cache)
                 .setUpstreamDataSourceFactory(
-                    ShadhinDataSourceFactory(context, music, musicRepository)
+                    ShadhinDataHlsSourceFactory(context, music, musicRepository)
                 )
                 // TODO must be remove setCacheWriteDataSinkFactory(null) this line when download done . but this time for testing
                 .setCacheWriteDataSinkFactory(null)

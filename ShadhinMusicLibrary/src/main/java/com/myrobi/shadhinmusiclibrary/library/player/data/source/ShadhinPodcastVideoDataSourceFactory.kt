@@ -38,8 +38,6 @@ internal open class ShadhinPodcastVideoDataSourceFactory constructor(
             .newBuilder()
             .addInterceptor(PlayerInterceptor(musicRepository, music))
             .build()
-
-
         val networkFactory = OkHttpDataSource.Factory(client)
         factory = DefaultDataSource.Factory(context, networkFactory)
     }
