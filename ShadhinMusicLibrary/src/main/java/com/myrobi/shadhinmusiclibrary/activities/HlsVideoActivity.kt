@@ -64,7 +64,6 @@ import com.myrobi.shadhinmusiclibrary.library.player.ShadhinMusicQueueNavigator
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManager
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManagerFactory
 import com.myrobi.shadhinmusiclibrary.library.player.data.source.MediaSources
-import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSource
 import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSourceHls
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils

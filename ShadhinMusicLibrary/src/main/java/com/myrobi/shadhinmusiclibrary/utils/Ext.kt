@@ -22,6 +22,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaMetadata
+import com.myrobi.shadhinmusiclibrary.library.player.data.model.Music
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -749,4 +752,18 @@ inline fun <reified T>Fragment.getNavigationResult(key: String = "result") =
 
 fun <T> Fragment.setNavigationResult(result: T, key: String = "result") {
     this.findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
+}
+fun toVideoMediaItem(mediaId: String,type:String,playUrl:String,title:String): MediaItem.Builder {
+    val music = Music(contentType = type, mediaId = mediaId, title = title)
+
+    return MediaItem.Builder()
+        .setUri(playUrl)
+        .setMediaId(mediaId)
+        .setMediaMetadata(
+            MediaMetadata.Builder()
+                .setTitle(music.title)
+                .setExtras(music.toBundleMetaData("Video"))
+                .build()
+        )
+
 }

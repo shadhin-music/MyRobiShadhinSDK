@@ -8,9 +8,9 @@ import androidx.core.net.toUri
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.hls.DefaultHlsDataSourceFactory
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
-import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.*
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
 import com.myrobi.shadhinmusiclibrary.library.player.Constants
@@ -24,23 +24,27 @@ internal class ShadhinVideoMediaSourceHls(
     private val context: Context,
     private val videoList: List<VideoModel>,
     private val cache: SimpleCache,
-    private val musicRepository: MusicRepository
+    private val musicRepository: MusicRepository,
 ) : MediaSources {
     override fun createSources(): List<MediaSource> {
         return videoList.map { createSource(it) }
     }
 
     private fun createSource(video: VideoModel): HlsMediaSource {
-        val dataSource: DataSource.Factory =
-            ShadhinDataSourceFactory.buildWithoutWriteCache(
-                context,
-                toMusic(video),
-                cache,
-                musicRepository
-            )
-        val pla = toVideoMediaItem(video)
-        return HlsMediaSource.Factory(dataSource)
-            .createMediaSource(pla)
+        val  dataSourceFactory : DataSource.Factory=  DefaultDataSourceFactory(context, "")
+
+        return HlsMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(toVideoMediaItem(video))
+//        val dataSource: HlsDataSourceFactory = DefaultHlsDataSourceFactory(DataSource)
+////            ShadhinDataSourceFactory.buildWithoutWriteCache(
+////                context,
+////                toMusic(video),
+////                cache,
+////                musicRepository
+////            )
+//        val pla = toVideoMediaItem(video)
+//        return HlsMediaSource.Factory(dataSource)
+//            .createMediaSource(pla)
     }
 
     private fun toMusic(video: VideoModel): Music {
