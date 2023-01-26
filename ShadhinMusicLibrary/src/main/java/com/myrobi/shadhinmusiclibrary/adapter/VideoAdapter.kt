@@ -140,16 +140,17 @@ internal class VideoAdapter(
                 )
             }
             subTitleTextView.text = item.artist
-            if (item?.image?.contains("size")==true){
+        ///    if (item?.image?.contains("<\$size\$>")==true){
                 Glide.with(itemView.context)
-                    .load(UtilHelper.getImageUrlSize450(item?.image!!))
+                    .load(UtilHelper.getImageUrlSize300(item?.image!!))
                     .placeholder(R.drawable.my_bl_sdk_default_video)
                     .into(videoImage)
-            }
-            Glide.with(itemView.context)
-                .load(item.image)
-                .placeholder(R.drawable.my_bl_sdk_default_video)
-                .into(videoImage)
+                Log.e("TAG","DATA: "+ item.image)
+           // }
+//            Glide.with(itemView.context)
+//                .load(item.image)
+//                .placeholder(R.drawable.my_bl_sdk_default_video)
+//                .into(videoImage)
 
             if (item.isPlaystate) {
                 playPauseImage.setImageResource(R.drawable.my_bl_sdk_ic_pause_n)
