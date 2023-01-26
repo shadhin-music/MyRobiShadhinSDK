@@ -21,6 +21,7 @@ import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
 import com.myrobi.shadhinmusiclibrary.activities.video.BottomsheetDialog
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.myrobi.shadhinmusiclibrary.utils.TimeParser
+import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 
 internal typealias VideoItemClickFunc = (VideoModel, isMenuClick: Boolean) -> Unit
 
@@ -139,6 +140,12 @@ internal class VideoAdapter(
                 )
             }
             subTitleTextView.text = item.artist
+            if (item?.image?.contains("size")==true){
+                Glide.with(itemView.context)
+                    .load(UtilHelper.getImageUrlSize450(item?.image!!))
+                    .placeholder(R.drawable.my_bl_sdk_default_video)
+                    .into(videoImage)
+            }
             Glide.with(itemView.context)
                 .load(item.image)
                 .placeholder(R.drawable.my_bl_sdk_default_video)

@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.AudioManager
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -16,6 +17,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
@@ -258,7 +261,13 @@ internal class VideoActivity : AppCompatActivity(),
             currentPosition = intent.getIntExtra(INTENT_KEY_POSITION, 0)
             videoList = intent.getParcelableArrayListExtra(INTENT_KEY_DATA_LIST)
             viewModel.videos(videoList)
-
+            val iconsLayout = findViewById<LinearLayout>(R.id.iconsLayout)
+            if (videoList?.get(currentPosition)?.playUrl?.contains("m3u8")==true){
+                iconsLayout.visibility = GONE
+            }
+            else{
+                iconsLayout.visibility = VISIBLE
+            }
             val downloaded =
                 cacheRepository.getDownloadById(videoList?.get(currentPosition)?.contentID.toString())
             val watched =
