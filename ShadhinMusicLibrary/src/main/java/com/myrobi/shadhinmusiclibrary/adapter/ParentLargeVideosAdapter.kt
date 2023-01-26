@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myrobi.shadhinmusiclibrary.R
-import com.myrobi.shadhinmusiclibrary.activities.HlsVideoActivity
+import com.myrobi.shadhinmusiclibrary.activities.video.VideoActivity
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
@@ -54,7 +54,7 @@ internal class ParentLargeVideosAdapter(
             textViewArtist.text = homePatchItemModel.Data[absoluteAdapterPosition].titleName
             Glide.with(itemView.context).load(UtilHelper.getImageUrlSize300(url)).into(imageView)
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, HlsVideoActivity::class.java)
+                val intent = Intent(itemView.context, VideoActivity::class.java)
                 val videoArray = ArrayList<VideoModel>()
                 for (item in homePatchItemModel.Data) {
                     val video = VideoModel()
@@ -62,8 +62,8 @@ internal class ParentLargeVideosAdapter(
                     videoArray.add(video)
                 }
                 val videos: ArrayList<VideoModel> = videoArray
-                intent.putExtra(HlsVideoActivity.INTENT_KEY_POSITION, absoluteAdapterPosition)
-                intent.putExtra(HlsVideoActivity.INTENT_KEY_DATA_LIST, videos)
+                intent.putExtra(VideoActivity.INTENT_KEY_POSITION, absoluteAdapterPosition)
+                intent.putExtra(VideoActivity.INTENT_KEY_DATA_LIST, videos)
                 itemView.context.startActivity(intent)
             }
 
