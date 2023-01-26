@@ -65,12 +65,14 @@ import com.myrobi.shadhinmusiclibrary.fragments.home.HomeViewModel
 import com.myrobi.shadhinmusiclibrary.library.discretescrollview.DSVOrientation
 import com.myrobi.shadhinmusiclibrary.library.discretescrollview.DiscreteScrollView
 import com.myrobi.shadhinmusiclibrary.library.discretescrollview.transform.ScaleTransformer
+
 import com.myrobi.shadhinmusiclibrary.library.player.Constants
 import com.myrobi.shadhinmusiclibrary.library.player.data.model.MusicPlayList
 import com.myrobi.shadhinmusiclibrary.library.player.ui.PlayerViewModel
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.myrobi.shadhinmusiclibrary.library.player.utils.isPlaying
 import com.myrobi.shadhinmusiclibrary.library.slidinguppanel.SlidingUpPanelLayout
+
 import com.myrobi.shadhinmusiclibrary.utils.*
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils.PatchDetail
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils.PatchItem
