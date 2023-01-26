@@ -2,19 +2,15 @@ package com.myrobi.shadhinmusiclibrary.adapter
 
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
-
 import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myrobi.shadhinmusiclibrary.R
-import com.myrobi.shadhinmusiclibrary.activities.HlsVideoActivity
 import com.myrobi.shadhinmusiclibrary.activities.video.VideoActivity
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel

@@ -17,17 +17,14 @@ import com.myrobi.shadhinmusiclibrary.library.player.utils.CharParser
 import com.myrobi.shadhinmusiclibrary.utils.exH
 import com.myrobi.shadhinmusiclibrary.utils.randomString
 
-internal class ShadhinVideoMediaSource(
+internal class ShadhinDefaultMediaSourceBuilder(
     private val context: Context,
-    private val videoList: List<VideoModel>,
+    private val video: VideoModel,
     private val cache: SimpleCache,
     private val musicRepository: MusicRepository
-) : MediaSources {
-    override fun createSources(): List<MediaSource> {
-        return videoList.map { createSource(it) }
-    }
+) : MediaSourceBuilder {
 
-    private fun createSource(video: VideoModel): ProgressiveMediaSource {
+    override fun build(): MediaSource {
         val dataSource: DataSource.Factory =
             ShadhinDataSourceFactory.buildWithoutWriteCache(
                 context,
@@ -39,7 +36,6 @@ internal class ShadhinVideoMediaSource(
         return ProgressiveMediaSource.Factory(dataSource)
             .createMediaSource(pla)
     }
-
     private fun toMusic(video: VideoModel): Music {
         return Music(
             mediaId = video.contentID,
