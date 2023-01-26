@@ -1,7 +1,5 @@
 package com.myrobi.shadhinmusiclibrary.library.player.data.source
 
-
-
 import android.content.Context
 import android.os.Bundle
 import androidx.core.net.toUri
@@ -9,7 +7,6 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
@@ -20,29 +17,25 @@ import com.myrobi.shadhinmusiclibrary.library.player.utils.CharParser
 import com.myrobi.shadhinmusiclibrary.utils.exH
 import com.myrobi.shadhinmusiclibrary.utils.randomString
 
-internal class ShadhinVideoMediaSourceHls(
+internal class ShadhinDefaultMediaSourceBuilder(
     private val context: Context,
-    private val videoList: List<VideoModel>,
+    private val video: VideoModel,
     private val cache: SimpleCache,
     private val musicRepository: MusicRepository
-) : MediaSources {
-    override fun createSources(): List<MediaSource> {
-        return videoList.map { createSource(it) }
-    }
+) : MediaSourceBuilder {
 
-    private fun createSource(video: VideoModel): HlsMediaSource {
+    override fun build(): MediaSource {
         val dataSource: DataSource.Factory =
-            ShadhinHlsDataSourceFactory.buildWithoutWriteCache(
+            ShadhinDataSourceFactory.buildWithoutWriteCache(
                 context,
                 toMusic(video),
                 cache,
                 musicRepository
             )
         val pla = toVideoMediaItem(video)
-        return HlsMediaSource.Factory(dataSource)
+        return ProgressiveMediaSource.Factory(dataSource)
             .createMediaSource(pla)
     }
-
     private fun toMusic(video: VideoModel): Music {
         return Music(
             mediaId = video.contentID,
@@ -67,7 +60,7 @@ internal class ShadhinVideoMediaSourceHls(
 
     private fun toVideoMediaItem(video: VideoModel): MediaItem {
         val videoUrl = "${Constants.FILE_BASE_URL}${video.playUrl}"
-        
+
         return MediaItem.Builder()
             .setMediaId(video.contentID ?: randomString(5))
             .setUri(videoUrl)

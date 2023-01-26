@@ -6,7 +6,7 @@ import androidx.core.net.toUri
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
@@ -17,29 +17,22 @@ import com.myrobi.shadhinmusiclibrary.library.player.utils.CharParser
 import com.myrobi.shadhinmusiclibrary.utils.exH
 import com.myrobi.shadhinmusiclibrary.utils.randomString
 
-internal class ShadhinVideoMediaSource(
+internal class ShadhinHlsMediaSourceBuilder(
     private val context: Context,
-    private val videoList: List<VideoModel>,
-    private val cache: SimpleCache,
+    private val video: VideoModel,
     private val musicRepository: MusicRepository
-) : MediaSources {
-    override fun createSources(): List<MediaSource> {
-        return videoList.map { createSource(it) }
-    }
-
-    private fun createSource(video: VideoModel): ProgressiveMediaSource {
+) : MediaSourceBuilder {
+    override fun build(): MediaSource {
         val dataSource: DataSource.Factory =
-            ShadhinDataSourceFactory.buildWithoutWriteCache(
+            ShadhinHlsDataSourceFactory.build(
                 context,
                 toMusic(video),
-                cache,
                 musicRepository
             )
         val pla = toVideoMediaItem(video)
-        return ProgressiveMediaSource.Factory(dataSource)
+        return HlsMediaSource.Factory(dataSource)
             .createMediaSource(pla)
     }
-
     private fun toMusic(video: VideoModel): Music {
         return Music(
             mediaId = video.contentID,

@@ -34,9 +34,7 @@ internal open class ShadhinHlsDataSourceFactory constructor(
             .addInterceptor(PlayerHlsInterceptor(musicRepository, music))
             .build()
 
-
-        val networkFactory = OkHttpDataSource.Factory(client)
-        factory = DefaultDataSource.Factory(context, networkFactory)
+        factory = OkHttpDataSource.Factory(client)
     }
 
     override fun createDataSource(): DataSource {
@@ -48,36 +46,10 @@ internal open class ShadhinHlsDataSourceFactory constructor(
         fun build(
             context: Context,
             music: Music,
-            cache: SimpleCache,
             musicRepository: MusicRepository
         ): DataSource.Factory {
-
-            return CacheDataSource.Factory()
-                .setCache(cache)
-                .setUpstreamDataSourceFactory(
-                    ShadhinDataSourceFactory(context, music, musicRepository)
-                )
-                // TODO must be remove setCacheWriteDataSinkFactory(null) this line when download done . but this time for testing
-                // .setCacheWriteDataSinkFactory(null)
-                .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
-
+            return ShadhinHlsDataSourceFactory(context, music, musicRepository)
         }
 
-        @JvmStatic
-        fun buildWithoutWriteCache(
-            context: Context,
-            music: Music,
-            cache: SimpleCache,
-            musicRepository: MusicRepository
-        ): DataSource.Factory {
-            return CacheDataSource.Factory()
-                .setCache(cache)
-                .setUpstreamDataSourceFactory(
-                    ShadhinDataSourceFactory(context, music, musicRepository)
-                )
-                // TODO must be remove setCacheWriteDataSinkFactory(null) this line when download done . but this time for testing
-                .setCacheWriteDataSinkFactory(null)
-                .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
-        }
     }
 }

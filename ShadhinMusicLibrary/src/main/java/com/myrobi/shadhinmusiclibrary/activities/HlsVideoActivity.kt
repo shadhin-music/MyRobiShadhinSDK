@@ -20,7 +20,6 @@ import android.view.View.GONE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
@@ -29,7 +28,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ExoPlayer
@@ -44,12 +42,10 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.myrobi.shadhinmusiclibrary.R
-import com.myrobi.shadhinmusiclibrary.activities.SDKMainActivity
 import com.myrobi.shadhinmusiclibrary.activities.video.PlayerOnScaleGestureListener
 import com.myrobi.shadhinmusiclibrary.activities.video.VideoViewModel
 import com.myrobi.shadhinmusiclibrary.activities.video.VideoViewModelFactory
 import com.myrobi.shadhinmusiclibrary.adapter.HlsVideoAdapter
-import com.myrobi.shadhinmusiclibrary.adapter.VideoAdapter
 import com.myrobi.shadhinmusiclibrary.data.model.DownloadingItem
 import com.myrobi.shadhinmusiclibrary.data.model.VideoModel
 import com.myrobi.shadhinmusiclibrary.data.model.fav.FavDataModel
@@ -64,8 +60,7 @@ import com.myrobi.shadhinmusiclibrary.library.player.ShadhinMusicQueueNavigator
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManager
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManagerFactory
 import com.myrobi.shadhinmusiclibrary.library.player.data.source.MediaSources
-import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSource
-import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSourceHls
+import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSources
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
@@ -137,6 +132,7 @@ internal class HlsVideoActivity : AppCompatActivity(),
         initializePlayer()
         gestureSetup()
         observe()
+
     }
 
     val cacheRepository by lazy {
@@ -604,12 +600,11 @@ internal class HlsVideoActivity : AppCompatActivity(),
     private fun addOnPlayerQueue(videoList: List<VideoModel>) {
         contactMediaSource.clear()
         exoPlayer?.clearMediaItems()
-        videoMediaSource = ShadhinVideoMediaSourceHls(
+        videoMediaSource = ShadhinVideoMediaSources(
             this.applicationContext,
             videoList,
             injector.exoplayerCache,
             injector.musicRepository
-            //injector.robimusicRepository
         )
         val mediaSources = videoMediaSource?.createSources()
         if (!mediaSources.isNullOrEmpty()) {

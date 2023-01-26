@@ -19,7 +19,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
@@ -28,7 +27,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ExoPlayer
@@ -59,7 +57,7 @@ import com.myrobi.shadhinmusiclibrary.library.player.ShadhinMusicQueueNavigator
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManager
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManagerFactory
 import com.myrobi.shadhinmusiclibrary.library.player.data.source.MediaSources
-import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSource
+import com.myrobi.shadhinmusiclibrary.library.player.data.source.ShadhinVideoMediaSources
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
@@ -595,7 +593,7 @@ internal class VideoActivity : AppCompatActivity(),
     private fun addOnPlayerQueue(videoList: List<VideoModel>) {
         contactMediaSource.clear()
         exoPlayer?.clearMediaItems()
-        videoMediaSource = ShadhinVideoMediaSource(
+        videoMediaSource = ShadhinVideoMediaSources(
             this.applicationContext,
             videoList,
             injector.exoplayerCache,

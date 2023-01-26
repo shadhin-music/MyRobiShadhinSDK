@@ -1,5 +1,6 @@
 package com.myrobi.shadhinmusiclibrary.library.player.data.source
 
+import android.util.Log
 import com.myrobi.shadhinmusiclibrary.library.player.Constants
 import com.myrobi.shadhinmusiclibrary.library.player.data.model.Music
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.MusicRepository
@@ -11,17 +12,21 @@ internal class PlayerHlsInterceptor(
     private val musicRepository: MusicRepository,
     private val music: Music
 ) : Interceptor {
-    private var hlsUrl:String?=null
+
     override fun intercept(chain: Interceptor.Chain): Response {
         DataSourceInfo.isDataSourceError = false
-        if(hlsUrl == null) {
-            hlsUrl = musicRepository.fetchURL(music)
-        }
 
+        val firstUrl = "${Constants.FILE_BASE_URL}${music.filePath()}"
+        val currentUrl = chain.request().url.toString()
+
+        val finalUrl = if (currentUrl == firstUrl)
+            musicRepository.fetchURL(music)
+        else
+            currentUrl
 
         val newRequest =
             chain.request().newBuilder()
-                .url(hlsUrl!!)
+                .url(finalUrl)
                 .header("User-Agent", Constants.userAgent)
                 .method("GET", null)
                 .build()
