@@ -57,3 +57,23 @@ internal class ShadhinDefaultMediaSourceBuilder(
             // rootImage = video.rootImage
         )
     }
+
+    private fun toVideoMediaItem(video: VideoModel): MediaItem {
+        val videoUrl = "${Constants.FILE_BASE_URL}${video.playUrl}"
+
+        return MediaItem.Builder()
+            .setMediaId(video.contentID ?: randomString(5))
+            .setUri(videoUrl)
+            .setMediaMetadata(
+                MediaMetadata.Builder()
+                    .setTitle(video.title)
+                    .setMediaUri(videoUrl.toUri())
+                    .setExtras(Bundle().apply {
+                        putString(Music.CONTENT_TYPE, video.contentType)
+                    })
+                    .setArtworkUri(exH { video.image?.toUri() })
+                    .setArtist(video.artist)
+                    .build()
+            ).build()
+    }
+}

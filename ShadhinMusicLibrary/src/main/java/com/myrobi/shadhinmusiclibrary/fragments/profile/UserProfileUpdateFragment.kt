@@ -116,10 +116,10 @@ internal class UserProfileUpdateFragment : BaseFragment(){
                      //selectBirthday.text = it.data?.data?.birthDate.toString()
                  }
                  if(it?.data?.data?.userPic?.toString().isNullOrEmpty()){
-                     profilepic.setImageResource(R.drawable.my_bl_sdk_ic_artist)
+                       profilepic.setImageResource(R.drawable.my_bl_sdk_ic_artist)
                  }else {
                         Log.e("TAG","PROPIC: "+it.data?.data?.userPic)
-                       Glide.with(requireContext()).load("https://api.shadhinmusic.com/userpic/"+it.data?.data?.userPic).into(profilepic)
+                        Glide.with(requireContext()).load("https://api.shadhinmusic.com/userpic/"+it.data?.data?.userPic).into(profilepic)
 
                  }
 
