@@ -27,6 +27,10 @@ internal class CacheRepository(val context: Context) {
     fun insertFavSingleContent(favData: FavDataModel) {
         favoriteContentDB?.FavoriteContentDao()?.insert(favData)
     }
+    fun deleteAllFavByType(type: String) {
+        favoriteContentDB?.FavoriteContentDao()?.deleteAllFavByType(type)
+    }
+    fun deleteAllFavPodcast() = favoriteContentDB?.FavoriteContentDao()?.deleteAllFavPodcast()
 
     fun getAllFavoriteContent() = favoriteContentDB?.FavoriteContentDao()?.getAllFavorites()
     fun getSongsFavoriteContent() = favoriteContentDB?.FavoriteContentDao()?.getAllSongsFav()

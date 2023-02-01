@@ -5,12 +5,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+       android:id ="@+id/main_layout"
+
        >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/my_sdk_color_white"
         tools:visibility="visible">
 
         <ImageView

@@ -59,6 +59,12 @@
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
+    <style name="BottomSheetDialog2" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle2</item>
+    </style>
+    <style name="AppModalStyle2" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">#00000000</item>
+    </style>
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/my_bl_sdk_dialog_bg</item>
     </style>
@@ -89,4 +95,72 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
+    <style name="profile_tv_bg" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+
+        <item name="android:padding">13dp</item>
+        <item name="android:textColor">#FF2A2D36</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:background">@drawable/bg_edittext_round</item>
+
+        <item name="android:textColorHint">#FF939598</item>
+
+    </style>
+
+    <style name="profile_et_bg" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+
+        <item name="android:padding">13dp</item>
+        <item name="android:textColor">#FF2A2D36</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:background">@drawable/bg_edittext_round</item>
+
+        <item name="android:textColorHint">#FF939598</item>
+
+    </style>
+    <style name="profile_et_bg_2" parent="Widget.AppCompat.TextView">
+
+
+        <item name="android:fontFamily">@font/roboto</item>
+
+        <item name="android:padding">13dp</item>
+        <item name="android:textColor">#FF2A2D36</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:background">@drawable/bg_edittext_round</item>
+
+        <item name="android:textColorHint">#FF939598</item>
+
+    </style>
+
+    <style name="profile_et_no_bd" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+
+        <item name="android:padding">13dp</item>
+        <item name="android:textColor">#FF2A2D36</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:textColorHint">#FF939598</item>
+
+    </style>
+
+
+
+    <style name="profile_radio_button_bg" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:textColor">#FF2A2D36</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:textColorHint">#FF939598</item>
+
+    </style>
+
 </resources>

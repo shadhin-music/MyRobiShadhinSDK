@@ -91,6 +91,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
 
         //Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
         if (selectedEpisodeID.isEmpty()) {
+//        if (selectedEpisodeID.isEmpty()) {
             getPodcastShowDetailsInitialize()
             Log.e("PDF", "getPodcastShowDetailsInitialize")
         }else{

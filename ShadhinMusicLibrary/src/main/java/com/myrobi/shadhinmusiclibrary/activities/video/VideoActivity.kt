@@ -1,5 +1,6 @@
 package com.myrobi.shadhinmusiclibrary.activities.video
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -7,7 +8,6 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.AudioManager
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -22,14 +22,22 @@ import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ExoPlayer
@@ -55,6 +63,11 @@ import com.myrobi.shadhinmusiclibrary.download.room.DatabaseClient
 import com.myrobi.shadhinmusiclibrary.download.room.DownloadedContent
 import com.myrobi.shadhinmusiclibrary.download.room.WatchLaterContent
 import com.myrobi.shadhinmusiclibrary.fragments.fav.FavViewModel
+import com.myrobi.shadhinmusiclibrary.fragments.home.HomeViewModel
+import com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionFragment
+import com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionFragmentForVideo
+import com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionNotFoundDialogFragment
+import com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionNotFoundForVideoDialogFragment
 import com.myrobi.shadhinmusiclibrary.library.player.Constants
 import com.myrobi.shadhinmusiclibrary.library.player.ShadhinMusicQueueNavigator
 import com.myrobi.shadhinmusiclibrary.library.player.audio_focus.AudioFocusManager
@@ -66,9 +79,9 @@ import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 import com.myrobi.shadhinmusiclibrary.utils.calculateVideoHeight
 import com.myrobi.shadhinmusiclibrary.utils.px
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 internal class VideoActivity : AppCompatActivity(),
@@ -79,10 +92,12 @@ internal class VideoActivity : AppCompatActivity(),
     /**1144x480 OR 856x480*/
     private val videoWidth: Int = 856
     private val videoHeight: Int = 480
-
+    private lateinit var homeViewModel: HomeViewModel
     private var isDownloaded: Boolean = false
     private var iswatched: Boolean = false
     private lateinit var mainLayout: FrameLayout
+    private lateinit var parentRelative:ConstraintLayout
+    private lateinit var relative:LinearLayout
     private lateinit var adapter: VideoAdapter
     private lateinit var videoRecyclerView: RecyclerView
     private lateinit var videoTitleTextView: TextView
@@ -120,9 +135,11 @@ internal class VideoActivity : AppCompatActivity(),
     private lateinit var videoViewModelFactory: VideoViewModelFactory
     private lateinit var favViewModel: FavViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_bl_sdk_activity_video)
+
         initAudioFocus()
         setupViewModel()
         setupUI()
@@ -131,6 +148,7 @@ internal class VideoActivity : AppCompatActivity(),
         initializePlayer()
         gestureSetup()
         observe()
+
     }
 
     val cacheRepository by lazy {
@@ -160,6 +178,10 @@ internal class VideoActivity : AppCompatActivity(),
             this,
             injector.factoryFavContentVM
         )[FavViewModel::class.java]
+     homeViewModel = ViewModelProvider(
+            this,
+            injector.factoryHomeVM
+        )[HomeViewModel::class.java]
     }
 
     private fun setupUI() {
@@ -173,6 +195,9 @@ internal class VideoActivity : AppCompatActivity(),
             openSearch()
         }
         mainLayout = findViewById(R.id.main)
+        relative = findViewById(R.id.relative)
+
+        parentRelative = findViewById(R.id.parentRelative)
         videoRecyclerView = findViewById(R.id.videoRecyclerView)
         videoTitleTextView = findViewById(R.id.videoTitle)
         videoDescTextView = findViewById(R.id.videoDesc)
@@ -196,6 +221,7 @@ internal class VideoActivity : AppCompatActivity(),
         backButton.setOnClickListener { onBackPressed() }
         fullscreenToggleButton.setOnClickListener { toggleOrientation() }
         configOrientation(resources.configuration.orientation)
+
     }
 
     private fun openSearch() {
@@ -362,6 +388,10 @@ internal class VideoActivity : AppCompatActivity(),
             }
 
             watchlaterLayout.setOnClickListener {
+
+             //   findNavController(R.layout.my_bl_sdk_activity_video).navigate(R.id.to_subscription_not_found)
+
+
                 if (iswatched.equals(true)) {
 
                     //  val currentVideoID =   viewModel.currentVideo.value?.contentID
@@ -405,68 +435,76 @@ internal class VideoActivity : AppCompatActivity(),
                     )
                 }
             }
+
             // val currentVideoID =   viewModel.currentVideo.value?.contentID
             // isDownloaded= false
             downloadLayout.setOnClickListener {
-                if (isDownloaded == true) {
-                    cacheRepository.deleteDownloadById(currentVideoID.toString())
-                    DownloadService.sendRemoveDownload(
-                        applicationContext,
-                        MyBLDownloadService::class.java, currentVideoID.toString(), false
-                    )
-                    val localBroadcastManager =
-                        LocalBroadcastManager.getInstance(applicationContext)
-                    val localIntent = Intent("DELETED")
-                        .putExtra("contentID", currentVideoID.toString())
-                    localBroadcastManager.sendBroadcast(localIntent)
-                    downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_down_item_desc))
-                    isDownloaded = false
-                } else {
-                    //val currentVideoID:String? =   viewModel.currentVideo.value?.contentID
-                    val currentURL: String? = viewModel.currentVideo.value?.playUrl
-                    val currentRootID = viewModel.currentVideo.value?.rootId
-                    val currentImage = viewModel.currentVideo.value?.image
-                    val currentTitle = viewModel.currentVideo.value?.title
-                    val currentRootType = viewModel.currentVideo.value?.contentType
-                    val currentArtist = viewModel.currentVideo.value?.artist
-                    val duration = viewModel.currentVideo.value?.duration
-                    val url = "${Constants.FILE_BASE_URL}${currentURL}"
-                    val downloadRequest: DownloadRequest? =
-                        url.let { it1 ->
-                            DownloadRequest.Builder(currentVideoID.toString(), it1.toUri())
-                                .build()
-                        }
-                    injector.downloadTitleMap[currentVideoID.toString()] =
-                        currentTitle.toString()
-                    downloadRequest?.let { it1 ->
-                        DownloadService.sendAddDownload(
-                            applicationContext,
-                            MyBLDownloadService::class.java,
-                            it1,
-                            /* foreground= */ false
-                        )
-                    }
-                    // downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_color_primary))
-                    if (cacheRepository.isDownloadCompleted(currentVideoID.toString())) {
-                        cacheRepository.insertDownload(
-                            DownloadedContent().apply {
-                                content_Id = currentVideoID.toString()
-                                rootContentId = currentRootID.toString()
-                                imageUrl = currentImage.toString()
-                                titleName = currentTitle.toString()
-                                rootContentType = currentRootType.toString()
-                                playingUrl = currentURL
-                                content_Type = currentRootType.toString()
-                                artistName = currentArtist.toString()
-                                total_duration = duration.toString()
+
+                lifecycleScope.launch {
+                    if (homeViewModel.haveActiveSubscriptionPlan()) {
+                        if (isDownloaded == true) {
+                            cacheRepository.deleteDownloadById(currentVideoID.toString())
+                            DownloadService.sendRemoveDownload(
+                                applicationContext,
+                                MyBLDownloadService::class.java, currentVideoID.toString(), false
+                            )
+                            val localBroadcastManager =
+                                LocalBroadcastManager.getInstance(applicationContext)
+                            val localIntent = Intent("DELETED")
+                                .putExtra("contentID", currentVideoID.toString())
+                            localBroadcastManager.sendBroadcast(localIntent)
+                            downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_down_item_desc))
+                            isDownloaded = false
+                        } else {
+                            //val currentVideoID:String? =   viewModel.currentVideo.value?.contentID
+                            val currentURL: String? = viewModel.currentVideo.value?.playUrl
+                            val currentRootID = viewModel.currentVideo.value?.rootId
+                            val currentImage = viewModel.currentVideo.value?.image
+                            val currentTitle = viewModel.currentVideo.value?.title
+                            val currentRootType = viewModel.currentVideo.value?.contentType
+                            val currentArtist = viewModel.currentVideo.value?.artist
+                            val duration = viewModel.currentVideo.value?.duration
+                            val url = "${Constants.FILE_BASE_URL}${currentURL}"
+                            val downloadRequest: DownloadRequest? =
+                                url.let { it1 ->
+                                    DownloadRequest.Builder(currentVideoID.toString(), it1.toUri())
+                                        .build()
+                                }
+                            injector.downloadTitleMap[currentVideoID.toString()] =
+                                currentTitle.toString()
+                            downloadRequest?.let { it1 ->
+                                DownloadService.sendAddDownload(
+                                    applicationContext,
+                                    MyBLDownloadService::class.java,
+                                    it1,
+                                    /* foreground= */ false
+                                )
                             }
-                        )
-                        isDownloaded = true
-                        downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_color_primary))
+                            // downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_color_primary))
+                            if (cacheRepository.isDownloadCompleted(currentVideoID.toString())) {
+                                cacheRepository.insertDownload(
+                                    DownloadedContent().apply {
+                                        content_Id = currentVideoID.toString()
+                                        rootContentId = currentRootID.toString()
+                                        imageUrl = currentImage.toString()
+                                        titleName = currentTitle.toString()
+                                        rootContentType = currentRootType.toString()
+                                        playingUrl = currentURL
+                                        content_Type = currentRootType.toString()
+                                        artistName = currentArtist.toString()
+                                        total_duration = duration.toString()
+                                    }
+                                )
+                                isDownloaded = true
+                                downloadImage.setColorFilter(applicationContext.resources.getColor(R.color.my_sdk_color_primary))
+                            }
+                        }
+                    }else{
+                        gotoSubscription()
+                       // navController.navigate(R.id.to_subscription_not_found)
                     }
                 }
             }
-
             var isFav = false
             val isAddedToFav = cacheRepository.getFavoriteById(currentVideoID.toString())
             if (isAddedToFav?.fav == "1") {
@@ -533,6 +571,39 @@ internal class VideoActivity : AppCompatActivity(),
                 }
             }
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun gotoSubscription() {
+//        val navHostFragment = supportFragmentManager
+//            .findFragmentById(R.id.fcv_navigation_host) as NavHostFragment
+//        val navController = navHostFragment.navController
+//      //  navController = findNavController(R.id.videoActivity)
+
+//        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialog2)
+//        val contentView =
+//            View.inflate(this, R.layout.fragment_subscription_dialog, null)
+//        bottomSheetDialog.setContentView(contentView)
+//        bottomSheetDialog.show()
+//        val btnSeeAll = bottomSheetDialog.findViewById<CardView>(R.id.btnSeeAll)
+//            btnSeeAll?.setOnClickListener {
+//                //Log.e("TAG","Heello")
+//               // Navigation.findNavController(this,R.id.fcv_navigation_host).navigate(R.id.to_subscription)
+//               // navController.navigate(R.id.to_subscription_not_found)
+//              val transaction= getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.fcv_navigation_host, SubscriptionFragmentForVideo());
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+             //   relative.setBackgroundColor(R.color.my_sdk_color_white)
+////                supportFragmentManager.beginTransaction()
+////                    .addToBackStack(SubscriptionFragment().toString())
+////                    .add(R.id.main, SubscriptionFragment())
+////                    .commit()
+//
+       //    }
+        val modalbottomSheetFragment = SubscriptionNotFoundForVideoDialogFragment()
+        modalbottomSheetFragment.show(supportFragmentManager,modalbottomSheetFragment.tag)
+
     }
 
     private fun initializePlayer() {
@@ -790,60 +861,72 @@ internal class VideoActivity : AppCompatActivity(),
         } else {
             textViewDownloadTitle?.text = "Download Offline"
         }
+//        val inflater = navHostFragment.navController.navInflater
+//        val navGraph = inflater.inflate(R.navigation.my_bl_sdk_nav_graph_common)
+//
+
         val constraintDownload: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintDownload)
         constraintDownload?.setOnClickListener {
-            if (isDownloaded) {
-                cacheRepository.deleteDownloadById(item.contentID.toString())
-                DownloadService.sendRemoveDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java, item.contentID.toString(), false
-                )
-                Log.e("TAG", "DELETED: " + isDownloaded)
-                val localBroadcastManager =
-                    LocalBroadcastManager.getInstance(applicationContext)
-                val localIntent = Intent("DELETED")
-                    .putExtra("contentID", item.contentID.toString())
-                localBroadcastManager.sendBroadcast(localIntent)
-                isDownloaded = false
+            lifecycleScope.launch {
+                if(homeViewModel.haveActiveSubscriptionPlan()) {
+                    if (isDownloaded) {
+                        cacheRepository.deleteDownloadById(item.contentID.toString())
+                        DownloadService.sendRemoveDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java, item.contentID.toString(), false
+                        )
+                        Log.e("TAG", "DELETED: " + isDownloaded)
+                        val localBroadcastManager =
+                            LocalBroadcastManager.getInstance(applicationContext)
+                        val localIntent = Intent("DELETED")
+                            .putExtra("contentID", item.contentID.toString())
+                        localBroadcastManager.sendBroadcast(localIntent)
+                        isDownloaded = false
 
-            } else {
-                val url = "${Constants.FILE_BASE_URL}${item.playUrl}"
-                val downloadRequest: DownloadRequest =
-                    url.toUri().let { it1 ->
-                        DownloadRequest.Builder(item.contentID.toString(), it1)
-                            .build()
-                    }
-                injector.downloadTitleMap[item.contentID.toString()] = item.title.toString()
-                DownloadService.sendAddDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    downloadRequest,
-                    /* foreground= */ false
-                )
-                if (cacheRepository.isDownloadCompleted(item.contentID.toString())
-                        .equals(true)
-                ) {
-                    // if (cacheRepository.isDownloadCompleted().equals(true)) {
-                    cacheRepository.insertDownload(
-                        DownloadedContent().apply {
-                            content_Id = item.contentID.toString()
-                            rootContentId = item.rootId.toString()
-                            imageUrl = item.image.toString()
-                            titleName = item.title.toString()
-                            content_Type = item.contentType.toString()
-                            playingUrl = item.playUrl
-                            content_Type = item.contentType.toString()
-                            artistName = item.artist.toString()
-                            artist_Id = item.artistId.toString()
-                            total_duration = item.duration.toString()
+                    } else {
+                        val url = "${Constants.FILE_BASE_URL}${item.playUrl}"
+                        val downloadRequest: DownloadRequest =
+                            url.toUri().let { it1 ->
+                                DownloadRequest.Builder(item.contentID.toString(), it1)
+                                    .build()
+                            }
+                        injector.downloadTitleMap[item.contentID.toString()] = item.title.toString()
+                        DownloadService.sendAddDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            downloadRequest,
+                            /* foreground= */ false
+                        )
+                        if (cacheRepository.isDownloadCompleted(item.contentID.toString())
+                                .equals(true)
+                        ) {
+                            // if (cacheRepository.isDownloadCompleted().equals(true)) {
+                            cacheRepository.insertDownload(
+                                DownloadedContent().apply {
+                                    content_Id = item.contentID.toString()
+                                    rootContentId = item.rootId.toString()
+                                    imageUrl = item.image.toString()
+                                    titleName = item.title.toString()
+                                    content_Type = item.contentType.toString()
+                                    playingUrl = item.playUrl
+                                    content_Type = item.contentType.toString()
+                                    artistName = item.artist.toString()
+                                    artist_Id = item.artistId.toString()
+                                    total_duration = item.duration.toString()
+                                }
+                            )
+                            isDownloaded = true
                         }
-                    )
-                    isDownloaded = true
-                }
-            }
+                    }
+                }else{
+                    gotoSubscription()
+                   //navController.navigate(R.id.to_subscription_not_found)
+                    //navController.navigate(R.id.to_subscription_not_found)
+                }}
             bottomSheetDialog.dismiss()
         }
+
         val watchlaterImage: ImageView? = bottomSheetDialog.findViewById(R.id.imgWatchlater)
         val textViewWatchlaterTitle: TextView? =
             bottomSheetDialog.findViewById(R.id.txtwatchLater)
@@ -926,6 +1009,7 @@ internal class VideoActivity : AppCompatActivity(),
             textFav?.text = "Favorite"
         }
         constraintFav?.setOnClickListener {
+
             if (isFav.equals(true)) {
                 favViewModel.deleteFavContent(item.contentID.toString(), "V")
                 cacheRepository.deleteFavoriteById(item.contentID.toString())

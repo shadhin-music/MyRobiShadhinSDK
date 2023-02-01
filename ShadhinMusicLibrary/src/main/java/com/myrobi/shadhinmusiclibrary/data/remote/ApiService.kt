@@ -8,18 +8,22 @@ import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.fav.FavDataResponseModel
 import com.myrobi.shadhinmusiclibrary.data.model.lastfm.LastFmResult
 import com.myrobi.shadhinmusiclibrary.data.model.podcast.PodcastModel
+import com.myrobi.shadhinmusiclibrary.data.model.profile.ProfileupdateModel
+import com.myrobi.shadhinmusiclibrary.data.model.profile.UserProfileResponseModel
 import com.myrobi.shadhinmusiclibrary.data.model.search.SearchModel
 import com.myrobi.shadhinmusiclibrary.data.model.search.TopTrendingModel
 import com.myrobi.shadhinmusiclibrary.fragments.create_playlist.CreatePlaylistResponseModel
 import com.myrobi.shadhinmusiclibrary.fragments.create_playlist.UserPlayListModel
 import com.myrobi.shadhinmusiclibrary.fragments.create_playlist.UserSongsPlaylistModel
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 internal interface ApiService {
     // @GET("ClientHomeContent/GetHomeContent")
-   @GET("ClientHomeContent/GetHomeContentV2")
-//    @GET("HomeContent/GetHomeContent")
+ //  @GET("ClientHomeContent/GetHomeContentV2")
+   @GET("HomeContent/GetHomeContent")
     suspend fun fetchHomeData(
         @Query("pageNumber") pageNumber: Int?,
         @Query("isPaid") isPaid: Boolean?,
@@ -165,4 +169,25 @@ internal interface ApiService {
 
 
 
+    @GET("User/GetUserInfo")
+    suspend fun getUserInfo(): UserProfileResponseModel
+
+//    @POST("User/RobiUserProfileUpdate ")
+//    fun updateUserProfile(fullName: RequestBody?, birthDate: RequestBody?, gender: RequestBody?, profileImage: MultipartBody.Part?) :UserProfileResponseModel
+
+    @Multipart
+    @POST("User/RobiUserProfileUpdate")
+    suspend fun updateUserProfile(
+        @Part("UserFullName") fullName:RequestBody?,
+        @Part("BirthDate") birthDate:RequestBody?,
+        @Part("Gender") gender:RequestBody?,
+        @Part profileImage: MultipartBody.Part?=null,
+    ):UserProfileResponseModel
+//@FormUrlEncoded
+//@POST("User/RobiUserProfileUpdate")
+//suspend fun updateUserProfile(
+//    @Field("UserFullName") fullName: String,
+//    @Field("BirthDate") birthDate: String?,
+//    @Field("Gender") gender: String?
+//):UserProfileResponseModel
 }

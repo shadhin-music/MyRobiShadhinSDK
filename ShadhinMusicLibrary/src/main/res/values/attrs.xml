@@ -243,7 +243,7 @@
             <enum name="left" value="1" />
             <enum name="back_and_forth" value="2" />
         </attr>
-
+        <attr name="profile_btn_disable_color" format="color"/>
     </declare-styleable>
 
 </resources>

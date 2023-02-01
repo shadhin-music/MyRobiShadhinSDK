@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/relative">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parentRelative"
             android:layout_width="match_parent"
@@ -381,7 +382,35 @@
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
+        <fragment
+            android:id="@+id/fcv_navigation_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateTint="@color/my_sdk_color_primary"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+
+    </RelativeLayout>
     <ProgressBar
         android:id="@+id/main_progress"
         android:layout_width="wrap_content"

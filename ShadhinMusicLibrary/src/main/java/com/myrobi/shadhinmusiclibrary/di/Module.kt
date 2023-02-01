@@ -37,6 +37,7 @@ import com.myrobi.shadhinmusiclibrary.fragments.history.ClientActivityViewModelF
 import com.myrobi.shadhinmusiclibrary.fragments.home.HomeViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.podcast.FeaturedPodcastViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.podcast.PodcastViewModelFactory
+import com.myrobi.shadhinmusiclibrary.fragments.profile.UserProfileViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.search.SearchViewModelFactory
 import com.myrobi.shadhinmusiclibrary.fragments.subscription.SubscriptionViewModelFactory
 import com.myrobi.shadhinmusiclibrary.library.player.data.rest.MusicRepository
@@ -168,6 +169,8 @@ internal class Module(private val applicationContext: Context) {
         ArtistBannerContentRepository(getApiShadhinMusicServiceV5withTokenAndClient())
     private val repositoryArtistSongContent: ArtistSongContentRepository =
         ArtistSongContentRepository(getApiShadhinMusicServiceV5withTokenAndClient())
+    private val repositoryUserProfileContent: UserProfileRepository =
+        UserProfileRepository(getApiShadhinMusicServiceV5withTokenAndClient())
     private val repositoryHomeContentRBT: AmartunesContentRepository =
         AmartunesContentRepository(getApiShadhinMusicServiceV5withTokenAndClient())
     private val repositoryAlbumContent: AlbumContentRepository =
@@ -203,6 +206,8 @@ internal class Module(private val applicationContext: Context) {
 
     val factoryArtistSongVM: ArtistContentViewModelFactory
         get() = ArtistContentViewModelFactory(repositoryArtistSongContent)
+    val factoryUserProfileVM: UserProfileViewModelFactory
+        get() = UserProfileViewModelFactory(repositoryUserProfileContent)
 
     private val artistAlbumContentRepository: ArtistAlbumContentRepository
         get() = ArtistAlbumContentRepository(

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -36,8 +37,15 @@ internal class HomePodcastAdapter(
         holder.bindItems()
         holder.itemView.setOnClickListener {
             //homeCallBack.onClickItemAndAllItem(position, homePatchItem)
-            Log.e("TAG","DATA: " + homePatchItem.Data )
-            podcastTrackClick.onClickItem(homePatchItem.Data.toMutableList(),position)
+            Log.e("TAG","DATA: " + homePatchItem.Data[position].isPaid )
+            Log.e("TAG","DATA: " + homePatchItem.Data[position].playingUrl)
+            Log.e("TAG","DATA: " + homePatchItem.Data[position].content_Type)
+            if(homePatchItem.Data[position].isPaid.toString().equals("false",true)){
+                podcastTrackClick.onClickItem(homePatchItem.Data.toMutableList(),position)
+            } else{
+                it.findNavController().navigate(R.id.to_subscription)
+            }
+
         }
     }
     override fun getItemCount(): Int {

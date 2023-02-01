@@ -8,6 +8,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myrobi.shadhinmusiclibrary.R
@@ -60,7 +61,10 @@ internal class LargeVideoAdapter(val argHomePatchItem: HomePatchItemModel?) :
                 val videos: ArrayList<VideoModel> = videoArray
                 intent.putExtra(VideoActivity.INTENT_KEY_POSITION, absoluteAdapterPosition)
                 intent.putExtra(VideoActivity.INTENT_KEY_DATA_LIST, videos)
+
                 itemView.context.startActivity(intent)
+
+
             }
 //            val linearLayout: LinearLayout = itemView.findViewById(R.id.linear)
 //            entityId = banner.entityId

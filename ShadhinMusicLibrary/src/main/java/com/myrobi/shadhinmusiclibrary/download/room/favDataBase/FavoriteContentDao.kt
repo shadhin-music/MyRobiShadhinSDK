@@ -83,4 +83,9 @@ internal interface FavoriteContentDao {
 
 //    @Query("DELETE FROM DownloadedContent")
 //    fun deleteAllDownloads():Unit
+@Query("DELETE FROM FavData WHERE content_Type = :type")
+fun deleteAllFavByType(type: String)
+
+    @Query("DELETE FROM FavData WHERE content_Type LIKE 'PD%'")
+    fun deleteAllFavPodcast()
 }

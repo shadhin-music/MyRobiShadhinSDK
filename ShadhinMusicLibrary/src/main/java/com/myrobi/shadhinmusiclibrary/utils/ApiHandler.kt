@@ -90,7 +90,6 @@ internal fun Throwable.toApiError(): ApiError {
 
 }
 
-
 internal sealed class Resource<T>(
     val status: Status,
     val data: T,

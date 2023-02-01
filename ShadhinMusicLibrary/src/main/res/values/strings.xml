@@ -7,6 +7,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="password_only">Password</string>
     <string name="plan_extra_text_for_vat"><![CDATA[Price Exclusive of VAT, SD & SC]]></string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
@@ -37,4 +38,13 @@
     <string name="dsv_ex_msg_adapter_wrong_recycler">InfiniteScrollAdapter is supposed to work only with DiscreteScrollView</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="email_n">Email</string>
+    <string name="full_name_sdf">Full Name</string>
+    <string name="xxxx_xxx_xxx">xxxx xxx xxx</string>
+    <string name="choose_date_of_birth">Choose date of birth</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="i_am_a">I am a</string>
+    <string name="link_with_profile">Link profile with</string>
+    <string name="usdfs_sdf">Update Profile</string>
 </resources>

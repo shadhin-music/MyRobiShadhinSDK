@@ -354,6 +354,36 @@ internal object UtilHelper {
             imageUrl = podcastDetails.Image
         }
 
+    fun getHomePatchDetailToPodcast(musicList: MutableList<HomePatchDetailModel>): MutableList<HomePatchDetailModel> {
+        val songDetailList = mutableListOf<HomePatchDetailModel>()
+        for (musicItem in musicList) {
+
+            songDetailList.add(
+               HomePatchDetailModel()
+                    .apply {
+                        content_Id = "" ?: ""
+                        imageUrl = musicItem.imageUrl ?: ""
+                        titleName = musicItem.titleName ?: ""
+                        content_Type = musicItem.content_Type ?: ""
+                        playingUrl = musicItem.playingUrl ?: ""
+                        artistName = musicItem.artistName
+                        total_duration = musicItem.total_duration
+
+                        fav = musicItem.fav
+                        artist_Id = ""
+                        album_Id = ""
+                        rootContentId = musicItem.artist_Id ?: ""
+                        rootContentType = ""
+                        rootImage = musicItem.rootImage ?: ""
+                        isSeekAble = musicItem.isSeekAble
+                        trackType = musicItem.trackType?: ""
+                    }
+            )
+        }
+        return songDetailList
+
+    }
+
     fun getHomePatchDetailToSearchDataModel(searchData: IMusicModel) =
         HomePatchDetailModel().apply {
             album_Id = searchData.album_Id ?: ""

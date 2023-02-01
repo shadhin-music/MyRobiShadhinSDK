@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myrobi.shadhinmusiclibrary.R
-import com.myrobi.shadhinmusiclibrary.callBackService.FeaturedPodcastOnItemClickCallback
 import com.myrobi.shadhinmusiclibrary.callBackService.HomeCallBack
-import com.myrobi.shadhinmusiclibrary.data.model.FeaturedPodcastDetailsModel
+import com.myrobi.shadhinmusiclibrary.data.model.HomePatchDetailModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 
@@ -25,9 +23,12 @@ internal class PDPSAdapter(val homePatchItemModel: HomePatchItemModel,val homeCa
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems()
+//        var toConvert = homePatchItemModel.Data.toMutableList()
+//        var items =  UtilHelper.getHomeDetailToMusic(toConvert)
         holder.itemView.setOnClickListener {
             //data.let { it1 -> clickCallback.onClickItem(it1, position) }
-           homeCallBack.onClickItemAndAllItem(position, homePatchItemModel)
+           homeCallBack.onClickItemAndAllItem(position, HomePatchItemModel(homePatchItemModel.Code,homePatchItemModel.ContentType,
+             UtilHelper.getHomePatchDetailToPodcast(homePatchItemModel.Data as MutableList<HomePatchDetailModel>),homePatchItemModel.Design,homePatchItemModel.Name,homePatchItemModel.Sort,homePatchItemModel.Total,homePatchItemModel.customData))
             // homeCallBack.onClickItem(position, Track(data.get()) )
         }
     }

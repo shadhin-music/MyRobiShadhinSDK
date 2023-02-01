@@ -460,10 +460,15 @@
         <action
             android:id="@+id/to_favorite"
             app:destination="@id/favorite_fragment" />
-
-        <!--<action android:id="@+id/to_subscription"
+        <action
+            android:id="@+id/to_videoActivity"
+            app:destination="@id/videoActivity" />
+        <action
+            android:id="@+id/to_userProfileUpdateFragment"
+            app:destination="@id/userProfileUpdateFragment" />
+        <action android:id="@+id/to_subscription"
             app:destination="@id/subscription_fragment"
-            />-->
+            />
 
 
 
@@ -503,6 +508,16 @@
         app:destination="@id/subscriptionNotFoundDialogFragment"/>
     <action android:id="@+id/to_subscription"
         app:destination="@id/subscription_fragment"/>
+    <activity
+        android:id="@+id/videoActivity"
 
-
+        android:name="com.myrobi.shadhinmusiclibrary.activities.video.VideoActivity"
+        android:label="VideoActivity" >
+    </activity>
+    <fragment
+        android:id="@+id/userProfileUpdateFragment"
+        android:name="com.myrobi.shadhinmusiclibrary.fragments.profile.UserProfileUpdateFragment"
+        android:label="fragment_user_profile_update"
+        tools:layout="@layout/fragment_user_profile_update">
+    </fragment>
 </navigation>

@@ -33,9 +33,12 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -80,6 +83,7 @@ import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils.PlaylistId
 import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils.PlaylistName
 import com.myrobi.shadhinmusiclibrary.utils.share.ShareCategory
 import com.myrobi.shadhinmusiclibrary.utils.share.ShareRC
+import kotlinx.coroutines.launch
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -1651,6 +1655,9 @@ internal class SDKMainActivity : BaseActivity(),
         val constraintDownload: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintDownload)
         constraintDownload?.setOnClickListener {
+
+            lifecycleScope.launch {
+            if(homeViewModel.haveActiveSubscriptionPlan()) {
             if (isDownloadComplete.equals(true)) {
                 cacheRepository.deleteDownloadById(mSongDetails.content_Id)
                 DownloadService.sendRemoveDownload(
@@ -1702,6 +1709,12 @@ internal class SDKMainActivity : BaseActivity(),
             }
             bottomSheetDialog.dismiss()
         }
+            else{
+
+               navController.navigate(R.id.to_subscription_not_found)
+            }
+            }
+        }
         val constraintAlbum: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintAlbum)
         constraintAlbum?.setOnClickListener {
@@ -1719,7 +1732,14 @@ internal class SDKMainActivity : BaseActivity(),
             bottomSheetDialog.findViewById(R.id.constraintAddtoPlaylist)
 
         constraintPlaylist?.setOnClickListener {
-            gotoPlayList(context, mSongDetails)
+            lifecycleScope.launch {
+                if (homeViewModel.haveActiveSubscriptionPlan()){
+                    gotoPlayList(context, mSongDetails)}
+                else{
+                   navController.navigate(R.id.to_subscription_not_found)
+                }
+            }
+
             bottomSheetDialog.dismiss()
         }
 
@@ -2066,58 +2086,67 @@ internal class SDKMainActivity : BaseActivity(),
         val constraintDownload: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintDownload)
         constraintDownload?.setOnClickListener {
-            if (isDownloadComplete) {
+            lifecycleScope.launch {
+                if(homeViewModel.haveActiveSubscriptionPlan()) {
+                    if (isDownloadComplete) {
 //                cacheRepository.deleteDownloadById(track.EpisodeId)
-                cacheRepository.deleteDownloadById(iSongTrack.content_Id)
-                DownloadService.sendRemoveDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    iSongTrack.content_Id,
-                    false
-                )
-                val localBroadcastManager =
-                    LocalBroadcastManager.getInstance(applicationContext)
-                val localIntent = Intent("DELETED")
-                    .putExtra("contentID", iSongTrack.content_Id)
+                        cacheRepository.deleteDownloadById(iSongTrack.content_Id)
+                        DownloadService.sendRemoveDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            iSongTrack.content_Id,
+                            false
+                        )
+                        val localBroadcastManager =
+                            LocalBroadcastManager.getInstance(applicationContext)
+                        val localIntent = Intent("DELETED")
+                            .putExtra("contentID", iSongTrack.content_Id)
 //                    .putExtra("contentID", track.EpisodeId)
-                localBroadcastManager.sendBroadcast(localIntent)
+                        localBroadcastManager.sendBroadcast(localIntent)
 
-            } else {
-                val mPlayingUrl = "${Constants.FILE_BASE_URL}${iSongTrack.playingUrl}"
-                val downloadRequest: DownloadRequest =
-                    DownloadRequest.Builder(iSongTrack.content_Id, mPlayingUrl.toUri())
-                        .build()
-                Log.e("TAG", "NAME: " + iSongTrack.titleName + " URL " + mPlayingUrl)
-                injector.downloadTitleMap[iSongTrack.content_Id ?: ""] = iSongTrack.titleName ?: ""
-                DownloadService.sendAddDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    downloadRequest,
-                    /* foreground= */ false
-                )
+                    } else {
+                        val mPlayingUrl = "${Constants.FILE_BASE_URL}${iSongTrack.playingUrl}"
+                        val downloadRequest: DownloadRequest =
+                            DownloadRequest.Builder(iSongTrack.content_Id, mPlayingUrl.toUri())
+                                .build()
+                        Log.e("TAG", "NAME: " + iSongTrack.titleName + " URL " + mPlayingUrl)
+                        injector.downloadTitleMap[iSongTrack.content_Id ?: ""] =
+                            iSongTrack.titleName ?: ""
+                        DownloadService.sendAddDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            downloadRequest,
+                            /* foreground= */ false
+                        )
 
-                //Todo iSongTrack.EpisodeId
-                if (cacheRepository.isDownloadCompleted(iSongTrack.content_Id)) {
+                        //Todo iSongTrack.EpisodeId
+                        if (cacheRepository.isDownloadCompleted(iSongTrack.content_Id)) {
 //                    val contentType = iSongTrack.content_Type
 //                    val podcastType = contentType?.take(2)
 //                    val  Type = contentType?.takeLast(2)
-                    cacheRepository.insertDownload(
-                        DownloadedContent().apply {
+                            cacheRepository.insertDownload(
+                                DownloadedContent().apply {
 
-                            content_Id = iSongTrack.content_Id
-                            album_Id = iSongTrack.album_Id
-                            rootContentId = iSongTrack.rootContentId
-                            imageUrl = iSongTrack.imageUrl
-                            titleName = iSongTrack.titleName
-                            content_Type = iSongTrack.content_Type
-                            playingUrl = iSongTrack.playingUrl
-                            rootContentType = iSongTrack.rootContentType
-                            titleName = iSongTrack.titleName
-                            artist_Id = iSongTrack.artist_Id
-                            artistName = iSongTrack.artistName.toString()
-                            total_duration = iSongTrack.total_duration
+                                    content_Id = iSongTrack.content_Id
+                                    album_Id = iSongTrack.album_Id
+                                    rootContentId = iSongTrack.rootContentId
+                                    imageUrl = iSongTrack.imageUrl
+                                    titleName = iSongTrack.titleName
+                                    content_Type = iSongTrack.content_Type
+                                    playingUrl = iSongTrack.playingUrl
+                                    rootContentType = iSongTrack.rootContentType
+                                    titleName = iSongTrack.titleName
+                                    artist_Id = iSongTrack.artist_Id
+                                    artistName = iSongTrack.artistName.toString()
+                                    total_duration = iSongTrack.total_duration
+                                }
+                            )
                         }
-                    )
+                    }
+                }
+                else{
+                    navController.navigate(R.id.to_subscription_not_found)
+
                 }
             }
             bottomSheetDialog.dismiss()
@@ -2203,6 +2232,7 @@ internal class SDKMainActivity : BaseActivity(),
             bottomSheetDialog.dismiss()
         }
         val constraintPlaylist: ConstraintLayout? =
+
             bottomSheetDialog.findViewById(R.id.constraintAddtoPlaylist)
         constraintPlaylist?.visibility = GONE
     }
@@ -2274,52 +2304,58 @@ internal class SDKMainActivity : BaseActivity(),
         val constraintDownload: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintDownload)
         constraintDownload?.setOnClickListener {
+            lifecycleScope.launch {
+                if(homeViewModel.haveActiveSubscriptionPlan()) {
+                    if (isDownloadComplete.equals(true)) {
+                        cacheRepository.deleteDownloadById(mSongDetails.content_Id)
+                        DownloadService.sendRemoveDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            mSongDetails.content_Id,
+                            false
+                        )
+                        val localBroadcastManager =
+                            LocalBroadcastManager.getInstance(applicationContext)
+                        val localIntent = Intent("DELETED")
+                            .putExtra("contentID", mSongDetails.content_Id)
+                        localBroadcastManager.sendBroadcast(localIntent)
+                    } else {
+                        val mPlayingUrl = "${Constants.FILE_BASE_URL}${mSongDetails.playingUrl}"
+                        val downloadRequest: DownloadRequest =
+                            DownloadRequest.Builder(mSongDetails.content_Id, mPlayingUrl.toUri())
+                                .build()
+                        injector.downloadTitleMap[mSongDetails.content_Id] =
+                            mSongDetails.titleName ?: ""
 
-            if (isDownloadComplete.equals(true)) {
-                cacheRepository.deleteDownloadById(mSongDetails.content_Id)
-                DownloadService.sendRemoveDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    mSongDetails.content_Id,
-                    false
-                )
-                val localBroadcastManager =
-                    LocalBroadcastManager.getInstance(applicationContext)
-                val localIntent = Intent("DELETED")
-                    .putExtra("contentID", mSongDetails.content_Id)
-                localBroadcastManager.sendBroadcast(localIntent)
-            } else {
-                val mPlayingUrl = "${Constants.FILE_BASE_URL}${mSongDetails.playingUrl}"
-                val downloadRequest: DownloadRequest =
-                    DownloadRequest.Builder(mSongDetails.content_Id, mPlayingUrl.toUri())
-                        .build()
-                injector.downloadTitleMap[mSongDetails.content_Id] =
-                    mSongDetails.titleName ?: ""
+                        DownloadService.sendAddDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            downloadRequest,
+                            /* foreground= */ false
+                        )
 
-                DownloadService.sendAddDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    downloadRequest,
-                    /* foreground= */ false
-                )
+                        if (cacheRepository.isDownloadCompleted(mSongDetails.content_Id)) {
 
-                if (cacheRepository.isDownloadCompleted(mSongDetails.content_Id)) {
-
-                    cacheRepository.insertDownload(
-                        DownloadedContent().apply {
-                            content_Id = mSongDetails.content_Id
-                            rootContentId = mSongDetails.rootContentId
-                            imageUrl = mSongDetails.imageUrl
-                            titleName = mSongDetails.titleName
-                            content_Type = mSongDetails.content_Type
-                            playingUrl = mSongDetails.playingUrl
-                            rootContentType = mSongDetails.content_Type
-                            artistName = mSongDetails.artistName
-                            artist_Id = mSongDetails.artist_Id.toString()
-                            total_duration = mSongDetails.total_duration
-                            album_Id = mSongDetails.album_Id
+                            cacheRepository.insertDownload(
+                                DownloadedContent().apply {
+                                    content_Id = mSongDetails.content_Id
+                                    rootContentId = mSongDetails.rootContentId
+                                    imageUrl = mSongDetails.imageUrl
+                                    titleName = mSongDetails.titleName
+                                    content_Type = mSongDetails.content_Type
+                                    playingUrl = mSongDetails.playingUrl
+                                    rootContentType = mSongDetails.content_Type
+                                    artistName = mSongDetails.artistName
+                                    artist_Id = mSongDetails.artist_Id.toString()
+                                    total_duration = mSongDetails.total_duration
+                                    album_Id = mSongDetails.album_Id
+                                }
+                            )
                         }
-                    )
+                    }
+                }else{
+                    navController.navigate(R.id.to_subscription_not_found)
+
                 }
             }
             bottomSheetDialog.dismiss()
@@ -2327,8 +2363,14 @@ internal class SDKMainActivity : BaseActivity(),
         val constraintPlaylist: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintAddtoPlaylist)
         constraintPlaylist?.setOnClickListener {
-            gotoPlayList(context, mSongDetails)
+            lifecycleScope.launch {
+                if(homeViewModel.haveActiveSubscriptionPlan()) {
+                    gotoPlayList(context, mSongDetails)
+                }else{
+                    navController.navigate(R.id.to_subscription_not_found)
 
+                }
+            }
             bottomSheetDialog.dismiss()
         }
         val constraintFav: ConstraintLayout? =
@@ -2469,51 +2511,58 @@ internal class SDKMainActivity : BaseActivity(),
         val constraintDownload: ConstraintLayout? =
             bottomSheetDialog.findViewById(R.id.constraintDownload)
         constraintDownload?.setOnClickListener {
-            if (isDownloadComplete == true) {
-                cacheRepository.deleteDownloadById(mSongDetails.content_Id)
-                DownloadService.sendRemoveDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    mSongDetails.content_Id,
-                    false
-                )
-                val localBroadcastManager =
-                    LocalBroadcastManager.getInstance(applicationContext)
-                val localIntent = Intent("DELETED")
-                    .putExtra("contentID", mSongDetails.content_Id)
-                localBroadcastManager.sendBroadcast(localIntent)
+            lifecycleScope.launch {
+                if(homeViewModel.haveActiveSubscriptionPlan()) {
+                    if (isDownloadComplete == true) {
+                        cacheRepository.deleteDownloadById(mSongDetails.content_Id)
+                        DownloadService.sendRemoveDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            mSongDetails.content_Id,
+                            false
+                        )
+                        val localBroadcastManager =
+                            LocalBroadcastManager.getInstance(applicationContext)
+                        val localIntent = Intent("DELETED")
+                            .putExtra("contentID", mSongDetails.content_Id)
+                        localBroadcastManager.sendBroadcast(localIntent)
 
-            } else {
-                val mPlayUrl = "${Constants.FILE_BASE_URL}${mSongDetails.playingUrl}"
-                val downloadRequest: DownloadRequest =
-                    DownloadRequest.Builder(mSongDetails.content_Id, mPlayUrl.toUri())
-                        .build()
-                injector.downloadTitleMap[mSongDetails.content_Id ?: ""] =
-                    mSongDetails.titleName ?: ""
-                DownloadService.sendAddDownload(
-                    applicationContext,
-                    MyBLDownloadService::class.java,
-                    downloadRequest,
-                    /* foreground= */ false
-                )
+                    } else {
+                        val mPlayUrl = "${Constants.FILE_BASE_URL}${mSongDetails.playingUrl}"
+                        val downloadRequest: DownloadRequest =
+                            DownloadRequest.Builder(mSongDetails.content_Id, mPlayUrl.toUri())
+                                .build()
+                        injector.downloadTitleMap[mSongDetails.content_Id ?: ""] =
+                            mSongDetails.titleName ?: ""
+                        DownloadService.sendAddDownload(
+                            applicationContext,
+                            MyBLDownloadService::class.java,
+                            downloadRequest,
+                            /* foreground= */ false
+                        )
 
-                if (cacheRepository.isDownloadCompleted(mSongDetails.content_Id)) {
-                    cacheRepository.insertDownload(
-                        DownloadedContent().apply {
-                            content_Id = mSongDetails.content_Id.toString()
-                            artist_Id = mSongDetails.artist_Id.toString()
-                            imageUrl = mSongDetails.imageUrl
-                            titleName = mSongDetails.titleName
-                            content_Type = mSongDetails.content_Type
-                            playingUrl = mSongDetails.playingUrl
-                            rootContentType = mSongDetails.content_Type
-                            artistName = mSongDetails.artistName
-                            total_duration = mSongDetails.total_duration
+                        if (cacheRepository.isDownloadCompleted(mSongDetails.content_Id)) {
+                            cacheRepository.insertDownload(
+                                DownloadedContent().apply {
+                                    content_Id = mSongDetails.content_Id.toString()
+                                    artist_Id = mSongDetails.artist_Id.toString()
+                                    imageUrl = mSongDetails.imageUrl
+                                    titleName = mSongDetails.titleName
+                                    content_Type = mSongDetails.content_Type
+                                    playingUrl = mSongDetails.playingUrl
+                                    rootContentType = mSongDetails.content_Type
+                                    artistName = mSongDetails.artistName
+                                    total_duration = mSongDetails.total_duration
 
-                            rootContentId = argHomePatchDetail?.rootContentId
-                            rootContentType = argHomePatchDetail?.content_Type
+                                    rootContentId = argHomePatchDetail?.rootContentId
+                                    rootContentType = argHomePatchDetail?.content_Type
+                                }
+                            )
                         }
-                    )
+                    }
+                }else{
+                    navController.navigate(R.id.to_subscription_not_found)
+
                 }
             }
             bottomSheetDialog.dismiss()

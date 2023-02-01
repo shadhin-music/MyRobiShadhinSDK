@@ -159,32 +159,38 @@ internal class HomeFragment : BaseFragment(),
             favViewModel.getFavContentAlbum.observe(viewLifecycleOwner) { res ->
                 if (res?.status == "success") {
                     //Log.e("TAG","FAV"+ res.data.)
+                    cacheRepository.deleteAllFavByType("R")
                     cacheRepository.insertFavoriteContent(res.data?.toMutableList())
                 }
             }
             favViewModel.getFavContentPodcast.observe(viewLifecycleOwner) { res ->
                 if (res?.status == "success") {
+                    cacheRepository.deleteAllFavPodcast()
                     cacheRepository.insertFavoriteContent(res.data?.toMutableList())
                 }
             }
             favViewModel.getFavContentArtist.observe(viewLifecycleOwner) { res ->
                 if (res?.status == "success") {
+                    cacheRepository.deleteAllFavByType("A")
                     cacheRepository.insertFavoriteContent(res.data?.toMutableList())
                 }
             }
             favViewModel.getFavContentVideo.observe(viewLifecycleOwner) { res ->
                 if (res?.status == "success") {
+                    cacheRepository.deleteAllFavByType("V")
                     cacheRepository.insertFavoriteContent(res.data?.toMutableList())
                 }
             }
 
             favViewModel.getFavContentSong.observe(viewLifecycleOwner) { res ->
                 if (res?.status == "success") {
+                    cacheRepository.deleteAllFavByType("S")
                     cacheRepository.insertFavoriteContent(res.data?.toMutableList())
                 }
             }
             favViewModel.getFavContentPlaylist.observe(viewLifecycleOwner) { res ->
                 if (res?.status == "success") {
+                    cacheRepository.deleteAllFavByType("P")
                     cacheRepository.insertFavoriteContent(res.data?.toMutableList())
                 }
             }
@@ -448,13 +454,13 @@ internal class HomeFragment : BaseFragment(),
 
     override fun clickOnArtist(selectedHomePatchItem: HomePatchItemModel) {
 
-        val bundle = Bundle().apply {
-            putSerializable(
-                AppConstantUtils.PatchItem,
-                selectedHomePatchItem as Serializable
-            )
-        }
-        findNavController().navigate(R.id.to_featured_popular_artist,bundle)
+//        val bundle = Bundle().apply {
+//            putSerializable(
+//                AppConstantUtils.PatchItem,
+//                selectedHomePatchItem as Serializable
+//            )
+//        }
+        findNavController().navigate(R.id.to_userProfileUpdateFragment)
     }
     override fun clickOnPodcast(selectedHomePatchItem: HomePatchItemModel) {
       /*  val data = Bundle()
