@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.AudioManager
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -22,7 +23,6 @@ import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
@@ -388,10 +388,6 @@ internal class VideoActivity : AppCompatActivity(),
             }
 
             watchlaterLayout.setOnClickListener {
-
-             //   findNavController(R.layout.my_bl_sdk_activity_video).navigate(R.id.to_subscription_not_found)
-
-
                 if (iswatched.equals(true)) {
 
                     //  val currentVideoID =   viewModel.currentVideo.value?.contentID
