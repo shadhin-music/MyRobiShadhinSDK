@@ -362,14 +362,13 @@ internal object UtilHelper {
             songDetailList.add(
                HomePatchDetailModel()
                     .apply {
-                        content_Id = "" ?: ""
+                        content_Id = musicItem.content_Id ?: ""
                         imageUrl = musicItem.imageUrl ?: ""
                         titleName = musicItem.titleName ?: ""
                         content_Type = musicItem.content_Type ?: ""
                         playingUrl = musicItem.playingUrl ?: ""
                         artistName = musicItem.artistName
                         total_duration = musicItem.total_duration
-
                         fav = musicItem.fav
                         artist_Id = ""
                         album_Id = ""

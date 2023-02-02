@@ -89,16 +89,17 @@ internal class PodcastDetailsFragment : BaseFragment(),
 
         setupViewModel()
         Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
-
+        Log.e("PDF", "getPodcastDetailsInitialize: "+selectedEpisodeID)
+         commentsViewModel.getAllComments(contentId,contentType,1)
         //Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
         if (selectedEpisodeID.isEmpty()) {
 //        if (selectedEpisodeID.isEmpty()) {
             getPodcastShowDetailsInitialize()
-            Log.e("PDF", "getPodcastShowDetailsInitialize")
+            //Log.e("PDF", "getPodcastShowDetailsInitialize")
         }else{
             getPodcastDetailsInitialize()
 
-            Log.e("PDF", "getPodcastDetailsInitialize")
+          //  Log.e("PDF", "getPodcastDetailsInitialize")
         }
 
 
@@ -153,7 +154,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
         searchBar.setOnClickListener {
             openSearch()
         }
-     //   podcastCommentsObserve()
+       podcastCommentsObserve()
     }
     private fun podcastCommentsObserve(){
         commentsViewModel.getComments.observe(viewLifecycleOwner){
