@@ -172,14 +172,16 @@ internal class PodcastSeeAllDetailsFragment : BaseFragment(),
         val trackViewHolder = currentVH as PodcastTNTypeAdapter.ViewHolder
 
         trackViewHolder.let {
-            if ( isAdded) {
+            if (data.size > 0 && isAdded) {
                 playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMusic ->
                     if (itMusic != null) {
                         trackViewHolder.item.let {
                             if (it?.TracktId == itMusic.mediaId &&
-                                it?.ContentType == itMusic.rootType){
-                                playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
-                                    playPauseStatePodcast(itPla.isPlaying, trackViewHolder.ivPlayBtn!!)
+                                it?.ContentType == itMusic.rootId){
+                                playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) {
+                                        itPla ->  trackViewHolder.ivPlayBtn.let {
+                                    it?.let { it1 -> playPauseStatePodcast(itPla.isPlaying, it1) }
+                                        }
                                 }
                             }else{
                                 trackViewHolder.ivPlayBtn?.let { playPauseStatePodcast(false, it) }

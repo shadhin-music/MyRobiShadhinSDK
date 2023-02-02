@@ -44,11 +44,11 @@ internal class HomePodcastAdapter(
             Log.e("TAG","DATA: " + homePatchItem.Data[position].playingUrl)
             Log.e("TAG","DATA: " + homePatchItem.customData)
 
-            if(homePatchItem.Data[position].isPaid.toString().equals("true",true)){
+           // if(homePatchItem.Data[position].isPaid.toString().equals("false",true)){
                 podcastTrackClick.onClickItem(homePatchItem.Data.toMutableList(),position)
-            } else{
-                it.findNavController().navigate(R.id.to_subscription_not_found)
-            }
+//            } else{
+//                it.findNavController().navigate(R.id.to_subscription_not_found)
+//            }
 
         }
     }

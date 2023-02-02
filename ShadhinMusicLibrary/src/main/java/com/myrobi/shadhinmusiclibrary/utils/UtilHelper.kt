@@ -91,6 +91,7 @@ internal object UtilHelper {
                     true
                 )
             ) songItem.PlayUrl!! else Constants.FILE_BASE_URL + songItem.PlayUrl!!
+           val isSeekAble = true
             musicList.add(
                 Music(
                     mediaId = songItem.TracktId,
@@ -104,7 +105,7 @@ internal object UtilHelper {
                     userPlayListId = "",
                     episodeId = "",
                     starring = "",
-                    seekable = songItem.Seekable,
+                    seekable = isSeekAble,
                     details = "",
                     fav = "" /*fav value set for this song are radio or normal song*/,
                     totalStream = 0L,

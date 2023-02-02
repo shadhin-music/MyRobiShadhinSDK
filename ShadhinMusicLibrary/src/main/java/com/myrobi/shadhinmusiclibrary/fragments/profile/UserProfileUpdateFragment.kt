@@ -91,7 +91,12 @@ internal class UserProfileUpdateFragment : BaseFragment(){
             viewModel.getProfile.observe(viewLifecycleOwner){
              if(it?.status == Status.SUCCESS){
                  progressBar.visibility = GONE
-                   phone_number.text = it.data?.data?.phoneNumber
+                 if (it.data?.data?.phoneNumber.toString().isNullOrBlank()== true){
+                     phone_number.hint= "Enter your mobile number"
+                 }else{
+                     phone_number.text = it.data?.data?.phoneNumber
+                 }
+
                  if (it.data?.data?.userFullName?.toString().isNullOrBlank()== true){
                        etName.setText("")
                  }else{

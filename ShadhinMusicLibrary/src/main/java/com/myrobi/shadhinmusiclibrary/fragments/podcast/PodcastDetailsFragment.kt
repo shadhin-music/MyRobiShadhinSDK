@@ -206,7 +206,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
             podcastHeaderAdapter,
             PodcastTrackHeaderAdapter(),
             podcastTrackAdapter,
-            podcastMoreEpisodesAdapter,podcastCommentsHeaderAdapter,
+            podcastMoreEpisodesAdapter,
             footerAdapter
         )
         // concatAdapter.notifyDataSetChanged()

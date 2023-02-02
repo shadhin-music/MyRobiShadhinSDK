@@ -25,7 +25,7 @@ internal class UserProfileViewModel (private val userProfileRepository: UserProf
     }
     fun updateProfile(name: String,birthday:String,gender:String) = viewModelScope.launch {
         val response = userProfileRepository.updateUserProfile(name,birthday,gender,profileImageFile)
-       // userProfileRepository.getUserInfo()
+        userProfileRepository.getUserInfo()
         _updateProfile.postValue(response)
     }
 
