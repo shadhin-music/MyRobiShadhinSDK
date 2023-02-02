@@ -11,7 +11,7 @@ import com.myrobi.shadhinmusiclibrary.R
 internal class PodcastCommentsHeaderAdapter : RecyclerView.Adapter<PodcastCommentsHeaderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.my_bl_sdk_layout_podcast_comment, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.my_bl_sdk_layout_podcast_comment_header, parent, false)
         return ViewHolder(v)
     }
 
@@ -30,10 +30,10 @@ internal class PodcastCommentsHeaderAdapter : RecyclerView.Adapter<PodcastCommen
         val  context = itemView.getContext()
         fun bindItems() {
 
-            val recyclerView: RecyclerView = itemView.findViewById(R.id.comment_rv)
-            recyclerView.layoutManager =
-                LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false )
-            recyclerView.adapter = CommentsAdapter()
+//            val recyclerView: RecyclerView = itemView.findViewById(R.id.comment_rv)
+//            recyclerView.layoutManager =
+//                LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false )
+//            recyclerView.adapter = CommentsAdapter()
 
 
         }

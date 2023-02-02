@@ -8,7 +8,7 @@ internal class ClientIdHeaderInterceptor : Interceptor {
         proceed(
             request()
                 .newBuilder()
-             .addHeader("Client", "4")
+             .addHeader("Client", "1")
                 .build()
         )
     }

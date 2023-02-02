@@ -100,7 +100,7 @@ internal class MyPlaylistFragment : BaseFragment(),
                         recyclerView.layoutManager = layoutManager
                         layoutManager.setSpanSizeLookup(onSpanSizeLookup)
                         recyclerView.adapter = concatAdapter
-                        concatAdapter.notifyDataSetChanged()
+                      //  concatAdapter.notifyDataSetChanged()
                     }
                 }
             }
@@ -166,19 +166,23 @@ internal class MyPlaylistFragment : BaseFragment(),
             AppConstantUtils.PatchItem,
             selectedHomePatchItem as Serializable
         )
+
+        Log.e("TAG", "HomeItem: "+ selectedHomePatchItem)
         data.putSerializable(PlaylistId, id)
         data.putSerializable(PlaylistName, name)
-        startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
-            .apply {
-                putExtra(
-                    AppConstantUtils.UI_Request_Type,
-                    AppConstantUtils.Requester_Name_CreatedPlaylistDetails
-                )
-                putExtra(AppConstantUtils.PatchItem, data)
-                putExtra(PlaylistId, data)
-                putExtra(PlaylistName, data)
-                putExtra(AppConstantUtils.PlaylistGradientId, gradientResId)
-            })
+        data.putSerializable(AppConstantUtils.PlaylistGradientId, gradientResId)
+//        startActivity(Intent(requireContext(), SDKMainActivity::class.java)
+//            .apply {
+//                putExtra(
+//                    AppConstantUtils.UI_Request_Type,
+//                    AppConstantUtils.Requester_Name_CreatedPlaylistDetails
+//                )
+//                putExtra(AppConstantUtils.PatchItem, data)
+//                putExtra(PlaylistId, data)
+//                putExtra(PlaylistName, data)
+//                putExtra(AppConstantUtils.PlaylistGradientId, gradientResId)
+//            })
+        findNavController().navigate(R.id.to_user_playlist_details,data)
     }
 
     fun openCreatePlaylist() {

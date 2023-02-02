@@ -45,13 +45,14 @@ internal class PodcastDetailsFragment : BaseFragment(),
     PodcastBottomSheetDialogItemCallback {
 
     private lateinit var viewModel: PodcastViewModel
+    private lateinit var commentsViewModel: CommentsViewModel
     private lateinit var navController: NavController
 
     private lateinit var podcastHeaderAdapter: PodcastHeaderAdapter
     private lateinit var podcastTrackAdapter: PodcastTrackAdapter
     private lateinit var podcastMoreEpisodesAdapter: PodcastMoreEpisodesAdapter
     private lateinit var concatAdapter: ConcatAdapter
-
+    private lateinit var podcastCommentsHeaderAdapter: PodcastCommentsHeaderAdapter
     var data: DataModel? = null
     var episode: List<EpisodeModel>? = null
 
@@ -87,7 +88,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
         cacheRepository = CacheRepository(requireContext())
 
         setupViewModel()
-        //Log.e("PDF", "getPodcastDetailsInitialize: "+ selectedEpisodeID)
+        Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
 
         //Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
         if (selectedEpisodeID.isEmpty()) {
@@ -96,6 +97,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
             Log.e("PDF", "getPodcastShowDetailsInitialize")
         }else{
             getPodcastDetailsInitialize()
+
             Log.e("PDF", "getPodcastDetailsInitialize")
         }
 
@@ -151,6 +153,18 @@ internal class PodcastDetailsFragment : BaseFragment(),
         searchBar.setOnClickListener {
             openSearch()
         }
+     //   podcastCommentsObserve()
+    }
+    private fun podcastCommentsObserve(){
+        commentsViewModel.getComments.observe(viewLifecycleOwner){
+            Log.e("TAG","getComments: "+ it.message)
+
+            if(it.status==Status.SUCCESS){
+                Log.e("TAG","CommentData: "+ it.data?.data)
+            }else{
+                Log.e("TAG","CommentData: "+ it.status)
+            }
+        }
     }
     private fun openSearch() {
         findNavController().navigate(R.id.to_search)
@@ -171,6 +185,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
     private fun getPodcastDetailsInitialize() {
         Log.e("PDF", "getPodcastDetailsInitialize: ")
         observePodcastDetailsData()
+
     }
 
     private fun setupAdapters() {
@@ -182,6 +197,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
             PodcastHeaderAdapter(this, cacheRepository, favViewModel, argHomePatchDetail)
         podcastTrackAdapter = PodcastTrackAdapter(this, this, cacheRepository!!)
         podcastMoreEpisodesAdapter = PodcastMoreEpisodesAdapter(data, this)
+        podcastCommentsHeaderAdapter = PodcastCommentsHeaderAdapter()
         footerAdapter = HomeFooterAdapter()
 //        artistsYouMightLikeAdapter =
 //            ArtistsYouMightLikeAdapter(argHomePatchItem, this, argHomePatchDetail?.ArtistId)
@@ -190,7 +206,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
             podcastHeaderAdapter,
             PodcastTrackHeaderAdapter(),
             podcastTrackAdapter,
-            podcastMoreEpisodesAdapter,
+            podcastMoreEpisodesAdapter,podcastCommentsHeaderAdapter,
             footerAdapter
         )
         // concatAdapter.notifyDataSetChanged()
@@ -208,6 +224,9 @@ internal class PodcastDetailsFragment : BaseFragment(),
             this,
             injector.factoryFavContentVM
         )[FavViewModel::class.java]
+        commentsViewModel = ViewModelProvider(this,injector.factoryCommentsVM)[CommentsViewModel::class.java]
+       // commentsViewModel.getAllComments("2374","TC",1)
+        Log.e("PDF", "getAllComments: " )
     }
 
     private fun observePodcastShowData() {
@@ -250,6 +269,8 @@ internal class PodcastDetailsFragment : BaseFragment(),
     private fun observePodcastDetailsData() {
         Log.i("PDF", "observePodcastDetailsData: " + selectedEpisodeID)
         viewModel.fetchPodcastContent(podcastType, selectedEpisodeID, contentType, false)
+
+      //  commentsViewModel.getAllComments(selectedEpisodeID,podcastType,1)
     }
 
     override fun onClickItemAndAllItem(

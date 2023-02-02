@@ -3,9 +3,10 @@ package com.myrobi.shadhinmusiclibrary.fragments.create_playlist
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import java.io.Serializable
 
 @Keep
-data class UserPlayListModel(
+internal data class UserPlayListModel(
     @SerializedName("data")
     var `data`: List<UserPlaylistData>?,
     @SerializedName("fav")
@@ -22,4 +23,4 @@ data class UserPlayListModel(
     var status: String?,
     @SerializedName("type")
     var type: String?
-)
+):Serializable

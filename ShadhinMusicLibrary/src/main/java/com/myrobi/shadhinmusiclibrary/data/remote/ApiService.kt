@@ -1,10 +1,13 @@
 package com.myrobi.shadhinmusiclibrary.data.remote
+
 import com.myrobi.shadhinmusiclibrary.data.model.*
 import com.myrobi.shadhinmusiclibrary.data.model.APIResponse
 import com.myrobi.shadhinmusiclibrary.data.model.ArtistBannerModel
 import com.myrobi.shadhinmusiclibrary.data.model.HomeDataModel
 import com.myrobi.shadhinmusiclibrary.data.model.PatchDataModel
 import com.myrobi.shadhinmusiclibrary.data.model.SongDetailModel
+import com.myrobi.shadhinmusiclibrary.data.model.comments.CommentReplyResponse
+import com.myrobi.shadhinmusiclibrary.data.model.comments.CommentResponse
 import com.myrobi.shadhinmusiclibrary.data.model.fav.FavDataResponseModel
 import com.myrobi.shadhinmusiclibrary.data.model.lastfm.LastFmResult
 import com.myrobi.shadhinmusiclibrary.data.model.podcast.PodcastModel
@@ -22,8 +25,8 @@ import retrofit2.http.*
 
 internal interface ApiService {
     // @GET("ClientHomeContent/GetHomeContent")
- //  @GET("ClientHomeContent/GetHomeContentV2")
-   @GET("HomeContent/GetHomeContent")
+    //  @GET("ClientHomeContent/GetHomeContentV2")
+    @GET("HomeContent/GetHomeContent")
     suspend fun fetchHomeData(
         @Query("pageNumber") pageNumber: Int?,
         @Query("isPaid") isPaid: Boolean?,
@@ -122,7 +125,7 @@ internal interface ApiService {
 
     @GET("Search/SearchByKeyword")
     suspend fun getSearch(
-        @Query("keyword") keyword: String
+        @Query("keyword") keyword: String,
     ): SearchModel
 
     @GET("Track/TopTrending")
@@ -168,7 +171,6 @@ internal interface ApiService {
     suspend fun fetchPatchClickHistory(@Body body: HistoryModel): ClickHistoryModel
 
 
-
     @GET("User/GetUserInfo")
     suspend fun getUserInfo(): UserProfileResponseModel
 
@@ -178,16 +180,26 @@ internal interface ApiService {
     @Multipart
     @POST("User/RobiUserProfileUpdate")
     suspend fun updateUserProfile(
-        @Part("UserFullName") fullName:RequestBody?,
-        @Part("BirthDate") birthDate:RequestBody?,
-        @Part("Gender") gender:RequestBody?,
-        @Part profileImage: MultipartBody.Part?=null,
-    ):UserProfileResponseModel
-//@FormUrlEncoded
+        @Part("UserFullName") fullName: RequestBody?,
+        @Part("BirthDate") birthDate: RequestBody?,
+        @Part("Gender") gender: RequestBody?,
+        @Part profileImage: MultipartBody.Part? = null,
+    ): UserProfileResponseModel
+
+    //@FormUrlEncoded
 //@POST("User/RobiUserProfileUpdate")
 //suspend fun updateUserProfile(
 //    @Field("UserFullName") fullName: String,
 //    @Field("BirthDate") birthDate: String?,
 //    @Field("Gender") gender: String?
 //):UserProfileResponseModel
+    @GET("Comment/GetListV2/{id}/{type}/{page}")
+   suspend fun getAllComment(
+        @Path("id") id: String?,
+        @Path("type") type: String?,
+        @Path("page") page: Int,
+    ): CommentResponse
+
+    @GET("Reply/GetList/{id}")
+    suspend fun getAllReply(@Path("id") id: Int): CommentReplyResponse
 }

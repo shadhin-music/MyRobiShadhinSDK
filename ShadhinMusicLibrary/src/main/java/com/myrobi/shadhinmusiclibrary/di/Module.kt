@@ -12,6 +12,8 @@ import com.myrobi.shadhinmusiclibrary.data.repository.ArtistContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.AuthRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.ClientActivityContentRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.HomeContentRepository
+import com.myrobi.shadhinmusiclibrary.data.repository.comments.CommentsRepository
+import com.myrobi.shadhinmusiclibrary.data.repository.comments.CommentsViewModelFactory
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.*
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionCheckRepository
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionCheckRepositoryImpl
@@ -19,7 +21,6 @@ import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionR
 import com.myrobi.shadhinmusiclibrary.data.repository.subscription.SubscriptionRepositoryImpl
 import com.myrobi.shadhinmusiclibrary.di.single.*
 import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient
-import com.myrobi.shadhinmusiclibrary.di.single.RetrofitClient.Companion.getInstance
 import com.myrobi.shadhinmusiclibrary.di.single.SingleDownloadMap
 import com.myrobi.shadhinmusiclibrary.di.single.SingleMusicServiceConnection
 import com.myrobi.shadhinmusiclibrary.di.single.SinglePlayerApiService
@@ -125,6 +126,13 @@ internal class Module(private val applicationContext: Context) {
             .build()
     }
 
+    private fun getShadhinMusicAuthServiceV5WithoutTokenAndClient(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(AppConstantUtils.BASE_URL_API_COMMENTS)
+            .addConverterFactory(GsonConverterFactory.create())
+//            .client(UtilsOkHttp.getBaseOkHttpClient())
+            .build()
+    }
     private fun getFMService(): ApiService {
         return getRetrofitFMAPIInstance().create(ApiService::class.java)
     }
@@ -133,6 +141,9 @@ internal class Module(private val applicationContext: Context) {
 //        return getRetrofitAPIShadhinMusicApiLoginInstanceV5().create(ApiLoginService::class.java)
 //    }
 
+    private fun getShadhinMusicRobiCommentService(): ApiService {
+    return getShadhinMusicAuthServiceV5WithoutTokenAndClient().create(ApiService::class.java)
+}
     private fun getShadhinMusicRobiLoginService(): ApiLoginService {
         return getRetrofitAPIShadhinMusicRobiApiLoginInstanceV5().create(ApiLoginService::class.java)
     }
@@ -144,6 +155,9 @@ internal class Module(private val applicationContext: Context) {
         return getRetrofitAPIShadhinMusicInstanceV5WithBearerTokenAndClient().create(ApiService::class.java)
     }
 
+    private fun getRetrofitInstanceWithoutTokenandClient(): Retrofit {
+        return RetrofitClient.getInstance(UtilsOkHttp.getBaseOkHttpClient())
+    }
     private fun getRetrofitInstance(): Retrofit {
         return RetrofitClient.getInstance(UtilsOkHttp.getBaseOkHttpClientWithTokenAndClient())
     }
@@ -159,9 +173,12 @@ internal class Module(private val applicationContext: Context) {
     private val artistAlbumApiService: ApiService = getApiShadhinMusicServiceV5withTokenAndClient()
     private val podcastApiService: ApiService = getApiShadhinMusicServiceV5withTokenAndClient()
 
+    private  val commentApiService:ApiService = getShadhinMusicRobiCommentService()
     private val clientActivityRep = ClientActivityContentRepository(
         getApiShadhinMusicServiceV5withTokenAndClient()
     )
+
+
 
     private val repositoryHomeContent: HomeContentRepository =
         HomeContentRepository(getApiShadhinMusicServiceV5())
@@ -185,6 +202,9 @@ internal class Module(private val applicationContext: Context) {
 
     val factoryHomeVM: HomeViewModelFactory
         get() = HomeViewModelFactory(repositoryHomeContent,subscriptionRepository)
+
+    val factoryCommentsVM: CommentsViewModelFactory
+        get() =  CommentsViewModelFactory(repositoryComment)
 
     val factoryAmarTuneVM: AmarTunesViewModelFactory
         get() = AmarTunesViewModelFactory(repositoryHomeContentRBT)
@@ -251,6 +271,8 @@ internal class Module(private val applicationContext: Context) {
             featuredtrackListRepository
         )
 
+    private val repositoryComment: CommentsRepository get()= CommentsRepository(commentApiService)
+
     val searchRepository: SearchRepository
         get() = SearchRepository(
             artistAlbumApiService
@@ -260,16 +282,18 @@ internal class Module(private val applicationContext: Context) {
             searchRepository
         )
 
+
     val exoplayerCache: SimpleCache
         get() = PlayerCache.getInstance(applicationContext)
 
     private val playerApiService: PlayerApiService
         get() = SinglePlayerApiService.getInstance(getRetrofitInstance())
 
-    private val robiplayerApiService: PlayerApiService
-        get() = SinglePlayerApiService.getInstance(getRobiRetrofitInstance())
+//    private val robiplayerApiService: PlayerApiService
+//        get() = SinglePlayerApiService.getInstance(getRobiRetrofitInstance())
 
-    val robimusicRepository: MusicRepository = ShadhinMusicRepository(robiplayerApiService)
+//
+//    val robimusicRepository: MusicRepository = ShadhinMusicRepository(robiplayerApiService)
 
     val musicRepository: MusicRepository = ShadhinMusicRepository(playerApiService)
 

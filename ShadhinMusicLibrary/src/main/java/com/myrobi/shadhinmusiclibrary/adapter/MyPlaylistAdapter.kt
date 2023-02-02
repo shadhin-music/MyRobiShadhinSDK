@@ -27,6 +27,7 @@ internal class MyPlaylistAdapter(val data: List<UserPlaylistData>?,val onClickIt
         holder.bindItems()
         holder.itemView.setOnClickListener {
             val userPlaylistData = data?.get(position)
+            Log.e("TAG","Item: "+ userPlaylistData)
             onClickItem.GotoPlaylistDetails(userPlaylistData?.id,userPlaylistData?.name,holder.imageId)
         }
     }

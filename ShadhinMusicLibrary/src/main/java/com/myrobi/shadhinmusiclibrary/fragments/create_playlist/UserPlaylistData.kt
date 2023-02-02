@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 @Keep
-data class UserPlaylistData(
+internal data class UserPlaylistData(
     @SerializedName("Data")
     var `data`: List<PlaylistContent>?,
     @SerializedName("id")

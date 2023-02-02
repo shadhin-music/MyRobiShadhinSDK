@@ -243,9 +243,9 @@ internal class SDKMainActivity : BaseActivity(),
         if (uiRequest == AppConstantUtils.Requester_Name_CreatedPlaylistDetails) {
             createdPlaylistDetailsFragmentAccess()
         }
-        if (uiRequest == AppConstantUtils.Requester_Name_CreatedPlaylistDetails) {
-            createdPlaylistDetailsFragmentAccess()
-        }
+//        if (uiRequest == AppConstantUtils.Requester_Name_CreatedPlaylistDetails) {
+//            createdPlaylistDetailsFragmentAccess()
+//        }
         //routeDataArtistType()
         /* playerViewModel.currentMusicLiveData.observe(this) { itMus ->
              if (itMus != null) {
@@ -570,8 +570,8 @@ internal class SDKMainActivity : BaseActivity(),
     }
 
     private fun myPlaylistFragmentAccess() {
-        val patch = intent.extras!!.getBundle(PatchItem)!!
-            .getSerializable(PatchItem) as HomePatchItemModel
+        val patch = intent.extras!!.getBundle(PatchItem)
+            ?.getSerializable(PatchItem) as HomePatchItemModel
 
         startDestination(
 

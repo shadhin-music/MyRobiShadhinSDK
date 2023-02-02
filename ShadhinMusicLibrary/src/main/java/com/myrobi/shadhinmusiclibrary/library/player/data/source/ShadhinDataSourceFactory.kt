@@ -41,7 +41,7 @@ internal open class ShadhinDataSourceFactory constructor(
     }
 
     override fun createDataSource(): DataSource {
-        Log.i("ShadhinVediaSource", "createSource: ${Thread.currentThread().name}")
+      //  Log.i("ShadhinVediaSource", "createSource: ${Thread.currentThread().name}")
         return factory.createDataSource()
     }
 

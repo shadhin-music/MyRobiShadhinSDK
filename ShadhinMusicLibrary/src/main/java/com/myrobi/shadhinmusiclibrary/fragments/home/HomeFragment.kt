@@ -425,14 +425,6 @@ internal class HomeFragment : BaseFragment(),
             }
         }
 
-      /*  startActivity(Intent(requireActivity(), SDKMainActivity::class.java)
-            .apply {
-                putExtra(
-                    AppConstantUtils.UI_Request_Type,
-                    AppConstantUtils.Requester_Name_MyPlaylist
-                )
-                putExtra(AppConstantUtils.PatchItem, data)
-            })*/
     }
 
     override fun clickOnMyFavorite(selectedHomePatchItem: HomePatchItemModel) {

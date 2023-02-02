@@ -458,7 +458,7 @@ internal class ParentAdapter(
         const val VIEW_TYPE = 100
     }
 }
-class ParentAdapterDiffCallback: DiffUtil.ItemCallback<HomePatchItemModel>() {
+internal class ParentAdapterDiffCallback: DiffUtil.ItemCallback<HomePatchItemModel>() {
     override fun areItemsTheSame(
         oldItem: HomePatchItemModel,
         newItem: HomePatchItemModel

@@ -16,6 +16,8 @@ import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.myrobi.shadhinmusiclibrary.callBackService.PodcastTrackCallback
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.Plan
+import com.myrobi.shadhinmusiclibrary.data.model.subscription.Status
 import com.myrobi.shadhinmusiclibrary.utils.UtilHelper
 
 
@@ -36,14 +38,16 @@ internal class HomePodcastAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems()
         holder.itemView.setOnClickListener {
+            val customData = homePatchItem.customData
             //homeCallBack.onClickItemAndAllItem(position, homePatchItem)
             Log.e("TAG","DATA: " + homePatchItem.Data[position].isPaid )
             Log.e("TAG","DATA: " + homePatchItem.Data[position].playingUrl)
-            Log.e("TAG","DATA: " + homePatchItem.Data[position].content_Type)
-            if(homePatchItem.Data[position].isPaid.toString().equals("false",true)){
+            Log.e("TAG","DATA: " + homePatchItem.customData)
+
+            if(homePatchItem.Data[position].isPaid.toString().equals("true",true)){
                 podcastTrackClick.onClickItem(homePatchItem.Data.toMutableList(),position)
             } else{
-                it.findNavController().navigate(R.id.to_subscription)
+                it.findNavController().navigate(R.id.to_subscription_not_found)
             }
 
         }
