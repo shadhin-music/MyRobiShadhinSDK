@@ -13,7 +13,7 @@ internal class AuthRepository(private val apiLoginSer: ApiLoginService) {
         val response = safeApiCall { apiLoginSer.fetchMyRobiLogin(LoginModel(msisdn)) }
         return if (response.status == Status.SUCCESS) {
                    appToken = response.data?.data?.Token
-            
+
             Pair(true, response.message)
         } else {
             appToken = null
