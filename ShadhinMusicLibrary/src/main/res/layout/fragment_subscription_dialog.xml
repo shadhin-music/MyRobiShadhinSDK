@@ -55,7 +55,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:fontFamily="@font/roboto"
+
                         android:text="Enjoy Shadhin Music Pro Features"
                         android:textColor="@color/my_sdk_white"
                         android:textFontWeight="600"
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="32dp"
-                        android:fontFamily="@font/roboto"
+
                         android:text="@string/commentsa"
                         android:textColor="@color/my_sdk_white"
                         android:textFontWeight="400"
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:clickable="false"
-                        android:fontFamily="@font/roboto"
+
                         android:gravity="start"
                         android:text="Shadhin Music Pro"
                         android:textFontWeight="600"
@@ -122,7 +122,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/roboto"
+
                         android:gravity="start"
                         android:text="@string/sdsafsdf"
                         android:textFontWeight="400"
@@ -174,7 +174,7 @@
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="12dp"
                                 android:clickable="false"
-                                android:fontFamily="@font/roboto"
+
                                 android:text="Monthly Plan"
                                 android:textColor="#00B0FF"
                                 android:textFontWeight="600"
@@ -190,7 +190,7 @@
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginBottom="12dp"
                                 android:clickable="false"
-                                android:fontFamily="@font/roboto"
+
                                 android:text="BDT 20.0 (Auto Renewal)"
                                 android:textFontWeight="400"
                                 android:textSize="12sp"
@@ -222,7 +222,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
+
                             android:text="See all plans"
                             android:textColor="@color/my_sdk_white"
                             android:textFontWeight="600"

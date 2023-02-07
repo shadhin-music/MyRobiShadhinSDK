@@ -48,6 +48,7 @@
                 android:background="@drawable/view_all_bg"
                 android:textColor="#2E2E2E"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/constraintRelease"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.ShadhinMusicSdkCore
-import com.myrobi.shadhinmusiclibrary.adapter.RadioTrackAdapter
+//import com.myrobi.shadhinmusiclibrary.adapter.RadioTrackAdapter
 import com.myrobi.shadhinmusiclibrary.callBackService.RadioTrackCallBack
 import com.myrobi.shadhinmusiclibrary.data.IMusicModel
 import com.myrobi.shadhinmusiclibrary.fragments.album.AlbumViewModel
@@ -23,7 +23,7 @@ internal class RadioFragment : BaseFragment(),
     RadioTrackCallBack {
 
     private lateinit var albumVM: AlbumViewModel
-    private lateinit var radioTrackAdapter: RadioTrackAdapter
+  //  private lateinit var radioTrackAdapter: RadioTrackAdapter
     private var globalRootContentId = ""
     private lateinit var parentRecycler: RecyclerView
 
@@ -36,7 +36,7 @@ internal class RadioFragment : BaseFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        radioTrackAdapter = RadioTrackAdapter(this)
+     //   radioTrackAdapter = RadioTrackAdapter(this)
         initialize()
 
         val imageBackBtn: AppCompatImageView = view.findViewById(R.id.imageBack)
@@ -65,18 +65,18 @@ internal class RadioFragment : BaseFragment(),
         albumVM.fetchGetAllRadio()
         albumVM.radiosContent.observe(viewLifecycleOwner) { res ->
             if (res.data?.data != null && res.status == Status.SUCCESS) {
-                radioTrackAdapter.setRadioTrackData(
-                    res.data.data,
-                    "",
-                    globalRootContentId
-                )
+//                radioTrackAdapter.setRadioTrackData(
+//                    res.data.data,
+//                    "",
+//                    globalRootContentId
+//                )
                 progressBar.visibility = View.GONE
             } else {
                 progressBar.visibility = View.GONE
             }
         }
         parentRecycler.layoutManager = layoutManager
-        parentRecycler.adapter = radioTrackAdapter
+        //parentRecycler.adapter = radioTrackAdapter
     }
 
     override fun onClickItem(currentSong: IMusicModel) {
@@ -96,35 +96,35 @@ internal class RadioFragment : BaseFragment(),
         currentVH: RecyclerView.ViewHolder,
         songDetails: MutableList<IMusicModel>
     ) {
-        val radioTrackVH = currentVH as RadioTrackAdapter.RadioTrackVH
-        if (songDetails.size > 0 && isAdded) {
-            //DO NOT USE requireActivity()
-            playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMusic ->
-                if (itMusic != null) {
-                    if (globalRootContentId.isEmpty()) {
-                        globalRootContentId = itMusic.rootId ?: ""
-                    }
-                    if (radioTrackVH.rootId == globalRootContentId) {
-                        playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
-                            if (itPla != null && radioTrackVH.rootId == globalRootContentId) {
-                                radioTrackVH.ivRadioPlay?.let {
-                                    playPauseStateBlack(
-                                        itPla.isPlaying,
-                                        it
-                                    )
-                                }
-                            }
-                        }
-                    } else {
-                        radioTrackVH.ivRadioPlay?.let {
-                            playPauseStateBlack(
-                                false,
-                                it
-                            )
-                        }
-                    }
-                }
-            }
-        }
+     //   val radioTrackVH = currentVH as RadioTrackAdapter.RadioTrackVH
+//        if (songDetails.size > 0 && isAdded) {
+//            //DO NOT USE requireActivity()
+//            playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMusic ->
+//                if (itMusic != null) {
+//                    if (globalRootContentId.isEmpty()) {
+//                        globalRootContentId = itMusic.rootId ?: ""
+//                    }
+//                    if (radioTrackVH.rootId == globalRootContentId) {
+//                        playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
+//                            if (itPla != null && radioTrackVH.rootId == globalRootContentId) {
+//                                radioTrackVH.ivRadioPlay?.let {
+//                                    playPauseStateBlack(
+//                                        itPla.isPlaying,
+//                                        it
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        radioTrackVH.ivRadioPlay?.let {
+//                            playPauseStateBlack(
+//                                false,
+//                                it
+//                            )
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 }

@@ -87,7 +87,12 @@ internal class HomeViewModel(
     fun fetchPatchData(patchCode: String) = viewModelScope.launch {
         _isLoading.postValue(true)
         val response = homeContentRepository.fetchPatchData(patchCode)
+
         if(response.status == Status.SUCCESS && response.data?.data !=null){
+//           response.data.data.let { it->
+//              it.Design.re
+//           }
+
             _patchItem.postValue(response.data.data)
         }
         _isLoading.postValue(false)

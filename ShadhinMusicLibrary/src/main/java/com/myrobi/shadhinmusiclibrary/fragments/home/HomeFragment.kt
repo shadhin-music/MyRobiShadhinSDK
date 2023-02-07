@@ -19,7 +19,7 @@ import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.ShadhinMusicSdkCore
 import com.myrobi.shadhinmusiclibrary.activities.SDKMainActivity
 import com.myrobi.shadhinmusiclibrary.adapter.HomeFooterAdapter
-import com.myrobi.shadhinmusiclibrary.adapter.NewReleaseSliderpagerAdapter
+//import com.myrobi.shadhinmusiclibrary.adapter.NewReleaseSliderpagerAdapter
 import com.myrobi.shadhinmusiclibrary.adapter.ParentAdapter
 import com.myrobi.shadhinmusiclibrary.callBackService.DownloadClickCallBack
 import com.myrobi.shadhinmusiclibrary.callBackService.HomeCallBack
@@ -505,41 +505,41 @@ internal class HomeFragment : BaseFragment(),
 
 
 
-        override fun getCurrentVH(
-            currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
-            data: List<IMusicModel>
-        ) {
-            val trackViewHolder = currentVH as NewReleaseSliderpagerAdapter.ViewHolder
-
-            trackViewHolder.let {
-                if (isAdded) {
-                    playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMusic ->
-                        if (itMusic != null) {
-                            trackViewHolder.item.let {
-
-                                    playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
-                                        if (it?.content_Id == itMusic.mediaId &&
-                                            it?.content_Type == itMusic.contentType
-                                        ) {
-                                            if (itPla != null){
-                                                playPauseStateRed(itPla.isPlaying,
-                                                    trackViewHolder.ivPlayBtn!!)
-                                                Log.e("TAG","DATA: " + itMusic.mediaId)
-                                            }
-                                        } else {
-                                            Log.e("TAG","DATA: " + isAdded)
-                                            Log.e("TAG","DATA123: " + itMusic.rootType)
-                                            trackViewHolder.ivPlayBtn?.let { playPauseStateRed(false, it) }
-                                        }
-                                    }
-
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        override fun getCurrentVH(
+//            currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
+//            data: List<IMusicModel>
+//        ) {
+//            val trackViewHolder = currentVH as NewReleaseSliderpagerAdapter.ViewHolder
+//
+//            trackViewHolder.let {
+//                if (isAdded) {
+//                    playerViewModel.currentMusicLiveData.observe(viewLifecycleOwner) { itMusic ->
+//                        if (itMusic != null) {
+//                            trackViewHolder.item.let {
+//
+//                                    playerViewModel.playbackStateLiveData.observe(viewLifecycleOwner) { itPla ->
+//                                        if (it?.content_Id == itMusic.mediaId &&
+//                                            it?.content_Type == itMusic.contentType
+//                                        ) {
+//                                            if (itPla != null){
+//                                                playPauseStateRed(itPla.isPlaying,
+//                                                    trackViewHolder.ivPlayBtn!!)
+//                                                Log.e("TAG","DATA: " + itMusic.mediaId)
+//                                            }
+//                                        } else {
+//                                            Log.e("TAG","DATA: " + isAdded)
+//                                            Log.e("TAG","DATA123: " + itMusic.rootType)
+//                                            trackViewHolder.ivPlayBtn?.let { playPauseStateRed(false, it) }
+//                                        }
+//                                    }
+//
+//
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
 
         override fun onTrackClick(data:  MutableList<IMusicModel>, position: Int) {
@@ -568,9 +568,9 @@ internal class HomeFragment : BaseFragment(),
 
 }
 internal interface NewReleaseTrackCallback {
-    fun getCurrentVH(
-        currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
-        data: List<IMusicModel>,
-    )
+//    fun getCurrentVH(
+//        currentVH: NewReleaseSliderpagerAdapter.ViewHolder?,
+//        data: List<IMusicModel>,
+//    )
     fun onTrackClick(data: MutableList<IMusicModel>, position: Int)
 }

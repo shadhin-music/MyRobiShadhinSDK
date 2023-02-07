@@ -110,7 +110,7 @@
                         android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_robi_charging" />
+                        android:src="@drawable/my_bl_sdk_ic_robi_charging" />
 
                 </RelativeLayout>
 

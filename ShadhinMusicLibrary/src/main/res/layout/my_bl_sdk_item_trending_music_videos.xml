@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="View All"
+                android:visibility="gone"
                 android:textAllCaps="true"
                 android:background="@drawable/view_all_bg"
                 android:textColor="#2E2E2E"

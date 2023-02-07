@@ -79,7 +79,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/roboto"
+
                     android:gravity="center"
                     android:text="Payment Successful"
                     android:textFontWeight="600"
@@ -97,7 +97,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/roboto"
+
                     android:gravity="center"
                     android:text="Congratulation! Successfully subscribed to Shadhin Music plan."
                     android:textFontWeight="400"

@@ -171,8 +171,8 @@ internal class PodcastDetailsFragment : BaseFragment(),
             if(it.status==Status.SUCCESS){
                 Log.e("TAG","CommentData: "+ it.data?.data)
                // setupAdapters(it.data?.data, id)
-                podcastCommentsHeaderAdapter = PodcastCommentsHeaderAdapter(it.data?.data!!)
-                concatAdapter.addAdapter(podcastCommentsHeaderAdapter)
+//                podcastCommentsHeaderAdapter = PodcastCommentsHeaderAdapter(it.data?.data!!)
+//                concatAdapter.addAdapter(podcastCommentsHeaderAdapter)
             }else{
                 Log.e("TAG","CommentData: "+ it.status)
             }

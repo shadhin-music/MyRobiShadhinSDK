@@ -333,7 +333,9 @@ internal class SDKMainActivity : BaseActivity(),
         homeViewModel.isLoading.observe(this) { isLoading ->
             progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
-        patchCode?.let { homeViewModel.fetchPatchData(it) }
+        patchCode?.let { homeViewModel.fetchPatchData(it)
+
+        }
     }
 
     private fun routePlaylist(patch: HomePatchItemModel) {

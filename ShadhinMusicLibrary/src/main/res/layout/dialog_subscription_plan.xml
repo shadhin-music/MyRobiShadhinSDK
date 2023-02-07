@@ -66,7 +66,7 @@
                                 android:layout_marginTop="16dp"
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginBottom="16dp"
-                                android:fontFamily="@font/roboto"
+
                                 android:text="Choose a plan of your choice"
                                 android:textColor="@color/my_sdk_color_text"
                                 android:textSize="14sp"
@@ -81,7 +81,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="16dp"
-                                android:fontFamily="@font/roboto"
+
                                 tools:text="Robi/Airtel"
                                 android:textColor="@color/my_sdk_color_black"
                                 android:textSize="18sp"
@@ -105,7 +105,7 @@
                                     android:id="@+id/icon_image"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:src="@drawable/ic_robi_charging"
+                                    android:src="@drawable/my_bl_sdk_ic_robi_charging"
                                     />
 
                             </androidx.cardview.widget.CardView>

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import com.myrobi.shadhinmusiclibrary.R
 import com.myrobi.shadhinmusiclibrary.callBackService.HomeCallBack
 import com.myrobi.shadhinmusiclibrary.data.model.FeaturedPodcastDataModel
@@ -42,13 +43,13 @@ internal class PodcastShowTypeAdapter(
         fun bindItems() {
             val textViewName = itemView.findViewById(R.id.txt_title) as TextView
             val textViewArtist = itemView.findViewById(R.id.txt_name) as TextView
-            val imageView= itemView.findViewById(R.id.image) as ImageView
-            val imageViewPaid = itemView.findViewById(R.id.img_premium) as ImageView
-            if(patchItem.Data[absoluteAdapterPosition].isPaid == true){
-                imageViewPaid.visibility = View.VISIBLE
-            } else{
-                imageViewPaid.visibility = View.GONE
-            }
+            val imageView= itemView.findViewById(R.id.image) as ShapeableImageView
+//            val imageViewPaid = itemView.findViewById(R.id.img_premium) as ImageView
+//            if(patchItem.Data[absoluteAdapterPosition].isPaid == true){
+//                imageViewPaid.visibility = View.VISIBLE
+//            } else{
+//                imageViewPaid.visibility = View.GONE
+//            }
             Glide.with(mContext)
                 .load(
                     UtilHelper.getImageUrlSize300(

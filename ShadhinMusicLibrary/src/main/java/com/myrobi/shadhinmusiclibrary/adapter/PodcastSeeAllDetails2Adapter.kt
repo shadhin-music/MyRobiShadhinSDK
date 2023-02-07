@@ -57,7 +57,7 @@ internal class PodcastSeeAllDetails2Adapter(
             "PP" -> VIEW_PP
             "TN" -> VIEW_TN
             "SS" -> VIEW_SS
-            "VP" -> VIEW_VP
+//            "VP" -> VIEW_VP
             "VL" -> VIEW_VL
             "LE" -> VIEW_LE
             "PS" -> VIEW_PS
@@ -126,16 +126,7 @@ internal class PodcastSeeAllDetails2Adapter(
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = PodcastSSTypeAdapter(patchItem.Data,podcastDetailsCallback)
         }
-        fun bindVP(patchItem: FeaturedPodcastDataModel) {
 
-            val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
-            tvTitle.text = patchItem.PatchName
-
-            val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
-            recyclerView.layoutManager =
-                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.adapter = PodcastVideoPodcastTypeAdapter(patchItem.Data,podcastDetailsCallback)
-        }
         private fun bindVL(patchItem: FeaturedPodcastDataModel) {
             val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
             tvTitle.text = patchItem.PatchName
@@ -168,7 +159,7 @@ internal class PodcastSeeAllDetails2Adapter(
                     "PP"-> bindPP(homePatchItemModel)
                     "TN"-> bindTN(homePatchItemModel)
                     "SS"-> bindSS(homePatchItemModel)
-                    "VP"-> bindVP(homePatchItemModel)
+//                    "VP"-> bindVP(homePatchItemModel)
                     "VL"-> bindVL(homePatchItemModel)
                     "PS"-> bindPS(homePatchItemModel)
                     "LE"-> bindLE(homePatchItemModel)

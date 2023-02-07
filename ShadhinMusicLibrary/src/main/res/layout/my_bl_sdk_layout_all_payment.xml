@@ -48,7 +48,7 @@
                     android:layout_marginStart="16dp"
 
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto"
+
                     android:text="Monthly"
                     android:maxLines="2"
                     android:textColor="@color/my_sdk_white"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/plan_duration"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/roboto"
+
                     android:gravity="right"
                     android:textColor="@color/my_sdk_white"
                     android:textSize="20sp"
@@ -188,7 +188,7 @@
                     android:layout_gravity="center"
 
                     android:layout_marginEnd="24dp"
-                    android:fontFamily="@font/roboto"
+
                     android:text="@string/text_telco"
                     android:textColor="@color/my_sdk_v2_text_light"
                     android:textSize="16sp" />
@@ -243,7 +243,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:fontFamily="@font/roboto"
+
                 android:text="@string/why_upgrade_to_premium"
                 android:textColor="#2A2D36"
                 android:textSize="24sp"
@@ -283,7 +283,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
+
                         android:text="@string/ad_free_streaming"
                         android:textColor="#2A2D36"
                         android:textSize="16sp" />
@@ -310,7 +310,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
+
                         android:text="@string/undsd"
                         android:textColor="#2A2D36"
                         android:textSize="16sp" />
@@ -337,7 +337,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
+
                         android:text="@string/exclusive_original_podcast"
                         android:textColor="#2A2D36"
                         android:textSize="16sp" />
@@ -364,7 +364,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
+
                         android:text="@string/xfsdfsdf"
                         android:textColor="#2A2D36"
                         android:textSize="16sp" />
@@ -379,7 +379,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        android:fontFamily="@font/roboto"
+
         android:gravity="center"
         android:text="@string/your_contribution_will_enrich_our_music_industry"
         android:textColor="@color/my_sdk_down_item_desc"

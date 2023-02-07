@@ -66,7 +66,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:elevation="3dp"
-            android:fontFamily="@font/roboto"
+
             android:gravity="center"
             android:outlineProvider="none"
             android:textColor="@color/my_sdk_color_primary"
@@ -85,7 +85,7 @@
             android:layout_marginEnd="8dp"
             android:outlineProvider="none"
             android:elevation="3dp"
-            android:fontFamily="@font/roboto"
+
             android:gravity="center"
             tools:text="৳2.67 / 1 day"
             android:textColor="@color/my_sdk_color_white_seventy_percent"
@@ -104,7 +104,7 @@
             android:outlineProvider="none"
             android:layout_marginBottom="16dp"
             android:elevation="3dp"
-            android:fontFamily="@font/roboto"
+
             android:gravity="center|top"
             android:paddingBottom="8dp"
             android:lines="3"

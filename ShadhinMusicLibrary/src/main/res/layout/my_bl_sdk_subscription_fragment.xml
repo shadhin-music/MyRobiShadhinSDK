@@ -36,7 +36,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:fontFamily="@font/roboto"
+
             android:text="@string/sub_title_text"
             android:textColor="@color/my_sdk_white"
 
@@ -52,7 +52,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="32dp"
-            android:fontFamily="@font/roboto"
+
             android:text="@string/choose_a_payment_method_to_continue"
             android:textColor="@color/my_sdk_white"
             android:textSize="14sp"

@@ -121,7 +121,7 @@ internal class PodcastSeeAllDetailsFragment : BaseFragment(),
             "PP" -> PodcastSeeAllDetails2Adapter.VIEW_PP
             "TN" -> PodcastSeeAllDetails2Adapter.VIEW_TN
             "SS" -> PodcastSeeAllDetails2Adapter.VIEW_SS
-            "VP" -> PodcastSeeAllDetails2Adapter.VIEW_VP
+//            "VP" -> PodcastSeeAllDetails2Adapter.VIEW_VP
             "VL" -> PodcastSeeAllDetails2Adapter.VIEW_VL
             "LE" -> PodcastSeeAllDetails2Adapter.VIEW_LE
             "PS" -> PodcastSeeAllDetails2Adapter.VIEW_PS

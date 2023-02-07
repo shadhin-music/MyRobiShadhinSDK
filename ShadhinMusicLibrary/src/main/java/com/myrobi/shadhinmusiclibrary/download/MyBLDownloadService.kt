@@ -206,7 +206,7 @@ class MyBLDownloadService : DownloadService(
 
         return notificationHelper.buildProgressNotification(
             applicationContext,
-            R.mipmap.my_bl_sdk_shadhin_logo,
+            R.drawable.my_bl_sdk_ic_shadhin_icon_gray_vector,
             null,
             "",
             downloads,
