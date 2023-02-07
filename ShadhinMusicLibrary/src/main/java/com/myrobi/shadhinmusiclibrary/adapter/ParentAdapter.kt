@@ -271,6 +271,7 @@ internal class ParentAdapter(
                 downloadClickCallBack.clickOnArtist(homePatchItemModel)
             }
             podcast.setOnClickListener{
+                Log.e("TAG","DATA: " + homePatchItemModel)
                 downloadClickCallBack.clickOnPodcast(homePatchItemModel)
             }
             cardItem.setOnClickListener {

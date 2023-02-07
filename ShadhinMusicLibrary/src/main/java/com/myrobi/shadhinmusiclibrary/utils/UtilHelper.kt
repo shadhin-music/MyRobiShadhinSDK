@@ -362,7 +362,7 @@ internal object UtilHelper {
             songDetailList.add(
                HomePatchDetailModel()
                     .apply {
-                        content_Id = musicItem.content_Id ?: ""
+                        content_Id = musicItem.content_Id ?: musicItem.album_Id.toString()
                         imageUrl = musicItem.imageUrl ?: ""
                         titleName = musicItem.titleName ?: ""
                         content_Type = musicItem.content_Type ?: ""

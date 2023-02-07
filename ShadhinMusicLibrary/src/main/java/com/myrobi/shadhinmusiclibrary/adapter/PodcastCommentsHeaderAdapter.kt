@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.myrobi.shadhinmusiclibrary.R
+import com.myrobi.shadhinmusiclibrary.data.model.comments.CommentData
 
 
-internal class PodcastCommentsHeaderAdapter : RecyclerView.Adapter<PodcastCommentsHeaderAdapter.ViewHolder>() {
+internal class PodcastCommentsHeaderAdapter(val data: List<CommentData>) : RecyclerView.Adapter<PodcastCommentsHeaderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.my_bl_sdk_layout_podcast_comment_header, parent, false)
@@ -23,7 +24,7 @@ internal class PodcastCommentsHeaderAdapter : RecyclerView.Adapter<PodcastCommen
     }
     override fun getItemViewType(position: Int) = VIEW_TYPE
     override fun getItemCount(): Int {
-        return 1
+        return data.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

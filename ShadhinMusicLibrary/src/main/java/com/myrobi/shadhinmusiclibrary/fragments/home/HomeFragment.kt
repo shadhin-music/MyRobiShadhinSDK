@@ -233,7 +233,10 @@ internal class HomeFragment : BaseFragment(),
                         homePatchDetail as Serializable
                     )
                 }
-
+                Log.e("TAG","Podcast: " + homePatchItem )
+                Log.e("TAG","Podcast: " + homePatchDetail.album_Id)
+                Log.e("TAG","Podcast: " + homePatchDetail.content_Id)
+                Log.e("TAG","data: " +homePatchDetail.album_Id )
                 findNavController().navigate(R.id.to_podcast_details, bundle)
             }
             val bundle = Bundle().apply {
@@ -268,6 +271,7 @@ internal class HomeFragment : BaseFragment(),
                         AppConstantUtils.PatchItem,
                         homePatchItem as Serializable
                     )
+                    Log.e("TAG","Podcast: " + homePatchItem )
                 })
             }
             if (homePatchItem.ContentType.contains("VD",true)) {
@@ -288,7 +292,7 @@ internal class HomeFragment : BaseFragment(),
             }
             when (homePatchItem.ContentType.uppercase()) {
                 DataContentType.CONTENT_TYPE_PS -> {
-
+                    Log.e("TAG","Podcast: " +bundle )
                     findNavController().navigate(R.id.to_podcast_see_all_fragment,  bundle )
 
                 }

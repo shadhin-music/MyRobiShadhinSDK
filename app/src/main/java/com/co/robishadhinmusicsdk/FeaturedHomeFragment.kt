@@ -1,22 +1,15 @@
-package com.co.shadhinmusicsdk
+package com.co.robishadhinmusicsdk
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import com.co.shadhinmusicsdk.data.AppApiService
-import com.co.shadhinmusicsdk.data.model.ClientService
-import com.co.shadhinmusicsdk.data.model.LoginModel
-import com.co.shadhinmusicsdk.data.model.LoginResponse
+import com.co.robishadhinmusicsdk.data.AppApiService
+import com.co.robishadhinmusicsdk.data.model.ClientService
+import com.co.robishadhinmusicsdk.data.model.LoginResponse
 import com.myrobi.shadhinmusiclibrary.ShadhinMusicSdkCore
-import com.myrobi.shadhinmusiclibrary.utils.share.ShareRC
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 internal class FeaturedHomeFragment : Fragment() {

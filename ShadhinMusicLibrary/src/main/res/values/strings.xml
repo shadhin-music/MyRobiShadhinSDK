@@ -47,4 +47,17 @@
     <string name="i_am_a">I am a</string>
     <string name="link_with_profile">Link profile with</string>
     <string name="usdfs_sdf">Update Profile</string>
+    <string name="comment_text">Comment</string>
+
+    <string name="user_name">User Name</string>
+    <string name="dummy_minute_ago">25 min ago</string>
+    <string name="reply_text">Reply</string>
+    <string name="like_text">Like</string>
+    <string name="replies_count">3 replies</string>
+    <string name="add_comment">Add a comment</string>
+    <string name="replies_text">Replies</string>
+    <string name="add_comment_reply_hint">Add a reply</string>
+    <string name="you_liked">You liked</string>
+    <string name="see_all">See all</string>
+    <string name="not_now">Not Now</string>
 </resources>

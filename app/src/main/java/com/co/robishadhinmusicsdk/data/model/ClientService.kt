@@ -1,4 +1,4 @@
-package com.co.shadhinmusicsdk.data.model
+package com.co.robishadhinmusicsdk.data.model
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

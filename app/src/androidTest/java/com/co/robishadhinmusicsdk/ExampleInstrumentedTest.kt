@@ -1,4 +1,4 @@
-package com.co.shadhinmusicsdk
+package com.co.robishadhinmusicsdk
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

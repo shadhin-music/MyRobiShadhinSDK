@@ -29,15 +29,14 @@ import com.myrobi.shadhinmusiclibrary.callBackService.PodcastBottomSheetDialogIt
 import com.myrobi.shadhinmusiclibrary.data.IMusicModel
 import com.myrobi.shadhinmusiclibrary.data.model.DownloadingItem
 import com.myrobi.shadhinmusiclibrary.data.model.HomePatchItemModel
+import com.myrobi.shadhinmusiclibrary.data.model.comments.CommentData
 import com.myrobi.shadhinmusiclibrary.data.model.podcast.DataModel
 import com.myrobi.shadhinmusiclibrary.data.model.podcast.EpisodeModel
 import com.myrobi.shadhinmusiclibrary.fragments.base.BaseFragment
 import com.myrobi.shadhinmusiclibrary.fragments.fav.FavViewModel
 import com.myrobi.shadhinmusiclibrary.library.player.utils.CacheRepository
 import com.myrobi.shadhinmusiclibrary.library.player.utils.isPlaying
-import com.myrobi.shadhinmusiclibrary.utils.AppConstantUtils
 import com.myrobi.shadhinmusiclibrary.utils.Status
-import java.lang.reflect.Type
 
 internal class PodcastDetailsFragment : BaseFragment(),
     HomeCallBack,
@@ -64,7 +63,10 @@ internal class PodcastDetailsFragment : BaseFragment(),
     private lateinit var parentRecycler: RecyclerView
     private var cacheRepository: CacheRepository? = null
     private lateinit var favViewModel: FavViewModel
-
+    private var pageNum = 1
+    //var page = -1
+    var isLoading = false
+    var isLastPage = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -83,14 +85,15 @@ internal class PodcastDetailsFragment : BaseFragment(),
             contentType = Type.takeLast(2)
             contentId = it.content_Id
             selectedEpisodeID = it.album_Id ?: it.content_Id
-            Log.e("PDF", "getPodcastDetailsInitialize: "+ Type)
+
         }
         cacheRepository = CacheRepository(requireContext())
 
         setupViewModel()
         Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
+        Log.e("PDF", "getPodcastDetailsInitialize: "+ contentType)
         Log.e("PDF", "getPodcastDetailsInitialize: "+selectedEpisodeID)
-         commentsViewModel.getAllComments(contentId,contentType,1)
+
         //Log.e("PDF", "getPodcastDetailsInitialize: "+ contentId)
         if (selectedEpisodeID.isEmpty()) {
 //        if (selectedEpisodeID.isEmpty()) {
@@ -135,6 +138,11 @@ internal class PodcastDetailsFragment : BaseFragment(),
                         itEpisod[0].TrackList,
                         argHomePatchDetail!!
                     )
+                    itEpisod.forEach {
+                        val id= it.Id
+                        commentsViewModel.getAllComments(id.toString(),contentType,pageNum)
+                        podcastCommentsObserve(id.toString())
+                    }
                 }
                 response.data?.data?.EpisodeList?.get(0)?.let {
                     podcastTrackAdapter.setData(
@@ -154,14 +162,17 @@ internal class PodcastDetailsFragment : BaseFragment(),
         searchBar.setOnClickListener {
             openSearch()
         }
-       podcastCommentsObserve()
+
     }
-    private fun podcastCommentsObserve(){
+    private fun podcastCommentsObserve(id: String) {
         commentsViewModel.getComments.observe(viewLifecycleOwner){
             Log.e("TAG","getComments: "+ it.message)
 
             if(it.status==Status.SUCCESS){
                 Log.e("TAG","CommentData: "+ it.data?.data)
+               // setupAdapters(it.data?.data, id)
+                podcastCommentsHeaderAdapter = PodcastCommentsHeaderAdapter(it.data?.data!!)
+                concatAdapter.addAdapter(podcastCommentsHeaderAdapter)
             }else{
                 Log.e("TAG","CommentData: "+ it.status)
             }
@@ -194,15 +205,14 @@ internal class PodcastDetailsFragment : BaseFragment(),
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         val config = ConcatAdapter.Config.Builder().apply { setIsolateViewTypes(false) }.build()
+        podcastMoreEpisodesAdapter = PodcastMoreEpisodesAdapter(this.data, this)
         podcastHeaderAdapter =
             PodcastHeaderAdapter(this, cacheRepository, favViewModel, argHomePatchDetail)
         podcastTrackAdapter = PodcastTrackAdapter(this, this, cacheRepository!!)
-        podcastMoreEpisodesAdapter = PodcastMoreEpisodesAdapter(data, this)
-        podcastCommentsHeaderAdapter = PodcastCommentsHeaderAdapter()
+     //
         footerAdapter = HomeFooterAdapter()
 //        artistsYouMightLikeAdapter =
-//            ArtistsYouMightLikeAdapter(argHomePatchItem, this, argHomePatchDetail?.ArtistId)
-        concatAdapter = ConcatAdapter(
+  concatAdapter = ConcatAdapter(
             config,
             podcastHeaderAdapter,
             PodcastTrackHeaderAdapter(),
@@ -210,6 +220,8 @@ internal class PodcastDetailsFragment : BaseFragment(),
             podcastMoreEpisodesAdapter,
             footerAdapter
         )
+
+
         // concatAdapter.notifyDataSetChanged()
         parentRecycler.layoutManager = layoutManager
         parentRecycler.adapter = concatAdapter
@@ -364,7 +376,7 @@ internal class PodcastDetailsFragment : BaseFragment(),
                                 playPauseStateRed(itPla.isPlaying, podcastHeaderVH.ivPlayBtn!!)
                         }
                     } else {
-                        podcastHeaderVH.ivPlayBtn?.let { playPauseStateRed(false, it) }
+                        podcastHeaderVH.ivPlayBtn?.let {playPauseStateRed(false, it) }
                     }
                 }
             }

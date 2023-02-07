@@ -751,7 +751,9 @@ internal class SDKMainActivity : BaseActivity(),
                             homePatchDetail as Serializable
                         )
                     }, R.id.podcast_details_fragment
+
                 )
+                Log.e("TAG", "CHECKING: " + homePatchDetail.content_Id)
             }
 /*            if (homePatchDetail.content_Type?.toUpperCase()!!.contains("PD")) {
                     Log.e("TAG","DATA: "+ homePatchDetail.content_Type)
